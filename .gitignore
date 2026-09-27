@@ -1,0 +1,20 @@
+# Python
+backend/.venv/
+backend/**/__pycache__/
+backend/**/*.pyc
+.pytest_cache/
+
+# Melt worker file-bridge runtime state (pending jobs, results, debug
+# screenshots/logs) -- see backend/app/parsing/pdx_tools_melt.py
+backend/.melt_bridge/
+
+# Flutter / Dart
+frontend/.dart_tool/
+frontend/.flutter-plugins
+frontend/.flutter-plugins-dependencies
+frontend/build/
+frontend/.pub-cache/
+frontend/pubspec.lock
+
+# OS
+.DS_Store
