@@ -1,1 +1,10 @@
 pytest>=8.0
+
+# Only used by the standalone melt worker (backend/tools/melt_worker.py),
+# which drives a real browser against pdx.tools to melt Ironman saves.
+# That script is meant to be run by hand in an unsandboxed terminal, not
+# by the backend/app process itself -- see app/parsing/pdx_tools_melt.py.
+# Listed here anyway so `pip install -r requirements.txt` sets up
+# everything the worker needs too; after installing, also run once:
+#   playwright install chromium
+playwright>=1.40
