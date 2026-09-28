@@ -200,11 +200,28 @@ For **every** save below:
   save (Esc -> Save Game). This is the entire "recipe" -- there is no
   merchant/ship change to make for any entry in the list below.
 - Rename the file to match the `file` column in
-  `backend/tests/fixtures/saves/saves.json` and drop it in that directory
-  (gitignored -- the manifest is the only thing tracked).
+  `backend/tests/fixtures/saves/saves.json` and drop it in that directory.
+  After adding one, run `python3 scripts/zip_fixture_saves.py <id>` to add
+  its tracked, compressed copy (see "Tracking the fixture saves" below).
 - For exotic non-European tags: check that the tag in-game still matches
   the manifest's `tag` (some may have changed across patches/DLC) --
   `test_save_matches_manifest` will tell you immediately if it doesn't.
+
+### Tracking the fixture saves
+
+The raw saves are ~2.8GB total, and don't compress well as one blob (a
+mixed-content archive doesn't hit the same ratio as the mostly-repetitive
+text within a single save) -- so the raw `.eu4` files themselves stay
+**gitignored**, but a small single-file zip of each (~13x smaller, plain
+Clausewitz text compresses very well) lives in
+`backend/tests/fixtures/saves_zip/` and **is tracked** (255MB total).
+`test_real_saves.py` unzips one at a time, on demand, into pytest's
+per-test `tmp_path` whenever the raw file isn't already sitting in
+`fixtures/saves/` -- nothing is ever extracted into the repo itself, so a
+fresh clone stays small on disk regardless of how many saves are in the
+manifest. `scripts/zip_fixture_saves.py` (re-)generates the zips; run it
+with no arguments to refresh everything, or pass specific ids after adding
+a new save.
 
 An opening-state save may not have `money` populated at all for any node
 (no monthly trade tick has run yet). That's expected: the income-dependent
@@ -327,7 +344,7 @@ manifest -- close enough to the original intent, not worth remaking):**
 
 | ID | Date | Country | Covers |
 |----|---|---|---|
-| S51 | *(not collected -- see note below)* | Venice VEN | Venice hub, 3rd era |
+| S51 | 1600.1.1 | Venice VEN | Venice hub, 3rd era |
 | S52 | 1644.11.11 | England ENG | English Channel hub, Commonwealth era |
 | S53 | 1624.11.11 | Netherlands NED | newly-independent Dutch Republic (earlier era than S41) |
 | S54 | 1614.11.11 | Russia RUS | Novgorod, Tsardom-era government reform (vs. S12/S17's Novgorod/Muscovy) |
@@ -363,19 +380,40 @@ manifest -- close enough to the original intent, not worth remaking):**
 | S73 | 1821.1.1 | Ottomans TUR | Constantinople, end-date -- completes the S14/S36/S37/S38 longitudinal arc |
 | S74 | 1821.1.1 | Oman OMA | Persian Gulf/Zanzibar, end-date (vs. S57/S65) |
 
-**S51 (Venice, ~1600) was never made** -- the only Venice save collected
-beyond S01 landed at 1700.1.11 and was used for S60 instead (a better fit
-for "4th era" than a 100-year gap from S01 would've been for "3rd era").
-Not remade -- Venice still has 3 eras of data (S01, S60, and indirectly
-S09/S44/S59 at the neighboring Genoa hub), and the manifest entry is left
-in place (skipped, not failed, same as any other not-yet-made save) in
-case it's worth filling in later.
+**S51 was filled in later** -- initially not made (the first Venice save
+collected beyond S01 landed at 1700.1.11 and was used for S60 instead, a
+better fit for "4th era" than a 100-year gap from S01 would've been for
+"3rd era"), then a dedicated 1600.1.1 Venice save was added, restoring the
+originally-planned 4 eras of Venice data (S01/S51/S60, plus the neighboring
+Genoa hub at S09/S44/S59).
 
 The tags in C-F for anything past the well-known majors (Mughals, Songhai,
 Bukhara, Tunis, Oman, Bijapur, Qing, Mysore) are a best guess at what's
 actually selectable in your client's bookmark country list, same caveat as
 the exotic tags in table A -- `test_save_matches_manifest` will tell you
 immediately if a guess was wrong.
+
+**G -- sprawling colonial empires (mid-18th century, 1744.11.11): a single
+country present across dozens of nodes at once**, not just its home region.
+Every save above is a fresh 1444/bookmark opening state where a country is
+realistically present in a handful of nodes; these instead pick major
+colonial powers well into their empire-building, exercising the val-sum/
+retention checks across a much larger slice of the 80-node graph per save
+(confirmed: FRA present in 23 nodes, NED 22, POR 19, SPA 12 -- vs. 1-3 for
+a typical table A/B/C save) even though, like every other save here, only
+the home node actively collects (still a pure opening state, no merchant
+placement):
+
+| ID | Date | Country | Covers |
+|----|---|---|---|
+| S75 | 1744.11.11 | France FRA | Champagne hub, 23-node colonial reach |
+| S76 | 1744.11.11 | Netherlands NED | English Channel hub, 22-node colonial reach |
+| S77 | 1744.11.11 | Portugal POR | Sevilla hub, 19-node colonial reach |
+| S78 | 1744.11.11 | Spain SPA | Sevilla hub, 12-node colonial reach |
+
+Great Britain was considered too but skipped -- already well covered
+across eras by S42/S67 (and GBR's reach is a similar story to NED's, both
+English Channel-based).
 
 The "Covers" column is only there to explain why a case is included -- the
 tests never assert it, only `tag` and `date` (and that a home node

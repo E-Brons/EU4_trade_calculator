@@ -10,16 +10,20 @@ changing anything. Nothing about a save depends on what the tester did, so
 any save can be reliably recreated from the manifest alone -- no merchant
 placement, steer target, or ship count to get "right" by hand.
 
-Every save listed in fixtures/saves/saves.json that isn't actually present
-on disk is SKIPPED, not failed -- this suite is a no-op until someone
-supplies the saves, and CI never needs them. Point EU4_TEST_SAVES_DIR at a
-different directory (e.g. to try a save without copying it into the repo)
-to override where they're looked for.
+The raw saves themselves (~2.8GB total) aren't tracked directly -- each has
+its own small tracked zip in fixtures/saves_zip/ instead (see
+scripts/zip_fixture_saves.py), unzipped on demand into pytest's per-test
+`tmp_path` as needed (see `_save_path`), never left sitting around. Any
+save with neither a raw file nor a zip is SKIPPED, not failed -- this suite
+is a no-op until someone supplies it, and CI never needs it. Point
+EU4_TEST_SAVES_DIR at a different directory (e.g. to try a save without
+adding it to the repo at all) to override where raw saves are looked for.
 """
 from __future__ import annotations
 
 import json
 import os
+import zipfile
 from pathlib import Path
 
 import pytest
@@ -65,18 +69,31 @@ def _rel_close(actual: float, expected: float, rel_tol: float, abs_tol: float = 
 
 
 MANIFEST: list[dict] = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))["saves"]
+ZIP_DIR = FIXTURES_DIR.parent / "saves_zip"  # tracked in git; see scripts/zip_fixture_saves.py
 
 
-def _save_path(entry: dict) -> Path:
-    return SAVES_DIR / entry["file"]
+def _save_path(entry: dict, tmp_dir: Path) -> Path | None:
+    """The raw save if it's already sitting in SAVES_DIR (e.g. a save just
+    dropped in by hand); otherwise unzips it from its tracked per-save zip
+    (see ZIP_DIR) into `tmp_dir` -- one at a time, on demand, never
+    persisted -- and returns that path. None if neither exists."""
+    raw = SAVES_DIR / entry["file"]
+    if raw.exists():
+        return raw
+    zip_path = ZIP_DIR / f"{entry['file']}.zip"
+    if SAVES_DIR != FIXTURES_DIR or not zip_path.exists():
+        return None
+    with zipfile.ZipFile(zip_path) as zf:
+        zf.extract(entry["file"], path=tmp_dir)
+    return tmp_dir / entry["file"]
 
 
 @pytest.fixture(params=MANIFEST, ids=[e["id"] for e in MANIFEST])
-def loaded_save(request):
+def loaded_save(request, tmp_path):
     entry = request.param
-    path = _save_path(entry)
-    if not path.exists():
-        pytest.skip(f"fixture save not present: {path} (see docs/test.md to make it)")
+    path = _save_path(entry, tmp_path)
+    if path is None or not path.exists():
+        pytest.skip(f"fixture save not present: {SAVES_DIR / entry['file']} (see docs/test.md to make it)")
     graph = load_trade_graph()
     parsed = load_save(path)
     node_states, current_allocation, home_node = build_node_states_from_save(parsed, graph)
