@@ -1,0 +1,449 @@
+{
+  "_comment": "Manifest of real .eu4 saves used by tests/test_real_saves.py. The saves themselves are NOT committed (gitignored) -- make them yourself following docs/test.md and drop them in this directory with the 'file' name below. Any entry whose file is missing is skipped, not failed. Most saves are the game's opening state for that (date, country) -- start a historical-setup game at the given bookmark, pick the country, and save immediately without unpausing or changing anything; see docs/test.md section 3. S67-S74 (19th century, no vanilla bookmark exists past 1785) are instead 'hands-off' saves -- started at the 1785 bookmark and run forward with zero player actions to the listed date; see docs/test.md section 3B. 'date' is the save's own in-game date (checked against the save, not guessed); 'tag' is the country tag the save should report as the player -- some non-major tags (S45 on) are best guesses for what's actually selectable at that bookmark, verify against your client's own bookmark country list.",
+  "saves": [
+    {
+      "id": "S01",
+      "file": "S01_VEN_1444.11.11.eu4",
+      "tag": "VEN",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S02",
+      "file": "S02_ENG_1444.11.11.eu4",
+      "tag": "ENG",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S03",
+      "file": "S03_FRA_1444.11.11.eu4",
+      "tag": "FRA",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S04",
+      "file": "S04_CAS_1444.11.11.eu4",
+      "tag": "CAS",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S05",
+      "file": "S05_POR_1444.11.11.eu4",
+      "tag": "POR",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S06",
+      "file": "S06_HAB_1444.11.11.eu4",
+      "tag": "HAB",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S07",
+      "file": "S07_BUR_1444.11.11.eu4",
+      "tag": "BUR",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S08",
+      "file": "S08_HSA_1444.11.11.eu4",
+      "tag": "HSA",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S09",
+      "file": "S09_GEN_1444.11.11.eu4",
+      "tag": "GEN",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S10",
+      "file": "S10_RAG_1444.11.11.eu4",
+      "tag": "RAG",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S11",
+      "file": "S11_POL_1444.11.11.eu4",
+      "tag": "POL",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S12",
+      "file": "S12_NOV_1444.11.11.eu4",
+      "tag": "NOV",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S13",
+      "file": "S13_SWE_1444.11.11.eu4",
+      "tag": "SWE",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S14",
+      "file": "S14_TUR_1444.11.11.eu4",
+      "tag": "TUR",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S15",
+      "file": "S15_MAM_1444.11.11.eu4",
+      "tag": "MAM",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S16",
+      "file": "S16_TIM_1444.11.11.eu4",
+      "tag": "TIM",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S17",
+      "file": "S17_MOS_1444.11.11.eu4",
+      "tag": "MOS",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S18",
+      "file": "S18_KAZ_1444.11.11.eu4",
+      "tag": "KAZ",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S19",
+      "file": "S19_CRI_1444.11.11.eu4",
+      "tag": "CRI",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S20",
+      "file": "S20_MNG_1444.11.11.eu4",
+      "tag": "MNG",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S21",
+      "file": "S21_ASK_1444.11.11.eu4",
+      "tag": "ASK",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S22",
+      "file": "S22_KOR_1444.11.11.eu4",
+      "tag": "KOR",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S23",
+      "file": "S23_VIJ_1444.11.11.eu4",
+      "tag": "VIJ",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S24",
+      "file": "S24_BAH_1444.11.11.eu4",
+      "tag": "BAH",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S25",
+      "file": "S25_DLH_1444.11.11.eu4",
+      "tag": "DLH",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S26",
+      "file": "S26_AYU_1444.11.11.eu4",
+      "tag": "AYU",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S27",
+      "file": "S27_MAJ_1444.11.11.eu4",
+      "tag": "MAJ",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S28",
+      "file": "S28_ETH_1444.11.11.eu4",
+      "tag": "ETH",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S29",
+      "file": "S29_MAL_1444.11.11.eu4",
+      "tag": "MAL",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S30",
+      "file": "S30_KON_1444.11.11.eu4",
+      "tag": "KON",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S31",
+      "file": "S31_ZAN_1444.11.11.eu4",
+      "tag": "ZAN",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S32",
+      "file": "S32_KTS_1444.11.11.eu4",
+      "tag": "KTS",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S33",
+      "file": "S33_AZT_1444.11.11.eu4",
+      "tag": "AZT",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S34",
+      "file": "S34_CSU_1444.11.11.eu4",
+      "tag": "CSU",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S35",
+      "file": "S35_ONO_1444.11.11.eu4",
+      "tag": "ONO",
+      "date": "1444.11.11"
+    },
+    {
+      "id": "S36",
+      "file": "S36_TUR_1500.1.1.eu4",
+      "tag": "TUR",
+      "date": "1500.1.1"
+    },
+    {
+      "id": "S37",
+      "file": "S37_TUR_1600.1.1.eu4",
+      "tag": "TUR",
+      "date": "1600.1.1"
+    },
+    {
+      "id": "S38",
+      "file": "S38_TUR_1700.1.1.eu4",
+      "tag": "TUR",
+      "date": "1700.1.1"
+    },
+    {
+      "id": "S39",
+      "file": "S39_SPA_1550.1.1.eu4",
+      "tag": "SPA",
+      "date": "1550.1.1"
+    },
+    {
+      "id": "S40",
+      "file": "S40_POR_1600.1.1.eu4",
+      "tag": "POR",
+      "date": "1600.1.1"
+    },
+    {
+      "id": "S41",
+      "file": "S41_NED_1650.1.1.eu4",
+      "tag": "NED",
+      "date": "1650.1.1"
+    },
+    {
+      "id": "S42",
+      "file": "S42_GBR_1750.1.1.eu4",
+      "tag": "GBR",
+      "date": "1750.1.1"
+    },
+    {
+      "id": "S43",
+      "file": "S43_ENG_1526.1.1.eu4",
+      "tag": "ENG",
+      "date": "1526.1.1"
+    },
+    {
+      "id": "S44",
+      "file": "S44_GEN_1550.1.1.eu4",
+      "tag": "GEN",
+      "date": "1550.1.1"
+    },
+    {
+      "id": "S45",
+      "file": "S45_DLH_1526.1.1.eu4",
+      "tag": "DLH",
+      "date": "1526.1.1"
+    },
+    {
+      "id": "S46",
+      "file": "S46_PER_1526.1.1.eu4",
+      "tag": "PER",
+      "date": "1526.1.1"
+    },
+    {
+      "id": "S47",
+      "file": "S47_SON_1550.1.1.eu4",
+      "tag": "SON",
+      "date": "1550.1.1"
+    },
+    {
+      "id": "S48",
+      "file": "S48_BUK_1526.1.1.eu4",
+      "tag": "BUK",
+      "date": "1526.1.1"
+    },
+    {
+      "id": "S49",
+      "file": "S49_TUN_1550.1.1.eu4",
+      "tag": "TUN",
+      "date": "1550.1.1"
+    },
+    {
+      "id": "S50",
+      "file": "S50_KOR_1550.1.1.eu4",
+      "tag": "KOR",
+      "date": "1550.1.1"
+    },
+    {
+      "id": "S51",
+      "file": "S51_VEN_1600.1.1.eu4",
+      "tag": "VEN",
+      "date": "1600.1.1"
+    },
+    {
+      "id": "S52",
+      "file": "S52_ENG_1644.11.11.eu4",
+      "tag": "ENG",
+      "date": "1644.11.11"
+    },
+    {
+      "id": "S53",
+      "file": "S53_NED_1624.11.11.eu4",
+      "tag": "NED",
+      "date": "1624.11.11"
+    },
+    {
+      "id": "S54",
+      "file": "S54_RUS_1614.11.11.eu4",
+      "tag": "RUS",
+      "date": "1614.11.11"
+    },
+    {
+      "id": "S55",
+      "file": "S55_MNG_1634.11.11.eu4",
+      "tag": "MNG",
+      "date": "1634.11.11"
+    },
+    {
+      "id": "S56",
+      "file": "S56_KON_1650.11.11.eu4",
+      "tag": "KON",
+      "date": "1650.11.11"
+    },
+    {
+      "id": "S57",
+      "file": "S57_OMA_1650.11.11.eu4",
+      "tag": "OMA",
+      "date": "1650.11.11"
+    },
+    {
+      "id": "S58",
+      "file": "S58_BIJ_1630.11.11.eu4",
+      "tag": "BIJ",
+      "date": "1630.11.11"
+    },
+    {
+      "id": "S59",
+      "file": "S59_GEN_1700.1.11.eu4",
+      "tag": "GEN",
+      "date": "1700.1.11"
+    },
+    {
+      "id": "S60",
+      "file": "S60_VEN_1700.1.11.eu4",
+      "tag": "VEN",
+      "date": "1700.1.11"
+    },
+    {
+      "id": "S61",
+      "file": "S61_RUS_1700.11.11.eu4",
+      "tag": "RUS",
+      "date": "1700.11.11"
+    },
+    {
+      "id": "S62",
+      "file": "S62_PRU_1744.11.11.eu4",
+      "tag": "PRU",
+      "date": "1744.11.11"
+    },
+    {
+      "id": "S63",
+      "file": "S63_QNG_1744.11.11.eu4",
+      "tag": "QNG",
+      "date": "1744.11.11"
+    },
+    {
+      "id": "S64",
+      "file": "S64_MYS_1761.1.11.eu4",
+      "tag": "MYS",
+      "date": "1761.1.11"
+    },
+    {
+      "id": "S65",
+      "file": "S65_OMA_1785.1.11.eu4",
+      "tag": "OMA",
+      "date": "1785.1.11"
+    },
+    {
+      "id": "S66",
+      "file": "S66_USA_1785.1.11.eu4",
+      "tag": "USA",
+      "date": "1785.1.11"
+    },
+    {
+      "id": "S67",
+      "file": "S67_GBR_1800.1.11.eu4",
+      "tag": "GBR",
+      "date": "1800.1.11"
+    },
+    {
+      "id": "S68",
+      "file": "S68_RUS_1810.1.11.eu4",
+      "tag": "RUS",
+      "date": "1810.1.11"
+    },
+    {
+      "id": "S69",
+      "file": "S69_FRA_1800.1.11.eu4",
+      "tag": "FRA",
+      "date": "1800.1.11"
+    },
+    {
+      "id": "S70",
+      "file": "S70_HAB_1810.1.11.eu4",
+      "tag": "HAB",
+      "date": "1810.1.11"
+    },
+    {
+      "id": "S71",
+      "file": "S71_QNG_1820.1.11.eu4",
+      "tag": "QNG",
+      "date": "1820.1.11"
+    },
+    {
+      "id": "S72",
+      "file": "S72_USA_1821.1.1.eu4",
+      "tag": "USA",
+      "date": "1821.1.1"
+    },
+    {
+      "id": "S73",
+      "file": "S73_TUR_1821.1.1.eu4",
+      "tag": "TUR",
+      "date": "1821.1.1"
+    },
+    {
+      "id": "S74",
+      "file": "S74_OMA_1821.1.1.eu4",
+      "tag": "OMA",
+      "date": "1821.1.1"
+    }
+  ]
+}

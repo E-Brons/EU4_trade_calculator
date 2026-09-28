@@ -106,6 +106,9 @@ details.
 - `docs/requirements.md` -- what this app is for and what it needs to do.
 - `docs/implementation.md` -- how it's actually built: architecture,
   the trade model, the optimizer, save parsing, and the melt automation.
+- `docs/test.md` -- how to check the trade calculation against real save
+  files (a save list to make, an automated harness, and a critical
+  accuracy finding surfaced while building it).
 
 ## Project layout
 

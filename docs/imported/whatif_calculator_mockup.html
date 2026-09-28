@@ -1,0 +1,41 @@
+<h2 class="sr-only">Interactive calculator for trade power, merchant action, and resulting ducats at Canton</h2>
+<div style="display:flex;flex-direction:column;gap:14px;">
+<div style="display:flex;align-items:center;gap:12px;">
+<label style="font-size:14px;color:var(--text-secondary);min-width:110px;">Light ships</label>
+<input type="range" id="ships" min="0" max="10" step="1" value="2" style="flex:1;" oninput="calc()">
+<span id="shipsOut" style="min-width:20px;text-align:right;font-weight:500;">2</span>
+</div>
+<div style="display:flex;align-items:center;gap:12px;">
+<label style="font-size:14px;color:var(--text-secondary);min-width:110px;">Merchant</label>
+<select id="merchant" onchange="calc()" style="flex:1;">
+<option value="none">Not present</option>
+<option value="collect" selected>Collect</option>
+<option value="steer">Steer downstream</option>
+</select>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:4px;">
+<div style="background:var(--surface-1);border-radius:var(--radius);padding:1rem;">
+<div style="font-size:13px;color:var(--text-secondary);">Your power share</div>
+<div id="share" style="font-size:24px;font-weight:500;">--</div>
+</div>
+<div style="background:var(--surface-1);border-radius:var(--radius);padding:1rem;">
+<div style="font-size:13px;color:var(--text-secondary);">Ducats this node</div>
+<div id="ducats" style="font-size:24px;font-weight:500;">--</div>
+</div>
+</div>
+</div>
+<script>
+function calc(){
+  const ships = parseInt(document.getElementById('ships').value);
+  document.getElementById('shipsOut').textContent = ships;
+  const action = document.getElementById('merchant').value;
+  const basePower = 6, shipPower = 1.4, rivalPower = 12;
+  const yourPower = basePower + ships*shipPower + (action==='collect'?1.5:0);
+  const share = yourPower/(yourPower+rivalPower);
+  const totalValue = 22;
+  const ducats = action==='steer' ? 0 : totalValue*share;
+  document.getElementById('share').textContent = Math.round(share*100)+'%';
+  document.getElementById('ducats').textContent = action==='steer' ? '0 (deferred)' : ducats.toFixed(1);
+}
+calc();
+</script>

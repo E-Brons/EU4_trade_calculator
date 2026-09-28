@@ -8,6 +8,10 @@ backend/**/*.pyc
 # screenshots/logs) -- see backend/app/parsing/pdx_tools_melt.py
 backend/.melt_bridge/
 
+# Real .eu4 saves used by backend/tests/test_real_saves.py -- see
+# docs/test.md for how to make them; saves.json (the manifest) IS tracked.
+backend/tests/fixtures/saves/*.eu4
+
 # Flutter / Dart
 frontend/.dart_tool/
 frontend/.flutter-plugins
