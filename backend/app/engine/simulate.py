@@ -1,76 +1,12 @@
 """Propagates trade value through the node graph and computes the player's
 trade income under a given allocation.
 
-This implements EU4's real trade formula, reverse-engineered and verified
-against a real melted 1.37.5 save (Ottomans/TUR, home node Constantinople;
-see backend/scripts/inspect_save.py and the real save at
-`~/Downloads/Ottomans_Ironman_Backup_melted.eu4`). Summary of how it works,
-and what was verified:
-
-1. Each node's total value = its own local production value, plus whatever
-   value flowed in from upstream nodes (`NodeState.local_value` +
-   incoming). Verified directly: for every inspected node, the sum of the
-   `top_power_values` of *all* countries present (collectors, steerers,
-   and merely-passive countries alike) equals the node's `total` field
-   exactly (e.g. constantinople: 778.215+21.152+2.742 = 802.109 = `total`;
-   basra and aleppo check out the same way to 3 decimals). This confirms
-   the save's per-country `val`/`top_power_values` figures are already
-   this node's total value distributed in proportion to trade power --
-   i.e. "trade power share of the node" and "ducat share of the node's
-   value" are the same ratio, which is exactly what letting `NodeState`'s
-   power fields double as value-weights (as `build_node_states_from_save`
-   already does for other countries) assumes.
-
-2. Retention: the fraction of a node's total value that stays *in* the
-   node (available to whoever collects there) rather than being forwarded
-   downstream equals retained power / total power in the node --
-   `retention` (a field the save reports directly) matches
-   `retain_power / total` to within display rounding on every inspected
-   node (constantinople 778.215/802.109=0.9702 vs reported 0.971; basra
-   83.474/467.948=0.1791 vs 0.18; aleppo 32.844/646.072=0.0508 vs 0.051;
-   ragusa 149.439/600.887=0.2487 vs 0.249). This is exactly the
-   power-weighted retained/forwarded split already implemented below.
-
-3. Everything not collected is forwarded down the node's outgoing links,
-   split in proportion to steering power (merchants explicitly set to
-   Steer); power with no merchant present (in a non-home node) is
-   "passive" and follows the same proportions, or splits evenly if nobody
-   is steering at all (an edge case with no recoverable real data --
-   documented approximation of last resort, see Params docstring).
-
-4. Value moving down a link gets a further bonus of
-   `steer_value_bonus_per_merchant` (TRADE_ADDED_VALUE_MODIFER = 0.05 in
-   vanilla) per merchant steering that link.
-
-5. The final ducat conversion for the player's own realized income at a
-   node they collect at is:
-
-       income = value_share * (1 + trade_efficiency + merchant_present_bonus)
-
-   where `value_share = total_value * player_power / total_power` (the
-   power-weighted share from step 2), `trade_efficiency` is
-   country-specific and can't be derived here (see Params), and
-   `merchant_present_bonus` (TRADE_MERCHANT_PRESENT = 0.1) applies only
-   when collecting via an explicitly-stationed merchant. This exact
-   two-term additive stack (not a multiplicative 1.1x) was confirmed from
-   the real save: TUR's home node (automatic capital collection, no
-   merchant present) realizes money at *1.750x* its power-weighted value
-   share; TUR's `ragusa` and `venice` nodes (merchant present, collecting
-   away from home) realize *1.8498x* and *1.8500x* respectively -- a
-   difference of +0.10 (matching TRADE_MERCHANT_PRESENT exactly), landing
-   on the additive stack. Back-solving the home ratio gives this specific
-   save's trade_efficiency = 0.75 (used only for the end-to-end save
-   validation, not as a library default -- see Params.trade_efficiency).
-
-6. Trade power itself = `NodeState.player_base_power` (from the save's
-   province_power/ship_power, or manual entry -- already includes
-   whatever home-node power bonus the game itself applied) plus, for
-   power the player is actively deciding on right now: ship power
-   (sea/coastal nodes only) and merchant power (`capital_merchant_power`
-   at the home node, `merchant_power` elsewhere) -- with
-   TRADE_POWER_HOME_BONUS (+10%) applied to *that added amount* at the
-   home node (not to the base, to avoid double-counting a bonus the save
-   already baked into province_power).
+The formula and every constant in `Params` are derived from and verified
+against 50 real, non-Ironman EU4 saves -- see
+`docs/implementation.md`'s "Trade simulation" section for the confirmed
+formula, field meanings, and what's still approximate (the replay-vs-
+hypothetical distinction below). Don't re-derive or second-guess the shape
+of this function without reading that first.
 
 Only the player's own power/behaviour is a variable; every other
 country's behaviour is fixed input (`NodeState`), taken from the save or
@@ -125,36 +61,54 @@ def simulate(
         player_passive = action == MerchantAction.NONE and not state.is_home
 
         if action == MerchantAction.STEER and steer_target not in outgoing:
-            # A steer target that doesn't exist (missing, stale, or -- from
-            # imperfectly reconstructed save data -- simply unknown) would
-            # otherwise make this power vanish from both the retained and
-            # forwarded totals. Fall back to passive rather than losing value.
+            # Unknown/stale steer target: fall back to passive rather than
+            # losing this power from both retained and forwarded totals.
             steer_target = None
             player_passive = True
 
         total_value = state.local_value + incoming_value[node_id]
 
-        total_power = (
-            player_power
-            + state.other_collect_power
-            + sum(state.other_steer_power.values())
-            + state.other_passive_power
+        # Replay vs. hypothetical -- see docs/implementation.md's "Trade
+        # simulation" section. Only valid when `alloc` matches exactly what
+        # the save recorded for this node.
+        is_replay = (
+            state.matches_recorded(alloc)
+            and state.known_retain_power is not None
+            and state.known_pull_power is not None
         )
 
-        retained_power = state.other_collect_power + (player_power if player_collects else 0.0)
-        player_share = (player_power / total_power) if (player_collects and total_power > 0) else 0.0
+        if is_replay:
+            total_value = state.known_gross_value
+            retained_power = state.known_retain_power
+            total_power = state.known_retain_power + state.known_pull_power
+            # Divide by total_power (retain+pull), not retain_power alone --
+            # see the confirmed formula in docs/implementation.md.
+            player_share = (
+                (state.known_player_val / total_power) if (player_collects and total_power > 0) else 0.0
+            )
+        else:
+            total_power = (
+                player_power
+                + state.other_collect_power
+                + sum(state.other_steer_power.values())
+                + state.other_passive_power
+            )
+            retained_power = state.other_collect_power + (player_power if player_collects else 0.0)
+            player_share = (player_power / total_power) if (player_collects and total_power > 0) else 0.0
 
-        # TRADE_MERCHANT_PRESENT: +10% income, additive with trade
-        # efficiency, only when collecting via an explicitly-stationed
-        # merchant (any node, including home) -- not for automatic
-        # capital collection with no merchant. See module docstring for
-        # how this was confirmed against the real save.
+        # TRADE_MERCHANT_PRESENT: additive with trade efficiency, only for
+        # an explicitly-stationed collecting merchant (see docs/implementation.md).
         merchant_present_bonus = params.merchant_present_income_bonus if action == MerchantAction.COLLECT else 0.0
         player_income = 0.0
         if player_collects and total_power > 0:
             player_income = total_value * player_share * (1 + params.trade_efficiency + merchant_present_bonus)
 
-        forwarded_value = max(total_value * (1 - retained_power / total_power), 0.0) if total_power > 0 else total_value
+        if is_replay:
+            forwarded_value = max(total_value - state.known_retained_value, 0.0)
+        else:
+            forwarded_value = (
+                max(total_value * (1 - retained_power / total_power), 0.0) if total_power > 0 else total_value
+            )
 
         link_values = _distribute_forwarded_value(
             total_value=total_value,
@@ -192,13 +146,10 @@ def _player_power(
     is_inland: bool,
     params: Params,
 ) -> float:
-    """Player's total trade power at this node: the save/manual-entry
-    base power, plus whatever the player is actively deciding to add
-    right now (ships, merchant). TRADE_POWER_HOME_BONUS (+10%) applies
-    only to that *added* amount at the home node -- the base power at
-    home already reflects this bonus in the save's own province_power, so
-    applying it again to the base would double-count it (see Params
-    docstring)."""
+    """Player's trade power at this node: base power (from the save or
+    manual entry) plus whatever they're actively adding right now (ships,
+    merchant), with the home bonus applied only to the added amount --
+    see docs/implementation.md's "Trade simulation" section."""
     ships = alloc.light_ships if alloc else 0
     action = alloc.merchant_action if alloc else MerchantAction.NONE
 

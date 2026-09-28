@@ -88,7 +88,9 @@ def test_load_save_parses_player_and_nodes(tmp_path):
     assert tur.has_capital is True
     ven = next(c for c in ragusa.countries if c.tag == "VEN")
     assert ven.has_trader is True
-    assert ven.is_steering is False  # has_trader but no "type" key => collecting
+    assert ven.is_steering is False  # has_trader but no "type" key => not steering (see
+    # build_node_states_from_save: without has_capital too, this does NOT mean "collecting"
+    # -- confirmed against real saves, see test_build_node_states_from_save_identifies_home_and_collect_vs_steer)
     assert parsed.warnings == []
 
 
@@ -209,8 +211,13 @@ def test_build_node_states_from_save_identifies_home_and_collect_vs_steer(tmp_pa
     assert home_node == "ragusa"
     assert node_states["ragusa"].is_home is True
     assert node_states["ragusa"].player_base_power == 4.0  # province_power(3) + ship_power(1)
-    # VEN has_trader with no "type" -> collecting, contributes to other_collect_power.
-    assert node_states["ragusa"].other_collect_power == 7.0
+    # CONFIRMED against 35 real 1444.11.11 saves (23,275 per-country trade-node
+    # entries, zero exceptions): a `power_fraction`/`money`/paid-out share only
+    # ever appears on the has_capital entry. `has_trader=yes` alone (no
+    # capital, no explicit steer) never comes with one -- so VEN here (no
+    # `has_capital`) is passive, not a collector, regardless of `has_trader`.
+    assert node_states["ragusa"].other_collect_power == 0.0
+    assert node_states["ragusa"].other_passive_power == 7.0
     assert current_allocation["ragusa"].merchant_action == MerchantAction.NONE  # home, no merchant
     assert current_allocation["ragusa"].light_ships == 2
 

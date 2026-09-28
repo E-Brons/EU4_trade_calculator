@@ -4,7 +4,8 @@ Everything the player can control is captured in `Allocation`. Everything
 about the rest of the world (other countries' trade power, node values) is
 captured in `NodeState`, treated as fixed input taken from the save (or the
 manual form). `Params` holds the tunable constants that approximate EU4's
-real trade formulas -- see engine/simulate.py for how they're used.
+real trade formulas -- see docs/implementation.md's "Trade simulation"
+section for the confirmed formula and how these are used.
 """
 from __future__ import annotations
 
@@ -45,6 +46,33 @@ class NodeState:
     # merchant there, and not that country's home node). Gets forwarded
     # in proportion to the explicit steering (or evenly if none).
     other_passive_power: float = 0.0
+
+    # --- Authoritative save data, when this NodeState was built from a real
+    # save rather than manual entry -- only valid for an exact replay of
+    # the save's own recorded allocation (see matches_recorded and
+    # docs/implementation.md's "Trade simulation" section).
+    known_gross_value: float | None = None  # local_value + sum(incoming[].value), read directly
+    known_retained_value: float | None = None  # the save's own `current` field
+    known_retain_power: float | None = None
+    known_pull_power: float | None = None
+    known_player_val: float = 0.0  # the player's own `val` field at this node, as recorded
+    known_player_action: MerchantAction | None = None
+    known_player_light_ships: int = 0
+    known_player_steer_target: str | None = None
+
+    def matches_recorded(self, alloc: NodeAllocation | None) -> bool:
+        """True iff `alloc` is exactly what was recorded for this node in the
+        save this NodeState came from -- the only case where the known_*
+        fields above are valid to use as-is."""
+        if self.known_player_action is None:
+            return False
+        recorded = NodeAllocation(
+            merchant_action=self.known_player_action,
+            steer_target=self.known_player_steer_target,
+            light_ships=self.known_player_light_ships,
+        )
+        given = alloc if alloc is not None else NodeAllocation()
+        return given.key() == recorded.key()
 
     def steer_merchant_count(self, target: str) -> int:
         if target in self.other_steer_merchants:
@@ -94,111 +122,39 @@ class Allocation:
 
 @dataclass
 class Params:
-    """Constants used by the trade formula in simulate.py.
+    """Constants used by the trade formula in simulate.py. Each is either a
+    real, named `defines.lua` constant or an explicit, documented exception
+    for a value that can't be derived from a save at all -- see
+    docs/implementation.md's "Trade simulation" section for the derivation,
+    confirmed/refuted mechanics, and known approximations (the `<2.0`-power
+    propagation threshold, and the even-split fallback when nobody at all
+    is steering out of a node)."""
 
-    Reverse-engineered against a real melted 1.37.5 save (Ottomans, home
-    node Constantinople; see backend/scripts/inspect_save.py) by comparing
-    each trade node's `money` field (the country's actual realized
-    ducats/month at that node, taken straight from the game) against the
-    node's power-weighted value share. See simulate.py's module docstring
-    for the full derivation. Fields below are either a real, named
-    defines.lua constant (hardcoded to that exact value) or an explicit,
-    documented exception for a genuinely save/country-specific value that
-    cannot be derived from the trade block at all.
-
-    One real mechanic that used to be modeled here but was REMOVED because
-    the save data refutes it: TRADE_NON_CAPITAL_OFFICE (-0.50) was
-    previously applied as a flat 50% trade-power penalty for collecting
-    with a merchant away from the home node. The real save has two clean
-    counter-examples: TUR collecting away from home at `ragusa`
-    (province_power 142.768 -> effective power 149.439, i.e. *higher*, not
-    halved) and at `venice` (province_power+ship_power 275.281 -> 268.898,
-    a ~2% difference, nowhere near -50%). TRADE_NON_CAPITAL_OFFICE is
-    evidently some other, narrower mechanic (most likely tied to a
-    specific trade-office building/estate privilege, not ordinary merchant
-    collection) and is not applied at all in this model.
-
-    Two important real mechanics that are NOT modeled here, and why:
-
-    - TRADE_PROPAGATE_THRESHOLD (2.0) / TRADE_PROPAGATE_DIVIDER (5):
-      confirmed via `basra`'s YEM entry (0.847 power, i.e. below 2.0) that
-      a country with less than 2 power in a node is excluded from both
-      `retain_power` and `pull_power` -- its tiny value share is simply
-      dropped, neither collected nor forwarded. This requires per-country
-      granularity (which specific country has <2 power) that isn't
-      available at this layer (NodeState only has aggregated buckets by
-      role: collect/steer/passive) -- it would need to be filtered in
-      save.py's node-state construction, not here. Effect on totals is
-      negligible: it only ever concerns minnows contributing a fraction
-      of a single node's value (e.g. 1.717 out of basra's total 467.948,
-      ~0.37% of that one node).
-    - The real default distribution of forwarded value when *nobody* at
-      all is steering (an edge case -- in the real save, essentially every
-      multi-link node has at least one steering merchant) is not
-      recoverable from the data available here (tradenodes.json carries no
-      per-link default-weight data). We fall back to an even split across
-      outgoing links in that case, which is a documented approximation of
-      last resort, not the verified formula used everywhere else.
-    """
-
-    # --- Country/save-specific: genuinely cannot be derived here ---
-    #
-    # Trade Efficiency is a national modifier from trade technology,
-    # idea groups (e.g. Economic ideas, trade policies), and some
-    # buildings/estate privileges. It is NOT present as a labelled field
-    # anywhere in the save's trade={} block. The save's per-country `add`
-    # field (docs mentioned it as a candidate) was checked and REFUTED: it
-    # only appears on entries that are actively STEERING (never on
-    # collectors), and its value (0.092 for TUR across several steering
-    # nodes) is inconsistent with the trade efficiency implied by TUR's
-    # own realized `money` (~0.75, see simulate.py docstring) -- `add` is
-    # something else entirely (most likely an internal steering-value
-    # bookkeeping field), not trade efficiency. This must be read off the
-    # in-game Economy -> Trade tab (or the country's ledger) and entered
-    # by the user; there is nowhere else to get it from a save file.
+    # Trade Efficiency: a national modifier (tech/ideas/buildings) not
+    # present as a labelled field anywhere in the trade block -- must be
+    # read off the in-game Economy -> Trade tab and entered by the user.
     trade_efficiency: float = 0.0
 
-    # --- Real, named defines.lua constants ---
-    #
-    # MERCHANT_MAX_POWER_BONUS: flat trade power added by stationing a
-    # merchant at a *non-home* node (collect or steer).
+    # MERCHANT_MAX_POWER_BONUS: flat trade power added by a merchant at a
+    # *non-home* node (collect or steer).
     merchant_power: float = 2.0
-    # TRADE_CAPITAL_POWER: flat trade power added by a merchant stationed
-    # at the player's *home* node instead of merchant_power (these two
-    # don't stack; the capital value replaces the ordinary one).
+    # TRADE_CAPITAL_POWER: same, but at the player's *home* node (doesn't
+    # stack with merchant_power -- this replaces it there).
     capital_merchant_power: float = 5.0
-    # TRADE_POWER_HOME_BONUS: +10% multiplier on the trade power the
-    # player *adds themselves* (merchant/ships) at the home node. Only
-    # applied to that added power, not to `NodeState.player_base_power` --
-    # base power at the home node is read straight from the save's
-    # province_power, which the game has already computed *with* this
-    # bonus applied; re-applying it to the base would double-count it.
+    # TRADE_POWER_HOME_BONUS: +10% multiplier on trade power the player
+    # *adds themselves* at the home node (not the save-provided base,
+    # which already includes it).
     home_power_bonus: float = 0.1
-    # TRADE_MERCHANT_PRESENT: +10% bonus to *realized income* (stacks
-    # additively with trade_efficiency, applied once as a single combined
-    # multiplier -- confirmed against the save: TUR's automatic home-node
-    # collection with no merchant realizes exactly (1+trade_efficiency) of
-    # its value share, while TUR's merchant-collected nodes away from home
-    # realize (1+trade_efficiency+0.1); see simulate.py docstring for the
-    # numbers). Applies whenever the player collects via an explicitly
-    # stationed merchant (MerchantAction.COLLECT), at *any* node including
-    # home -- not when collecting automatically at home with no merchant.
+    # TRADE_MERCHANT_PRESENT: +10% additive income bonus for collecting via
+    # an explicitly-stationed merchant, at any node.
     merchant_present_income_bonus: float = 0.1
-    # TRADE_ADDED_VALUE_MODIFER: +5% to the value forwarded down a link,
-    # per merchant steering that link (stacks additively per merchant).
+    # TRADE_ADDED_VALUE_MODIFER: +5% to value forwarded down a link, per
+    # merchant steering that link (stacks additively).
     steer_value_bonus_per_merchant: float = 0.05
 
-    # --- Derived from real save data, not a named defines.lua constant ---
-    #
-    # Light ship base trade power. defines.lua has no single named
-    # constant for this (it depends on ship type/naval tech). Derived from
-    # the cleanest single-ship data point available (`crimea`: TUR had
-    # exactly 1 light ship contributing exactly 3.0 ship_power there).
-    # Multi-ship nodes in the same save showed lower per-ship averages
-    # (basra: 3.5, venice: ~3.07 for 36 ships), consistent with either ship
-    # quality variance or a soft diminishing-returns cap for large stacks
-    # that isn't modeled here -- documented approximation for ship-heavy
-    # allocations.
+    # Light ship base trade power -- not a single named defines.lua
+    # constant (depends on ship type/tech); derived from the cleanest
+    # single-ship real save data point available.
     power_per_light_ship: float = 3.0
 
     # --- Optimizer-only, not a game mechanic ---

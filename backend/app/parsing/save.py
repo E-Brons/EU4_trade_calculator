@@ -12,31 +12,15 @@ the same way it handles a real save's `gamestate` (the fields we need,
 full Clausewitz tokenizer over the whole file we scan for the byte range
 of just the top-level `trade={...}` block and tokenize only that.
 
-FIELD NAMES BELOW ARE VERIFIED against a real melted 1.37.5 save (see
-`scripts/inspect_save.py`), not guessed. Two things about the format that
-shaped this module:
-
-- Inside `node={...}`, each country present is a sub-block keyed directly
-  by its 3-letter tag (`TUR={...}`, `PIR={...}`, colonial nations like
-  `C08={...}`) -- NOT a repeated `country={tag=...}` block as an earlier
-  version of this module assumed. We detect these by key shape
-  (`^[A-Z0-9]{2,4}$` and a dict value) rather than an allowlist, since new
-  tags (colonial nations, custom nations) aren't enumerable in advance.
-- Whether a country's merchant *collects* or *steers* isn't stored as an
-  explicit enum: `has_trader=yes` marks a merchant present, and `type=1`
-  additionally present means it's set to Steer; `has_trader=yes` with no
-  `type` means Collect. `power_fraction`/`money` are only present for
-  collectors (money is that node's realized ducats/month for that
-  country -- useful to sanity-check the whole pipeline against the
-  in-game ledger).
-- The save does *not* record which specific outgoing link a country's
-  merchant steers to, only an aggregate per-link `steer_power` at the
-  *node* level (repeated once per outgoing link, in the same order as the
-  node's `outgoing` edges in `data/tradenodes.json`). We use that
-  aggregate as relative weights to split each node's total "other
-  countries are steering this much" across its specific links --
-  reasonable for nodes with one outgoing link (the common case, and
-  exact), approximate for nodes with several.
+Field names and the formula they feed are verified against 50 real,
+non-Ironman saves, not guessed -- see docs/implementation.md's "Trade
+simulation" and "Save parsing" sections for what each field means and the
+confirmed relationships between them. Two parsing-specific things worth
+knowing: countries in a node are sub-blocks keyed directly by tag
+(`TUR={...}`), detected by key shape rather than an allowlist since
+colonial/custom tags aren't enumerable in advance; and steering weight is
+only given as a node-level aggregate per outgoing link, not per country
+(see `_distribute_steer_weights`).
 """
 from __future__ import annotations
 
@@ -59,16 +43,14 @@ class ParsedCountryInNode:
     light_ships: int = 0
     has_capital: bool = False
     has_trader: bool = False
-    is_steering: bool = False  # has_trader and a Steer action (see module docstring)
+    is_steering: bool = False  # has_trader and a Steer action
     money: float = 0.0  # realized ducats/month from this node, if collecting
     val: float = 0.0  # power-weighted share of the node's WHOLE value (retained + forwarded)
-    value_share: float = 0.0  # this country's share of the RETAINED value specifically (per-country `total`);
-    # `money = value_share * (1 + trade_efficiency + merchant_present_bonus)` -- see the
-    # back-solve below and engine/simulate.py's module docstring. Do not confuse with `val`,
-    # which spans the whole node (retained+forwarded) and is a different, larger quantity.
-    add: float = 0.0  # per-country steering-bookkeeping field; refuted as a trade_efficiency
-    # proxy (only ever appears on steering entries, never collectors) -- kept for completeness
-    # but not used for anything. See suggested_trade_efficiency's real derivation below instead.
+    value_share: float = 0.0  # this country's share of the RETAINED value (per-country `total`
+    # field) -- only ever populated on the `has_capital` entry. See docs/implementation.md's
+    # "Trade simulation" section for the confirmed formula relating this to `val`/`money`.
+    add: float = 0.0  # per-country steering-bookkeeping field, refuted as a trade_efficiency
+    # proxy -- kept for completeness, not used for anything.
     raw: dict = field(default_factory=dict)
 
     @property
@@ -80,7 +62,16 @@ class ParsedCountryInNode:
 class ParsedNode:
     node_id: str
     local_value: float = 0.0
-    total_value: float = 0.0
+    total_value: float = 0.0  # save's `total` field: a trade-power-weighted "reach" metric, NOT
+    # a ducat figure -- see docs/implementation.md. Used only for the val-sum/retention identity
+    # checks in test_real_saves.py, never as a stand-in for ducat value.
+    current_value: float = 0.0  # save's `current` field: the node's RETAINED (post-forward)
+    # ducat value -- see docs/implementation.md's confirmed formula.
+    retention: float = 0.0  # save-reported fraction of gross value retained in-node
+    retain_power: float = 0.0  # save's `retain_power` field -- see docs/implementation.md
+    pull_power: float = 0.0  # save's `pull_power` field -- see docs/implementation.md
+    incoming_sum: float = 0.0  # sum of the save's own `incoming[].value`, read directly rather
+    # than accumulated via our own graph traversal (avoids compounding upstream error)
     steer_power_weights: list[float] = field(default_factory=list)  # per outgoing link, save order
     countries: list[ParsedCountryInNode] = field(default_factory=list)
 
@@ -88,6 +79,7 @@ class ParsedNode:
 @dataclass
 class ParsedSave:
     player_tag: str
+    date: str | None = None  # save's in-game date (e.g. "1444.11.11"), for matching test fixtures
     nodes: dict[str, ParsedNode] = field(default_factory=dict)
     warnings: list[str] = field(default_factory=list)
     suggested_trade_efficiency: float | None = None
@@ -130,11 +122,12 @@ def load_save(path: str | Path, rakaly_path: Path | None = None) -> ParsedSave:
     player_tag = _extract_scalar(meta_text, "player") or _extract_scalar(gamestate_text, "player")
     if not player_tag:
         raise ValueError("Could not find the player's country tag in the save")
+    date = _extract_scalar(meta_text, "date") or _extract_scalar(gamestate_text, "date")
 
     trade_block_text = extract_top_level_block(gamestate_text, "trade")
     if trade_block_text is None:
         warnings.append("No top-level 'trade' block found in gamestate; falling back to manual entry.")
-        return ParsedSave(player_tag=player_tag, nodes={}, warnings=warnings)
+        return ParsedSave(player_tag=player_tag, date=date, nodes={}, warnings=warnings)
 
     trade_tree = parse(trade_block_text[1:-1])
     nodes: dict[str, ParsedNode] = {}
@@ -146,6 +139,13 @@ def load_save(path: str | Path, rakaly_path: Path | None = None) -> ParsedSave:
             node_id=node_id,
             local_value=_as_float(node_body.get("local_value")),
             total_value=_as_float(node_body.get("total")),
+            current_value=_as_float(node_body.get("current")),
+            retention=_as_float(node_body.get("retention")),
+            retain_power=_as_float(node_body.get("retain_power")),
+            pull_power=_as_float(node_body.get("pull_power")),
+            incoming_sum=sum(
+                _as_float(x.get("value")) for x in as_list(node_body.get("incoming")) if isinstance(x, dict)
+            ),
             steer_power_weights=[_as_float(v) for v in as_list(node_body.get("steer_power"))],
         )
         for key, value in node_body.items():
@@ -177,18 +177,8 @@ def load_save(path: str | Path, rakaly_path: Path | None = None) -> ParsedSave:
             "Falling back to manual entry."
         )
 
-    # Back-solve trade_efficiency from the nodes where the player actually
-    # collects: `money = value_share * (1 + trade_efficiency + merchant_bonus)`
-    # (see engine/simulate.py's module docstring for how that formula was
-    # derived and verified). `value_share` (the per-country `total` field --
-    # NOT `val`, which spans the whole node rather than just the retained
-    # portion; verified against 3 real collecting nodes, all converging on
-    # trade_efficiency ~= 0.75 for this save once the right field is used)
-    # is the player's own share of the node's retained value -- exact, not
-    # reconstructed. An earlier version of this function used the
-    # per-country `add` field as a trade_efficiency proxy; that's refuted
-    # (it only ever appears on entries that are *steering*, never on
-    # collectors) and is no longer used for anything.
+    # Back-solve trade_efficiency from collecting nodes -- see
+    # docs/implementation.md's "Trade simulation" section for the formula.
     MERCHANT_PRESENT_BONUS = 0.1  # TRADE_MERCHANT_PRESENT; keep in sync with engine/model.py Params default
     implied_efficiencies = []
     for node in nodes.values():
@@ -200,19 +190,16 @@ def load_save(path: str | Path, rakaly_path: Path | None = None) -> ParsedSave:
         sum(implied_efficiencies) / len(implied_efficiencies) if implied_efficiencies else None
     )
 
-    # Exact ground truth for "current income": the save already computed
-    # this (money is that node's realized ducats/month for the player).
-    # Summing it directly is more accurate than re-deriving it through
-    # simulate()'s formula, which is necessarily an estimate (see
-    # engine/simulate.py's module docstring) -- reserve that estimate for
-    # allocations the player hasn't actually tried, where no ground truth
-    # can exist.
+    # The save already computed this exactly (money = realized ducats/month
+    # per node); summing it directly beats re-deriving it through
+    # simulate()'s necessarily-approximate hypothetical-mode estimate.
     actual_current_income = sum(
         c.money for node in nodes.values() for c in node.countries if c.tag == player_tag
     )
 
     return ParsedSave(
         player_tag=str(player_tag),
+        date=date,
         nodes=nodes,
         warnings=warnings,
         suggested_trade_efficiency=suggested_trade_efficiency,
@@ -229,15 +216,9 @@ def build_node_states_from_save(
     `TradeGraph` (see `parsing/tradenodes.py`), used to place each node's
     aggregate steer power onto its specific outgoing links.
 
-    APPROXIMATION (see module docstring): the save only gives us an
-    aggregate steer weight per link at the node level, not per country, so
-    if the player is one of several countries steering from a node, their
-    own contribution can't be cleanly subtracted out of "other countries'"
-    total for that link. The player's own steer *target* similarly isn't
-    stored for nodes with more than one outgoing link -- defaults to the
-    first outgoing link there. Both are safe to leave as-is (mirrors the
-    game's actual current state) but are editable in the UI before
-    optimizing.
+    See docs/implementation.md's "Trade simulation" section for the
+    confirmed collect/steer/passive classification rules and the
+    known_* replay fields this populates.
     """
     from app.engine.model import MerchantAction, NodeAllocation, NodeState
 
@@ -257,15 +238,43 @@ def build_node_states_from_save(
         for c in node.countries:
             if c.tag == parsed.player_tag:
                 continue
-            if c.has_capital or (c.has_trader and not c.is_steering):
+            if c.has_capital:
+                # Only has_capital ever actually collects -- see
+                # docs/implementation.md's "Trade simulation" section.
                 other_collect += c.val if c.val else c.power
             elif c.is_steering:
                 other_steer_total += c.val if c.val else c.power
             else:
-                other_passive += c.power
+                # `val` is the authoritative value-weight even when
+                # province_power/ship_power are 0 (e.g. colonial-range
+                # presence with no owned provinces) -- same val-or-power
+                # fallback as the branches above, or this country's share
+                # of the node's value silently vanishes.
+                other_passive += c.val if c.val else c.power
 
         outgoing = graph.outgoing(node_id) if node_id in graph else ()
         other_steer_power = _distribute_steer_weights(other_steer_total, node.steer_power_weights, outgoing)
+
+        if player:
+            if not player.has_trader:
+                action = MerchantAction.NONE
+            elif player.is_steering:
+                action = MerchantAction.STEER
+            elif player.has_capital:
+                action = MerchantAction.COLLECT
+            else:
+                # Same has_capital-gating as the "other countries" loop
+                # above, applied to the player's own merchant.
+                action = MerchantAction.NONE
+            steer_target = outgoing[0] if (action == MerchantAction.STEER and outgoing) else None
+        else:
+            action = MerchantAction.NONE
+            steer_target = None
+
+        # Authoritative save fields -- only trustworthy for REPLAYING this
+        # exact recorded allocation (simulate() gates on
+        # NodeState.matches_recorded()), see docs/implementation.md.
+        has_known_data = node.retain_power > 0 or node.pull_power > 0
 
         node_states[node_id] = NodeState(
             node_id=node_id,
@@ -275,16 +284,17 @@ def build_node_states_from_save(
             other_collect_power=other_collect,
             other_steer_power=other_steer_power,
             other_passive_power=other_passive,
+            known_gross_value=(node.local_value + node.incoming_sum) if has_known_data else None,
+            known_retained_value=node.current_value if has_known_data else None,
+            known_retain_power=node.retain_power if has_known_data else None,
+            known_pull_power=node.pull_power if has_known_data else None,
+            known_player_val=player.val if player else 0.0,
+            known_player_action=action,
+            known_player_light_ships=player.light_ships if player else 0,
+            known_player_steer_target=steer_target,
         )
 
         if player:
-            if not player.has_trader:
-                action = MerchantAction.NONE
-            elif player.is_steering:
-                action = MerchantAction.STEER
-            else:
-                action = MerchantAction.COLLECT
-            steer_target = outgoing[0] if (action == MerchantAction.STEER and outgoing) else None
             current_allocation[node_id] = NodeAllocation(
                 merchant_action=action,
                 steer_target=steer_target,
