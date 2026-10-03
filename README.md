@@ -33,6 +33,20 @@ haven't actually tried, calibrated against that exact current figure.
 
 ## Run it
 
+### Quick start
+
+```bash
+./run.sh
+```
+
+Stops any previous uvicorn / `flutter run` from this project, verifies port
+8000 is free, rebuilds the Flutter bundle if the sources are newer than
+`frontend/build/web`, starts the backend, and checks that the server is
+serving that exact build. Then open http://localhost:8000/. Options:
+`--no-build` (skip the rebuild check), `--check` (only stop old runs and
+report). Processes from other projects are never touched; if something else
+holds port 8000 the script stops and says so.
+
 ### Backend
 
 ```bash

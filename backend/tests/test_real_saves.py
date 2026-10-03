@@ -96,7 +96,7 @@ def loaded_save(request, tmp_path):
         pytest.skip(f"fixture save not present: {SAVES_DIR / entry['file']} (see docs/test.md to make it)")
     graph = load_trade_graph()
     parsed = load_save(path)
-    node_states, current_allocation, home_node = build_node_states_from_save(parsed, graph)
+    node_states, current_allocation, home_node, _real_presence = build_node_states_from_save(parsed, graph)
     return entry, graph, parsed, node_states, current_allocation, home_node
 
 

@@ -206,7 +206,7 @@ def test_build_node_states_from_save_identifies_home_and_collect_vs_steer(tmp_pa
     parsed = load_save(save_path)
     graph = _toy_graph()
 
-    node_states, current_allocation, home_node = build_node_states_from_save(parsed, graph)
+    node_states, current_allocation, home_node, real_presence = build_node_states_from_save(parsed, graph)
 
     assert home_node == "ragusa"
     assert node_states["ragusa"].is_home is True
@@ -220,6 +220,7 @@ def test_build_node_states_from_save_identifies_home_and_collect_vs_steer(tmp_pa
     assert node_states["ragusa"].other_passive_power == 7.0
     assert current_allocation["ragusa"].merchant_action == MerchantAction.NONE  # home, no merchant
     assert current_allocation["ragusa"].light_ships == 2
+    assert real_presence == {"ragusa"}  # genuine presence (home); venice has none for TUR
 
 
 # --- Automatic melting of binary Ironman saves ----------------------------

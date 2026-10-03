@@ -77,6 +77,10 @@ class NodeStateData {
   Map<String, int> otherSteerMerchants;
   double otherPassivePower;
 
+  /// Authoritative save fields, echoed back to the backend untouched so it
+  /// can replay the save's own allocation exactly. Not user-editable.
+  final Map<String, dynamic> known;
+
   NodeStateData({
     required this.nodeId,
     this.localValue = 0,
@@ -86,8 +90,21 @@ class NodeStateData {
     Map<String, double>? otherSteerPower,
     Map<String, int>? otherSteerMerchants,
     this.otherPassivePower = 0,
+    Map<String, dynamic>? known,
   })  : otherSteerPower = otherSteerPower ?? {},
-        otherSteerMerchants = otherSteerMerchants ?? {};
+        otherSteerMerchants = otherSteerMerchants ?? {},
+        known = known ?? {};
+
+  static const _knownKeys = [
+    'known_gross_value',
+    'known_retained_value',
+    'known_retain_power',
+    'known_pull_power',
+    'known_player_val',
+    'known_player_action',
+    'known_player_light_ships',
+    'known_player_steer_target',
+  ];
 
   factory NodeStateData.fromJson(Map<String, dynamic> j) => NodeStateData(
         nodeId: j['node_id'],
@@ -100,9 +117,11 @@ class NodeStateData {
         otherSteerMerchants: (j['other_steer_merchants'] as Map? ?? {})
             .map((k, v) => MapEntry(k as String, v as int)),
         otherPassivePower: (j['other_passive_power'] as num).toDouble(),
+        known: {for (final k in _knownKeys) if (j[k] != null) k: j[k]},
       );
 
   Map<String, dynamic> toJson() => {
+        ...known,
         'node_id': nodeId,
         'local_value': localValue,
         'is_home': isHome,
@@ -125,6 +144,12 @@ class NodeAllocationData {
     this.lightShips = 0,
   });
 
+  NodeAllocationData copy() => NodeAllocationData(
+        merchantAction: merchantAction,
+        steerTarget: steerTarget,
+        lightShips: lightShips,
+      );
+
   factory NodeAllocationData.fromJson(Map<String, dynamic> j) => NodeAllocationData(
         merchantAction: merchantActionFromJson(j['merchant_action'] ?? 'none'),
         steerTarget: j['steer_target'],
@@ -146,7 +171,6 @@ class ParamsData {
   double homePowerBonus;
   double merchantPresentIncomeBonus;
   double steerValueBonusPerMerchant;
-  int shipChunk;
 
   ParamsData({
     this.tradeEfficiency = 0.0,
@@ -156,7 +180,6 @@ class ParamsData {
     this.homePowerBonus = 0.1,
     this.merchantPresentIncomeBonus = 0.1,
     this.steerValueBonusPerMerchant = 0.05,
-    this.shipChunk = 5,
   });
 
   Map<String, dynamic> toJson() => {
@@ -167,7 +190,8 @@ class ParamsData {
         'home_power_bonus': homePowerBonus,
         'merchant_present_income_bonus': merchantPresentIncomeBonus,
         'steer_value_bonus_per_merchant': steerValueBonusPerMerchant,
-        'ship_chunk': shipChunk,
+        // ship_chunk deliberately omitted -- internal optimizer tuning knob,
+        // not a game mechanic; backend defaults it to 1 (see Params).
       };
 }
 
@@ -210,10 +234,25 @@ class MarginalValueData {
   final double income;
   final double deltaVsOptimal;
 
+  /// Where the change would be made: added to / taken from this node.
+  final String? nodeId;
+  final String? nodeDisplayName;
+  final String? change; // 'add' | 'remove'
+  final MerchantAction? merchantAction;
+  final String? steerTarget;
+  final String? steerTargetDisplayName;
+
   MarginalValueData.fromJson(Map<String, dynamic> j)
       : label = j['label'],
         income = (j['income'] as num).toDouble(),
-        deltaVsOptimal = (j['delta_vs_optimal'] as num).toDouble();
+        deltaVsOptimal = (j['delta_vs_optimal'] as num).toDouble(),
+        nodeId = j['node_id'],
+        nodeDisplayName = j['node_display_name'],
+        change = j['change'],
+        merchantAction =
+            j['merchant_action'] == null ? null : merchantActionFromJson(j['merchant_action']),
+        steerTarget = j['steer_target'],
+        steerTargetDisplayName = j['steer_target_display_name'];
 }
 
 class RecommendedActionData {
@@ -265,6 +304,9 @@ class ImportSaveResponseData {
   final String? suggestedHomeNode;
   final double? suggestedTradeEfficiency;
   final double actualCurrentIncome;
+  final int? suggestedMaxMerchants;
+  final int? suggestedMaxLightShips;
+  final List<String> suggestedCandidateNodes;
 
   ImportSaveResponseData.fromJson(Map<String, dynamic> j)
       : playerTag = j['player_tag'],
@@ -275,5 +317,20 @@ class ImportSaveResponseData {
             .map((k, v) => MapEntry(k as String, NodeAllocationData.fromJson(v))),
         suggestedHomeNode = j['suggested_home_node'],
         suggestedTradeEfficiency = (j['suggested_trade_efficiency'] as num?)?.toDouble(),
-        actualCurrentIncome = (j['actual_current_income'] as num).toDouble();
+        actualCurrentIncome = (j['actual_current_income'] as num).toDouble(),
+        suggestedMaxMerchants = j['suggested_max_merchants'] as int?,
+        suggestedMaxLightShips = j['suggested_max_light_ships'] as int?,
+        suggestedCandidateNodes = List<String>.from(j['suggested_candidate_nodes'] ?? const []);
+}
+
+/// What `/api/build` says is on disk right now.
+class BuildInfoData {
+  final String? buildId;
+  final String? builtAt;
+  final bool sourcesNewerThanBuild;
+
+  BuildInfoData.fromJson(Map<String, dynamic> j)
+      : buildId = j['build_id'],
+        builtAt = j['built_at'],
+        sourcesNewerThanBuild = j['sources_newer_than_build'] ?? false;
 }

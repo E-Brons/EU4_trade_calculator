@@ -196,3 +196,70 @@ def test_import_save_real_ironman_end_to_end_via_live_melt_worker():
     assert data["player_tag"] == "TUR"
     assert len(data["node_states"]) >= 70  # ~80 trade nodes in a real save
 
+
+
+def test_import_then_simulate_replays_saves_own_income():
+    """The import response must carry the known_* replay fields, so POSTing
+    it straight back to /api/simulate reproduces the save's own income."""
+    zips = sorted((Path(__file__).parent / "fixtures" / "saves_zip").glob("*.zip"))
+    if not zips:
+        pytest.skip("no fixture save zips present")
+    with zipfile.ZipFile(zips[0]) as zf:
+        data = zf.read(zf.namelist()[0])
+
+    r = client.post("/api/import-save", files={"file": ("fixture.eu4", data, "application/octet-stream")})
+    assert r.status_code == 200
+    imported = r.json()
+
+    r = client.post(
+        "/api/simulate",
+        json={
+            "node_states": imported["node_states"],
+            "allocation": imported["current_allocation"],
+            "params": {"trade_efficiency": imported["suggested_trade_efficiency"] or 0.0},
+        },
+    )
+    assert r.status_code == 200
+    simulated = r.json()["total_income"]
+    actual = imported["actual_current_income"]
+    assert simulated == pytest.approx(actual, rel=0.02, abs=0.05)
+
+
+def _frontend_built() -> bool:
+    from app import buildinfo
+
+    return buildinfo.BUNDLE.exists()
+
+
+def test_everything_is_served_uncached():
+    r = client.get("/api/health")
+    assert r.headers["cache-control"] == "no-store, max-age=0"
+    if _frontend_built():
+        assert client.get("/").headers["cache-control"] == "no-store, max-age=0"
+        assert client.get("/main.dart.js").headers["cache-control"] == "no-store, max-age=0"
+
+
+def test_build_endpoint_reports_the_bundle_on_disk():
+    r = client.get("/api/build")
+    assert r.status_code == 200
+    data = r.json()
+    assert set(data) == {"build_id", "built_at", "sources_newer_than_build"}
+    if not _frontend_built():
+        assert data["build_id"] is None
+        return
+    assert len(data["build_id"]) == 8
+    import hashlib
+
+    from app import buildinfo
+
+    assert data["build_id"] == hashlib.sha256(buildinfo.BUNDLE.read_bytes()).hexdigest()[:8]
+
+
+def test_index_html_is_stamped_with_the_build_id():
+    if not _frontend_built():
+        pytest.skip("frontend not built")
+    build_id = client.get("/api/build").json()["build_id"]
+    for path in ("/", "/index.html"):
+        r = client.get(path)
+        assert f'<meta name="build-id" content="{build_id}">' in r.text
+        assert "<html" in r.text.lower()

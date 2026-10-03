@@ -32,7 +32,7 @@ def main() -> None:
     for w in parsed.warnings:
         print(f"warning: {w}")
 
-    node_states, current_allocation, home_node = build_node_states_from_save(parsed, graph)
+    node_states, current_allocation, home_node, _real_presence = build_node_states_from_save(parsed, graph)
     print(f"home_node = {home_node}")
     print(f"suggested_trade_efficiency = {parsed.suggested_trade_efficiency}")
     print(f"actual_current_income (save) = {parsed.actual_current_income:.3f}")

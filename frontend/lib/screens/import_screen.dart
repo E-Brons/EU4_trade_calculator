@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../app_state.dart';
 import '../api_client.dart';
+import 'dashboard_screen.dart';
 import 'setup_screen.dart';
 
 class ImportScreen extends StatefulWidget {
@@ -34,7 +35,7 @@ class _ImportScreenState extends State<ImportScreen> {
       final imported = await app.api.importSave(bytes, file.name);
       app.applyImportResult(imported);
       if (!context.mounted) return;
-      Navigator.of(context).push(MaterialPageRoute(builder: (_) => const SetupScreen()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => const DashboardScreen()));
     } catch (e) {
       final message = e is ApiException ? e.message : e.toString();
       setState(() => _error =

@@ -158,4 +158,4 @@ class Params:
     power_per_light_ship: float = 3.0
 
     # --- Optimizer-only, not a game mechanic ---
-    ship_chunk: int = 5  # granularity the optimizer moves ships in
+    ship_chunk: int = 1  # granularity the optimizer moves ships in

@@ -34,6 +34,14 @@ from app.parsing.clausewitz import as_list, parse
 
 _COUNTRY_TAG_RE = re.compile(r"^[A-Z0-9]{2,4}$")
 
+# Params defaults duplicated here (see engine/model.py) so _player_base_power
+# can back out the player's own recorded merchant/ship contribution from
+# `val` without importing engine.model at parse time -- keep in sync.
+_MERCHANT_POWER_DEFAULT = 2.0
+_CAPITAL_MERCHANT_POWER_DEFAULT = 5.0
+_POWER_PER_LIGHT_SHIP_DEFAULT = 3.0
+_HOME_POWER_BONUS_DEFAULT = 0.1
+
 
 @dataclass
 class ParsedCountryInNode:
@@ -44,11 +52,23 @@ class ParsedCountryInNode:
     has_capital: bool = False
     has_trader: bool = False
     is_steering: bool = False  # has_trader and a Steer action
+    steer_link_index: int = 0  # save's own `steer_power` field: which of the node's outgoing
+    # links (0-indexed, same order as ParsedNode.steer_power_weights/graph.outgoing) this
+    # country steers to. Absent (default 0) means the first link -- CONFIRMED against a real
+    # save: a country with no `steer_power` key always lines up with the node's dominant
+    # weight landing on outgoing[0].
+    is_collecting: bool = False  # `total` key present on this entry -- the authoritative
+    # "actually retains ducats here" signal, CONFIRMED against a real mid-game save: a merchant
+    # explicitly Collecting away from the capital gets this (plus nonzero `money`); `has_trader`
+    # alone does not -- a save taken before any trade tick has run can have has_trader=True at
+    # an away node (a scripted/historical merchant placement) with no `total`/`money` yet, since
+    # nothing has been computed there. has_capital always collects regardless of this flag.
     money: float = 0.0  # realized ducats/month from this node, if collecting
     val: float = 0.0  # power-weighted share of the node's WHOLE value (retained + forwarded)
     value_share: float = 0.0  # this country's share of the RETAINED value (per-country `total`
-    # field) -- only ever populated on the `has_capital` entry. See docs/implementation.md's
-    # "Trade simulation" section for the confirmed formula relating this to `val`/`money`.
+    # field) -- populated whenever is_collecting is True (has_capital, or an away merchant that's
+    # actually realized a Collect result). See docs/implementation.md's "Trade simulation"
+    # section for the confirmed formula relating this to `val`/`money`.
     add: float = 0.0  # per-country steering-bookkeeping field, refuted as a trade_efficiency
     # proxy -- kept for completeness, not used for anything.
     raw: dict = field(default_factory=dict)
@@ -84,6 +104,10 @@ class ParsedSave:
     warnings: list[str] = field(default_factory=list)
     suggested_trade_efficiency: float | None = None
     actual_current_income: float = 0.0
+    suggested_max_merchants: int | None = None  # len(countries.<TAG>.merchants.envoy) -- currently
+    # DEPLOYED merchants, not the country's merchant cap (that cap isn't stored anywhere in the
+    # save; it's computed from tech/ideas). Still a far better starting point than a fixed guess.
+    suggested_max_light_ships: int | None = None  # countries.<TAG>.num_subunits_type_and_cat.light_ship.normal
 
 
 def load_save(path: str | Path, rakaly_path: Path | None = None) -> ParsedSave:
@@ -123,11 +147,19 @@ def load_save(path: str | Path, rakaly_path: Path | None = None) -> ParsedSave:
     if not player_tag:
         raise ValueError("Could not find the player's country tag in the save")
     date = _extract_scalar(meta_text, "date") or _extract_scalar(gamestate_text, "date")
+    max_merchants, max_light_ships = _extract_player_military(gamestate_text, str(player_tag))
 
     trade_block_text = extract_top_level_block(gamestate_text, "trade")
     if trade_block_text is None:
         warnings.append("No top-level 'trade' block found in gamestate; falling back to manual entry.")
-        return ParsedSave(player_tag=player_tag, date=date, nodes={}, warnings=warnings)
+        return ParsedSave(
+            player_tag=player_tag,
+            date=date,
+            nodes={},
+            warnings=warnings,
+            suggested_max_merchants=max_merchants,
+            suggested_max_light_ships=max_light_ships,
+        )
 
     trade_tree = parse(trade_block_text[1:-1])
     nodes: dict[str, ParsedNode] = {}
@@ -161,6 +193,8 @@ def load_save(path: str | Path, rakaly_path: Path | None = None) -> ParsedSave:
                     has_capital=bool(value.get("has_capital")),
                     has_trader=has_trader,
                     is_steering=has_trader and "type" in value,
+                    steer_link_index=int(_as_float(value.get("steer_power"))),
+                    is_collecting="total" in value,
                     money=_as_float(value.get("money")),
                     val=_as_float(value.get("val")),
                     value_share=_as_float(value.get("total")),
@@ -204,13 +238,15 @@ def load_save(path: str | Path, rakaly_path: Path | None = None) -> ParsedSave:
         warnings=warnings,
         suggested_trade_efficiency=suggested_trade_efficiency,
         actual_current_income=actual_current_income,
+        suggested_max_merchants=max_merchants,
+        suggested_max_light_ships=max_light_ships,
     )
 
 
 def build_node_states_from_save(
     parsed: ParsedSave,
     graph,
-) -> tuple[dict[str, "NodeState"], dict[str, "NodeAllocation"], str | None]:
+) -> tuple[dict[str, "NodeState"], dict[str, "NodeAllocation"], str | None, set[str]]:
     """Turns a `ParsedSave` into the engine's `NodeState`/`NodeAllocation`
     inputs, from the player's point of view. `graph` is the loaded
     `TradeGraph` (see `parsing/tradenodes.py`), used to place each node's
@@ -225,6 +261,7 @@ def build_node_states_from_save(
     node_states: dict[str, NodeState] = {}
     current_allocation: dict[str, NodeAllocation] = {}
     home_node: str | None = None
+    real_presence: set[str] = set()
 
     for node_id, node in parsed.nodes.items():
         player = next((c for c in node.countries if c.tag == parsed.player_tag), None)
@@ -238,12 +275,15 @@ def build_node_states_from_save(
         for c in node.countries:
             if c.tag == parsed.player_tag:
                 continue
-            if c.has_capital:
-                # Only has_capital ever actually collects -- see
-                # docs/implementation.md's "Trade simulation" section.
-                other_collect += c.val if c.val else c.power
-            elif c.is_steering:
+            if c.is_steering:
                 other_steer_total += c.val if c.val else c.power
+            elif c.has_capital or c.is_collecting:
+                # Home always collects; an away merchant only counts as
+                # collecting once it has actually realized a result (see
+                # ParsedCountryInNode.is_collecting) -- has_trader alone
+                # isn't enough, since a zero-tick save can have a merchant
+                # placed but not yet reflected in any recorded value.
+                other_collect += c.val if c.val else c.power
             else:
                 # `val` is the authoritative value-weight even when
                 # province_power/ship_power are 0 (e.g. colonial-range
@@ -257,16 +297,26 @@ def build_node_states_from_save(
 
         if player:
             if not player.has_trader:
+                # No merchant stationed -- NONE even at home (simulate.py's
+                # is_home compensation still counts the passive capital
+                # collection; this keeps the +10% "merchant present" bonus,
+                # which only applies with an actual merchant, from
+                # firing here).
                 action = MerchantAction.NONE
             elif player.is_steering:
                 action = MerchantAction.STEER
-            elif player.has_capital:
+            elif player.has_capital or player.is_collecting:
                 action = MerchantAction.COLLECT
             else:
-                # Same has_capital-gating as the "other countries" loop
-                # above, applied to the player's own merchant.
+                # has_trader with no `type` (not steering) but no realized
+                # result yet either (no `total` key) -- a merchant is
+                # placed but nothing's been computed for it (zero-tick
+                # save). Not COLLECT: there's nothing real to replay here.
                 action = MerchantAction.NONE
-            steer_target = outgoing[0] if (action == MerchantAction.STEER and outgoing) else None
+            steer_target = None
+            if action == MerchantAction.STEER and outgoing:
+                idx = player.steer_link_index if player.steer_link_index < len(outgoing) else 0
+                steer_target = outgoing[idx]
         else:
             action = MerchantAction.NONE
             steer_target = None
@@ -276,11 +326,13 @@ def build_node_states_from_save(
         # NodeState.matches_recorded()), see docs/implementation.md.
         has_known_data = node.retain_power > 0 or node.pull_power > 0
 
+        player_base_power = _player_base_power(player, is_home, node_id, graph)
+
         node_states[node_id] = NodeState(
             node_id=node_id,
             local_value=node.local_value,
             is_home=is_home,
-            player_base_power=player.power if player else 0.0,
+            player_base_power=player_base_power,
             other_collect_power=other_collect,
             other_steer_power=other_steer_power,
             other_passive_power=other_passive,
@@ -300,8 +352,64 @@ def build_node_states_from_save(
                 steer_target=steer_target,
                 light_ships=player.light_ships,
             )
+            # Genuine presence -- owned provinces/ships, OR already doing
+            # something real here, regardless of `val` (which, after the
+            # fix above, can be a small nonzero "colonial range" figure at
+            # nodes the player has nothing actually standing in -- not a
+            # sane place to suggest a NEW merchant/ship). Raw power is the
+            # right signal for "can this candidate be acted on at all",
+            # val for "how much is acting on it worth".
+            if player.power > 0 or is_home or action != MerchantAction.NONE:
+                real_presence.add(node_id)
 
-    return node_states, current_allocation, home_node
+    return node_states, current_allocation, home_node, real_presence
+
+
+def _player_base_power(player: "ParsedCountryInNode | None", is_home: bool, node_id: str, graph) -> float:
+    """The player's intrinsic trade power at a node, for simulate()'s
+    `_player_power` to add merchant/ship bonuses on top of.
+
+    `val` is the authoritative power figure here, for ANY entry (collect,
+    steer, or passive) -- CONFIRMED against a real, ticked save two ways:
+    summed over has_capital/collecting entries it matches the node's own
+    `retain_power`; summed over every OTHER entry (steer + passive
+    together) it matches `pull_power`, exactly, for every node without
+    meaningful piracy (a handful of colonial/frontier nodes are off by the
+    same already-documented pirate-power gap that `test_val_sums_to_node_
+    total` tolerates). Earlier reasoning that `val` was unreliable away
+    from a collecting entry compared it against raw `province_power+
+    ship_power` instead of `pull_power` -- the wrong baseline; `val` was
+    right all along, raw power just isn't the same quantity as `val` to
+    begin with (val is already-modified; see the ~2x home-vs-away gap at
+    collecting entries that raw power alone can't explain either).
+
+    Whatever of `val` is already attributable to the save's OWN recorded
+    merchant/ships is subtracted back out first, so a hypothetical
+    allocation that changes the merchant/ship count at this node (the
+    optimizer's entire job) doesn't double-count the old ones on top of
+    the new ones simulate() adds.
+    """
+    if not player or not player.val:
+        # No `val` to work with (e.g. synthetic/manual data, or a
+        # genuinely zero-power entry) -- fall back to raw power as-is.
+        # Nothing to subtract: unlike `val`, raw power never had the
+        # recorded merchant/ship bonus baked into it.
+        return player.power if player else 0.0
+
+    recorded_added = 0.0
+    if node_id not in graph or not graph.is_inland(node_id):
+        recorded_added += player.light_ships * _POWER_PER_LIGHT_SHIP_DEFAULT
+    if player.has_trader:
+        recorded_added += _CAPITAL_MERCHANT_POWER_DEFAULT if is_home else _MERCHANT_POWER_DEFAULT
+    if is_home:
+        recorded_added *= 1 + _HOME_POWER_BONUS_DEFAULT
+
+    # Raw power is a floor, not just a 0 clamp: it's never valid for `val`
+    # minus its own recorded bonus to come out below the country's bare
+    # province/ship power (that would mean the bonus was bigger than the
+    # total it's supposedly part of). Falls back to it gracefully instead
+    # of collapsing to 0 whenever that happens.
+    return max(player.val - recorded_added, player.power)
 
 
 def _distribute_steer_weights(total: float, weights: list[float], outgoing: tuple[str, ...]) -> dict[str, float]:
@@ -319,6 +427,27 @@ def _as_float(value) -> float:
         return 0.0
 
 
+def _extract_player_military(gamestate_text: str, player_tag: str) -> tuple[int | None, int | None]:
+    """Pulls the player's deployed-merchant count and total light-ship count
+    from the top-level `countries={ <TAG>={...} ... }` block, without
+    tokenizing the other 1000+ countries in it, and without even scanning
+    past our own tag's entry -- `countries` alone is tens of MB, so a naive
+    "extract the whole block, then search within it" (like the `trade`
+    block above) would burn several seconds walking all of it char-by-char
+    just to find its end. `_extract_nested_block` stops the instant it
+    finds `player_tag`."""
+    country_block = _extract_nested_block(gamestate_text, "countries", player_tag)
+    if country_block is None:
+        return None, None
+    country = parse(country_block[1:-1])
+    merchants = country.get("merchants")
+    max_merchants = len(as_list(merchants.get("envoy"))) if isinstance(merchants, dict) else 0
+    subunits = country.get("num_subunits_type_and_cat")
+    light_ship = subunits.get("light_ship") if isinstance(subunits, dict) else None
+    max_light_ships = int(_as_float(light_ship.get("normal"))) if isinstance(light_ship, dict) else 0
+    return max_merchants, max_light_ships
+
+
 def _extract_scalar(text: str, key: str) -> str | None:
     match = re.search(rf'(?m)^\s*{re.escape(key)}\s*=\s*"?([^"\n]+?)"?\s*$', text)
     return match.group(1) if match else None
@@ -328,7 +457,6 @@ def extract_top_level_block(text: str, key: str) -> str | None:
     """Finds `key={ ... }` at brace-depth 0 and returns the block including
     its braces, without tokenizing the rest of the (potentially huge)
     document. Returns None if the key isn't found at the top level."""
-    marker = None
     i = 0
     n = len(text)
     depth = 0
@@ -355,44 +483,145 @@ def extract_top_level_block(text: str, key: str) -> str | None:
             depth -= 1
             i += 1
             continue
-        if depth == 0 and marker is None:
-            # Are we at the start of "<key>" possibly preceded by whitespace/newline?
-            if (
-                text.startswith(key, i)
-                and (i == 0 or not (text[i - 1].isalnum() or text[i - 1] == "_"))
-                and (i + len(key) >= n or not (text[i + len(key)].isalnum() or text[i + len(key)] == "_"))
-            ):
-                after = i + len(key)
-                j = after
-                while j < n and text[j] in " \t":
-                    j += 1
-                if j < n and text[j] == "=":
-                    j += 1
-                    while j < n and text[j] in " \t":
-                        j += 1
-                    if j < n and text[j] == "{":
-                        start = j
-                        block_depth = 0
-                        k = j
-                        in_q = False
-                        while k < n:
-                            ck = text[k]
-                            if in_q:
-                                if ck == "\\":
-                                    k += 2
-                                    continue
-                                if ck == '"':
-                                    in_q = False
-                                k += 1
-                                continue
-                            if ck == '"':
-                                in_q = True
-                            elif ck == "{":
-                                block_depth += 1
-                            elif ck == "}":
-                                block_depth -= 1
-                                if block_depth == 0:
-                                    return text[start : k + 1]
-                            k += 1
+        if depth == 0:
+            brace = _key_eq_brace_at(text, i, key)
+            if brace is not None:
+                end = _match_brace_block(text, brace)
+                if end is not None:
+                    return text[brace:end]
         i += 1
+    return None
+
+
+def _extract_nested_block(text: str, outer_key: str, inner_key: str) -> str | None:
+    """Like `extract_top_level_block`, but for `outer_key={ inner_key={...}
+    ... }` where `outer_key`'s block is too large to fully scan just to
+    find its end (e.g. `countries`, tens of MB) -- stops the moment
+    `inner_key` is found at depth 1, never walking the rest of
+    `outer_key`'s block. Returns None if either key isn't found."""
+    n = len(text)
+    outer_start = None
+    i = 0
+    depth = 0
+    in_quotes = False
+    while i < n:
+        c = text[i]
+        if in_quotes:
+            if c == "\\":
+                i += 2
+                continue
+            if c == '"':
+                in_quotes = False
+            i += 1
+            continue
+        if c == '"':
+            in_quotes = True
+            i += 1
+            continue
+        if c == "{":
+            depth += 1
+            i += 1
+            continue
+        if c == "}":
+            depth -= 1
+            i += 1
+            continue
+        if depth == 0:
+            brace = _key_eq_brace_at(text, i, outer_key)
+            if brace is not None:
+                outer_start = brace
+                i = brace
+                break
+        i += 1
+    if outer_start is None:
+        return None
+
+    # Now scan strictly inside the outer block, tracking depth relative to
+    # it (starts at 1, right after its own opening brace), looking for
+    # `inner_key={` at depth 1.
+    depth = 0
+    in_quotes = False
+    i = outer_start
+    while i < n:
+        c = text[i]
+        if in_quotes:
+            if c == "\\":
+                i += 2
+                continue
+            if c == '"':
+                in_quotes = False
+            i += 1
+            continue
+        if c == '"':
+            in_quotes = True
+            i += 1
+            continue
+        if c == "{":
+            depth += 1
+            i += 1
+            continue
+        if c == "}":
+            depth -= 1
+            if depth == 0:
+                return None  # reached the end of outer_key's block
+            i += 1
+            continue
+        if depth == 1:
+            brace = _key_eq_brace_at(text, i, inner_key)
+            if brace is not None:
+                end = _match_brace_block(text, brace)
+                return text[brace:end] if end is not None else None
+        i += 1
+    return None
+
+
+def _key_eq_brace_at(text: str, i: int, key: str) -> int | None:
+    """If `text[i:]` starts with the bareword `key` (not part of a longer
+    identifier) followed by `=` and a `{`, returns the index of that `{`.
+    Otherwise None."""
+    n = len(text)
+    if not (
+        text.startswith(key, i)
+        and (i == 0 or not (text[i - 1].isalnum() or text[i - 1] == "_"))
+        and (i + len(key) >= n or not (text[i + len(key)].isalnum() or text[i + len(key)] == "_"))
+    ):
+        return None
+    j = i + len(key)
+    while j < n and text[j] in " \t":
+        j += 1
+    if j >= n or text[j] != "=":
+        return None
+    j += 1
+    while j < n and text[j] in " \t":
+        j += 1
+    return j if j < n and text[j] == "{" else None
+
+
+def _match_brace_block(text: str, start: int) -> int | None:
+    """`start` is the index of a `{`. Returns the index just past its
+    matching `}` (so `text[start:end]` is the whole `{...}` block),
+    handling quoted strings/escapes. None if unterminated."""
+    n = len(text)
+    depth = 0
+    in_quotes = False
+    k = start
+    while k < n:
+        c = text[k]
+        if in_quotes:
+            if c == "\\":
+                k += 2
+                continue
+            if c == '"':
+                in_quotes = False
+            k += 1
+            continue
+        if c == '"':
+            in_quotes = True
+        elif c == "{":
+            depth += 1
+        elif c == "}":
+            depth -= 1
+            if depth == 0:
+                return k + 1
+        k += 1
     return None

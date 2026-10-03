@@ -228,6 +228,35 @@ found and fixed one at a time against the real save, documented in
   the *same*, possibly load-broken page, the fix is `page.reload()`
   between retries, not just re-selecting the file.
 
+## Dashboard (`frontend/lib/screens/dashboard_screen.dart`)
+
+One screen after import, following `docs/imported/trade-visualizations.md`.
+Left: controls. Right: a Sankey of trade value flow
+(`widgets/trade_sankey.dart`, geometry in `widgets/sankey_layout.dart`) over a
+per-node waterfall (`widgets/node_waterfall.dart`).
+
+- **Three presets**: *Snapshot* (the save's own allocation), *Optimal* (the
+  optimizer's), *Current* (the user's last-edited allocation). Each is
+  simulated through `/api/simulate` over the **same** node states, so incomes
+  are directly comparable. Editing any control while Snapshot/Optimal is shown
+  forks that allocation into Current; the two read-only presets never change.
+- **Snapshot is an exact replay**: `NodeStateIn` round-trips the `known_*`
+  fields, so simulating the imported allocation reproduces the save's own
+  income (checked in `test_import_then_simulate_replays_saves_own_income`).
+- **Optimizer gets every node's state**, not just the candidates (decisions are
+  still limited to candidates). With candidates only, upstream value flowing
+  into a candidate was dropped, income was understated, and "optimal" could come
+  out *below* the save's current income (e.g. NED 1650: 14.85 vs 17.04 actual;
+  with all nodes: 24.98). This replaces the old calibration-ratio workaround.
+- **"Hide nodes with 0 power"** hides nodes where the active preset gives you no
+  trade power. Flow to/from hidden nodes is drawn as grey stubs so totals still
+  add up. To place a merchant at a node you have no power in, turn the filter off.
+- Changing trade efficiency re-simulates all presets; changing the merchant/ship
+  budget only marks Optimal stale until "Re-optimize" is pressed.
+- Chart colours are the dataviz reference palette (blue ramp for power share,
+  aqua = collect, orange = steer); aqua is below 3:1 on the light surface, so
+  collect marks always carry a text label.
+
 ## Testing
 
 `backend/tests/` (pytest): the Clausewitz parser on hand-built snippets;

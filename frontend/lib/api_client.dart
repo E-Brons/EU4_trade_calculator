@@ -55,6 +55,11 @@ class ApiClient {
     return TradeGraphData.fromJson(_decode(r));
   }
 
+  Future<BuildInfoData> getBuildInfo() async {
+    final r = await http.get(_uri('/api/build'), headers: {'Cache-Control': 'no-cache'});
+    return BuildInfoData.fromJson(_decode(r));
+  }
+
   Future<SimulateResponseData> simulate({
     required Map<String, NodeStateData> nodeStates,
     required Map<String, NodeAllocationData> allocation,

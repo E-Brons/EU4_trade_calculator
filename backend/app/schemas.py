@@ -19,6 +19,17 @@ class NodeStateIn(BaseModel):
     other_steer_merchants: dict[str, int] = Field(default_factory=dict)
     other_passive_power: float = 0.0
 
+    # Authoritative save fields, round-tripped so the client can ask for an
+    # exact replay of the save's own allocation (see NodeState.matches_recorded).
+    known_gross_value: float | None = None
+    known_retained_value: float | None = None
+    known_retain_power: float | None = None
+    known_pull_power: float | None = None
+    known_player_val: float = 0.0
+    known_player_action: MerchantAction | None = None
+    known_player_light_ships: int = 0
+    known_player_steer_target: str | None = None
+
     def to_engine(self) -> NodeState:
         return NodeState(**self.model_dump())
 
@@ -40,7 +51,7 @@ class ParamsIn(BaseModel):
     home_power_bonus: float = 0.1
     merchant_present_income_bonus: float = 0.1
     steer_value_bonus_per_merchant: float = 0.05
-    ship_chunk: int = 5
+    ship_chunk: int = 1
 
     def to_engine(self) -> Params:
         return Params(**self.model_dump())
@@ -120,10 +131,27 @@ class MarginalValueOut(BaseModel):
     label: str
     income: float
     delta_vs_optimal: float
+    # Where the change would be made: added to / taken from this node.
+    node_id: str | None = None
+    node_display_name: str | None = None
+    change: str | None = None  # "add" | "remove"
+    merchant_action: MerchantAction | None = None
+    steer_target: str | None = None
+    steer_target_display_name: str | None = None
 
     @classmethod
-    def from_engine(cls, m: MarginalValue) -> "MarginalValueOut":
-        return cls(**m.__dict__)
+    def from_engine(cls, m: MarginalValue, display_names: dict[str, str]) -> "MarginalValueOut":
+        return cls(
+            label=m.label,
+            income=m.income,
+            delta_vs_optimal=m.delta_vs_optimal,
+            node_id=m.node_id,
+            node_display_name=display_names.get(m.node_id, m.node_id) if m.node_id else None,
+            change=m.change,
+            merchant_action=m.merchant_action,
+            steer_target=m.steer_target,
+            steer_target_display_name=display_names.get(m.steer_target, m.steer_target) if m.steer_target else None,
+        )
 
 
 class OptimizeResponse(BaseModel):
@@ -162,8 +190,8 @@ class OptimizeResponse(BaseModel):
             current_income=current_income,
             income_gain_vs_current=(result.income - current_income) if current_income is not None else None,
             recommended_actions=actions,
-            merchant_marginals=[MarginalValueOut.from_engine(m) for m in result.merchant_marginals],
-            ship_marginals=[MarginalValueOut.from_engine(m) for m in result.ship_marginals],
+            merchant_marginals=[MarginalValueOut.from_engine(m, display_names) for m in result.merchant_marginals],
+            ship_marginals=[MarginalValueOut.from_engine(m, display_names) for m in result.ship_marginals],
             breakdown=SimulateResponse.from_engine(breakdown, display_names),
         )
 
@@ -189,3 +217,8 @@ class ImportSaveResponse(BaseModel):
     suggested_home_node: str | None
     suggested_trade_efficiency: float | None
     actual_current_income: float
+    suggested_max_merchants: int | None
+    suggested_max_light_ships: int | None
+    suggested_candidate_nodes: list[str]  # genuine presence only (owned provinces/ships, home,
+    # or already doing something there) -- NOT the same test as "player_base_power > 0", which
+    # now uses `val` and can be nonzero from pure colonial-range reach with nothing to act on.

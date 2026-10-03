@@ -3,10 +3,13 @@ import 'package:provider/provider.dart';
 
 import '../app_state.dart';
 import '../models.dart';
-import 'results_screen.dart';
+import 'dashboard_screen.dart';
 
 class SetupScreen extends StatefulWidget {
-  const SetupScreen({super.key});
+  /// Opened from the dashboard to tweak raw trade data: "Apply" just pops
+  /// back (the dashboard rebuilds itself) instead of pushing a new dashboard.
+  final bool fromDashboard;
+  const SetupScreen({super.key, this.fromDashboard = false});
 
   @override
   State<SetupScreen> createState() => _SetupScreenState();
@@ -60,10 +63,14 @@ class _SetupScreenState extends State<SetupScreen> {
                 children: [
                   FilledButton.icon(
                     icon: const Icon(Icons.auto_awesome),
-                    label: const Text('Optimize'),
+                    label: Text(widget.fromDashboard ? 'Apply' : 'Open dashboard'),
                     onPressed: () {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (_) => const ResultsScreen()));
+                      if (widget.fromDashboard) {
+                        Navigator.of(context).pop();
+                      } else {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (_) => const DashboardScreen()));
+                      }
                     },
                   ),
                 ],
@@ -136,12 +143,6 @@ class _GlobalParamsCard extends StatelessWidget {
               label: 'Light ships available',
               value: app.maxLightShips.toDouble(),
               onChanged: (v) => app.maxLightShips = v.round(),
-              integer: true,
-            ),
-            _NumberField(
-              label: 'Ship allocation chunk',
-              value: app.params.shipChunk.toDouble(),
-              onChanged: (v) => app.params.shipChunk = v.round(),
               integer: true,
             ),
             _NumberField(

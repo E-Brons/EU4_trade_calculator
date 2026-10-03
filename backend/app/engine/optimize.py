@@ -40,9 +40,21 @@ class OptimizeConfig:
 
 @dataclass
 class MarginalValue:
+    """Value of adding/removing one merchant or chunk of ships, relative to the
+    optimal allocation, and exactly where the change would be made.
+
+    `node_id` is where the merchant/ships would be added (change="add") or
+    taken from (change="remove"); None when there is no beneficial place to add
+    one (or nothing to remove). For merchants, `merchant_action`/`steer_target`
+    is the action to start (add) or the action being given up (remove)."""
+
     label: str
     income: float
     delta_vs_optimal: float
+    node_id: str | None = None
+    change: str | None = None  # "add" | "remove"
+    merchant_action: MerchantAction | None = None
+    steer_target: str | None = None
 
 
 @dataclass
@@ -102,7 +114,7 @@ def optimize(
     best_income = _score(graph, node_states, best_alloc, params)
 
     merchant_marginals = _merchant_marginals(graph, node_states, params, config, candidates, best_alloc, best_income)
-    ship_marginals = _ship_marginals(graph, node_states, params, config, best_alloc, best_income)
+    ship_marginals = _ship_marginals(graph, node_states, params, config, candidates, best_alloc, best_income)
 
     return OptimizeResult(
         allocation=best_alloc,
@@ -400,21 +412,66 @@ def _merchant_marginals(
     best_alloc: Allocation,
     best_income: float,
 ) -> list[MarginalValue]:
-    results = []
-    for delta, label in [(-1, "one fewer merchant"), (1, "one more merchant")]:
-        n = max(config.max_merchants + delta, 0)
-        trial_config = OptimizeConfig(
-            home_node=config.home_node,
-            candidate_nodes=candidates,
-            max_merchants=n,
-            max_light_ships=config.max_light_ships,
-            random_seed=config.random_seed,
-            max_restarts=1,
+    """One fewer / one more merchant, each applied to the optimal allocation:
+    the removal that loses least, and the best spot for a new merchant."""
+
+    def has_merchant(node_id: str) -> bool:
+        a = best_alloc.nodes.get(node_id)
+        return a is not None and a.merchant_action != MerchantAction.NONE
+
+    def with_action(node_id: str, action: MerchantAction, target: str | None) -> Allocation:
+        trial = best_alloc.copy()
+        ships = trial.get(node_id).light_ships
+        trial.nodes[node_id] = NodeAllocation(action, target, ships)
+        return trial
+
+    # --- one fewer: take a merchant off the node where it is worth least.
+    fewer = MarginalValue(label="one fewer merchant", income=best_income, delta_vs_optimal=0.0)
+    best_removal: tuple[float, str] | None = None
+    for node_id in candidates:
+        if not has_merchant(node_id):
+            continue
+        income = _score(graph, node_states, with_action(node_id, MerchantAction.NONE, None), params)
+        if best_removal is None or income > best_removal[0]:
+            best_removal = (income, node_id)
+    if best_removal is not None:
+        income, node_id = best_removal
+        old = best_alloc.nodes[node_id]
+        fewer = MarginalValue(
+            label="one fewer merchant",
+            income=income,
+            delta_vs_optimal=income - best_income,
+            node_id=node_id,
+            change="remove",
+            merchant_action=old.merchant_action,
+            steer_target=old.steer_target,
         )
-        alloc = _heuristic_search(graph, node_states, params, trial_config, candidates)
-        income = _score(graph, node_states, alloc, params)
-        results.append(MarginalValue(label=label, income=income, delta_vs_optimal=income - best_income))
-    return results
+
+    # --- one more: put a new merchant where it adds most (only counts nodes
+    # that have no merchant yet; changing an existing one doesn't use a new one).
+    more = MarginalValue(label="one more merchant", income=best_income, delta_vs_optimal=0.0)
+    best_add: tuple[float, str, NodeAllocation] | None = None
+    for node_id in candidates:
+        if has_merchant(node_id):
+            continue
+        for opt in _node_options(graph, node_id, config.home_node):
+            if opt.merchant_action == MerchantAction.NONE:
+                continue
+            income = _score(graph, node_states, with_action(node_id, opt.merchant_action, opt.steer_target), params)
+            if best_add is None or income > best_add[0]:
+                best_add = (income, node_id, opt)
+    if best_add is not None and best_add[0] > best_income + 1e-9:
+        income, node_id, opt = best_add
+        more = MarginalValue(
+            label="one more merchant",
+            income=income,
+            delta_vs_optimal=income - best_income,
+            node_id=node_id,
+            change="add",
+            merchant_action=opt.merchant_action,
+            steer_target=opt.steer_target,
+        )
+    return [fewer, more]
 
 
 def _ship_marginals(
@@ -422,22 +479,45 @@ def _ship_marginals(
     node_states: dict[str, NodeState],
     params: Params,
     config: OptimizeConfig,
+    candidates: list[str],
     best_alloc: Allocation,
     best_income: float,
 ) -> list[MarginalValue]:
-    results = []
+    """`chunk` fewer / more light ships, each applied to the optimal allocation:
+    the node where taking ships hurts least, and the node where adding helps most."""
     chunk = params.ship_chunk
-    for delta, label in [(-chunk, f"{chunk} fewer light ships"), (chunk, f"{chunk} more light ships")]:
-        ships = max(config.max_light_ships + delta, 0)
-        merchant_only = _strip_ships(best_alloc)
-        sea_candidates = [n for n in merchant_only.nodes if not graph.is_inland(n)]
-        income, _ = _greedy_ship_allocation(graph, node_states, params, merchant_only, sea_candidates, ships)
-        results.append(MarginalValue(label=label, income=income, delta_vs_optimal=income - best_income))
-    return results
+    fewer_label = f"{chunk} fewer light ships"
+    more_label = f"{chunk} more light ships"
 
+    fewer = MarginalValue(label=fewer_label, income=best_income, delta_vs_optimal=0.0)
+    best_removal: tuple[float, str] | None = None
+    for node_id, a in best_alloc.nodes.items():
+        if a.light_ships < chunk:
+            continue
+        trial = best_alloc.copy()
+        trial.get(node_id).light_ships -= chunk
+        income = _score(graph, node_states, trial, params)
+        if best_removal is None or income > best_removal[0]:
+            best_removal = (income, node_id)
+    if best_removal is not None:
+        income, node_id = best_removal
+        fewer = MarginalValue(
+            label=fewer_label, income=income, delta_vs_optimal=income - best_income, node_id=node_id, change="remove"
+        )
 
-def _strip_ships(alloc: Allocation) -> Allocation:
-    a = alloc.copy()
-    for na in a.nodes.values():
-        na.light_ships = 0
-    return a
+    more = MarginalValue(label=more_label, income=best_income, delta_vs_optimal=0.0)
+    best_add: tuple[float, str] | None = None
+    for node_id in candidates:
+        if graph.is_inland(node_id):
+            continue
+        trial = best_alloc.copy()
+        trial.get(node_id).light_ships += chunk
+        income = _score(graph, node_states, trial, params)
+        if best_add is None or income > best_add[0]:
+            best_add = (income, node_id)
+    if best_add is not None and best_add[0] > best_income + 1e-9:
+        income, node_id = best_add
+        more = MarginalValue(
+            label=more_label, income=income, delta_vs_optimal=income - best_income, node_id=node_id, change="add"
+        )
+    return [fewer, more]

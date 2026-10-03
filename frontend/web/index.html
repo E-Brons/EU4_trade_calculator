@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Local dev tool, not a PWA -- actively tear out any service worker a
+       previous build may have registered so a stale cached bundle can
+       never mask a fresh backend/frontend build again. -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((regs) => {
+        for (const reg of regs) reg.unregister();
+      });
+    }
+    if ('caches' in window) {
+      caches.keys().then((keys) => keys.forEach((k) => caches.delete(k)));
+    }
+  </script>
   <!--
     If you are serving your web app in a path other than the root, change the
     href value below to reflect the base path you are serving from.

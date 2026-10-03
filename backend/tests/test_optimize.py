@@ -127,3 +127,71 @@ def test_marginal_value_of_extra_merchant_is_reported():
     assert len(result.merchant_marginals) == 2
     more = next(m for m in result.merchant_marginals if "more" in m.label)
     assert more.income >= result.income  # a 2nd merchant should never make things worse
+
+
+def _two_node_case(max_merchants=1, max_ships=0, ship_power=3.0):
+    graph = make_graph({"far": ["home"], "home": []})
+    states = {
+        "far": NodeState(node_id="far", local_value=100.0, player_base_power=5.0, other_collect_power=5.0),
+        "home": NodeState(node_id="home", is_home=True, local_value=60.0, player_base_power=5.0, other_collect_power=5.0),
+    }
+    params = Params(merchant_power=10.0, power_per_light_ship=ship_power)
+    config = OptimizeConfig(
+        home_node="home",
+        candidate_nodes=["far", "home"],
+        max_merchants=max_merchants,
+        max_light_ships=max_ships,
+    )
+    return graph, states, params, config
+
+
+def test_merchant_marginals_name_the_node_to_take_from_and_add_to():
+    graph, states, params, config = _two_node_case(max_merchants=1)
+    result = optimize(graph, states, params, config)
+    placed = [n for n, a in result.allocation.nodes.items() if a.merchant_action.value != "none"]
+    assert len(placed) == 1
+    fewer = next(m for m in result.merchant_marginals if "fewer" in m.label)
+    more = next(m for m in result.merchant_marginals if "more" in m.label)
+
+    # Removing the only merchant: it must come from where it is, and costs income.
+    assert fewer.change == "remove"
+    assert fewer.node_id == placed[0]
+    assert fewer.merchant_action == result.allocation.nodes[placed[0]].merchant_action
+    assert fewer.delta_vs_optimal <= 0
+
+    # Adding one: goes to the other node (the one without a merchant), and helps.
+    assert more.change == "add"
+    assert more.node_id is not None and more.node_id != placed[0]
+    assert more.merchant_action is not None and more.merchant_action.value != "none"
+    assert more.delta_vs_optimal > 0
+    assert more.income == pytest.approx(result.income + more.delta_vs_optimal)
+
+
+def test_merchant_marginals_have_no_location_when_nothing_to_remove_or_add():
+    graph, states, params, config = _two_node_case(max_merchants=0)
+    result = optimize(graph, states, params, config)
+    fewer = next(m for m in result.merchant_marginals if "fewer" in m.label)
+    assert fewer.node_id is None and fewer.change is None and fewer.delta_vs_optimal == 0
+
+
+def test_ship_marginals_name_the_node_to_take_from_and_add_to():
+    graph, states, params, config = _two_node_case(max_merchants=0, max_ships=2, ship_power=4.0)
+    result = optimize(graph, states, params, config)
+    ships_at = {n: a.light_ships for n, a in result.allocation.nodes.items() if a.light_ships}
+    assert ships_at, "optimizer should use ships here"
+    fewer = next(m for m in result.ship_marginals if "fewer" in m.label)
+    more = next(m for m in result.ship_marginals if "more" in m.label)
+    assert fewer.change == "remove" and fewer.node_id in ships_at
+    assert fewer.delta_vs_optimal <= 0
+    assert more.change == "add" and more.node_id in {"far", "home"}
+    assert more.delta_vs_optimal >= 0
+
+
+def test_ship_marginals_never_suggest_an_inland_node():
+    graph = make_graph({"far": ["home"], "home": []}, inland={"far", "home"})
+    states = {"far": NodeState(node_id="far", local_value=50.0, player_base_power=5.0),
+              "home": NodeState(node_id="home", is_home=True, player_base_power=5.0)}
+    config = OptimizeConfig(home_node="home", candidate_nodes=["far", "home"], max_merchants=0, max_light_ships=5)
+    result = optimize(graph, states, Params(), config)
+    more = next(m for m in result.ship_marginals if "more" in m.label)
+    assert more.node_id is None

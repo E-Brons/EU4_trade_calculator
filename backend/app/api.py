@@ -52,7 +52,7 @@ def post_simulate(req: SimulateRequest) -> SimulateResponse:
 
     allocation = Allocation(nodes={nid: a.to_engine() for nid, a in req.allocation.items()})
     result = run_simulate(graph, node_states, allocation, req.params.to_engine())
-    display_names = {nid: graph.display_name(nid) for nid in node_states if nid in graph}
+    display_names = {nid: graph.display_name(nid) for nid in graph.nodes}
     return SimulateResponse.from_engine(result, display_names)
 
 
@@ -107,7 +107,7 @@ async def post_import_save(file: UploadFile = File(...)) -> ImportSaveResponse:
             raise HTTPException(422, str(e)) from e
 
     graph = load_trade_graph()
-    node_states, current_allocation, home_node = save_parsing.build_node_states_from_save(parsed, graph)
+    node_states, current_allocation, home_node, real_presence = save_parsing.build_node_states_from_save(parsed, graph)
 
     warnings = list(parsed.warnings)
     known_states = {}
@@ -133,4 +133,7 @@ async def post_import_save(file: UploadFile = File(...)) -> ImportSaveResponse:
         suggested_home_node=home_node,
         suggested_trade_efficiency=parsed.suggested_trade_efficiency,
         actual_current_income=parsed.actual_current_income,
+        suggested_max_merchants=parsed.suggested_max_merchants,
+        suggested_max_light_ships=parsed.suggested_max_light_ships,
+        suggested_candidate_nodes=sorted(nid for nid in real_presence if nid in known_states),
     )
