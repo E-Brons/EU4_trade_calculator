@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  # Fast unit/integration tests -- everything except the real-save corpus,
+  # so a syntax/logic error fails in seconds instead of waiting on the
+  # much slower save-verification job below.
+  backend-unit-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -q --ignore=tests/test_real_saves.py
+
+  # THE most important check in this CI: re-simulates the trade calculation
+  # engine against ~78 real EU4 saves (opening-state snapshots, see
+  # docs/test.md) and asserts it reproduces each save's OWN recorded
+  # numbers (retention, per-node income, total income) to within the
+  # tolerances documented in tests/test_real_saves.py. This is what
+  # actually proves the calculation core is correct -- the unit tests above
+  # only prove the code runs, not that the formula matches the game.
+  #
+  # The raw .eu4 saves are gitignored (multi-GB); each has a small tracked
+  # zip under tests/fixtures/saves_zip/ instead, unzipped lazily into a
+  # pytest tmp_path per test (see test_real_saves.py's _save_path) -- never
+  # persisted to disk here, so there's nothing extra to clean up.
+  verify-calculation-vs-saves:
+    name: "Verify calculation core vs. save database"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+      - run: pip install -r requirements.txt
+      - name: Confirm the save corpus is actually present (not silently all-skipped)
+        run: |
+          python3 - <<'EOF'
+          import json, zipfile
+          from pathlib import Path
+          manifest = json.loads(Path("tests/fixtures/saves/saves.json").read_text())["saves"]
+          zip_dir = Path("tests/fixtures/saves_zip")
+          missing = [e["id"] for e in manifest if not (zip_dir / f"{e['file']}.zip").exists()]
+          if missing:
+              raise SystemExit(f"{len(missing)}/{len(manifest)} fixture saves have no tracked zip: {missing}")
+          print(f"{len(manifest)} fixture saves present, zips verified readable.")
+          for e in manifest:
+              with zipfile.ZipFile(zip_dir / f"{e['file']}.zip") as zf:
+                  zf.testzip()
+          EOF
+      - run: python -m pytest -q tests/test_real_saves.py -v
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+      - run: flutter build web --pwa-strategy=none
