@@ -132,5 +132,6 @@ async def post_import_save(file: UploadFile = File(...)) -> ImportSaveResponse:
         actual_current_income=parsed.actual_current_income,
         suggested_max_merchants=parsed.suggested_max_merchants,
         suggested_max_light_ships=parsed.suggested_max_light_ships,
+        suggested_power_per_light_ship=parsed.suggested_power_per_light_ship,
         suggested_candidate_nodes=sorted(nid for nid in real_presence if nid in known_states),
     )

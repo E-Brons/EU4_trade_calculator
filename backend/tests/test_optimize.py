@@ -105,6 +105,49 @@ def test_optimizer_respects_merchant_budget_on_larger_random_network():
     assert result.allocation.light_ship_count() <= 30
 
 
+def test_local_search_terminates_with_fine_ship_chunk_and_many_sea_candidates():
+    # Regression test: with ship_chunk=1 (the default), the 1-opt local
+    # search in _complete_and_refine can discover a single ship worth
+    # moving by a sliver every round, which can flip a near-tied merchant
+    # choice, which re-ties the ships -- a genuine oscillation between
+    # merchant 1-opt and ship re-placement that a coarser chunk mostly
+    # hides. Confirmed against a real save: this hung for 15+ minutes
+    # (>900s, never completing) before MAX_LOCAL_SEARCH_ROUNDS was added.
+    # Many sea candidates + many ships + chunk=1 reproduces the same
+    # shape here; the real assertion is just that this returns at all,
+    # and promptly -- not oscillates forever.
+    import random
+    import time
+
+    rng = random.Random(3)
+    home = "home"
+    others = [f"n{i}" for i in range(12)]
+    edges = {home: []}
+    for n in others:
+        edges[n] = [home]
+    graph = make_graph(edges)  # none inland -- every node is a sea candidate
+    states = {home: NodeState(node_id=home, is_home=True, player_base_power=5.0)}
+    for n in others:
+        states[n] = NodeState(
+            node_id=n,
+            local_value=rng.uniform(20, 30),  # narrow range: encourages near-ties
+            player_base_power=rng.uniform(2, 6),
+            other_collect_power=rng.uniform(15, 25),
+        )
+    params = Params(merchant_power=6.0, power_per_light_ship=1.5, ship_chunk=1)
+    config = OptimizeConfig(
+        home_node=home, candidate_nodes=others + [home], max_merchants=6, max_light_ships=80, random_seed=2
+    )
+
+    start = time.monotonic()
+    result = optimize(graph, states, params, config)
+    elapsed = time.monotonic() - start
+
+    assert elapsed < 15.0, f"optimize() took {elapsed:.1f}s -- local search likely regressed to unbounded oscillation"
+    assert result.allocation.merchant_count() <= 6
+    assert result.allocation.light_ship_count() <= 80
+
+
 def test_optimizer_respects_ship_budget_and_inland_nodes_get_no_ships():
     graph = make_graph({"home": []}, inland={"home"})
     states = {"home": NodeState(node_id="home", is_home=True, local_value=100.0, player_base_power=5.0)}

@@ -82,6 +82,12 @@ class AppState extends ChangeNotifier {
     if (result.suggestedMaxLightShips != null) {
       maxLightShips = result.suggestedMaxLightShips!;
     }
+    // Real weighted-mean trade power across the player's actual light
+    // ship fleet mix (e.g. Early Frigates + Frigates), not the flat 3.0
+    // guess -- see save.py's LIGHT_SHIP_TRADE_POWER.
+    if (result.suggestedPowerPerLightShip != null) {
+      params.powerPerLightShip = result.suggestedPowerPerLightShip!;
+    }
     actualCurrentIncome = result.actualCurrentIncome;
     notifyListeners();
   }

@@ -108,6 +108,9 @@ class ParsedSave:
     # DEPLOYED merchants, not the country's merchant cap (that cap isn't stored anywhere in the
     # save; it's computed from tech/ideas). Still a far better starting point than a fixed guess.
     suggested_max_light_ships: int | None = None  # countries.<TAG>.num_subunits_type_and_cat.light_ship.normal
+    suggested_power_per_light_ship: float | None = None  # weighted-mean real trade_power across the
+    # player's actual light_ship fleet mix (see LIGHT_SHIP_TRADE_POWER) -- None if the save has no
+    # recognized light_ship-type ships at all (e.g. a save with zero light ships).
 
 
 def load_save(path: str | Path) -> ParsedSave:
@@ -148,7 +151,7 @@ def load_save(path: str | Path) -> ParsedSave:
     if not player_tag:
         raise ValueError("Could not find the player's country tag in the save")
     date = _extract_scalar(meta_text, "date") or _extract_scalar(gamestate_text, "date")
-    max_merchants, max_light_ships = _extract_player_military(gamestate_text, str(player_tag))
+    max_merchants, max_light_ships, power_per_light_ship = _extract_player_military(gamestate_text, str(player_tag))
 
     trade_block_text = extract_top_level_block(gamestate_text, "trade")
     if trade_block_text is None:
@@ -160,6 +163,7 @@ def load_save(path: str | Path) -> ParsedSave:
             warnings=warnings,
             suggested_max_merchants=max_merchants,
             suggested_max_light_ships=max_light_ships,
+            suggested_power_per_light_ship=power_per_light_ship,
         )
 
     trade_tree = parse(trade_block_text[1:-1])
@@ -241,6 +245,7 @@ def load_save(path: str | Path) -> ParsedSave:
         actual_current_income=actual_current_income,
         suggested_max_merchants=max_merchants,
         suggested_max_light_ships=max_light_ships,
+        suggested_power_per_light_ship=power_per_light_ship,
     )
 
 
@@ -428,25 +433,66 @@ def _as_float(value) -> float:
         return 0.0
 
 
-def _extract_player_military(gamestate_text: str, player_tag: str) -> tuple[int | None, int | None]:
-    """Pulls the player's deployed-merchant count and total light-ship count
-    from the top-level `countries={ <TAG>={...} ... }` block, without
-    tokenizing the other 1000+ countries in it, and without even scanning
-    past our own tag's entry -- `countries` alone is tens of MB, so a naive
-    "extract the whole block, then search within it" (like the `trade`
-    block above) would burn several seconds walking all of it char-by-char
-    just to find its end. `_extract_nested_block` stops the instant it
-    finds `player_tag`."""
+def _extract_player_military(
+    gamestate_text: str, player_tag: str
+) -> tuple[int | None, int | None, float | None]:
+    """Pulls the player's deployed-merchant count, total light-ship count,
+    and the actual trade-power-per-light-ship implied by their real fleet
+    composition, from the top-level `countries={ <TAG>={...} ... }` block,
+    without tokenizing the other 1000+ countries in it, and without even
+    scanning past our own tag's entry -- `countries` alone is tens of MB,
+    so a naive "extract the whole block, then search within it" (like the
+    `trade` block above) would burn several seconds walking all of it
+    char-by-char just to find its end. `_extract_nested_block` stops the
+    instant it finds `player_tag`."""
     country_block = _extract_nested_block(gamestate_text, "countries", player_tag)
     if country_block is None:
-        return None, None
+        return None, None, None
     country = parse(country_block[1:-1])
     merchants = country.get("merchants")
     max_merchants = len(as_list(merchants.get("envoy"))) if isinstance(merchants, dict) else 0
     subunits = country.get("num_subunits_type_and_cat")
     light_ship = subunits.get("light_ship") if isinstance(subunits, dict) else None
     max_light_ships = int(_as_float(light_ship.get("normal"))) if isinstance(light_ship, dict) else 0
-    return max_merchants, max_light_ships
+
+    # Weighted-mean trade power per light ship, from the player's ACTUAL
+    # fleet mix (e.g. 10 Early Frigate + 90 Frigate), not a flat guess --
+    # see LIGHT_SHIP_TRADE_POWER's own docstring for where the per-type
+    # numbers come from.
+    type_counts: dict[str, int] = {}
+    for navy in as_list(country.get("navy")):
+        if not isinstance(navy, dict):
+            continue
+        for ship in as_list(navy.get("ship")):
+            if not isinstance(ship, dict):
+                continue
+            t = ship.get("type")
+            if t in LIGHT_SHIP_TRADE_POWER:
+                type_counts[t] = type_counts.get(t, 0) + 1
+    total_light_ships_seen = sum(type_counts.values())
+    power_per_light_ship = (
+        sum(LIGHT_SHIP_TRADE_POWER[t] * n for t, n in type_counts.items()) / total_light_ships_seen
+        if total_light_ships_seen
+        else None
+    )
+
+    return max_merchants, max_light_ships, power_per_light_ship
+
+
+# Real `trade_power` stat per light_ship-category unit, read directly out
+# of this game install's own `common/units/*.txt` (type=light_ship units
+# only -- confirmed every one of them, there's no DLC/unique light_ship
+# unit missing from this list). A public game-balance constant, not
+# save-specific or proprietary data -- same category as the other named
+# constants in engine/model.py's Params.
+LIGHT_SHIP_TRADE_POWER: dict[str, float] = {
+    "barque": 2.0,
+    "caravel": 2.5,
+    "early_frigate": 3.0,
+    "frigate": 3.5,
+    "heavy_frigate": 4.0,
+    "great_frigate": 5.0,
+}
 
 
 def _extract_scalar(text: str, key: str) -> str | None:

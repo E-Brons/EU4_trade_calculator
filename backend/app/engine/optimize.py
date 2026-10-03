@@ -353,8 +353,23 @@ def _complete_and_refine(
             improved = True
 
     # Local search: 1-opt over merchant placement/action, then re-place ships.
+    # Capped, not a plain "while changed": merchant 1-opt and the ship
+    # greedy re-placement can each nudge the other back and forth
+    # indefinitely between two near-tied allocations rather than settling
+    # (confirmed against a real save: this hung for 15+ minutes with
+    # ship_chunk=1, whose fine granularity makes such ties far more
+    # common than a coarser chunk did -- each round can always find some
+    # single ship worth moving by a sliver, which can un-tie a merchant
+    # choice, which re-ties the ships, forever). A well-behaved landscape
+    # converges in just a couple of rounds; capping at a single-digit
+    # number guarantees bounded runtime regardless of chunk size, and
+    # empirically costs nothing even in the oscillating case (confirmed:
+    # same final income whether capped at 8, 12, or 30 rounds).
+    MAX_LOCAL_SEARCH_ROUNDS = 8
     changed = True
-    while changed:
+    rounds = 0
+    while changed and rounds < MAX_LOCAL_SEARCH_ROUNDS:
+        rounds += 1
         changed = False
         current_income = _score(graph, node_states, alloc, params)
 

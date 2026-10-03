@@ -219,6 +219,9 @@ class ImportSaveResponse(BaseModel):
     actual_current_income: float
     suggested_max_merchants: int | None
     suggested_max_light_ships: int | None
+    suggested_power_per_light_ship: float | None  # weighted-mean real trade_power across the
+    # player's actual light_ship fleet mix (e.g. a mix of Early Frigates and Frigates) -- see
+    # app.parsing.save.LIGHT_SHIP_TRADE_POWER.
     suggested_candidate_nodes: list[str]  # genuine presence only (owned provinces/ships, home,
     # or already doing something there) -- NOT the same test as "player_base_power > 0", which
     # now uses `val` and can be nonzero from pure colonial-range reach with nothing to act on.

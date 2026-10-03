@@ -306,6 +306,7 @@ class ImportSaveResponseData {
   final double actualCurrentIncome;
   final int? suggestedMaxMerchants;
   final int? suggestedMaxLightShips;
+  final double? suggestedPowerPerLightShip;
   final List<String> suggestedCandidateNodes;
 
   ImportSaveResponseData.fromJson(Map<String, dynamic> j)
@@ -320,6 +321,7 @@ class ImportSaveResponseData {
         actualCurrentIncome = (j['actual_current_income'] as num).toDouble(),
         suggestedMaxMerchants = j['suggested_max_merchants'] as int?,
         suggestedMaxLightShips = j['suggested_max_light_ships'] as int?,
+        suggestedPowerPerLightShip = (j['suggested_power_per_light_ship'] as num?)?.toDouble(),
         suggestedCandidateNodes = List<String>.from(j['suggested_candidate_nodes'] ?? const []);
 }
 
