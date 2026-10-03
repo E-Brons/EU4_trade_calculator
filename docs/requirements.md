@@ -63,10 +63,11 @@ game state rather than generic advice.
   constant in `Params` must be either a real, named game constant or an
   explicitly-justified exception with a stated reason it can't be derived.
 - **Ironman melting must not depend on the sandboxed dev/agent environment
-  having open network/browser access.** The chosen design (a file-based
-  job bridge to a separate, user-run, unsandboxed helper process) must
-  work even when the primary development/service environment is
-  network- and process-sandboxed.
+  having open network/browser access.** The chosen design (pdx.tools
+  browser automation, driven directly in-process for a normal unsandboxed
+  run, with a file-based job bridge to a separate user-run helper process
+  as a fallback for sandboxed dev/agent environments) must work either
+  way.
 - **Don't commit unused exploratory dependencies.** Vendored reference
   source (e.g. the `rakaly`/`jomini` and `pdx-tools` repos, read during
   development to find real selectors/mechanics) is not a runtime

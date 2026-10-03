@@ -2,7 +2,7 @@
 
 A real `.eu4` is a zip containing `gamestate`, `meta`, and `ai`; Ironman
 saves have those members in Paradox's binary format and need melting
-first (see `rakaly.py`). We also accept an already-melted flat text file
+first (see `ironman_melt.py`). We also accept an already-melted flat text file
 (not zipped) as produced by pdx.tools' "Melt" button -- meta and gamestate
 end up concatenated into one document there, which this module handles
 the same way it handles a real save's `gamestate` (the fields we need,
@@ -29,7 +29,7 @@ import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from app.parsing import rakaly
+from app.parsing import ironman_melt
 from app.parsing.clausewitz import as_list, parse
 
 _COUNTRY_TAG_RE = re.compile(r"^[A-Z0-9]{2,4}$")
@@ -110,7 +110,7 @@ class ParsedSave:
     suggested_max_light_ships: int | None = None  # countries.<TAG>.num_subunits_type_and_cat.light_ship.normal
 
 
-def load_save(path: str | Path, rakaly_path: Path | None = None) -> ParsedSave:
+def load_save(path: str | Path) -> ParsedSave:
     zpath = Path(path)
 
     if zipfile.is_zipfile(zpath):
@@ -121,19 +121,20 @@ def load_save(path: str | Path, rakaly_path: Path | None = None) -> ParsedSave:
             gamestate_raw = zf.read("gamestate")
             meta_raw = zf.read("meta") if "meta" in names else gamestate_raw
 
-        if rakaly.is_binary(gamestate_raw):
+        if ironman_melt.is_binary(gamestate_raw):
             # Binary Ironman save: melt automatically, with zero manual
-            # steps for whoever's uploading (see rakaly.melt_ironman_save
-            # for the pdx.tools-automation-then-rakaly-CLI order of
-            # attempts). The result is one merged meta+gamestate document,
-            # same shape as an already-melted flat text file, so both text
-            # vars below point at it.
-            melted = rakaly.melt_ironman_save(zpath.read_bytes(), gamestate_raw, rakaly_path)
-            merged_text = rakaly.ensure_text(melted, rakaly_path).decode("utf-8", errors="replace")
+            # steps for whoever's uploading (see
+            # ironman_melt.melt_ironman_save for the in-process-then-
+            # separate-worker order of attempts). The result is one
+            # merged meta+gamestate document, same shape as an
+            # already-melted flat text file, so both text vars below
+            # point at it.
+            melted = ironman_melt.melt_ironman_save(zpath.read_bytes())
+            merged_text = ironman_melt.ensure_text(melted).decode("utf-8", errors="replace")
             gamestate_text = meta_text = merged_text
         else:
-            gamestate_text = rakaly.ensure_text(gamestate_raw, rakaly_path).decode("utf-8", errors="replace")
-            meta_text = rakaly.ensure_text(meta_raw, rakaly_path).decode("utf-8", errors="replace")
+            gamestate_text = ironman_melt.ensure_text(gamestate_raw).decode("utf-8", errors="replace")
+            meta_text = ironman_melt.ensure_text(meta_raw).decode("utf-8", errors="replace")
     else:
         # Not a zip: treat as an already-melted flat text document (e.g.
         # pdx.tools' "Melt" output), which has both meta and gamestate

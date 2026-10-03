@@ -9,7 +9,7 @@ from fastapi import APIRouter, File, HTTPException, UploadFile
 
 from app.engine.optimize import optimize as run_optimize
 from app.engine.simulate import simulate as run_simulate
-from app.parsing import rakaly, save as save_parsing
+from app.parsing import ironman_melt, save as save_parsing
 from app.parsing.tradenodes import load_trade_graph
 from app.schemas import (
     ImportSaveResponse,
@@ -91,16 +91,13 @@ async def post_import_save(file: UploadFile = File(...)) -> ImportSaveResponse:
         tmp.flush()
         try:
             parsed = save_parsing.load_save(Path(tmp.name))
-        except rakaly.MeltUnavailableError as e:
-            # Ironman save, and neither the pdx.tools automation nor a
-            # local rakaly CLI could melt it -- message already tells the
-            # user exactly what to do (start the melt worker, or melt via
-            # pdx.tools by hand and re-upload, or enter data manually).
+        except ironman_melt.MeltUnavailableError as e:
+            # Ironman save, and neither in-process pdx.tools automation
+            # nor a separate melt worker could melt it -- message already
+            # tells the user exactly what to do (start the melt worker,
+            # or melt via pdx.tools by hand and re-upload, or enter data
+            # manually).
             raise HTTPException(422, str(e)) from e
-        except rakaly.RakalyNotFound as e:
-            raise HTTPException(422, str(e)) from e
-        except rakaly.RakalyMeltError as e:
-            raise HTTPException(422, f"Failed to melt save: {e}") from e
         except zipfile.BadZipFile as e:
             raise HTTPException(422, f"Not a valid .eu4 save file: {e}") from e
         except ValueError as e:

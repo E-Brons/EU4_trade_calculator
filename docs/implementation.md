@@ -92,6 +92,31 @@ field was suspected and refuted -- it only appears on steering entries).
 `save.py` back-solves it from the relationship above at every node the
 player collects at, and it's otherwise a manually-entered `Params` field.
 
+### Per-node explanation fields and `/api/node-options`
+
+Every `NodeBreakdown` also carries `player_share`, `income_multiplier`,
+`retained_power`/`pull_power` (sum to `total_power`), `retained_value`
+(`total_value - forwarded_value`), `incoming_value`, `player_action`
+(`collect` | `steer` | `passive-home` | `none`), `player_steer_target`,
+`player_light_ships` and `is_replay`; `player_income == total_value *
+player_share * income_multiplier` in both replay and hypothetical branches.
+`POST /api/node-options` re-simulates one node with each merchant action
+(none / collect / steer per outgoing link) and with 0..N light ships. Each
+entry has `total_income` (engine, replay where the node still matches the
+save) and `formula_total_income` (pure formula, no replay); the response's
+`calibration_offset` is replay - formula for the unchanged allocation. Gross value of
+every node with a recorded `known_gross_value` is `known_gross_value +
+(incoming_now - incoming_ref)`, where `incoming_ref` (`reference_incoming`) is
+the modelled inflow when every node replays its recorded allocation. With the
+recorded allocation everywhere the delta is exactly 0 (snapshot stays the
+bit-exact replay); an edited upstream steer/collect/ships shifts downstream
+gross by the modelled delta, and replayed nodes forward their share
+`1 - retain_power/total_power` of it. Nodes without a recorded value (manual
+entry) use local + inflow. `formula_total_income` means pure formula: every
+`known_*` field dropped. The optimizer computes the reference once
+(`with_reference`); `simulate()` accepts `incoming_ref` or uses the cache a
+`ReferencedStates` carries.
+
 ### Replay vs. hypothetical
 
 `simulate()` supports two modes, both through the same code path:
@@ -170,7 +195,7 @@ what each field means. Two parsing details worth knowing:
   ones (only matters for hypothetical-mode; see "Replay vs. hypothetical"
   above).
 
-## Ironman melting (`app/parsing/rakaly.py`, `app/parsing/pdx_tools_melt.py`, `tools/melt_worker.py`)
+## Ironman melting (`app/parsing/ironman_melt.py`, `app/parsing/pdx_tools_browser.py`, `app/parsing/pdx_tools_melt.py`, `tools/melt_worker.py`)
 
 Ironman saves are binary and need melting before they can be parsed as
 text. This project does **not** implement or obtain Paradox's private
@@ -178,9 +203,17 @@ token dictionary itself; instead it drives
 [pdx.tools](https://pdx.tools), which already melts entirely client-side
 (WASM) in a browser tab, licensed to embed that dictionary.
 
-Because the backend commonly runs in a network/process-sandboxed
-environment that can't itself reach pdx.tools or launch a real browser,
-the actual automation runs in a **separate process the user starts in an
+For a normal (unsandboxed) run of this backend, the automation
+(`pdx_tools_browser.melt_via_browser`) runs **directly in-process**,
+dispatched to a dedicated plain thread (not the request-handling
+thread, which has its own asyncio event loop that Playwright's sync API
+refuses to share) -- no separate process or manual setup needed beyond
+`playwright install chromium` once.
+
+Only when that genuinely can't be attempted (no Playwright/no browser
+binary in this environment -- e.g. a network/process-sandboxed dev/agent
+environment that can't reach pdx.tools or launch a real browser at all)
+does it fall back to a **separate process the user starts in an
 ordinary terminal** (`tools/melt_worker.py`), talking to the sandboxed
 backend over a plain file-based job queue (no sockets):
 
@@ -197,9 +230,10 @@ backend over a plain file-based job queue (no sockets):
                                        worker
 ```
 
-`rakaly.py` tries this bridge first, then falls back to a local `rakaly`
-CLI if one happens to be installed, then raises one clear, actionable
-error naming both attempts.
+`ironman_melt.melt_ironman_save()` tries the in-process path first, then
+that bridge, then raises one clear, actionable error naming both
+attempts. There is no local-CLI fallback (e.g. `rakaly`) -- pdx.tools is
+the one and only melt path, in or out of process.
 
 Getting the actual browser automation reliable took real, confirmed bugs
 found and fixed one at a time against the real save, documented in

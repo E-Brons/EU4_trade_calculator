@@ -180,7 +180,7 @@ true what-if prediction).
 ## 3. Save protocol
 
 Non-Ironman saves need zero melting -- `.eu4` files from a regular game
-save directly as plain text, so this is all local, no pdx.tools/rakaly
+save directly as plain text, so this is all local, no pdx.tools
 round-trip needed.
 
 **Every fixture in this suite is the game's opening state for one (date,

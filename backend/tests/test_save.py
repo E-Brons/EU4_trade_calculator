@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 
 from app.engine.model import MerchantAction
-from app.parsing import pdx_tools_melt, rakaly
+from app.parsing import ironman_melt, pdx_tools_browser, pdx_tools_melt
 from app.parsing.save import build_node_states_from_save, extract_top_level_block, load_save
 from app.parsing.tradenodes import TradeGraph
 
@@ -225,13 +225,13 @@ def test_build_node_states_from_save_identifies_home_and_collect_vs_steer(tmp_pa
 
 # --- Automatic melting of binary Ironman saves ----------------------------
 #
-# These mock the heavy part (the pdx.tools file-bridge round trip, and the
-# rakaly CLI subprocess) so they run fast and deterministically. A real,
-# unmocked end-to-end run against the live Ironman save fixture lives in
-# test_api.py, guarded to skip when pdx.tools/a melt worker aren't actually
-# reachable (as is the case in this sandbox).
+# These mock the heavy part (the pdx.tools file-bridge round trip) so they
+# run fast and deterministically. A real, unmocked end-to-end run against
+# the live Ironman save fixture lives in test_api.py, guarded to skip when
+# pdx.tools/a melt worker aren't actually reachable (as is the case in this
+# sandbox).
 
-BINARY_MAGIC_GAMESTATE = b"EU4bin\x00not real binary tokens, melt_bytes/pdx_tools_melt.melt are mocked below"
+BINARY_MAGIC_GAMESTATE = b"EU4bin\x00not real binary tokens, pdx_tools_melt.melt is mocked below"
 
 
 def make_fake_ironman_save(tmp_path: Path) -> Path:
@@ -243,23 +243,20 @@ def make_fake_ironman_save(tmp_path: Path) -> Path:
     return save_path
 
 
+def _unavailable_in_process_melt(*a, **kw):
+    raise RuntimeError("playwright/chromium not available in this test environment")
+
+
 def test_load_save_melts_binary_via_pdx_tools_bridge(tmp_path, monkeypatch):
     save_path = make_fake_ironman_save(tmp_path)
 
+    # In-process browser automation is tried first (see
+    # ironman_melt.melt_ironman_save); simulate it being unavailable here
+    # (as it is in this sandboxed test run) so the fallback to a separate
+    # worker-bridge process below gets exercised.
+    monkeypatch.setattr(pdx_tools_browser, "melt_via_browser", _unavailable_in_process_melt)
     monkeypatch.setattr(pdx_tools_melt, "available", lambda *a, **kw: True)
     monkeypatch.setattr(pdx_tools_melt, "melt", lambda file_bytes, *a, **kw: GAMESTATE)
-
-    parsed = load_save(save_path)
-    assert parsed.player_tag == "TUR"
-    assert set(parsed.nodes) == {"ragusa", "venice"}
-
-
-def test_load_save_falls_back_to_rakaly_cli_when_bridge_unavailable(tmp_path, monkeypatch):
-    save_path = make_fake_ironman_save(tmp_path)
-
-    monkeypatch.setattr(pdx_tools_melt, "available", lambda *a, **kw: False)
-    monkeypatch.setattr(rakaly, "find_rakaly", lambda: Path("/fake/rakaly"))
-    monkeypatch.setattr(rakaly, "melt_bytes", lambda data, path=None: GAMESTATE)
 
     parsed = load_save(save_path)
     assert parsed.player_tag == "TUR"
@@ -269,14 +266,13 @@ def test_load_save_falls_back_to_rakaly_cli_when_bridge_unavailable(tmp_path, mo
 def test_load_save_raises_actionable_error_when_no_melt_path_available(tmp_path, monkeypatch):
     save_path = make_fake_ironman_save(tmp_path)
 
+    monkeypatch.setattr(pdx_tools_browser, "melt_via_browser", _unavailable_in_process_melt)
     monkeypatch.setattr(pdx_tools_melt, "available", lambda *a, **kw: False)
-    monkeypatch.setattr(rakaly, "find_rakaly", lambda: None)
 
-    with pytest.raises(rakaly.MeltUnavailableError) as exc_info:
+    with pytest.raises(ironman_melt.MeltUnavailableError) as exc_info:
         load_save(save_path)
     message = str(exc_info.value)
     assert "pdx.tools" in message
     assert "melt_worker.py" in message
-    assert "rakaly" in message
     assert "manually" in message
 

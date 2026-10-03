@@ -22,6 +22,17 @@ income -- either from a save file or from numbers you type in by hand.
   candidate sets).
 - **`backend/app/api.py`** exposes it all over HTTP; the Flutter app in
   `frontend/` is the UI.
+- **Trade Atlas** (`frontend/lib/screens/atlas_view.dart`) is the default
+  dashboard: a game-style world map where each trade node's land is tinted by
+  a lens (your trade power / trade value / production / your income) for the
+  active Snapshot / Optimal / Current preset, trade routes carry animated value
+  flow, and markers show your merchants (collect / steer) and light ships. Click
+  a node to fly there and open the inspector: where its value comes from, who
+  holds the power, how value becomes your ducats, and live what-if cards and a
+  ships-vs-income curve (`POST /api/node-options`). "Follow the money" tours the
+  selected node's value downstream to its final destination. The Sankey view is
+  still available via "Flow chart". Map geometry is generated from the game
+  files by `backend/scripts/build_map.py` (see below).
 
 See `backend/app/engine/model.py` (`Params`) for every constant the trade
 model uses -- most are exact game constants, a few (trade efficiency) are
@@ -54,6 +65,14 @@ cd backend
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
+```
+
+Regenerate the Atlas map geometry (`frontend/assets/map/world_map.json`, land
+regions per trade node, coastlines, route curves) from a local EU4 install --
+needs system `python3` with numpy and Pillow:
+
+```bash
+python3 backend/scripts/build_map.py --preview
 ```
 
 Regenerate `data/tradenodes.json` from a local EU4 install (only needed if
@@ -130,8 +149,9 @@ details.
 backend/
   app/
     parsing/    clausewitz.py (text-format parser), tradenodes.py (graph),
-                save.py (.eu4 -> engine input), rakaly.py + pdx_tools_melt.py
-                (Ironman melt: local CLI, then the pdx.tools bridge)
+                save.py (.eu4 -> engine input), ironman_melt.py +
+                pdx_tools_browser.py + pdx_tools_melt.py (Ironman melt:
+                in-process pdx.tools automation, then a separate worker)
     engine/     model.py (data model + Params), simulate.py, optimize.py
     api.py, main.py, schemas.py
   data/tradenodes.json   generated node graph (committed, so no game

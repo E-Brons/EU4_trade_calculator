@@ -85,10 +85,10 @@ class _ImportScreenState extends State<ImportScreen> {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Non-ironman saves are read directly. Ironman saves need the '
-                  'rakaly CLI available on the server to melt first; if that\'s '
-                  'not set up, importing will fail gracefully and you can enter '
-                  'values by hand.',
+                  'Non-ironman saves are read directly. Ironman saves are melted '
+                  'automatically via pdx.tools; if that\'s not available, '
+                  'importing will fail gracefully and you can enter values by '
+                  'hand instead.',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
