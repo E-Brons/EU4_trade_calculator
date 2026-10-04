@@ -1,0 +1,89 @@
+# R05 response 1 - Trade power propagation (prev)
+
+Scope: only points the 82 fixture saves settle. Every number comes from a script run (`backend/scripts/research/r04_r05_r06_r05*.py`, helper `r04_r05_r06_flat.py`, snapshot of the repo in /tmp/eu4research/repo). "Snapshots" = S01-S78 (hands-off start saves); "played" = S79, S80, U01, U02 (not saved on the 1st of a month; U01/U02 are the same dates as S80/S79). Candidate = a (save, node B, tag) that has an entry at B, or whose tag has `province_power >= 10` at some downstream node D of B (113,559 candidates: 109,487 snapshot, 4,072 played).
+
+## Q2 - Threshold semantics
+
+### C-Q2.1 Threshold lies between 9.961 and 10.036 on downstream `province_power`
+Claim: a downstream node D contributes to `prev` only if the country's `province_power` at D is >= ~10. In the snapshots the largest `province_power` that did not propagate is 9.961 and the smallest that did is 10.036.
+Formula: contribution_D = trunc3(province_power_D / 5) if province_power_D >= 10 else 0.
+Applies when: the link B->D is carrying flow (see Q3).
+Source: save corpus, `r04_r05_r06_r05h.py`.
+Quote (values just below / above 10, snapshots): below 9.88, 9.884, 9.9, 9.92, 9.955, 9.961; above 10.036, 10.038, 10.08, 10.092, 10.125, 10.14.
+Confidence: confirmed for "threshold in (9.961, 10.036]"; `>` vs `>=` at exactly 10.000 is UNKNOWN (no save has an entry at exactly 10.000). `province_power/5 >= 2` is the same test as `province_power >= 10`; the data cannot tell them apart.
+Caveats: `TRADE_PROPAGATE_THRESHOLD = 2 -> 10` is inferred, not documented.
+
+## Q3 - Residual failures
+
+With the rule "per-link truncation + threshold 10" and no other condition, 168 of 110,589 entries that carry data keys fail (tolerance 0.0005): 158 with recorded `prev` = 0 and 10 (MOR, S80/U01) with `prev` higher than predicted.
+
+### C-Q3.1 The `prev` = 0 entries (first group) are links whose node `steer_power` weight is 0 (start snapshots only)
+Claim: in the 78 start snapshots, propagation along link B->D happens exactly when the recorded `steer_power` weight of that link at node B is > 0. The 158 failing entries (california/XAL 40, cape_of_good_hope/BEN, KON, JOL 35 each, patagonia/INC 5, cuiaba/C04 5, amazonas_node/C03 3) are all links with weight 0, and in total 3,181 snapshot (B, D, tag) links with downstream `province_power >= 10` have weight 0 (most of them with no entry at all at B).
+Formula: prev_B(tag) = sum over the outgoing links i of B (graph edge order = order of the node's `steer_power` list) with `steer_power[i] > 0` of trunc3(province_power_D(tag)/5) over those D with province_power_D(tag) >= 10.
+Applies when: snapshot saves.
+Source: `r04_r05_r06_r05g.py`, `r04_r05_r06_r05h.py`, `r04_r05_r06_r05_summary.py`.
+Quote: S14 `california` `steer_power={ 0.0 1.0 0.0 0.0 }` (links mexico, mississippi_river, girin, polynesia_node): XAL has `province_power=11.31` at mexico and at california only `province_power=0.87 max_pow=0.87` (no `prev`); S14 `cape_of_good_hope` `steer_power=0.0`: BEN/KON/JOL have `province_power` 28.46 / 18.599 / 20.593 at ivory_coast and `potential=-0.002`, no `prev`.
+Result: snapshots 109,487 of 109,487 candidates reproduced exactly (0 failures) with the gate; 106,377 without it. Single-link cases: weight > 0 and propagated 33,808; weight 0 and not propagated 3,039; 0 exceptions.
+Confidence: confirmed as a description of the 78 snapshots. NOT confirmed as a general game rule: see C-Q3.2.
+Caveats: the weight depends on `val`, which contains `prev`; a what-if that changes steering changes which links propagate, so the two cannot be computed independently.
+
+### C-Q3.2 In the played saves the weight gate does not hold
+Claim: in S79, S80, U01, U02 the gate explains fewer entries than the plain threshold rule.
+Quote: single-link cases in the played saves (1,836): weight > 0 and propagated 1,636; weight 0 and propagated 182; weight 0 and not propagated 18 (all `polynesia_node` -> australia/panama, S79 and S80 `steer_power` of polynesia_node differ); weight > 0 and not propagated 0. All candidates: gate 3,796 of 4,072; threshold rule without the gate 4,044 of 4,072. Example S80 `california` `steer_power={0.885 0.114 0.0 0.0}` yet entries propagate over the link to girin (weight 0).
+Confidence: the contradiction is confirmed. The reason is UNKNOWN. Candidate explanation (inferred, untested): in a save not written on a tick day the stored link weights and the stored `prev` come from different ticks. What would settle it: two saves of the same game on consecutive days with unchanged steering, or an intervention pair (R14).
+Caveat: the simple threshold rule therefore fails for the 78 snapshots (3,110 of 109,487 candidates) and the gated rule fails for the played saves (276 of 4,072); neither alone fits all 82 saves.
+
+### C-Q3.3 Second group (MOR, S80/U01): ships propagate for MOR with factor 0.25
+Claim: the extra `prev` of MOR is 0.25 x downstream `ship_power` / 5.
+Formula: prev_B(MOR) += sum over D (link allowed, province_power_D >= 10) of ship_power_D(MOR) x 0.25 / 5.
+Source: `r04_r05_r06_r05d.py`, `r04_r05_r06_r05g.py`.
+Quote (S80, same in U01): kongo prev 10.797 vs 10.272 (+0.525; ivory_coast `ship_power=10.5 light_ship=3`, province_power 51.36); katsina 12.305 vs 11.78 (+0.525; tunis ship_power 10.5); cape_of_good_hope and brazil 10.797 vs 10.272 (+0.525); timbuktu 14.216 vs 13.341 (+0.875 = (safi 7.0 + ivory_coast 10.5) x 0.05).
+Result: MOR candidates (gated rule, all 82 saves: 426 snapshot + 34 played) 460: 460 match with the term, 450 without (the 10 others are the residuals above). Non-MOR entries with downstream `ship_power > 0` in played saves (S79 267, S80 232, U01 232, U02 267) are all explained without any ship term. The 78 snapshots contain 0 entries with downstream ship power, so "ships do not propagate" is tested only in the played saves.
+Confidence: inferred (the term fits 10 of 10 residuals and 460 of 460 MOR candidates, but it is one country in one game: S80 and U01 are the same save). The factor 0.25 is fitted from three distinct ship-power sums (10.5, 10.5, 17.5), not from a source; the country modifier that produces it is UNKNOWN (the save has no string `propagat` and no `caravan`, checked on S80 gamestate).
+
+## Q4 - `ship_power_propagation` (data part only)
+The save does not store it: the string `ship_power_propagation` does not occur in the S80 gamestate, and the MOR country block has only `active_idea_groups` (MOR_ideas 7, ...) and `modifier` entries from which it could come. See C-Q3.3 for the fitted effect. Which ideas/policies grant it: not answered (needs an outside source). Whether the threshold 10 applies to the province power when ships propagate: all MOR cases in the data have `province_power >= 10` at the downstream node with ships, so UNKNOWN.
+
+## Q5 - Rounding and `caravan_power`
+
+### C-Q5.1 Truncation per link, not rounding and not truncation of the sum
+Claim: each downstream link contributes trunc3(province_power_D/5) and the contributions are added.
+Formula: prev = sum_D trunc3(province_power_D / 5).
+Source: `r04_r05_r06_r05h.py`; exact-match tolerance 1e-6, snapshot candidates with the weight gate (109,487).
+Quote / result (exact matches of all / single-link (33,808) / multi-link (1,367)):
+- sum_D trunc3(p/5): 109,487 / 33,808 / 1,367 (0 failures)
+- trunc3(sum p / 5): 108,962 / 33,808 / 842
+- round3(sum p / 5): 99,447 / 24,680 / 455
+- sum_D round3(p/5): 99,566 / 24,680 / 574
+- exact sum p / 5: 89,667 / 15,241 / 114
+Confidence: confirmed (the only variant with no failure; the multi-link column separates per-link truncation from truncation of the sum).
+Caveat: this uses the 3-decimal `province_power` as stored; the game's underlying value may have more decimals, but the match is exact anyway.
+
+### `caravan_power`
+No key or string `caravan` exists in the S80 gamestate, and the trade-block keys of all 82 saves contain no such field, so it is not a stored quantity. Whether the game has it as an internal term: not answered (needs an outside source). The fits above need no caravan term.
+
+## Not answered (needs an outside source)
+Q1 (URLs, quotes, strategium.ru/wiki provenance, Defines.md status); Q2 "documented" wording of the define; Q4 which ideas/abilities grant `ship_power_propagation` (file + line); Q5 `caravan_power` existence in the game files.
+
+## Updated UNKNOWN list
+- Why the link-weight gate holds in all 78 snapshots but not in the played saves (needs same-game consecutive-day saves or an intervention pair).
+- `>` vs `>=` at exactly 10.000 (needs an entry with exactly 10.000).
+- Source and country/modifier of MOR's 0.25 ship factor (needs the MOR modifier values; other countries with the same modifier would show the same term).
+
+## Verification (date 2026-10-04)
+Independent re-computation in `backend/scripts/research/ver_r05.py`, `ver_r05b.py`, `ver_r05c.py` (own candidate set from `common.nodes`, graph edge order from `data/tradenodes.json`, per-link truncation by exact `Decimal` division of the 3-decimal `province_power`; no author code reused). The author's `r04_r05_r06_r05*.py` were also re-run. Note for anyone re-implementing: `trunc3(p / 5)` must divide exactly (or add a small epsilon); float division gives 2.719 for 13.6 / 5 and loses about 1,750 matches.
+
+Re-run and matching:
+- Candidates 113,559 (109,487 snapshot, 4,072 played); `steer_power` length equals the number of outgoing links in 6,560 of 6,560 nodes (so the weight-to-link index mapping is well defined).
+- Snapshots: gated rule 109,487 of 109,487, ungated 106,377; variants: sum of per-link trunc3 109,487 (multi-link 1,367 of 1,367), trunc3 of the sum 108,962 (842), round3 of the sum 99,447 (455), exact sum / 5 89,667 (114).
+- Threshold: largest non-propagating value 9.961, smallest propagating 10.036 (snapshots).
+- Played saves: gated 3,796 of 4,072, ungated 4,044; single-link cases: weight > 0 and propagated 1,636, weight 0 and propagated 182, weight 0 and not propagated 18, weight > 0 and not propagated 0.
+- Ungated rule on existing entries: 168 of 110,589 fail (158 with recorded `prev` = 0: california/XAL 40, cape_of_good_hope BEN/KON/JOL 35 each, patagonia/INC 5, cuiaba/C04 5, amazonas_node/C03 3; 10 MOR in S80/U01 with recorded `prev` higher).
+- MOR: in the played saves the ship term (0.25 x downstream `ship_power` / 5) matches 34 of 34 MOR candidates (24 without it); 886 non-MOR played-save entries with ship power on an allowed link: 878 match the ungated rule without a ship term, 0 match with it (the 8 others are the weight-0 non-propagating `polynesia_node` cases).
+- `ship_power_propagation`, `propagat`, `caravan` do not occur in the S80 gamestate text (0 occurrences each).
+
+Corrected:
+- C-Q3.3 confidence `confirmed` -> `inferred` (one country, one game; the factor 0.25 is a fit from three ship-power sums) and the meaning of "MOR candidates 460" made explicit (82 saves, 426 snapshot + 34 played).
+- The `request_2` fact on the MOR term was aligned with this.
+
+Not verified: the author's count "non-MOR entries with downstream ship_power > 0: S79 267, S80 232" uses a wider definition (any downstream ship power, not only on an allowed link); the narrower independent count above (886 over the four files) supports the same conclusion. The reason for the gate failure in the played saves, the `>` vs `>=` question and the source of the 0.25 remain UNKNOWN, as the response states.

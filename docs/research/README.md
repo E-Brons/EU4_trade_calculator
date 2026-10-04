@@ -60,22 +60,26 @@ Tasks are independent and can run in parallel. Priority: R01-R04 and R06-R08 unb
 
 | Topic | What it answers | Status |
 |---|---|---|
-| R01 power_multiplier | What determines max_demand (the multiplier from raw power to effective power) | draft, integrated, `request_1` ready |
-| R02 away_collection_penalty | The penalty for collecting away from the capital node (TRADE_NON_CAPITAL_OFFICE = -0.5) | draft, integrated, `request_1` ready |
+| R01 power_multiplier | What determines max_demand (the multiplier from raw power to effective power) | draft, integrated, `response_1` (saves only, verified), `request_2` ready |
+| R02 away_collection_penalty | The penalty for collecting away from the capital node (TRADE_NON_CAPITAL_OFFICE = -0.5) | draft, integrated, `response_1` (saves only, verified), `request_2` ready |
 | R03 pull_power_composition | Which countries' power counts in pull_power (and why some non-collectors are excluded) | draft, integrated, final-ready (no request needed) |
-| R04 transferred_trade_power | Transferred trade power (t_in/t_out/t_from/t_to/potential) and subject/overlord trade rules | draft, integrated, `request_1` ready |
-| R05 trade_power_propagation | Trade power propagation between nodes (the prev field) | draft, `request_1` ready |
-| R06 flat_power_extras | Flat power additions: capital, merchants, placed_merchant_power, modifiers | draft, `request_1` ready |
-| R07 income_and_trade_efficiency | Income formula, merchant-present bonus and how to compute trade efficiency | draft, `request_1` ready |
-| R08 steering_and_link_split | How forwarded value is split across outgoing links (steering, add, trade_steering) | draft, `request_1` ready |
-| R09 save_field_dictionary | Meaning of every trade-block field in an EU4 save | draft, `request_1` ready |
-| R10 embargo_privateers_transfers_misc | Embargo, privateers/pirates and why node total can differ from the sum of country val | draft, `request_1` ready |
-| R11 ships_and_trade_power | How assigned light ships become trade power in a node | draft, `request_1` ready |
-| R12 monthly_tick_timing | Order and timing of the monthly trade tick versus the values stored in a save | draft, `request_1` ready |
-| R13 province_trade_power | Per-province trade power and trade value (optional, lower priority) | draft, `request_1` ready |
-| R14 intervention_saves | Design of intervention-pair saves (counterfactual validation) | draft, `request_1` ready |
+| R04 transferred_trade_power | Transferred trade power (t_in/t_out/t_from/t_to/potential) and subject/overlord trade rules | draft, integrated, `response_1` (saves only, verified), `request_2` ready |
+| R05 trade_power_propagation | Trade power propagation between nodes (the prev field) | draft, `response_1` (saves only, verified), `request_2` ready |
+| R06 flat_power_extras | Flat power additions: capital, merchants, placed_merchant_power, modifiers | draft, `response_1` (saves only, verified), `request_2` ready |
+| R07 income_and_trade_efficiency | Income formula, merchant-present bonus and how to compute trade efficiency | draft, `response_1` (saves only, verified), `request_2` ready |
+| R08 steering_and_link_split | How forwarded value is split across outgoing links (steering, add, trade_steering) | draft, `response_1` (saves only, verified), `request_2` ready |
+| R09 save_field_dictionary | Meaning of every trade-block field in an EU4 save | draft, `response_1` (saves only, verified), `request_2` ready |
+| R10 embargo_privateers_transfers_misc | Embargo, privateers/pirates and why node total can differ from the sum of country val | draft, `response_1` (saves only, verified), `request_2` ready |
+| R11 ships_and_trade_power | How assigned light ships become trade power in a node | draft, `response_1` (saves only, verified), `request_2` ready |
+| R12 monthly_tick_timing | Order and timing of the monthly trade tick versus the values stored in a save | draft, `response_1` (saves only, verified), `request_2` ready |
+| R13 province_trade_power | Per-province trade power and trade value (optional, lower priority) | draft, `response_1` (saves only, verified), `request_2` ready |
+| R14 intervention_saves | Design of intervention-pair saves (counterfactual validation) | draft, `response_1` (saves only, verified), `request_2` ready |
 
-All of R01-R14 have now been reviewed under rule 1. `request_1` files exist for every topic except R03, which is final-ready: its rule is already integrated and verified in code, so only its `final` document is still to be written. For R10-R14 the requests follow the review below; the next step is to give each one to the AI (with the files it names) and save the answer as `Rxx_<topic>_response_1.md`.
+Round status (2026-10-04): every topic except R03 has a `response_1` and a `request_2`. R03 is final-ready (its rule is already integrated and verified in code; only its `final` document is still to be written).
+
+- `Rxx_*_response_1.md` were produced from the save corpus (82 fixture saves) by the scripts in `backend/scripts/research/` (`common.py` = cached parser; `rNN_*.py` = analyses; `ver_*.py` = independent re-computations used to verify the responses). They answer only the points the saves can settle; every other point of `request_1` is carried forward. Each response ends with a `Verification` section (claims re-run, corrected, unverifiable).
+- `Rxx_*_request_2.md` contain: the facts response_1 verified (a given the AI must not contradict), numbered points `Q1..` for the internet-enabled AI (sources, defines, quotes, formulas that the data cannot give, and sharper questions raised by the data findings), and a final table `Data needed to complete the research` (open item | what data settles it).
+- The next step is to give each `request_2` (with the files it names) to the AI and save the answer as `Rxx_<topic>_response_2.md`. Points answered by data stay settled; only the listed points are asked again.
 
 ### Open points found in the review of R10-R14 (seed for each `request_1`)
 
