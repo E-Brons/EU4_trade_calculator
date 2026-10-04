@@ -67,7 +67,7 @@ jobs:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_TOKEN }}
           TARGET: ${{ matrix.item.target }}
         run: |
-          copilot -p "$(cat "$RUNNER_TEMP/research_prompt.md")" --output-format markdown > "docs/research/$TARGET"
+          copilot -p "$(cat "$RUNNER_TEMP/research_prompt.md")" --output-format text > "docs/research/$TARGET"
 
       - name: Formatting repair and sanity check
         env:
