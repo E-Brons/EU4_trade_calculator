@@ -62,14 +62,14 @@ jobs:
             echo "RESEARCH_PROMPT_EOF"
           } >> "$GITHUB_OUTPUT"
 
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot
+
       - name: Invoke Copilot Agent
-        uses: mvkaran/gh-copilot@v1
-        with:
-          copilot-token: ${{ secrets.COPILOT_TOKEN }}
-          prompt: ${{ steps.prompt.outputs.text }}
-          output-format: markdown
-          output-file: docs/research/${{ matrix.item.target }}
-          cli-version: latest
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_TOKEN }}
+        run: |
+          copilot -p "${{ steps.prompt.outputs.text }}" --output-format markdown > docs/research/${{ matrix.item.target }}
 
       - name: Formatting repair and sanity check
         env:
