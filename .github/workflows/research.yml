@@ -61,6 +61,17 @@ jobs:
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
 
+      # Temporary diagnostic: separates "secret not delivered / invalid token" from "no Copilot permission". Prints no secret.
+      - name: Check Copilot token
+        continue-on-error: true
+        env:
+          T: ${{ secrets.COPILOT_TOKEN }}
+        run: |
+          echo "secret length: ${#T} (0 = secret missing or empty)"
+          echo "prefix: ${T:0:11}"
+          curl -s -o /dev/null -w "GET /user -> HTTP %{http_code}\n" -H "Authorization: Bearer $T" https://api.github.com/user
+          curl -s -D - -o /dev/null -H "Authorization: Bearer $T" https://api.github.com/user | grep -i '^x-oauth-scopes\|^github-authentication-token-expiration' || true
+
       - name: Invoke Copilot Agent
         timeout-minutes: 60
         env:
