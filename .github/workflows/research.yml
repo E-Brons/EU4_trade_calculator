@@ -1,0 +1,115 @@
+name: Research Agent
+
+# Runs the research agent (GitHub Copilot) on the topics under docs/research that are waiting for it:
+#   newest file is a `goal`        -> the agent writes `<topic>_draft.md`
+#   newest file is a `request_<i>` -> the agent writes `<topic>_response_<i>.md`
+# Reviewing drafts/responses and writing the next request stays a human/Claude step (see
+# docs/research/README.md and .github/skills/research-loop). Only the generated files are committed.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/research/**"
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Only this topic (e.g. R10 or R10_embargo_privateers_transfers_misc); empty = all pending"
+        required: false
+        default: ""
+
+# one run at a time: the commit job rebases onto whatever was pushed meanwhile
+concurrency:
+  group: research-agent
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  plan:
+    # never react to our own commits
+    if: github.actor != 'github-actions[bot]' && !contains(github.event.head_commit.message, '[skip ci]')
+    runs-on: ubuntu-latest
+    outputs:
+      items: ${{ steps.plan.outputs.items }}
+      any: ${{ steps.plan.outputs.any }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: plan
+        env:
+          TOPIC: ${{ inputs.topic }}
+        run: |
+          items=$(python3 .github/scripts/research_pending.py plan "$TOPIC")
+          echo "items=$items" >> "$GITHUB_OUTPUT"
+          if [ "$items" = "[]" ]; then echo "any=false" >> "$GITHUB_OUTPUT"; else echo "any=true" >> "$GITHUB_OUTPUT"; fi
+          echo "Pending: $items"
+
+  research:
+    needs: plan
+    if: needs.plan.outputs.any == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        item: ${{ fromJson(needs.plan.outputs.items) }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Build prompt
+        id: prompt
+        env:
+          TARGET: ${{ matrix.item.target }}
+        run: |
+          {
+            echo "text<<RESEARCH_PROMPT_EOF"
+            python3 .github/scripts/research_pending.py prompt "$TARGET"
+            echo "RESEARCH_PROMPT_EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Invoke Copilot Agent
+        uses: mvkaran/gh-copilot@v1
+        with:
+          copilot-token: ${{ secrets.COPILOT_TOKEN }}
+          prompt: ${{ steps.prompt.outputs.text }}
+          output-format: markdown
+          output-file: docs/research/${{ matrix.item.target }}
+
+      - name: Formatting repair and sanity check
+        env:
+          TARGET: ${{ matrix.item.target }}
+        run: python3 .github/scripts/research_pending.py strip "docs/research/$TARGET"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: research-${{ matrix.item.target }}
+          path: docs/research/${{ matrix.item.target }}
+
+  commit:
+    needs: research
+    # commit whatever succeeded, even if some topics failed
+    if: always() && needs.research.result != 'skipped' && needs.research.result != 'cancelled'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: research-*
+          path: docs/research
+          merge-multiple: true
+
+      - name: Commit Generated Research
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # only new draft/response files; never touches goals, requests, finals or the README
+          files=$(git ls-files --others --exclude-standard docs/research | grep -E '_(draft|response_[0-9]+)\.md$' || true)
+          if [ -z "$files" ]; then echo "nothing to commit"; exit 0; fi
+          git add $files
+          git commit -m "docs(research): agent output - $(echo $files | sed 's#docs/research/##g')" -m "[skip ci]"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push
