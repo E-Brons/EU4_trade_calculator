@@ -1,0 +1,30 @@
+# R09 request 1 - Save field dictionary
+
+**Read first (by path, same folder; paste them in if you cannot read the repository):** `R09_save_field_dictionary_goal.md` (question, project context, field tables, rules, required format), `R09_save_field_dictionary_draft.md` (the first answer, including the project notes in its section 7, which this request builds on). Where relevant also `R04_transferred_trade_power_draft.md` section 7 (`potential`) and `R10_embargo_privateers_transfers_misc_goal.md` (pirates).
+
+**Rules (same as the goal):** every claim needs a source (URL or game file + line) and a **verbatim quote** from that source, and a confidence `confirmed|reported|inferred`. If you cannot establish something, write `UNKNOWN`; never fill a gap with a plausible guess. Do not invent quotes, file paths, defines or save rows. Where you test a formula, use only rows that appear in the goal's data tables and show the arithmetic. Verified facts listed in the goal are ground truth; if a source disagrees with them, say so instead of bending the formula.
+
+**How to answer:** a file `R09_save_field_dictionary_response_1.md`. Answer only the numbered points below, keep their numbers (`Q1`, `Q2`, ...), and for each use the goal's claim format (Claim / Formula / Applies when / Source / Quote / Confidence / Caveats). Add at the end an updated list of what is still `UNKNOWN` and what would settle it. For a field you cannot document write `UNKNOWN`; a one-line guess in a dictionary cell is not acceptable.
+
+## What was wrong with the draft (summary)
+
+The three claims quote our own goal header, not outside sources, and section 6 has no URLs (a "Paradox Developer Wiki, Save Game Structure" page is not identified). The validation uses numbers that are not in the goal (retain_power 51.446 is the goal's `p_pow` example, pull_power 111.454 appears nowhere; max_pow 2.162 with max_demand 1.0 does not give the `val` example 3.601). Many dictionary cells are guesses stated as fact, several contradict verified project results, and most of the "additional country-level fields" are not covered.
+
+## Points to answer
+
+**Q1 - Fields whose dictionary cell contradicts verified results.** Correct or source each:
+- `power_fraction = val / total` (node total). The project verified `power_fraction = fx(effective / retain_power)` with effective = val - t_out + t_in, exact in 42,323 of 42,330 entries. State the correct definition and whether a source says so.
+- `pull_power` = "trade power of non-collecting countries steering forward". The integrated R03 rule is: a country pulls where it steers, or does not collect there but collects downstream (5,586 of 5,588 nodes). Reconcile.
+- `potential` = "transfers or embargo adjustment". R04 established `potential = (t_out - t_in) / total` (3-decimal truncation). Replace the vague cell.
+- `max_demand = 1.0 + global_trade_power_modifiers`: R01/R02 say it also contains the away-from-capital penalty and embargo effects, and `max_demand` exists for every country at every node (100,640 entries). Give a sourced definition or `UNKNOWN`; do not write "confirmed".
+- `num_collectors_including_pirates` "nations + pirate privateers": the R10 goal's second table has `num_collectors_including_pirates = num_collectors + 1` with equal powers in 14 of 15 rows. Reconcile or mark `UNKNOWN`.
+
+**Q2 - Fields guessed without evidence.** For each give the exact definition with source and quote, or `UNKNOWN` and the check that would settle it using the goal's examples: `already_sent` (the draft's cell says "accumulated value transferred forward", while its section 5 says the meaning is unknown: pick one, with evidence); `max`; `p_pow`; `highest_power`; `collector_power`; `total` (node) ; `top_power`, `top_power_values`, `top_provinces`, `top_provinces_values` (how many entries, sorted by what, do they list `val` or `max_pow`?); `local_value` ("sum of goods_produced * price": source); `trade_goods_size` (what index is which good, what unit, how it relates to `local_value`); `most_recent_treasure_ship_passage`. Note two oddities in the goal's node examples to explain if they come from one node: `highest_power` 17.371 while `top_power_values` starts at 44.434, and `max` - `p_pow` = 76.446 - 51.446 = 25.000 exactly. Do not assume they are from one node; say what would need to be checked.
+
+**Q3 - `prev` and `max_pow`.** The draft gives "~20%" for `prev` as confirmed with no source; the goal's verified fact is sum over downstream nodes D of province_power_D / 5 (95% of 519 entries within 1%). Give a sourced statement (or `UNKNOWN`) for which downstream nodes and which province power (owned by the same country?), and for the 5% of entries that do not fit. For `max_pow` give the component list with a source (province + ship + prev + flat extras: which flat extras are in it, see R06), or `UNKNOWN`.
+
+**Q4 - Country-level fields the goal asked to document.** The draft covers none: `trade_embargoes`, `trade_embargoed_by`, `transfer_trade_power_from`, `transfer_trade_power_to`, `merchants={envoy={...}}`, `traded`, `traded_bonus`, `trade_mission`, `num_ships_protecting_trade`, `mercantilism`, the province field `trade_power`, node `trade_company_region`. For each give meaning, unit, and source (pdx-tools / eu4save / rakaly schema files with path and quote are the expected sources), or `UNKNOWN`. State which of these feed the trade calculation (and which only describe state).
+
+**Q5 - Real validation.** Replace the three "checks" with checks that use only rows that appear in the goal's tables (for example `retain_power` 58.273 + `pull_power` 126.61 = 184.883 = node `total` example, retention 0.3152 vs the listed 0.316: say honestly whether they come from one node and what the mismatch means, or that the goal does not identify the node). Show arithmetic for at least 5 fields; list every failure.
+
+**Q6 - Sources.** Replace the quotes of C-01 to C-03 by outside sources or state that these three relations are project-verified only. Give URLs and file paths (pdx-tools / eu4save / rakaly) for the field names, with the version they refer to (1.37.5 or not).
