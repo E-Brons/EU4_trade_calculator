@@ -51,25 +51,23 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # The prompt is written to a file and read back inside the shell: expanding it into the script text with
+      # ${{ }} made backticks, quotes and $ in the research files execute as shell code.
       - name: Build prompt
-        id: prompt
         env:
           TARGET: ${{ matrix.item.target }}
-        run: |
-          {
-            echo "text<<RESEARCH_PROMPT_EOF"
-            python3 .github/scripts/research_pending.py prompt "$TARGET"
-            echo "RESEARCH_PROMPT_EOF"
-          } >> "$GITHUB_OUTPUT"
+        run: python3 .github/scripts/research_pending.py prompt "$TARGET" > "$RUNNER_TEMP/research_prompt.md"
 
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
 
       - name: Invoke Copilot Agent
+        timeout-minutes: 60
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_TOKEN }}
+          TARGET: ${{ matrix.item.target }}
         run: |
-          copilot -p "${{ steps.prompt.outputs.text }}" --output-format markdown > docs/research/${{ matrix.item.target }}
+          copilot -p "$(cat "$RUNNER_TEMP/research_prompt.md")" --output-format markdown > "docs/research/$TARGET"
 
       - name: Formatting repair and sanity check
         env:

@@ -3,7 +3,7 @@
 Status summary: the **structure** of `max_demand` is established (cap x embargo factor x away factor); the **cap's composition from country modifiers is UNKNOWN** (not documented anywhere I could find, and not derivable from the save). No source documents the save field name `max_demand`; the mapping below is `inferred` from the data.
 
 ## 1. Answer
- 
+
 ```
 # per country c, per node n, game 1.37.5
 # 1) base multiplier ("cap") - depends only on country modifiers and on the node CLASS
