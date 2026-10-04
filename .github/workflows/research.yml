@@ -75,6 +75,13 @@ jobs:
         run: python3 .github/scripts/research_pending.py strip "docs/research/$TARGET"
 
       - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: raw-${{ matrix.item.target }}
+          path: docs/research/${{ matrix.item.target }}
+          if-no-files-found: ignore
+
+      - uses: actions/upload-artifact@v4
         with:
           name: research-${{ matrix.item.target }}
           path: docs/research/${{ matrix.item.target }}

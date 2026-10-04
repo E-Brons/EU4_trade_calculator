@@ -93,6 +93,11 @@ def strip(path):
             break
     while lines and not lines[-1].strip():
         lines.pop()
+    # drop anything the CLI printed before the document itself (progress lines, a one-line preface)
+    for i, line in enumerate(lines):
+        if line.strip() == "```markdown" or re.match(r"^#{1,6}\s", line):
+            lines = lines[i:]
+            break
     if lines and lines[0].strip() == "```markdown":
         lines = lines[1:]
         while lines and not lines[-1].strip():
@@ -101,7 +106,9 @@ def strip(path):
             lines.pop()
     text = "\n".join(lines).strip() + "\n"
     if len(text) < 500 or not text.lstrip().startswith("#"):
-        sys.exit(f"{path}: output is empty or not a markdown document; refusing to keep it")
+        head = "\n".join(p.read_text().split("\n")[:30])
+        sys.exit(f"{path}: output is empty or not a markdown document ({len(text)} chars after cleanup); refusing to keep it. "
+                 f"First 30 lines of the raw output:\n{head}")
     p.write_text(text)
 
 
