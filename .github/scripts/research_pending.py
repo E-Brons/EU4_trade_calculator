@@ -86,6 +86,13 @@ def prompt(target):
 def strip(path):
     p = Path(path)
     lines = p.read_text().strip().split("\n")
+    # the Copilot CLI appends a stats block (Changes / AI Credits / Tokens / Resume) to text output
+    for i in range(len(lines) - 1, -1, -1):
+        if re.match(r"^Changes\s+\+\d+\s+-\d+", lines[i]):
+            lines = lines[:i]
+            break
+    while lines and not lines[-1].strip():
+        lines.pop()
     if lines and lines[0].strip() == "```markdown":
         lines = lines[1:]
         while lines and not lines[-1].strip():
