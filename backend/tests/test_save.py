@@ -25,6 +25,8 @@ trade={
 \t\tsteer_power=1.000
 \t\tTUR={
 \t\t\tval=3.0
+\t\t\tmax_pow=4.0
+\t\t\tmax_demand=0.75
 \t\t\tprovince_power=3.0
 \t\t\tship_power=1.0
 \t\t\tlight_ship=2
@@ -210,7 +212,12 @@ def test_build_node_states_from_save_identifies_home_and_collect_vs_steer(tmp_pa
 
     assert home_node == "ragusa"
     assert node_states["ragusa"].is_home is True
-    assert node_states["ragusa"].player_base_power == 4.0  # province_power(3) + ship_power(1)
+    assert node_states["ragusa"].player_base_power == 3.0  # max_pow(4.0) - ship_power(1.0) --
+    # see _player_base_power: everything about this country's power at this node EXCEPT its own
+    # ships, read directly off the save rather than reconstructed from province_power + a
+    # guessed merchant/home bonus (there's a real "bonus" of 0.0 to find here -- max_pow(4.0)
+    # - province_power(3.0) - ship_power(1.0) -- but that's coincidental to this fixture's
+    # made-up numbers, not a general "province+ship" identity).
     # CONFIRMED against 35 real 1444.11.11 saves (23,275 per-country trade-node
     # entries, zero exceptions): a `power_fraction`/`money`/paid-out share only
     # ever appears on the has_capital entry. `has_trader=yes` alone (no

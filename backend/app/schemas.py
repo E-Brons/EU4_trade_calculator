@@ -14,6 +14,12 @@ class NodeStateIn(BaseModel):
     local_value: float = 0.0
     is_home: bool = False
     player_base_power: float = 0.0
+    player_power_per_ship: float | None = None
+    player_recorded_has_trader: bool = False
+    player_merchant_bonus: float = 0.0
+    player_max_demand: float = 1.0
+    player_t_in: float = 0.0
+    player_t_out: float = 0.0
     other_collect_power: float = 0.0
     other_steer_power: dict[str, float] = Field(default_factory=dict)
     other_steer_merchants: dict[str, int] = Field(default_factory=dict)
@@ -74,6 +80,17 @@ class NodeBreakdownOut(BaseModel):
     player_income: float
     forwarded_value: float
     link_values: dict[str, float]
+    # Explanatory extras -- see engine.simulate.NodeBreakdown for definitions.
+    player_share: float = 0.0
+    income_multiplier: float = 1.0
+    retained_power: float = 0.0
+    pull_power: float = 0.0
+    retained_value: float = 0.0
+    player_action: str = "none"  # 'collect' | 'steer' | 'passive-home' | 'none'
+    player_steer_target: str | None = None
+    player_light_ships: int = 0
+    incoming_value: float = 0.0
+    is_replay: bool = False
 
     @classmethod
     def from_engine(cls, b: NodeBreakdown, display_name: str) -> "NodeBreakdownOut":
@@ -93,6 +110,48 @@ class SimulateResponse(BaseModel):
                 for nid, b in result.nodes.items()
             },
         )
+
+
+class NodeOptionsRequest(BaseModel):
+    node_states: dict[str, NodeStateIn]
+    allocation: dict[str, NodeAllocationIn] = Field(default_factory=dict)
+    params: ParamsIn = Field(default_factory=ParamsIn)
+    node_id: str
+    max_light_ships: int = 0
+
+
+class MerchantOptionOut(BaseModel):
+    action: MerchantAction
+    steer_target: str | None = None
+    steer_target_display_name: str | None = None
+    total_income: float  # whole-empire income if this option replaced the node's merchant action
+    formula_total_income: float  # same, but computed purely by the formula model (no save replay)
+    is_current: bool
+    node: NodeBreakdownOut
+
+
+class ShipPointOut(BaseModel):
+    ships: int
+    total_income: float
+    formula_total_income: float
+    player_power: float
+    player_share: float
+    node_income: float
+
+
+class NodeOptionsResponse(BaseModel):
+    node_id: str
+    display_name: str
+    current_total_income: float
+    # Pure-formula income of the current allocation, and replay - formula.
+    # Options/curve points that differ from the save's recorded allocation at
+    # this node use the formula model, so they sit `calibration_offset` away
+    # from the exact replay number. Compare `formula_total_income` series and
+    # add the offset to stay consistent with `current_total_income`.
+    formula_current_total_income: float
+    calibration_offset: float
+    merchant_options: list[MerchantOptionOut]
+    ship_curve: list[ShipPointOut]
 
 
 class OptimizeRequest(BaseModel):

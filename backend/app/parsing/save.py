@@ -71,7 +71,48 @@ class ParsedCountryInNode:
     # section for the confirmed formula relating this to `val`/`money`.
     add: float = 0.0  # per-country steering-bookkeeping field, refuted as a trade_efficiency
     # proxy -- kept for completeness, not used for anything.
+    max_demand: float = 1.0  # save's `max_demand` field -- CONFIRMED (889/889 entries, S80):
+    # val == max(max_pow, 0) * max_demand exactly. Needed to undo the demand scaling when
+    # back-solving this country's own pre-ships/merchant power baseline (see
+    # `_player_base_power`) -- subtracting a raw (un-scaled) ship/merchant bonus directly from
+    # `val` mixes two different unit scales whenever max_demand != 1, which is most of the time.
+    t_in: float = 0.0  # save's `t_in` field: trade power TRANSFERRED to this country from
+    # another (e.g. a subject sending a cut of its own power to its overlord's collection here).
+    t_out: float = 0.0  # save's `t_out` field: this country's own power sent away the same way.
+    # CONFIRMED on S80's comorin_cape (80 node-countries, exact to <0.001): neither t_in nor
+    # t_out is part of `val`/`max_pow` (those are fully explained by province/ship/prev/modifier/
+    # merchant-bonus alone) -- but `retain_power`/`pull_power`/`money` all need `val + t_in -
+    # t_out` in place of bare `val` for EVERY country, not just collectors: a transfer moves
+    # power from the sender's role-bucket (retain if collecting, else pull) to the receiver's,
+    # with total power conserved. A transfer between two non-collectors (or two collectors)
+    # nets to zero change in the retain/pull split, which is why earlier spot-checks against
+    # home/passive/steer entries with no transfers never surfaced this.
+    max_pow: float = 0.0  # save's own `max_pow` field -- CONFIRMED (889/889 S80 entries, to
+    # <0.01): `max_pow = province_power + ship_power + prev + sum(modifier[].power) +
+    # merchant_bonus`, where `merchant_bonus` is a discrete, NOT fully identified schedule
+    # (observed values: 0 passive, 2/5/7/12/17/22/27 with a merchant -- the spread looks
+    # nation-dependent, e.g. a flat "+X Merchant trade power" national idea, not a single
+    # universal constant). Read directly rather than reconstructed from guessed constants --
+    # see `_player_base_power`, which backs `merchant_bonus` out exactly as whatever's left
+    # once every other real, parsed term is subtracted, instead of assuming a fixed value.
+    prev: float = 0.0  # save's own `prev` field -- CONFIRMED (S80, 466/496 non-zero cases):
+    # `prev == 0.2 * sum(province_power of this country at directly-downstream nodes)`. Ships
+    # do NOT propagate into it (confirmed: differs by country/node, not by this node's own
+    # ship count), so it's treated as fixed input, not something `_player_base_power` re-derives.
     raw: dict = field(default_factory=dict)
+
+    @property
+    def net_power(self) -> float:
+        """This country's true power for retain/pull/share purposes: `val` (or raw `power` when
+        there's no `val` to work with at all) adjusted for transfers in/out. See `t_in`/`t_out`."""
+        base = self.val if self.val else self.power
+        return base + self.t_in - self.t_out if self.val else base
+
+    @property
+    def modifier_power(self) -> float:
+        """Sum of every `modifier[].power` on this entry (embargoes, war exhaustion, etc.) --
+        one of the real, parsed terms `max_pow` decomposes into. See `max_pow`."""
+        return sum(_as_float(m.get("power")) for m in as_list(self.raw.get("modifier")) if isinstance(m, dict))
 
     @property
     def power(self) -> float:
@@ -111,6 +152,24 @@ class ParsedSave:
     suggested_power_per_light_ship: float | None = None  # weighted-mean real trade_power across the
     # player's actual light_ship fleet mix (see LIGHT_SHIP_TRADE_POWER) -- None if the save has no
     # recognized light_ship-type ships at all (e.g. a save with zero light ships).
+
+
+MERCHANT_PRESENT_BONUS = 0.1  # TRADE_MERCHANT_PRESENT; keep in sync with engine/model.py Params default
+
+
+def suggested_trade_efficiency_for(nodes: dict[str, ParsedNode], tag: str) -> float | None:
+    """Back-solves trade_efficiency from every node `tag` collects at --
+    see docs/implementation.md's "Trade simulation" section for the formula.
+    Takes an arbitrary tag (not just the save's own player) so tests can
+    validate the formula by treating any country in the save as "the
+    player" -- see tests/test_formula_vs_save.py."""
+    implied = []
+    for node in nodes.values():
+        country = next((c for c in node.countries if c.tag == tag), None)
+        if country and country.money > 0 and country.value_share > 0:
+            merchant_bonus = MERCHANT_PRESENT_BONUS if country.has_trader else 0.0
+            implied.append(country.money / country.value_share - 1 - merchant_bonus)
+    return sum(implied) / len(implied) if implied else None
 
 
 def load_save(path: str | Path) -> ParsedSave:
@@ -204,6 +263,11 @@ def load_save(path: str | Path) -> ParsedSave:
                     val=_as_float(value.get("val")),
                     value_share=_as_float(value.get("total")),
                     add=_as_float(value.get("add")),
+                    max_demand=_as_float(value.get("max_demand")) or 1.0,
+                    t_in=_as_float(value.get("t_in")),
+                    t_out=_as_float(value.get("t_out")),
+                    max_pow=_as_float(value.get("max_pow")),
+                    prev=_as_float(value.get("prev")),
                     raw=value,
                 )
             )
@@ -216,18 +280,7 @@ def load_save(path: str | Path) -> ParsedSave:
             "Falling back to manual entry."
         )
 
-    # Back-solve trade_efficiency from collecting nodes -- see
-    # docs/implementation.md's "Trade simulation" section for the formula.
-    MERCHANT_PRESENT_BONUS = 0.1  # TRADE_MERCHANT_PRESENT; keep in sync with engine/model.py Params default
-    implied_efficiencies = []
-    for node in nodes.values():
-        player = next((c for c in node.countries if c.tag == player_tag), None)
-        if player and player.money > 0 and player.value_share > 0:
-            merchant_bonus = MERCHANT_PRESENT_BONUS if player.has_trader else 0.0
-            implied_efficiencies.append(player.money / player.value_share - 1 - merchant_bonus)
-    suggested_trade_efficiency = (
-        sum(implied_efficiencies) / len(implied_efficiencies) if implied_efficiencies else None
-    )
+    suggested_trade_efficiency = suggested_trade_efficiency_for(nodes, str(player_tag))
 
     # The save already computed this exactly (money = realized ducats/month
     # per node); summing it directly beats re-deriving it through
@@ -282,21 +335,23 @@ def build_node_states_from_save(
             if c.tag == parsed.player_tag:
                 continue
             if c.is_steering:
-                other_steer_total += c.val if c.val else c.power
+                other_steer_total += c.net_power
             elif c.has_capital or c.is_collecting:
                 # Home always collects; an away merchant only counts as
                 # collecting once it has actually realized a result (see
                 # ParsedCountryInNode.is_collecting) -- has_trader alone
                 # isn't enough, since a zero-tick save can have a merchant
                 # placed but not yet reflected in any recorded value.
-                other_collect += c.val if c.val else c.power
+                other_collect += c.net_power
             else:
                 # `val` is the authoritative value-weight even when
                 # province_power/ship_power are 0 (e.g. colonial-range
                 # presence with no owned provinces) -- same val-or-power
                 # fallback as the branches above, or this country's share
-                # of the node's value silently vanishes.
-                other_passive += c.val if c.val else c.power
+                # of the node's value silently vanishes. `net_power` (val
+                # adjusted for transfers in/out) rather than bare `val` --
+                # see ParsedCountryInNode.net_power.
+                other_passive += c.net_power
 
         outgoing = graph.outgoing(node_id) if node_id in graph else ()
         other_steer_power = _distribute_steer_weights(other_steer_total, node.steer_power_weights, outgoing)
@@ -332,13 +387,23 @@ def build_node_states_from_save(
         # NodeState.matches_recorded()), see docs/implementation.md.
         has_known_data = node.retain_power > 0 or node.pull_power > 0
 
-        player_base_power = _player_base_power(player, is_home, node_id, graph)
+        player_base_power, player_power_per_ship, player_merchant_bonus = _player_base_power(player)
+        # Only apply the save's own max_demand when we actually used `val` to derive
+        # player_base_power above -- the raw-power fallback (no val at all) was never
+        # demand-scaled to begin with, so treat it as already in finished units.
+        player_max_demand = (player.max_demand or 1.0) if (player and player.val) else 1.0
 
         node_states[node_id] = NodeState(
             node_id=node_id,
             local_value=node.local_value,
             is_home=is_home,
             player_base_power=player_base_power,
+            player_power_per_ship=player_power_per_ship,
+            player_recorded_has_trader=(action != MerchantAction.NONE),
+            player_merchant_bonus=player_merchant_bonus,
+            player_max_demand=player_max_demand,
+            player_t_in=player.t_in if player else 0.0,
+            player_t_out=player.t_out if player else 0.0,
             other_collect_power=other_collect,
             other_steer_power=other_steer_power,
             other_passive_power=other_passive,
@@ -346,7 +411,7 @@ def build_node_states_from_save(
             known_retained_value=node.current_value if has_known_data else None,
             known_retain_power=node.retain_power if has_known_data else None,
             known_pull_power=node.pull_power if has_known_data else None,
-            known_player_val=player.val if player else 0.0,
+            known_player_val=player.net_power if player else 0.0,
             known_player_action=action,
             known_player_light_ships=player.light_ships if player else 0,
             known_player_steer_target=steer_target,
@@ -371,51 +436,66 @@ def build_node_states_from_save(
     return node_states, current_allocation, home_node, real_presence
 
 
-def _player_base_power(player: "ParsedCountryInNode | None", is_home: bool, node_id: str, graph) -> float:
-    """The player's intrinsic trade power at a node, for simulate()'s
-    `_player_power` to add merchant/ship bonuses on top of.
+def _player_base_power(player: "ParsedCountryInNode | None") -> tuple[float, float | None, float]:
+    """The player's trade power components at a node, decomposed from the
+    save's own recorded fields rather than guessed constants wherever
+    possible, for simulate()'s `_player_power` to recombine with a
+    hypothetical ship count / merchant action:
 
-    `val` is the authoritative power figure here, for ANY entry (collect,
-    steer, or passive) -- CONFIRMED against a real, ticked save two ways:
-    summed over has_capital/collecting entries it matches the node's own
-    `retain_power`; summed over every OTHER entry (steer + passive
-    together) it matches `pull_power`, exactly, for every node without
-    meaningful piracy (a handful of colonial/frontier nodes are off by the
-    same already-documented pirate-power gap that `test_val_sums_to_node_
-    total` tolerates). Earlier reasoning that `val` was unreliable away
-    from a collecting entry compared it against raw `province_power+
-    ship_power` instead of `pull_power` -- the wrong baseline; `val` was
-    right all along, raw power just isn't the same quantity as `val` to
-    begin with (val is already-modified; see the ~2x home-vs-away gap at
-    collecting entries that raw power alone can't explain either).
-
-    Whatever of `val` is already attributable to the save's OWN recorded
-    merchant/ships is subtracted back out first, so a hypothetical
-    allocation that changes the merchant/ship count at this node (the
-    optimizer's entire job) doesn't double-count the old ones on top of
-    the new ones simulate() adds.
+    - `base` (ship-count-INDEPENDENT max_pow, SAME action as recorded):
+      `province_power + prev + modifier_power + bonus`, all read directly
+      from the save -- CONFIRMED (S80, 889 entries): `max_pow =
+      province_power + ship_power + prev + modifier_power + bonus` to
+      <0.01 absolute, and neither `prev` nor province/modifier power
+      depend on this country's own ships (`prev` is 0.2x downstream
+      province power; see ParsedCountryInNode.prev).
+    - `power_per_ship`: this country's OWN recorded `ship_power /
+      light_ships` -- its actual real rate (CONFIRMED to vary: 3.05/ship
+      for TUR at comorin_cape, 2.0/ship for KMC at girin -- fleet
+      composition, not a universal constant) -- or None if it currently
+      has no ships to derive a rate from (caller falls back to
+      `Params.power_per_light_ship`, a guess, since there's nothing real
+      to read).
+    - `bonus`: whatever's left of `max_pow` once province power, ship
+      power, `prev`, and modifiers are all subtracted -- CONFIRMED this is
+      NOT a single constant/formula: it's nonzero even with no merchant at
+      all whenever the country owns the node (has_capital) -- e.g. AAC at
+      rheinland, has_trader=False, residual exactly 5.0 -- and the
+      observed discrete values (0/2/5/7/12/17/22/27) don't decompose
+      cleanly into "home" vs "away" vs "merchant present": the SAME tag
+      can show a different value at its home node than away (e.g. KON:
+      +2 extra at home, +0 extra away), which rules out a uniform
+      per-nation idea bonus layered on a fixed home/away base. Most likely
+      a mix of national ideas/government reforms this model doesn't
+      attempt to decompose. Rather than enumerate every possible term,
+      `base` is computed as `max_pow - ship_power` directly -- CONFIRMED
+      this covers terms this model doesn't even have a name for: a purely
+      passive, no-province/no-ship/no-merchant "presence" entry (e.g. SCA
+      at carribean_trade, S80) can still have a nonzero `max_pow` that
+      `province + prev + modifier_power + bonus` doesn't explain at all
+      (there, all four are exactly 0) -- but it's still exactly `max_pow`
+      once ship_power is the only thing subtracted out, so working from
+      `max_pow` directly rather than re-summing named components is
+      strictly more robust to whatever this model hasn't identified yet.
+      `bonus` is still reported separately (NOT part of `base`'s return
+      value's own subtraction) purely for the one case that needs an
+      isolated number: the caller's "merchant toggled off" correction
+      below, which has to subtract exactly the merchant's own share of
+      `max_pow`, not all of it.
     """
     if not player or not player.val:
         # No `val` to work with (e.g. synthetic/manual data, or a
-        # genuinely zero-power entry) -- fall back to raw power as-is.
-        # Nothing to subtract: unlike `val`, raw power never had the
-        # recorded merchant/ship bonus baked into it.
-        return player.power if player else 0.0
+        # genuinely zero-power entry) -- fall back to raw power as-is,
+        # with no ship/merchant decomposition to offer.
+        return (player.power if player else 0.0), None, 0.0
 
-    recorded_added = 0.0
-    if node_id not in graph or not graph.is_inland(node_id):
-        recorded_added += player.light_ships * _POWER_PER_LIGHT_SHIP_DEFAULT
-    if player.has_trader:
-        recorded_added += _CAPITAL_MERCHANT_POWER_DEFAULT if is_home else _MERCHANT_POWER_DEFAULT
-    if is_home:
-        recorded_added *= 1 + _HOME_POWER_BONUS_DEFAULT
+    bonus = 0.0
+    if player.has_trader or player.has_capital:
+        bonus = player.max_pow - player.province_power - player.ship_power - player.prev - player.modifier_power
 
-    # Raw power is a floor, not just a 0 clamp: it's never valid for `val`
-    # minus its own recorded bonus to come out below the country's bare
-    # province/ship power (that would mean the bonus was bigger than the
-    # total it's supposedly part of). Falls back to it gracefully instead
-    # of collapsing to 0 whenever that happens.
-    return max(player.val - recorded_added, player.power)
+    base = player.max_pow - player.ship_power
+    power_per_ship = (player.ship_power / player.light_ships) if player.light_ships > 0 else None
+    return base, power_per_ship, bonus
 
 
 def _distribute_steer_weights(total: float, weights: list[float], outgoing: tuple[str, ...]) -> dict[str, float]:
