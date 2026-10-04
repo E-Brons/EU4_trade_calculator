@@ -71,6 +71,8 @@ jobs:
           echo "prefix: ${T:0:11}"
           curl -s -o /dev/null -w "GET /user -> HTTP %{http_code}\n" -H "Authorization: Bearer $T" https://api.github.com/user
           curl -s -D - -o /dev/null -H "Authorization: Bearer $T" https://api.github.com/user | grep -i '^x-oauth-scopes\|^github-authentication-token-expiration' || true
+          copilot --version || true
+          COPILOT_GITHUB_TOKEN="$T" copilot -p "say hi" --output-format text 2>&1 | head -8 || true
 
       - name: Invoke Copilot Agent
         timeout-minutes: 60
