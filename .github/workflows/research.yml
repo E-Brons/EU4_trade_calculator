@@ -69,6 +69,7 @@ jobs:
           prompt: ${{ steps.prompt.outputs.text }}
           output-format: markdown
           output-file: docs/research/${{ matrix.item.target }}
+          cli-version: latest
 
       - name: Formatting repair and sanity check
         env:
