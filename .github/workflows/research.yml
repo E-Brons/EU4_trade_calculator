@@ -9,15 +9,9 @@ name: Research Agent
 on:
   push:
     branches:
-      - main
+      - "**"
     paths:
       - "docs/research/**"
-  workflow_dispatch:
-    inputs:
-      topic:
-        description: "Only this topic (e.g. R10 or R10_embargo_privateers_transfers_misc); empty = all pending"
-        required: false
-        default: ""
 
 # one run at a time: the commit job rebases onto whatever was pushed meanwhile
 concurrency:
@@ -38,10 +32,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: plan
-        env:
-          TOPIC: ${{ inputs.topic }}
         run: |
-          items=$(python3 .github/scripts/research_pending.py plan "$TOPIC")
+          items=$(python3 .github/scripts/research_pending.py plan)
           echo "items=$items" >> "$GITHUB_OUTPUT"
           if [ "$items" = "[]" ]; then echo "any=false" >> "$GITHUB_OUTPUT"; else echo "any=true" >> "$GITHUB_OUTPUT"; fi
           echo "Pending: $items"

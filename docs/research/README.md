@@ -44,7 +44,7 @@ Save the AI's text unchanged except for repairs that do not alter wording or num
 
 ## Automation (CI research agent)
 
-`.github/workflows/research.yml` runs on every push to `main` that touches `docs/research/**` (and manually, optionally for one topic). `.github/scripts/research_pending.py plan` decides what is waiting for the agent:
+`.github/workflows/research.yml` runs on a push to any branch (not tags) that changes something under `docs/research/**`, and only then. `.github/scripts/research_pending.py plan` decides what is waiting for the agent:
 
 | Newest file of a topic | The agent writes |
 |---|---|
