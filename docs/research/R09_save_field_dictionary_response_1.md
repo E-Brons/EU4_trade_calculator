@@ -61,6 +61,7 @@ Formula: `max = p_pow + sum(max_pow - prev - province_power) = p_pow + sum(ship_
 Source: save corpus, `r09_r13_nodefields.py`.
 Quote: S01 `kongo`: `p_pow=73.29`, `max=128.29`, difference 55.0 = 11 capital entries each with `max_pow - province_power - prev - ship_power = 5.0` (KON, TYO, KSJ, LUB, LND, CKW, KIK, KZB, YAK, KLD, KUB). S14 `alexandria`: `p_pow=136.077`, `max=156.077`, `sum(max_pow - prev)=156.077`.
 Confidence: confirmed for 6,503 of 6,504 nodes (6,345 without ship power; 158 with ship power, where the ships are part of the sum). The single failure is S64 `genua` (difference 40.0 vs 35.0 explained by entries).
+Updated 2026-10-05: on the new saves the identity holds in 80/80 nodes (U03, U04) and 78/80 (U05); the two U05 exceptions are `ethiopia` and `gulf_of_aden`, where `max` exceeds `p_pow` + the present entries by exactly 2.0 and 7.0 because a country that lost its last province (AFA) left its old power in the node (section 'Update 2026-10-05', U-R09-2).
 Caveats: the "oddity" `max - p_pow = 25.000` of the goal is the sum of five flat extras of 5.0 (a node with five capital entries); I do not claim the goal's two example nodes are the same node.
 
 ### C-08 `highest_power`
@@ -116,6 +117,7 @@ Applies when: the entry exists (entries with `max_pow` or `prev`).
 Source: save corpus + graph, `r09_r13_prev.py`.
 Quote: S80 `kongo` MOR: downstream province powers `[51.36, 0.0]`, rule 10.272, stored `prev=10.797`. S01 `california` XAL: downstream `[11.31, 0, 0, 0]`, rule 2.262, stored 0.
 Confidence: confirmed on 85,968 entries: the thresholded one-hop rule fails 73 times (99.915%); the plain `sum/5` (no threshold) fails 5,271 times; `>10` and `>=10` give the same 73 (an exact 10.00 case does not exist). The 73 failures: `california`/XAL (40 entries across saves, downstream 11.31 but `prev=0`), `patagonia`/INC (5), `cuiaba`/C04 (5), `gujarat`/POR (5), `tunis`/SPA (5), `amazonas_node`/C03 (3), and MOR in S80/U01 (`kongo`, `katsina`, `cape_of_good_hope`, `brazil`, `timbuktu`, 2 each, stored `prev` larger than the rule by 0.525, 0.525, 0.525, 0.525 and 0.875).
+Updated 2026-10-05: in played saves the failures of the ungated rule are a few `polynesia_node` entries and the MOR ship cases; U04 (a tick day) fails like the mid-month saves (section 'Update 2026-10-05', U-R09-3 and the R05 update).
 Caveats: truncating each link's `province_power/5` before adding (R05 response) gives 63 failures instead of 73 on the same 85,968 entries, so the per-link form is the closer one. This test counts entries that have `max_pow` or `prev`; R05's own count (108,562 entries) includes entries without those keys and finds 163 failures; the two bases differ and neither is wrong.
 
 ### C-17 `max_pow` components
@@ -196,3 +198,29 @@ Independent recomputation (new code, not the author's logic): `backend/scripts/r
 - C-16 caveat added: truncating each link before adding gives 63 failures instead of 73.
 
 **Could not be verified / not re-tested:** `S01 kongo` and the other quoted node rows beyond those listed above were checked only where named; the exact tolerance behind the author's 73 (tolerance 0.0015 reproduces it); the Q4 claim that `action=2` means "placed in a node" (inferred, only correlational: 42,588 of 42,754); `traded` sum comparisons (136 / 22 of 42,754) and the 11,266 figure are taken from the author's run of `r09_r13_homebonus.py` (re-run, same output) rather than recomputed independently; the `comorin`-type ratios of Q1 sources are not applicable (all outside-source points remain unanswered by design).
+
+## Update 2026-10-05 - saves U03, U04, U05
+
+Status: the results below are single runs of `backend/scripts/research/u345_pipe_*.py` (own code; `u345_pipe_stages.py` runs the project's `verify_world`); they have not been independently re-computed, unlike the Verification section above. New data: U03 (in-game date 1691.1.9), U04 (in-game date 1691.11.1, a tick day; its file name says 1691.11.17) and U05 (1693.4.15) are melted Ironman saves of the same Ottoman campaign (player TUR, game 1.37.5, 80 trade nodes) as S79 (1665.4.22) and S80 (1682.4.18); they are not independent samples. Counts refer to these saves unless stated otherwise.
+
+### U-R09-1 Identities re-run on the new saves (U03 / U04 / U05)
+- `val == trunc3(max_pow x max_demand)`: 866/866, 869/869, 859/859 (stage `val`, 0 failures).
+- `top_power_values` equals `val - t_out + t_in` for the pairs that have an entry: 866/866, 869/869, 859/859 (see U-R09-2 for the entry-less tag in U05).
+- `max = p_pow + sum(max_pow - prev - province_power)` within 0.0035: 80/80 (U03), 80/80 (U04), 78/80 (U05; `ethiopia`, `gulf_of_aden`).
+- `potential` and `t_in`/`t_out` (stage `transfers`): 0 failures in 436, 436, 432 checks. Stage `income_share`: 0 failures in 368, 368, 362 checks. `retention`: 0 failures in 80 nodes each.
+- `pull_power` and `retain_power`: 0/77 and 0/80 (U03, U04), 1/77 and 1/80 (U05, the stale case below).
+- `value_added_outgoing == outgoing`: 77/77 nodes with links each (R08 C-07); link identities 159/159 links each (one `incoming.add` exception in U05).
+
+### U-R09-2 Node fields that keep the power of a country without an entry (new)
+In U05 the tag AFA (last province lost between U04 and U05) has no entry at `ethiopia` and `gulf_of_aden`, but these node fields still contain its old values: `top_power` lists it (2.61 and 7.518), `pull_power` of ethiopia exceeds the calculation by 2.610 and `retain_power` of gulf_of_aden by 7.518, `max` exceeds `p_pow` + the present entries by 2.0 and 7.0, and the link `ethiopia -> gulf_of_aden` keeps `incoming.add` 0.377 (AFA's old `add` 0.065 x 5.804). So the C-11 statement "`top_power_values` are the entries' effective powers" has an exception when a country has just lost all provinces: the node lists are then one monthly computation older than the entries (confirmed as a description of U05; the reading "the lists keep the last monthly tick" is inferred from one event; see the R12 update).
+
+### U-R09-3 `prev` (C-16)
+The ungated one-hop rule with per-link truncation and threshold 10 is exact in 959/963 (U03), 963/967 (U04), 951/955 (U05) candidates; the 4 misses per save are `polynesia_node` entries (C02, C03, C12, HOL) with recorded `prev` 0 (R05 update). `max_pow` extras: not re-decomposed in the new saves (the stage `raw_power` fails in 527/883, 528/886, 519/873 entries, the same as in S79/S80; [corrected in the second pass 2026-10-05: the error is NOT a constant 22.0 - predicted minus recorded is -2.0, -7.0, -15.0, -17.0, -20.0 or -22.0, the flat extras of R06, and 22.0 is only the largest]; R06 topic).
+
+### Verification 2026-10-05 (second pass)
+
+Method: new code `backend/scripts/research/ver2_c_stages.py` (project `verify_world` over all 85 manifest saves; U01/U02 are copies of S80/S79, so corpus-wide counts contain two duplicates), `ver2_c_identities.py` (own re-computation of the identities, prev rule, gate and ship-term counts from the parsed trade trees, exact decimal truncation), `ver2_c_gates.py`, `ver2_c_worst.py`.
+
+Matched: `val == trunc3(max_pow x max_demand)` 866/866, 869/869, 859/859 (88,486 of 88,486 over all 85 saves); `top_power_values == val - t_out + t_in` for every pair with an entry (88,486 of 88,486 over 85 saves; the only pairs without an entry are AFA at `ethiopia` and `gulf_of_aden` in U05); `max = p_pow + sum(max_pow - prev - province_power)` 80/80, 80/80, 78/80 and 6,741 of 6,744 over 85 saves (exceptions: S64 `genua` 348.254 vs 343.254, U05 `ethiopia` 135.787 vs 133.787 and `gulf_of_aden` 562.664 vs 555.664); stage counts for `transfers` 436/436/432, `income_share` 0/368, 0/368, 0/362 checks, `retention` 0/80; `prev` rule 959/963, 963/967, 951/955.
+Corrected: the `raw_power` error is not a constant 22.0 (see the note in U-R09-3): predicted minus recorded is -2.0 (256/257/248 entries in U03/U04/U05), -17.0 (147/147/145), -7.0 (51/51/52), -22.0 (42/42/42), -15.0 (20/20/21), -20.0 (6/6/6); these are the flat extras 2, 5 and 15 of R06 in combination. The AFA values in U-R09-2 are AFA with zero province power, see the R12 verification.
+Unverifiable: the parser-project definitions; the cause of the 3 `max` exceptions other than U05.

@@ -17,6 +17,7 @@ Ruled out by the data: `value_added_outgoing != outgoing` (it equals `outgoing` 
 ## Q5 - Played saves not on the 1st
 Claim C-02 (confirmed for the listed identities): the two played saves (dated 1665.4.22 and 1682.4.18) are internally consistent in the same way as the start snapshots: `val == trunc3(max_pow*max_demand)`: start 82,260 of 82,260; ticked 1,816 of 1,816. `retention`, `outgoing`, `current` identities: see Q3. `total == sum(val)` within 0.01: start 5,916 of 6,205, ticked 139 of 160 (lower in both; not explained). So the stored values of a mid-month save are from one consistent tick; which inputs changed since the last tick (merchant placement, ships, diplomacy) is UNKNOWN from the save alone.
 Consistency check with saved fields only: val identity, retention identity, `current` identity and link identity above; a stale save would break the link identity (weights vs `incoming`), which holds in 12,113 of 12,113 links including the played saves.
+Updated 2026-10-05: U04 (in-game date 1691.11.1, a tick day) satisfies the same identities as the mid-month saves, and U05 shows country entries updating at once while node aggregates keep the last monthly computation (section 'Update 2026-10-05', U-R12-2; inferred from one event).
 
 ## Q6 - `prev` timing
 Claim C-03 (inferred): `prev` is computed from the province power that is in the same snapshot. Rule tested: `prev(country, node) = trunc3( sum over direct downstream nodes D with province_power_D >= 10 of province_power_D / 5 )`, `prev.py`: start snapshots 82,197 of 82,260 entries exact (0.077 % bad; with the per-link truncation `sum_D trunc3(p_D/5)` of R05 it is 82,207 of 82,260, 0.064 % bad), ticked saves 1,849 of 1,854 (0.27 % bad). A lag of one tick would make nearly all entries with changing province power inexact in ticked saves; it does not. The 5 ticked misses are all tag MOR in S80 (`kongo`, `katsina`, `cape_of_good_hope`, `brazil`, `timbuktu`): recorded prev 10.797 vs predicted 10.272 (and 12.305/11.78, 14.216/13.341), i.e. +0.525/+0.875: cause not identified (R05 Q3).
@@ -37,3 +38,39 @@ Corrected / added:
 - The hand-computed `alexandria` example in Q3 was removed earlier (not from a script).
 
 Could not be verified: the claim that a one-tick lag "would break many entries" (argument, not a count); Q4, Q7 and the other outside-source points.
+
+## Update 2026-10-05 - saves U03, U04, U05
+
+Status: the results below are single runs of `backend/scripts/research/u345_pipe_*.py` (own code; `u345_pipe_stages.py` runs the project's `verify_world`); they have not been independently re-computed, unlike the Verification section above. New data: U03 (in-game date 1691.1.9), U04 (in-game date 1691.11.1, a tick day; its file name says 1691.11.17) and U05 (1693.4.15) are melted Ironman saves of the same Ottoman campaign (player TUR, game 1.37.5, 80 trade nodes) as S79 (1665.4.22) and S80 (1682.4.18); they are not independent samples. Counts refer to these saves unless stated otherwise.
+
+### U-R12-1 Identities on the new saves (tick-day save U04)
+Hold in all three saves (U03 / U04 / U05):
+- `val == trunc3(max_pow x max_demand)`: 866/866, 869/869, 859/859.
+- `current = (local_value + sum incoming.value) x retention`: 66/66, 66/66, 65/65; `outgoing = gross - current`: 63/63, 63/63, 62/62; `retention = retain / (retain + pull)` within 0.0011: 63/63, 63/63, 62/62.
+- Link identities and the tight conservation bound: see the R08 update (77/77 nodes, 159/159 links each; one identity-2 exception in U05, below).
+- Weight sums 1.0 / 0.999 / 0.998 and one node with 0.997 (U03).
+- Strict `|sum value - outgoing| <= 0.0015 x links`: not recomputed on the new saves; `|sum value - sum add - out| <= 0.0015 x links` holds in 38/77, 39/77, 42/77 nodes with links (21/77, 22/77, 22/77 without subtracting `add`; 56, 55, 55 nodes carry a link `add`). These are rates over one played save and are not comparable with the corpus-wide 83.8% figure.
+- U04 is on the 1st of the month and shows the same identity results as U03 (9th) and U05 (15th): there is no mid-month artefact in these identities.
+
+### U-R12-2 Stale node fields after a country loses its last province (new; updates Q5)
+In U05 (1693.4.15, not a 1st) the tag AFA is listed in `top_power` of `ethiopia` (value 2.61) and `gulf_of_aden` (7.518) but has no entry at those nodes (in U03 and U04 AFA has an entry at ethiopia: `type=1`, `steer_power=1`, `add=0.065`, `has_trader`, `max_pow=2.0`). The country AFA still exists but has no `num_of_cities` / `development` key in U05 (U04: `num_of_cities 1`, `development 5.0`): it lost its last province between the two saves. The node aggregates and the link value still contain its old power:
+- `pull_power` of ethiopia recorded 247.475 vs calc 244.865: difference 2.610 = AFA's `top_power` value; `retain_power` of gulf_of_aden recorded 795.345 vs calc 787.827: difference 7.518 = AFA's `top_power` value there (the only two failures of these stages in U05).
+- `max` of ethiopia and gulf_of_aden exceeds `p_pow` + the sum over present entries by exactly 2.0 and 7.0 (2.0 = AFA's last `max_pow` at ethiopia; the 7.0 at gulf_of_aden was not matched to an AFA field [second pass 2026-10-05: matched, see the Verification section below]).
+- Link `ethiopia -> gulf_of_aden` has `incoming.add` 0.377 = 5.804 x 1.0 x 0.065 (AFA's `add` in U03/U04) although no entry at ethiopia carries an `add` any more.
+Reading: per-country entries are updated at once when a country ceases to exist, while `top_power`, `max`, `pull_power`, `retain_power` and `incoming.add` keep the values of the last monthly computation. Confidence: confirmed as a description of this save (exact equalities); that the stale fields are the tick's is inferred (one event, one save; which day the tick ran is not identified by this save). UNKNOWN: when AFA lost its province; whether other mid-month changes (merchant recalled, ship moved) behave the same.
+
+### U-R12-3 `prev` timing on the new saves (updates Q6)
+The one-hop rule with per-link truncation and threshold 10 (ungated, candidates as in the R05 update) is exact in 959/963 (U03), 963/967 (U04), 951/955 (U05) candidates (S79 1055/1060, S80 967/976); the 4 misses per new save are the `polynesia_node` entries C02, C03, C12, HOL, not a timing effect (recorded `prev` 0 for all four). The tick-day save U04 behaves like the others, so no evidence of a one-tick lag appears (inferred).
+
+### Updated UNKNOWN list (2026-10-05)
+- Day of the month and order of the tick (needs a source); which stored fields are recomputed daily (entries, country existence) and which only at the tick (`top_power`, `max`, `pull_power`, `retain_power`, `incoming.add`) rests on one event.
+- The definition behind the "95.5%" figure (not reproduced).
+
+### Verification 2026-10-05 (second pass)
+
+Method: new code `backend/scripts/research/ver2_c_stages.py` (project `verify_world` over all 85 manifest saves; U01/U02 are copies of S80/S79, so corpus-wide counts contain two duplicates), `ver2_c_identities.py` (own re-computation of the identities, prev rule, gate and ship-term counts from the parsed trade trees, exact decimal truncation), `ver2_c_gates.py`, `ver2_c_worst.py`.
+
+Matched: `val` 866/866, 869/869, 859/859; `current` 66/66, 66/66, 65/65; `outgoing` 63/63, 63/63, 62/62; `retention` 63/63, 63/63, 62/62 (all 85 saves: `current` 6,075 of 6,103, the 28 misses are in start saves as before; `outgoing` 5,360 of 5,360; `retention` 5,388 of 5,388); link identities as in the R08 verification; `prev` rule 959/963, 963/967, 951/955 (the 4 misses per save are `polynesia_node` C02, C03, C12, HOL, where the gate is right); weight sums; AFA facts (no entry at `ethiopia` and `gulf_of_aden` in U05; U03/U04 entry at `ethiopia`: `type 1`, `steer_power 1`, `add 0.065`, `has_trader`, `max_pow 2.0`; `num_of_cities 1` / `development 5.0` in U04, both absent in U05).
+Corrected: the open remark "the 7.0 at gulf_of_aden was not matched to an AFA field" - it is matched: AFA's U04 entry at its capital node `gulf_of_aden` has `max_pow 13.26` = `province_power 1.26` + 5 (`has_capital`) + 5 (`modifier` `merchants_too_succesful`, 24 days left in U04) + 2 (merchant constant); without the province and with the modifier expired that leaves 7.0, and the `top_power` values are 2.0 x 1.305 = 2.61 and 7.0 x 1.074 = 7.518 (AFA's U04 `max_demand` 1.293 and 1.062 plus 0.012; AFA has no entry in U05, so this cannot be read). Consequence for the reading of U-R12-2: the aggregates are not a copy of AFA's U04 entry; they were computed after AFA had lost its province, and the entry was removed after that computation (inferred from one event; the day of the computation stays UNKNOWN).
+Label: the tick-day statements rest on one tick-day save (U04), see the R05 verification.
+Unverifiable: day of the month and order of the tick (needs a source).

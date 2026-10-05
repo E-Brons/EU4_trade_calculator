@@ -1,0 +1,2 @@
+# Stored user cases are large saves: keep them in git LFS (see docs/trade_testing.md)
+backend/tests/fixtures/saves_zip/U*.zip filter=lfs diff=lfs merge=lfs -text

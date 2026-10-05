@@ -31,6 +31,7 @@ Caveats: the weight depends on `val`, which contains `prev`; a what-if that chan
 Claim: in S79, S80, U01, U02 the gate explains fewer entries than the plain threshold rule.
 Quote: single-link cases in the played saves (1,836): weight > 0 and propagated 1,636; weight 0 and propagated 182; weight 0 and not propagated 18 (all `polynesia_node` -> australia/panama, S79 and S80 `steer_power` of polynesia_node differ); weight > 0 and not propagated 0. All candidates: gate 3,796 of 4,072; threshold rule without the gate 4,044 of 4,072. Example S80 `california` `steer_power={0.885 0.114 0.0 0.0}` yet entries propagate over the link to girin (weight 0).
 Confidence: the contradiction is confirmed. The reason is UNKNOWN. Candidate explanation (inferred, untested): in a save not written on a tick day the stored link weights and the stored `prev` come from different ticks. What would settle it: two saves of the same game on consecutive days with unchanged steering, or an intervention pair (R14).
+Updated 2026-10-05: the candidate explanation (a save not written on a tick day) is REJECTED by U04 (in-game date 1691.11.1, a tick day): the gate fails there like in U03, U05, S79 and S80, and the plain threshold rule is exact in every failure. The difference is start saves versus played saves (section 'Update 2026-10-05', U-R05-2).
 Caveat: the simple threshold rule therefore fails for the 78 snapshots (3,110 of 109,487 candidates) and the gated rule fails for the played saves (276 of 4,072); neither alone fits all 82 saves.
 
 ### C-Q3.3 Second group (MOR, S80/U01): ships propagate for MOR with factor 0.25
@@ -40,6 +41,7 @@ Source: `r04_r05_r06_r05d.py`, `r04_r05_r06_r05g.py`.
 Quote (S80, same in U01): kongo prev 10.797 vs 10.272 (+0.525; ivory_coast `ship_power=10.5 light_ship=3`, province_power 51.36); katsina 12.305 vs 11.78 (+0.525; tunis ship_power 10.5); cape_of_good_hope and brazil 10.797 vs 10.272 (+0.525); timbuktu 14.216 vs 13.341 (+0.875 = (safi 7.0 + ivory_coast 10.5) x 0.05).
 Result: MOR candidates (gated rule, all 82 saves: 426 snapshot + 34 played) 460: 460 match with the term, 450 without (the 10 others are the residuals above). Non-MOR entries with downstream `ship_power > 0` in played saves (S79 267, S80 232, U01 232, U02 267) are all explained without any ship term. The 78 snapshots contain 0 entries with downstream ship power, so "ships do not propagate" is tested only in the played saves.
 Confidence: inferred (the term fits 10 of 10 residuals and 460 of 460 MOR candidates, but it is one country in one game: S80 and U01 are the same save). The factor 0.25 is fitted from three distinct ship-power sums (10.5, 10.5, 17.5), not from a source; the country modifier that produces it is UNKNOWN (the save has no string `propagat` and no `caravan`, checked on S80 gamestate).
+Updated 2026-10-05: weakened, not refuted. In U03, U04, U05 MOR has no ship power and no downstream node with provincial power >= 10 and ship power, so the term is untestable there; for every other tag the plain rule needs no ship term in four played saves (section 'Update 2026-10-05', U-R05-3).
 
 ## Q4 - `ship_power_propagation` (data part only)
 The save does not store it: the string `ship_power_propagation` does not occur in the S80 gamestate, and the MOR country block has only `active_idea_groups` (MOR_ideas 7, ...) and `modifier` entries from which it could come. See C-Q3.3 for the fitted effect. Which ideas/policies grant it: not answered (needs an outside source). Whether the threshold 10 applies to the province power when ships propagate: all MOR cases in the data have `province_power >= 10` at the downstream node with ships, so UNKNOWN.
@@ -87,3 +89,42 @@ Corrected:
 - The `request_2` fact on the MOR term was aligned with this.
 
 Not verified: the author's count "non-MOR entries with downstream ship_power > 0: S79 267, S80 232" uses a wider definition (any downstream ship power, not only on an allowed link); the narrower independent count above (886 over the four files) supports the same conclusion. The reason for the gate failure in the played saves, the `>` vs `>=` question and the source of the 0.25 remain UNKNOWN, as the response states.
+
+## Update 2026-10-05 - saves U03, U04, U05
+
+Status: the results below are single runs of `backend/scripts/research/u345_pipe_*.py` (own code; `u345_pipe_stages.py` runs the project's `verify_world`); they have not been independently re-computed, unlike the Verification section above. New data: U03 (in-game date 1691.1.9), U04 (in-game date 1691.11.1, a tick day; its file name says 1691.11.17) and U05 (1693.4.15) are melted Ironman saves of the same Ottoman campaign (player TUR, game 1.37.5, 80 trade nodes) as S79 (1665.4.22) and S80 (1682.4.18); they are not independent samples. Counts refer to these saves unless stated otherwise.
+
+### U-R05-1 Propagation stage on the new saves
+Project stage `propagation` (threshold 10, per-link truncation, no gate), failures / checks: U03 115/959, U04 117/963, U05 108/951 (S79 148/1055, S80 123/972; 78 start saves 5209/106535). Largest-error failures: `prev` at cuiaba, amazonas_node, patagonia for C14 (U03 and U04: calc 3.197 / 3.128 / 2.550, recorded 0.0; U05 3.307 / 3.159 / 2.654).
+
+### U-R05-2 The tick-day hypothesis is rejected (updates C-Q3.2)
+Rule tested (`u345_pipe_prev.py`): `prev(B, tag) = sum over links B->D with province_power_D(tag) >= 10 of trunc3(province_power_D / 5)`, with or without the gate "`steer_power` weight of the link > 0".
+
+| save | date | candidates | gated rule exact | ungated rule exact |
+|---|---|---|---|---|
+| 78 start saves | 1444-1744 | 109,487 | 109,487 | 106,377 |
+| S79 | 1665.4.22 | 1,060 | 993 | 1,055 |
+| S80 | 1682.4.18 | 976 | 905 | 967 |
+| U03 | 1691.1.9 | 963 | 891 | 959 |
+| **U04** | **1691.11.1 (tick day)** | 967 | 896 | 963 |
+| U05 | 1693.4.15 | 955 | 886 | 951 |
+
+Result: U04 is written on the 1st of a month and behaves exactly like U03, U05, S79 and S80: the gate fails in 71 of 967 candidates (U03 72, U05 69) and in every one of those failures the ungated rule is exact (U03 72/72, U04 71/71, U05 69/69). The candidate explanation of C-Q3.2 (stored weights and stored `prev` come from different ticks in a save not written on a tick day) is therefore rejected; the split is start snapshot versus played save. Confidence: confirmed for these three saves and S79/S80 (one campaign, counts not independent).
+Remaining misses of the ungated rule in played saves: the same 4 entries in each new save, all at `polynesia_node` (tags C02, C03, C12, HOL; node weights `[1.0, 0.0, 0.0]`, downstream panama/australia; recorded `prev` 0, rule predicts 26.075 / 3.437 / 46.832 / 4.848 in U03); S79 has 5 (adds MCA), S80 the same 4 plus 5 MOR cases. In the gate-failure nodes the weights look like `california [0.823, 0.176, 0.0, 0.0]`: links with weight 0.0 still contribute to `prev`. Two other gates were tested ("the link counts iff the downstream node has an `incoming` entry from B", and the same with value > 0): neither explains both groups (S79: 519/524 and 448/524; U03: 497/501 and 429/501). No single gate for `prev` in played saves is established: UNKNOWN. In the start saves the gated rule is exact everywhere and the ungated one is not.
+
+### U-R05-3 The MOR ship term (updates C-Q3.3)
+In U03, U04, U05 MOR has no own `ship_power` at any node and no downstream node with provincial power >= 10 and ship power, so the term is untestable there (0 cases), not refuted. For every other tag the ungated rule without any ship term is exact for all entries with downstream `ship_power > 0` outside `polynesia_node`: S79 234/234, U03 207/207, U04 210/210, U05 213/213 (S80 200/205; the 5 misses are MOR). "Ships do not propagate" now holds in four played saves of the same campaign; the MOR case remains a single-country, single-save observation (inferred). UNKNOWN: what gives MOR the extra term.
+
+### Updated UNKNOWN list (2026-10-05)
+- What differs between start saves and played saves such that links with steer weight 0 propagate (the tick-day candidate is rejected).
+- Which rule, if any, selects the links that feed `prev` in played saves (both tested gates fail on one group); why 4 entries at `polynesia_node` (C02, C03, C12, HOL) have `prev` 0.
+- Source and country/modifier of MOR's 0.25 ship factor (untestable in U03-U05).
+- `>` vs `>=` at exactly 10.000.
+
+### Verification 2026-10-05 (second pass)
+
+Method: new code `backend/scripts/research/ver2_c_stages.py` (project `verify_world` over all 85 manifest saves; U01/U02 are copies of S80/S79, so corpus-wide counts contain two duplicates), `ver2_c_identities.py` (own re-computation of the identities, prev rule, gate and ship-term counts from the parsed trade trees, exact decimal truncation), `ver2_c_gates.py`, `ver2_c_worst.py`.
+
+Matched: propagation stage 115/959 (U03), 117/963 (U04), 108/951 (U05), S79 148/1055, S80 123/972, 78 start saves 5,209/106,535; worst failures `prev` of C14 at cuiaba / amazonas_node / patagonia (3.197 / 3.128 / 2.55 vs 0.0 in U03 and U04; 3.307 / 3.159 / 2.654 in U05). Candidates / gated exact / ungated exact: 78 start saves 109,487 / 109,487 / 106,377; S79 1,060 / 993 / 1,055; S80 976 / 905 / 967; U03 963 / 891 / 959; U04 967 / 896 / 963; U05 955 / 886 / 951. Gate failures 72 (U03), 71 (U04), 69 (U05), in every one the ungated rule is exact. Ship term: S79 234/234, U03 207/207, U04 210/210, U05 213/213 entries with downstream ship power outside `polynesia_node` exact without a ship term; S80 200/205 with the 5 misses all MOR (kongo, katsina, cape_of_good_hope, brazil, timbuktu); MOR has 3 entries with own `ship_power` in S80 and none in U03-U05. `polynesia_node`: weights `[1.0, 0.0, 0.0]` over nippon / australia / panama in S79, U03, U04, U05; the four tags (C02, C03, C12, HOL) have downstream provincial power >= 10 only at panama (C02, C03, HOL) or australia (C12), both weight-0 links; recorded `prev` 0; ungated prediction 26.075 / 3.437 / 46.832 / 4.848 in U03 (S79 adds MCA); `california` weights `[0.823, 0.176, 0.0, 0.0]` in U03. Alternative gates: "incoming entry from B" 519/524 (S79) and 497/501 (U03) over the candidates with a qualifying link, "incoming value > 0" 448/524 and 429/501; the ungated rule reaches the same 519/524 and 497/501 (the first alternative gate is equivalent to the ungated rule in these saves).
+Sharpened: (1) the tick-day rejection rests on one tick-day played save (U04); it refutes the universal form of the theory, it does not identify a cause. Supporting fact: the 78 start saves are dated the 11th (59) or the 1st (19) and have 0 gate failures in both groups, so the day of the month does not matter there either. The U04 file name says 11.17 while the save says 1691.11.1; the counterexample needs the save date to be right. (2) At `polynesia_node` the gate is right (weight 0 and `prev` 0), so weight-0 links do not propagate everywhere in played saves. (3) Label of the tick-day result: `confirmed` as a counterexample in this campaign, not as a general statement about all played games.
+Unverifiable: the cause of the start/played difference; what gives MOR the extra term.

@@ -22,6 +22,7 @@ Source: `countries` block vs trade entries, `r04_r05_r06_r04a.py` (all 82 saves)
 Quote: country-saves with entries: flag and `t_out` in 490; neither in 42,647 (pseudo-tag `---` excluded; with it 42,729); flag without `t_out` in 2 (BEI in S80 and U01, overlord TUR, `transfer_trade_power_to={ TUR }`, 7 entries with `val` but no `t_out`); `t_out` without flag in 0. S80: `transfer_trade_power_from` of SPA = [C00, C02, C03, C06, C09, C12, C14, C16, C20, C21], TUR = [BEI, SND, C22], GBR = [C05, C10, C17], BRZ = [C04, C07, C11], BRI = [C08, C15, C19], SCA = [C18].
 In every giver country-save the single receiver (`t_to`) is the country's `overlord` (490 of 490). Givers in the corpus are the colonial nations of SPA/POR/ENG/GBR/FRA/RUS/BRI/DAN/TUR/BRZ/SCA/CAS and SND (a vassal of TUR, S79/S80, `colonial_parent` absent); other vassals and march-like subjects do not give (e.g. S80: 12 non-colonial subjects have no `t_out`, 11 of them without the flag and BEI with it; S14: 107 subjects, 0 givers; S42: 53 non-colonial subjects, 0 givers). A country is never giver and receiver in the same node (0 entries have both `t_in` and `t_out`).
 Confidence: confirmed as a description of the corpus (BEI is the only exception: flag present, `t_out` absent; played saves are saved mid-month, so a flag set after the last tick is a possible but untested reading).
+Updated 2026-10-05: the BEI case was not re-examined in U03, U04, U05 (no check run there); the `transfers` stage is unchanged on them (section 'Update 2026-10-05').
 Not answered from data: whether peace deals, trade companies or leagues create transfers (none visible), the fraction per subject type (every giver uses 0.5 with the Q1 offset; no other fraction occurs).
 
 ## Q4 - What part is transferred; does it propagate?
@@ -80,3 +81,24 @@ Corrected:
 - Q6.1: "Confidence: confirmed (counts above)" hid 7 failures of the formula among other collectors; now stated (all S64 `genua`).
 
 Not verified / observations: the S80 colonial nation POR (overlord BRZ) has no flag and no `t_out` (author re-run); the statement "givers are the colonial nations of ..." is therefore a list of observed givers, not a rule "colonial nation => gives". The 12 unexplained played-save giver-downstream entries above are not analysed.
+
+## Update 2026-10-05 - saves U03, U04, U05
+
+Status: the results below are single runs of `backend/scripts/research/u345_pipe_*.py` (own code; `u345_pipe_stages.py` runs the project's `verify_world`); they have not been independently re-computed, unlike the Verification section above. New data: U03 (in-game date 1691.1.9), U04 (in-game date 1691.11.1, a tick day; its file name says 1691.11.17) and U05 (1693.4.15) are melted Ironman saves of the same Ottoman campaign (player TUR, game 1.37.5, 80 trade nodes) as S79 (1665.4.22) and S80 (1682.4.18); they are not independent samples. Counts refer to these saves unless stated otherwise.
+
+### U-R04-1 The transfers stage on the new saves
+Project stage `transfers` (`t_out = trunc3(0.5 x val - 0.05)`, `t_in`, `potential = trunc3-toward-zero((t_out - t_in) / total)`): 0 failures in 436 (U03), 436 (U04), 432 (U05) checks (S79 0/358, S80 0/414; 78 start saves 0/5,624). Confirmed for these saves (same campaign, not independent of S79/S80).
+
+### U-R04-2 pull_power and retain_power near transfers
+Project stages: `pull_power` 0/77 (U03), 0/77 (U04), 1/77 (U05); `retain_power` 0/80, 0/80, 1/80. The two U05 failures are not transfer effects: `pull_power` of `ethiopia` (recorded 247.475, calc 244.865) and `retain_power` of `gulf_of_aden` (recorded 795.345, calc 787.827) differ by exactly the `top_power` value of AFA (2.610 and 7.518), a country that lost its last province and has no entry there any more (see the R12 update, U-R12-2; inferred). The two S79 `pull_power` failures (the POR nodes `ohio`, `chesapeake_bay`) have no counterpart in U03 and U04 (0/77 failures); the "steers downstream" extension of the R03 rule was therefore not tested further (no new case).
+
+### U-R04-3 Still open
+The BEI exception (flag without `t_out`) was not examined in the new saves: UNKNOWN as before. Origin of the flat 0.05, subject types with a fraction other than 0.5, and the mechanisms other than the diplomatic flag: no new data.
+
+### Verification 2026-10-05 (second pass)
+
+Method: new code `backend/scripts/research/ver2_c_stages.py` (project `verify_world` over all 85 manifest saves; U01/U02 are copies of S80/S79, so corpus-wide counts contain two duplicates), `ver2_c_identities.py` (own re-computation of the identities, prev rule, gate and ship-term counts from the parsed trade trees, exact decimal truncation), `ver2_c_gates.py`, `ver2_c_worst.py`.
+
+Matched: `transfers` 0 failures in 436 (U03), 436 (U04), 432 (U05), S79 0/358, S80 0/414, 78 start saves 0/5,624; over all 85 saves 0 failures in 8,472 checks. `pull_power` 0/77, 0/77, 1/77 (U05 `ethiopia`, calc 244.865, recorded 247.475) and `retain_power` 0/80, 0/80, 1/80 (U05 `gulf_of_aden`, calc 787.827, recorded 795.345); over all 85 saves `retain_power` 1 failure in 6,800 checks and `pull_power` 5 failures in 6,050 (S79 and its copy U02 at `chesapeake_bay` 607.474 vs 646.532 and `ohio` 402.981 vs 440.306, U05 1), i.e. 3 distinct nodes. The AFA difference equals AFA's `top_power` value (2.61 and 7.518 in the node lists).
+Corrected: nothing in the numbers. Label: the transfers result is `confirmed` for the saves listed (85 saves, 2 duplicates, one campaign for the 7 played saves).
+Unverifiable: BEI exception (not examined in U03-U05), origin of the flat 0.05, subject types with another fraction.

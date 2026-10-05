@@ -19,6 +19,7 @@ Failures of the clean subset: S80 `california` (pred 0.9015/0.0985, stored 0.885
 The goal's Example 1 (S79 `alexandria`) is not claimed: it was only reproduced by hand with an assumed strength for BLG, so it is left out as evidence.
 A per-country fit of a_c over integer multiples of the observed adds (`steer5.py`) reaches 50 of 53 (S79) and 48 of 52 (S80) nodes within 0.004, but it has ~100 free parameters and is not a test; it is not used as evidence.
 What would settle it: the country modifier `trade_steering` (not in the save) or an intervention pair changing only one steerer's modifier.
+Updated 2026-10-05: no new weight rule came out of U03, U04, U05 (the project's current rule fails at the same rate there); the tick-day candidate for the weight anomalies is rejected by U04 (section 'Update 2026-10-05').
 
 Claim about `trade_steering`: the save stores no such modifier (0 occurrences of `steering` in the S80 gamestate text, 58.7 MB).
 
@@ -64,3 +65,26 @@ Corrected:
 - C-03 RMSE 0.0227 (all steerer nodes) reproduces only with a default strength 0.05 for countries without `add`; with 0 it is 0.0291. Removed the hand-computed `alexandria` weight example (assumed BLG factor 2) earlier.
 
 Could not be verified: the `k` of `add` (UNKNOWN as written), the "pull-direction model explained 77 to 198 of 602" statement (not re-run), Q6 and the outside-source points.
+
+## Update 2026-10-05 - saves U03, U04, U05
+
+Status: the results below are single runs of `backend/scripts/research/u345_pipe_*.py` (own code; `u345_pipe_stages.py` runs the project's `verify_world`); they have not been independently re-computed, unlike the Verification section above. New data: U03 (in-game date 1691.1.9), U04 (in-game date 1691.11.1, a tick day; its file name says 1691.11.17) and U05 (1693.4.15) are melted Ironman saves of the same Ottoman campaign (player TUR, game 1.37.5, 80 trade nodes) as S79 (1665.4.22) and S80 (1682.4.18); they are not independent samples. Counts refer to these saves unless stated otherwise.
+
+### U-R08-1 Stage results
+Project stages, failures / checks: `steer_weights` U03 118/159, U04 117/159, U05 115/159 node-links (S79 104/159, S80 116/159; 65-74% in the played saves [second pass: S79 65%, S80 73%, U03 74%, U04 74%, U05 72%; the original '72-74%' left out S79]; 78 start saves 9618/12402); first failures `lhasa` (calc 0.985 / 0.015 vs recorded 0.0 / 1.0) and `mississippi_river`. `link_flow` U03 107/159, U04 105/159, U05 104/159 (S79 109/156, S80 105/159; start saves 0/11483). Nothing in the new saves gives a rule for Q1 or for the factor k of Q2: both stay UNKNOWN. U04 is a tick day: the weight anomalies are not a mid-month artefact (same failure rate as the off-tick saves).
+
+### U-R08-2 Identities re-run on the new saves (hold)
+- `value_added_outgoing == outgoing` (0.0005): 77/77 nodes with links in each of U03, U04, U05 (C-07).
+- Link identity 1 (`value - add` within `[out x w - 0.002, out x (w + 0.001) + 0.002]`): 159/159 links in each (C-06). Identity 2 (`add = out x w x sum(add of the steerers on the link)`): 159/159 (U03, U04), 158/159 (U05).
+- Tight conservation bound (C-08) `|(sum value - sum add) - out| <= out x (1 - sum w) + 0.003 x links + 0.001 x out x links`: 77/77 nodes in each.
+- Weight sums: U03 1.0 in 37 nodes, 0.999 in 32, 0.998 in 7, **0.997 in 1** (0.997 did not occur in the earlier runs of the same script on S14, S79, S80); U04 37 / 34 / 6; U05 39 / 30 / 8.
+- Strict `|sum value - sum add - out| <= 0.0015 x links`: 38/77, 39/77, 42/77; without subtracting `add`: 21/77, 22/77, 22/77 (nodes with any link `add`: 56, 55, 55). These rates are over the nodes with links of one played save and are not comparable with the 83.8% corpus figure, which is dominated by start saves without `add`.
+- The one identity-2 exception in U05 is `ethiopia -> gulf_of_aden`: `incoming.add` 0.377 = 5.804 (outgoing) x 1.0 (weight) x 0.065, the `add` that AFA showed at ethiopia in U03 and U04; in U05 AFA has no entry at ethiopia any more (it lost its last province) and no entry there carries an `add`. The link value kept the old bonus (see the R12 update, U-R12-2; inferred).
+
+### Verification 2026-10-05 (second pass)
+
+Method: new code `backend/scripts/research/ver2_c_stages.py` (project `verify_world` over all 85 manifest saves; U01/U02 are copies of S80/S79, so corpus-wide counts contain two duplicates), `ver2_c_identities.py` (own re-computation of the identities, prev rule, gate and ship-term counts from the parsed trade trees, exact decimal truncation), `ver2_c_gates.py`, `ver2_c_worst.py`.
+
+Matched: stage `steer_weights` 118/159 (U03), 117/159 (U04), 115/159 (U05), S79 104/159, S80 116/159, 78 start saves 9,618/12,402; first failures `lhasa` (calc 0.985 / 0.015, recorded 0.0 / 1.0) and `mississippi_river`; `link_flow` 107/159, 105/159, 104/159, S79 109/156, S80 105/159, start saves 0/11,483. Identities (own code, 85 saves): `value_added_outgoing == outgoing` 5,999 of 5,999 nodes with links (77 in each new save); link identity 1 12,590 of 12,590 links (159 in each new save); identity 2 (sum of `add` of the steerers with a `type`) 12,587 of 12,590 links at a tolerance of 0.0025 (exceptions: `carribean_trade -> chesapeake_bay` in S80 and U01, `ethiopia -> gulf_of_aden` in U05; the variant that sums every entry with an `add` has 12,589); tight conservation bound 5,999 of 5,999. Weight sums U03 1.0 / 0.999 / 0.998 / 0.997 in 37 / 32 / 7 / 1 nodes, U04 37 / 34 / 6, U05 39 / 30 / 8; 0.997 occurs in no other of the 85 saves. Strict-sum rates 38/77, 39/77, 42/77 and 21/77, 22/77, 22/77; nodes with a link `add` 56, 55, 55. The U05 exception: 5.804 x 1.0 x 0.065 = 0.377.
+Corrected: "72-74% in the played saves" -> 65-74% (S79 65%, S80 73%, U03 74%, U04 74%, U05 72%).
+Unverifiable: the weight rule (Q1) and the factor of `add` (Q2) stay UNKNOWN.

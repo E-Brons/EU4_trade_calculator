@@ -20,7 +20,7 @@ Applies when: the save is one of the played saves and the entry has a merchant (
 Source: save corpus (trade block + `countries` block: `government.reform_stack.reforms`, `active_idea_groups`), `r04_r05_r06_r06a.py`.
 Quote: residual per country-save is a single value in 642 of 644 country-saves (7.0 / 17.0 for VER only: wien, saxony, north_sea 7.0, rheinland 17.0); values: 2.0 in 444, 17.0 in 98, 7.0 in 72, 22.0 in 28. In S80, `trade_ideas` level: residual 17.0 -> 23 countries with level 7, 2 with 5, 1 with 6; residual 22.0 -> 6 with 7, 1 with 6; residual 2.0 or 7.0 -> levels 0-4 or no `trade_ideas` (0 exceptions). Feature search (S80, 24 countries with +5 vs 124 without; S79, 26 vs 147): `reform:mercantilistic_approach_reform` 18 of 24 (and 21 of 26) with 0 false positives, `reform:pious_merchants_reform` 5 (and 4) with 0 false positives. Checking the formula per country-save: S79 172 of 173 correct, S80 147 of 149; exceptions: SND (observed 22.0, formula 17.0, +5 from an unidentified source), VER (rheinland 17.0 against 7.0 elsewhere: a node-specific +10 not explained).
 Confidence: inferred (fit on two saves, feature search over reforms/privileges/modifiers/ideas; the three constants 2, 5, 15 are fitted sums, their game names are not in the save). The values 2, 5, 15 are consistent with placed/merchant-power country modifiers but no source is given here.
-Caveats: in the 78 snapshots the same formula predicts R > 0 for 1,842 country-saves with merchants in the four snapshots checked (S14, S42, S67, S78) (e.g. S42: 86 country-saves with `trade_ideas` >= 5 predict 17, 330 predict 2; S67: 101 / 252; S78: 84 / 327; S14: 662 predict 2) and all observe 0. Why the snapshots lack the term (bookmark-start state versus played game) is UNKNOWN; a start save of a played game, or a played save on the first of a month, would settle it.
+Caveats: in the 78 snapshots the same formula predicts R > 0 for 1,842 country-saves with merchants in the four snapshots checked (S14, S42, S67, S78) (e.g. S42: 86 country-saves with `trade_ideas` >= 5 predict 17, 330 predict 2; S67: 101 / 252; S78: 84 / 327; S14: 662 predict 2) and all observe 0. Why the snapshots lack the term (bookmark-start state versus played game) is UNKNOWN; a start save of a played game, or a played save on the first of a month, would settle it. **Updated 2026-10-05:** the played save U04 is dated the 1st of a month and still has R > 0 (section Update, U-1), so the mid-month explanation is refuted; the difference is start/bookmark state versus played game.
 
 ### C-Q1.3 Entries whose `has_trader` key is absent but which carry R
 Claim: 4 entries carry R without `has_trader`: S79/U02 TMB at timbuktu (home, extras 7.0 = 5 + 2) and S80/U01 SCA at carribean_trade (passive, `max_pow 17.0` and no other key).
@@ -39,7 +39,7 @@ Confidence: confirmed for the arithmetic (all 168 recalled entries are in the pl
 ### C-Q3.1 Full decomposition, played saves
 Claim: extras = 5 x capital + sum(modifier powers) + R(country) x [has_trader] reproduces 3,676 of 3,708 entries (99.1%) of the four played saves; all 78 snapshots are reproduced with R = 0.
 Quote of the modifier terms seen in the corpus (key, power: entries by class): `GEN_ITALIAN_MERCHANT_INFLUENCE` +20 (passive+merchant 72, passive 4), `BYZ_colony_in_galata` +20 (passive+merchant 35), `the_muskovy_trade_company` +20 (passive 4), `COTTON_IMPORTS_BANNED` -10 (passive 10, steer+merchant 2, collect-away+merchant 4), `pirate_hunting` -10 (home+merchant 10), `merchant_recalled` -10 (168), `merchants_too_succesful` +5 (steer+merchant 6), `income_bonanza` +25 (steer+merchant 4). So the 107 passive+merchant rows with extras 20.0 are the three +20 modifiers (not a merchant term), and the 42.0 rows are 2 + 15 + 25 (`income_bonanza`), 27.0 = 5 + 22, 12.0 = 5 + 7, 22.0/7.0/17.0 are R values (C-Q1.2).
-Exceptions (32 entries): SND (+5 extra at every steering node and gujarat, in S79, S80, U01, U02), VER rheinland (above), TMB and SCA (no `has_trader` key), nothing else.
+Exceptions (32 entries): SND (+5 extra at every steering node and gujarat, in S79, S80, U01, U02), VER rheinland (above), TMB and SCA (no `has_trader` key), nothing else. **Updated 2026-10-05:** SND fails in U03, U04 and U05 too, and MKL north_sea is a new node-specific +5 in U05 (section Update, U-1).
 Consistency across nodes: the residual is identical in every node of a country in 642 of 644 country-saves (all nodes of C03, C06, TUR, MIR, KON, MOR, POR ... in all four played saves), so one country-level `placed_merchant_power`-type value is consistent with the data; the exceptions are SND/VER.
 Confidence: confirmed as a description of the data (counts above); the game names of the terms are UNKNOWN.
 
@@ -68,3 +68,33 @@ Re-run and matching:
 Corrected: Q6 "2 home+merchant entries with extras 2.0 ... UNKNOWN" is resolved (S79/U02 LIT at kiev, 5 + 7 - 10); the request_2 open-item row for it was removed and the fact added.
 
 Not verified / note: C-Q1.2 and Q1.3 wording about VER rheinland is the same fact seen two ways (residual 17.0 against 7.0 at its other nodes = observed extras 7.0 where R + recall gives -3.0); the game names and sources of 2, 5, 15 remain UNKNOWN; the rule is a fit on one played game (four files, two distinct saves), so `inferred` is the right label.
+
+## Update 2026-10-05 - saves U03, U04, U05
+
+Status: the results below come from one run each of the scripts `backend/scripts/research/u345_home_*.py` (and `u345_ships_*.py` where stated). Unlike the Verification section above they have not been re-computed by an independent verifier. Labels: `confirmed` = whole set with exceptions listed, `inferred` = otherwise.
+
+New data: U03 (1691.1.9), U04 (in-game date 1691.11.1, a tick day; its file name says 11.17) and U05 (1693.4.15) are melted Ironman saves of the same Ottoman campaign as S79 (1665.4.22) and S80 (1682.4.18). They are not independent of S79/S80 or of each other.
+
+### U-1 The merchant term R on three more saves
+Formula under test (unchanged): extras = 5 x `has_capital` + sum(`modifier.power`) + R, R = 2 + 5 x [`mercantilistic_approach_reform` or `pious_merchants_reform`] + 15 x [`trade_ideas` >= 5], for countries with a merchant.
+- Merchant countries that fit the formula: S79 172 / 173, S80 147 / 149, **U03 136 / 137, U04 136 / 137, U05 132 / 134**. SND fails in every new save (observed R = 22, formula 17: the +5 of Q3 continues). U05 adds **MKL**: R = 2 at saxony and rheinland but 7.0 at north_sea only in U05 (it was 2.0 at all three nodes in U04; no modifier listed) [corrected in the second-pass verification below: MKL has four merchant nodes] - a node-specific +5 like VER rheinland in S80 [VER's extra is +10, not +5: see the second-pass verification below].
+- Entries without `has_trader` that carry R: 0 in U03, U04 and U05 (the TMB and SCA cases of C-Q1.3 are not repeated).
+- **U04 is dated the 1st (1691.11.1), a tick day.** R is non-zero there like in the mid-month saves (U03 1691.1.9, U05 1693.4.15, S79, S80). So "R > 0 only because the played saves are written mid-month" is refuted: R > 0 goes with a played game (all 78 start snapshots have R = 0). Confidence: confirmed for "not a mid-month effect" (136 of 137 merchant countries of a tick-day save have R as predicted). Why start snapshots lack R stays UNKNOWN.
+- TUR: R = 17 at every merchant entry of all five saves (S79, S80, U03, U04, U05). In U05 constantinople (home, collecting, with a merchant for the first time) has extras 22.0 = 5 (capital) + 17; in U04, with no merchant there, 5.0. So a home merchant that collects gets R like any other merchant entry; TUR's ideas and reforms do not change across the five saves, so no change of R was expected or seen.
+- Cross-check from the ship analysis (`u345_ships_maxpow.py`): for entries with ships, `max_pow - province_power - ship_power - prev - 5 x has_capital - sum(modifier.power)` equals the country's constant R (taken from its ship-less entries) within 0.0025 in 476 of 476 entries (S79 92, S80 90, U03 94, U04 100, U05 100), with coefficient 1 on `ship_power`.
+
+### Verification 2026-10-05 (second pass)
+
+Independent code (new, not reusing the author's logic): `backend/scripts/research/ver2_b_lib.py`, `ver2_b_tur.py`, `ver2_b_bonus.py`, `ver2_b_resid.py`, `ver2_b_x.py`, `ver2_b_switch.py`, `ver2_b_corpus.py`; corpus of 85 saves (S01-S80, U01-U05; U01/U02 copy S80/S79). Each Update claim was re-run and recomputed. Labels follow the rule confirmed = whole set with exceptions listed, else inferred.
+
+Matched (re-run and independently recomputed; residual = `max_pow - province_power - ship_power - prev - 5 x has_capital - sum(modifier.power)` of entries that have `max_pow`; formula R = 2 + 5 x [mercantilistic_approach_reform or pious_merchants_reform] + 15 x [trade_ideas >= 5]):
+- Merchant countries / formula fits: S79 173 / 172, S80 149 / 147, U03 137 / 136, U04 137 / 136, U05 134 / 132 (U01/U02 copy S80/S79); exceptions SND (22.0 against 17 in every new save: malacca, ganges_delta, doab, lahore, deccan, comorin_cape), MKL (U05), VER (S80, as before).
+- Entries without `has_trader` whose residual is not 0: 0 in U03, U04, U05 (TMB in S79 and SCA in S80 as before). All 61,072 merchant entries of the 78 snapshots have residual 0.
+- TUR: residual 17.0 at all 8 merchant entries in each of the seven played-save files; constantinople extras 5.0 in U04 and 22.0 in U05 (5 + 17).
+- U04 is dated the 1st and has R > 0.
+
+Corrected:
+- MKL has four merchant nodes (lubeck, north_sea, rheinland, saxony), not three: in U04 all four have R = 2.0; in U05 lubeck, rheinland and saxony are 2.0 and north_sea is 7.0.
+- "a node-specific +5 like VER rheinland in S80": VER's deviation at rheinland is +10 (17.0 against 7.0 at its other nodes), MKL's at north_sea is +5; both are node-specific, the sizes differ.
+
+Unverifiable here: the cross-check "476 of 476 entries with ships" belongs to the ship analysis and is verified in R11; the three constants' origin.

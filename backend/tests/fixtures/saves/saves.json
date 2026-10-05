@@ -560,6 +560,72 @@
       "tag": "TUR",
       "date": "1682.4.18",
       "kind": "ticked"
+    },
+    {
+      "id": "U01",
+      "file": "U01_TUR.1682.04.18.eu4",
+      "tag": "TUR",
+      "date": "1682.4.18",
+      "kind": "user_case",
+      "expected": "red",
+      "sha256": "536c1c316c29277356b7cf4938cbbedd712ff3e0ae5790328ba48b59ad644542",
+      "calc_version": "0.1.0-skeleton",
+      "first_failing_stage": "propagation"
+    },
+    {
+      "id": "U02",
+      "file": "U02_TUR.1665.04.22.eu4",
+      "tag": "TUR",
+      "date": "1665.4.22",
+      "kind": "user_case",
+      "expected": "red",
+      "sha256": "bc63b758af63d2e84e8bfbc068de1635f7863748ed858a32c2ae286bbecf899a",
+      "calc_version": "0.1.0-skeleton",
+      "first_failing_stage": "propagation"
+    },
+    {
+      "id": "U03",
+      "file": "U03_TUR.1691.01.09.eu4",
+      "tag": "TUR",
+      "date": "1691.1.9",
+      "kind": "user_case",
+      "expected": "red",
+      "sha256": "117668c0a9d2dc14c56087133c7b9ac4430a9e4c573bd720a58250f6e18e1144",
+      "calc_version": "0.1.0-skeleton",
+      "first_failing_stage": "propagation"
+    },
+    {
+      "id": "U04",
+      "file": "U04_TUR.1691.11.01.eu4",
+      "tag": "TUR",
+      "date": "1691.11.1",
+      "kind": "user_case",
+      "expected": "red",
+      "sha256": "c0f740995342df87fcf4d78d20333398693fa700ebaac31d5891cb5b551b6356",
+      "calc_version": "0.1.0-skeleton",
+      "first_failing_stage": "propagation"
+    },
+    {
+      "id": "U05",
+      "file": "U05_TUR.1693.04.15.eu4",
+      "tag": "TUR",
+      "date": "1693.4.15",
+      "kind": "user_case",
+      "expected": "red",
+      "sha256": "1a6034873dd3b539727440d9cc5e257bc4ed5c2276736a27fdc33959856f99c0",
+      "calc_version": "0.1.0-skeleton",
+      "first_failing_stage": "propagation"
+    },
+    {
+      "id": "U06",
+      "file": "U06_TUR.1696.03.25.eu4",
+      "tag": "TUR",
+      "date": "1696.3.25",
+      "kind": "user_case",
+      "expected": "red",
+      "sha256": "dc04f3961709702ea69aaf3f949755cceb0d32560de8eb7f120d150c5402d387",
+      "calc_version": "0.1.0-skeleton",
+      "first_failing_stage": "propagation"
     }
   ]
 }

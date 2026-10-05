@@ -23,6 +23,7 @@ Example for topic R10: `goal` -> `draft` -> `request_1` -> `response_1` -> `requ
 5. **Contradictions with data win.** If a source claim disagrees with the save corpus, the data is right and the claim is recorded as rejected in `final`, with the evidence.
 6. **Status of a topic = its newest file** (see table below). Only `final` unblocks calculation work; code may use a `draft` only for exploration.
 7. Files are append-only and numbered monotonically; never renumber or delete a request/response.
+8. **A `final` only for a closed topic.** If every question that is essential to the topic is answered, write the `final`. If an essential question is still open, there is no `final`: the topic keeps its `response_<i>` (what the evidence settles) and its `request_<i+1>` (the open, relevant questions). A side question that arises during the research and is not directly part of the topic becomes a new topic `Rxx` of its own; it does not keep the original topic open.
 
 ### Format of `final` (addition to the goal's template)
 
@@ -44,7 +45,7 @@ Save the AI's text unchanged except for repairs that do not alter wording or num
 
 ## Automation (CI research agent)
 
-`.github/workflows/research.yml` runs on a push to any branch (not tags) that changes something under `docs/research/**`, and only then. `.github/scripts/research_pending.py plan` decides what is waiting for the agent:
+`.github/workflows/research.yml` runs only when started by hand (Actions tab -> Run workflow), because each run spends Copilot credits. `.github/scripts/research_pending.py plan` decides what is waiting for the agent; `research_pending.py prompt <target>` prints the same prompt for pasting into any AI chat by hand:
 
 | Newest file of a topic | The agent writes |
 |---|---|
@@ -61,8 +62,8 @@ Tasks are independent and can run in parallel. Priority: R01-R04 and R06-R08 unb
 | Topic | What it answers | Status |
 |---|---|---|
 | R01 power_multiplier | What determines max_demand (the multiplier from raw power to effective power) | draft, integrated, `response_1` (saves only, verified), `request_2` ready |
-| R02 away_collection_penalty | The penalty for collecting away from the capital node (TRADE_NON_CAPITAL_OFFICE = -0.5) | draft, integrated, `response_1` (saves only, verified), `request_2` ready |
-| R03 pull_power_composition | Which countries' power counts in pull_power (and why some non-collectors are excluded) | draft, integrated, final-ready (no request needed) |
+| R02 away_collection_penalty | The penalty for collecting away from the capital node (TRADE_NON_CAPITAL_OFFICE = -0.5) | draft, integrated, `response_1`, **`final` written 2026-10-05** (multiplicative 0.5 on `max_demand`; side questions moved to R15 / R01 / R10) |
+| R03 pull_power_composition | Which countries' power counts in pull_power (and why some non-collectors are excluded) | draft, integrated (rule A), **`final` written 2026-10-05** (rule B = A + steering downstream; `calc.py` still implements A, so integrating B is the next code step) |
 | R04 transferred_trade_power | Transferred trade power (t_in/t_out/t_from/t_to/potential) and subject/overlord trade rules | draft, integrated, `response_1` (saves only, verified), `request_2` ready |
 | R05 trade_power_propagation | Trade power propagation between nodes (the prev field) | draft, `response_1` (saves only, verified), `request_2` ready |
 | R06 flat_power_extras | Flat power additions: capital, merchants, placed_merchant_power, modifiers | draft, `response_1` (saves only, verified), `request_2` ready |
@@ -74,11 +75,14 @@ Tasks are independent and can run in parallel. Priority: R01-R04 and R06-R08 unb
 | R12 monthly_tick_timing | Order and timing of the monthly trade tick versus the values stored in a save | draft, `response_1` (saves only, verified), `request_2` ready |
 | R13 province_trade_power | Per-province trade power and trade value (optional, lower priority) | draft, `response_1` (saves only, verified), `request_2` ready |
 | R14 intervention_saves | Design of intervention-pair saves (counterfactual validation) | draft, `response_1` (saves only, verified), `request_2` ready |
+| R15 away_penalty_modifier_and_main_trade_node | Side questions of R02: the modifier `reduced_trade_penalty_on_non_main_tradenode` and which node counts as the main trade node when capital and main trade port differ | `goal` written 2026-10-05 |
 
-Round status (2026-10-04): every topic except R03 has a `response_1` and a `request_2`. R03 is final-ready (its rule is already integrated and verified in code; only its `final` document is still to be written).
+Round status (2026-10-05): every topic except R03 has a `response_1` and a `request_2`. R03 and R02 are closed (`final` written); R15 is a new topic opened from R02's side questions (goal only). R03 is closed: its `final` document (`R03_pull_power_composition_final.md`) was written on 2026-10-05 after a whole-corpus check (rule A: 5,893 of 5,896 nodes, rule B: 5,895 of 5,896; the remaining node is the stale-AFA case U05 `ethiopia`). On 2026-10-05 three more saves of the Ottoman campaign (U03, U04, U05) were added to the corpus and their findings were carried into the affected `response_1` / `request_2` files (section `Update 2026-10-05`), see the bullet below.
 
-- `Rxx_*_response_1.md` were produced from the save corpus (82 fixture saves) by the scripts in `backend/scripts/research/` (`common.py` = cached parser; `rNN_*.py` = analyses; `ver_*.py` = independent re-computations used to verify the responses). They answer only the points the saves can settle; every other point of `request_1` is carried forward. Each response ends with a `Verification` section (claims re-run, corrected, unverifiable).
+- `Rxx_*_response_1.md` were produced from the save corpus (the fixture saves listed in `backend/tests/fixtures/saves/saves.json`: 80 start/ticked saves S01-S80 and, since 2026-10-05, the stored user cases U01-U05) by the scripts in `backend/scripts/research/` (`common.py` = cached parser; `rNN_*.py` = analyses; `ver_*.py` = independent re-computations used to verify the responses). They answer only the points the saves can settle; every other point of `request_1` is carried forward. Each response ends with a `Verification` section (claims re-run, corrected, unverifiable).
 - `Rxx_*_request_2.md` contain: the facts response_1 verified (a given the AI must not contradict), numbered points `Q1..` for the internet-enabled AI (sources, defines, quotes, formulas that the data cannot give, and sharper questions raised by the data findings), and a final table `Data needed to complete the research` (open item | what data settles it).
+- Stored user cases: `U01`/`U02` are copies of `S80`/`S79` (TUR 1682.4.18 and 1665.4.22). `U03` (TUR 1691.1.9), `U04` (TUR, in-game date 1691.11.1, a tick day; it was delivered as `U04_TUR_1691.11.17`, the save itself says `1691.11.1`, so it is stored as `U04_TUR.1691.11.01.eu4`) and `U05` (TUR 1693.4.15) are Ironman saves melted with pdx.tools and stored as git-LFS zips (`backend/tests/fixtures/saves_zip/Uxx_TAG.yyyy.mm.dd.eu4.zip`, manifest kind `user_case`). They continue the S79/S80 campaign, so they are not independent of those two. Originals: `~/EU4_save_backups/`.
+- `Update 2026-10-05` sections (in `R01, R02, R04-R12 response_1`): findings from U03-U05 and the follow-up analyses (ship factor `f` from national idea sets and leader `maneuver`; `ship_power` is inside `max_pow`; money from a ship arises at the downstream collecting nodes; home-collecting evidence for the away factor 0.5 and the home bonus; the weight-gate split is start saves vs played saves, not tick day vs mid-month). Each carries a `Verification ... (second pass)` subsection; the corresponding `request_2` files have the extended facts, points and `Data needed` table. R13 and R14 are unchanged.
 - The next step is to give each `request_2` (with the files it names) to the AI and save the answer as `Rxx_<topic>_response_2.md`. Points answered by data stay settled; only the listed points are asked again.
 
 ### Open points found in the review of R10-R14 (seed for each `request_1`)
