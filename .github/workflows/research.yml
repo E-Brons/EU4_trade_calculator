@@ -7,11 +7,9 @@ name: Research Agent
 # docs/research/README.md and .github/skills/research-loop). Only the generated files are committed.
 
 on:
-  push:
-    branches:
-      - "**"
-    paths:
-      - "docs/research/**"
+  # manual only (Actions tab -> Run workflow): every run spends Copilot credits, so a push must not start it.
+  # To run on pushes again, add back: push: {branches: ["**"], paths: ["docs/research/**"]}
+  workflow_dispatch:
 
 # one run at a time: the commit job rebases onto whatever was pushed meanwhile
 concurrency:
