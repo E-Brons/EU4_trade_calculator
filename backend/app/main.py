@@ -12,6 +12,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app import buildinfo
 from app.api import router
+from app.trade.api import router as trade_router
 
 app = FastAPI(title="EU4 Trade Optimizer")
 
@@ -23,6 +24,7 @@ app.add_middleware(
 )
 
 app.include_router(router)
+app.include_router(trade_router)
 
 
 @app.middleware("http")

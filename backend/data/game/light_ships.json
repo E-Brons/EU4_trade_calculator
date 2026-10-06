@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "game_version": "EU4 v1.37.5.0 Inca (491d)",
+    "source": "common/defines.lua, common/units/*.txt"
+  },
+  "ships": {
+    "barque": {
+      "hull_size": 8,
+      "trade_power": 2.0
+    },
+    "caravel": {
+      "hull_size": 10,
+      "trade_power": 2.5
+    },
+    "early_frigate": {
+      "hull_size": 12,
+      "trade_power": 3.0
+    },
+    "frigate": {
+      "hull_size": 16,
+      "trade_power": 3.5
+    },
+    "great_frigate": {
+      "hull_size": 24,
+      "trade_power": 5.0
+    },
+    "heavy_frigate": {
+      "hull_size": 20,
+      "trade_power": 4.0
+    }
+  }
+}

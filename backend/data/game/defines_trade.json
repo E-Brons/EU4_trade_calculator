@@ -1,0 +1,268 @@
+{
+  "_meta": {
+    "game_version": "EU4 v1.37.5.0 Inca (491d)",
+    "source": "common/defines.lua, common/units/*.txt"
+  },
+  "defines": {
+    "BASE_TARIFF": {
+      "comment": "Basic part of colonies income that goes to tariffs",
+      "value": 0.1
+    },
+    "CARAVAN_FACTOR": {
+      "comment": "Development is divided by this factor, do not set to zero!",
+      "value": 3.0
+    },
+    "CARAVAN_POWER_MAX": {
+      "comment": "",
+      "value": 50.0
+    },
+    "CARAVAN_POWER_MIN": {
+      "comment": "",
+      "value": 2.0
+    },
+    "COASTAL_MODIFIER": {
+      "comment": "_EDEF_COASTAL_MODIFIER_",
+      "value": 1.0
+    },
+    "COLONY_MIN_AUTONOMY": {
+      "comment": "Colonial cores always have at least this much autonomy",
+      "value": 50.0
+    },
+    "DIVERT_TRADE_FRACTION": {
+      "comment": "",
+      "value": 1.0
+    },
+    "DIVERT_TRADE_LIBERTY": {
+      "comment": "",
+      "value": 30.0
+    },
+    "EMBARGO_BASE_EFFICIENCY": {
+      "comment": "EMBARGO_BASE_EFFICIENCY",
+      "value": 0.5
+    },
+    "EMBARGO_MERCANTILISM_EFFICIENCY": {
+      "comment": "Percentage added to embargo efficiency modifier scaled by mercantilism.",
+      "value": 50.0
+    },
+    "EMBARGO_RIVALS_LIBERTY": {
+      "comment": "",
+      "value": 5.0
+    },
+    "LARGE_COLONIAL_NATION_LIMIT": {
+      "comment": "",
+      "value": 10.0
+    },
+    "MERCHANT_CHANCE": {
+      "comment": "_EDEF_MERCHANT_CHANCE_",
+      "value": 0.35
+    },
+    "MERCHANT_COMPETE": {
+      "comment": "_EDEF_MERCHANT_COMPETE_",
+      "value": 0.5
+    },
+    "MERCHANT_COMPETE_PERCENT_OWNED_BASE": {
+      "comment": "_EDEF_MERCHANT_COMPETE_PERCENT_OWNED_BASE_",
+      "value": 0.25
+    },
+    "MERCHANT_MAX_POWER_BONUS": {
+      "comment": "MERCHANT_MAX_POWER_BONUS",
+      "value": 2.0
+    },
+    "MERCHANT_SPEED": {
+      "comment": "MERCHANT_SPEED",
+      "value": 20.0
+    },
+    "MERCHANT_TIME_DISTANCE": {
+      "comment": "_EDEF_MERCHANT_TIME_DISTANCE_",
+      "value": 0.25
+    },
+    "OPEN_SEA_MODIFIER": {
+      "comment": "_EDEF_OPEN_SEA_MODIFIER_",
+      "value": 1.7
+    },
+    "PIRATES_MONOPOLY_BONUS": {
+      "comment": "Factor of monopolization of node added to privateer power efficiency.",
+      "value": 1.0
+    },
+    "PIRATES_TRADE_POWER_FACTOR": {
+      "comment": "",
+      "value": 1.5
+    },
+    "PO_TRADE_POWER_AMOUNT": {
+      "comment": "Transfer 50% of trade power on peace option",
+      "value": 0.5
+    },
+    "PRIVATEER_INCOME_COLLECTION_EFF": {
+      "comment": "",
+      "value": 0.5
+    },
+    "PROMOTE_INVESTMENTS_TRADEPOWER": {
+      "comment": "",
+      "value": 0.5
+    },
+    "TRADED_FRACTION_FOR_BONUS": {
+      "comment": "_EDEF_TRADED_FRACTION_FOR_BONUS_",
+      "value": 0.2
+    },
+    "TRADE_ADDED_VALUE_MODIFER": {
+      "comment": "",
+      "value": 0.05
+    },
+    "TRADE_CAPITAL_POWER": {
+      "comment": "TRADE_CAPITAL_POWER",
+      "value": 5.0
+    },
+    "TRADE_COMPANY_CONTROL_LIMIT": {
+      "comment": "",
+      "value": 0.6
+    },
+    "TRADE_COMPANY_COOLDOWN": {
+      "comment": "",
+      "value": 60.0
+    },
+    "TRADE_COMPANY_DAYS_TO_SWAP_LEADER": {
+      "comment": "",
+      "value": 30.0
+    },
+    "TRADE_COMPANY_INVESTMENT_COST_THRESHOLD": {
+      "comment": "How many times the cost of the investment must be in the treasury to consider buying it",
+      "value": 1.0
+    },
+    "TRADE_COMPANY_RELIGION_RESTRICTION": {
+      "comment": "If we limit trade companies based on religion.",
+      "value": 0.0
+    },
+    "TRADE_COMPANY_STRONG_LIMIT": {
+      "comment": "",
+      "value": 0.51
+    },
+    "TRADE_FAVORS_ACTION_COOLDOWN": {
+      "comment": "",
+      "value": 5.0
+    },
+    "TRADE_FAVORS_FOR_GOLD_FAVOR_COST": {
+      "comment": "",
+      "value": 10.0
+    },
+    "TRADE_FAVORS_FOR_GOLD_REQUIRED_OPINION": {
+      "comment": "",
+      "value": 50.0
+    },
+    "TRADE_FAVORS_FOR_HEIR_FAVOR_COST": {
+      "comment": "",
+      "value": 90.0
+    },
+    "TRADE_FAVORS_FOR_HEIR_REQUIRED_OPINION": {
+      "comment": "",
+      "value": 50.0
+    },
+    "TRADE_FAVORS_FOR_MEN_FAVOR_COST": {
+      "comment": "",
+      "value": 10.0
+    },
+    "TRADE_FAVORS_FOR_MEN_REQUIRED_OPINION": {
+      "comment": "",
+      "value": 50.0
+    },
+    "TRADE_FAVORS_FOR_SAILORS_FAVOR_COST": {
+      "comment": "",
+      "value": 10.0
+    },
+    "TRADE_FAVORS_FOR_SAILORS_REQUIRED_OPINION": {
+      "comment": "",
+      "value": 50.0
+    },
+    "TRADE_FAVORS_FOR_TRUST_REQUIRED_OPINION": {
+      "comment": "",
+      "value": 50.0
+    },
+    "TRADE_FAVORS_FOR_WAR_PREP_REQUIRED_OPINION": {
+      "comment": "",
+      "value": 50.0
+    },
+    "TRADE_GOODS_ROTATE_SPEED": {
+      "comment": "Higher values gives a faster speed",
+      "value": 0.2
+    },
+    "TRADE_GOODS_SPEED": {
+      "comment": "Higher values gives a faster speed",
+      "value": 0.02
+    },
+    "TRADE_INTEREST_THRESHOLD": {
+      "comment": "Number of merchants required to be a nation with trade interest",
+      "value": 3.0
+    },
+    "TRADE_LEAGUE_BREAK_OPINION": {
+      "comment": "AI will leave a Trade League if their opinion of you falls below this value.",
+      "value": -50.0
+    },
+    "TRADE_LEAGUE_MIN_PRESTIGE_NEW_LEADER": {
+      "comment": "Minimum required prestige to become the new leader of a Trade League when the old one is resigned.",
+      "value": 20.0
+    },
+    "TRADE_LEAGUE_MIN_PRESTIGE_OLD_LEADER": {
+      "comment": "Minimum required prestige to stay leader of a Trade League.",
+      "value": -50.0
+    },
+    "TRADE_MERCHANT_PRESENT": {
+      "comment": "bonus on income if trade present",
+      "value": 0.1
+    },
+    "TRADE_NON_CAPITAL_OFFICE": {
+      "comment": "TRADE_NON_CAPITAL_OFFICE",
+      "value": -0.5
+    },
+    "TRADE_POLICY_AT_WAR_PER_PROVINCE_SCORE": {
+      "comment": "Score per enemy province while preparing war for attack bonus trade policy (if selectable)",
+      "value": 5.5
+    },
+    "TRADE_POLICY_IMPROVE_RELATIONS_PER_COUNTRY_SCORE": {
+      "comment": "Score per country with merchant for improve relations policy",
+      "value": 5.0
+    },
+    "TRADE_POLICY_MAXIMIZE_PROFITS_SCORE": {
+      "comment": "Score for maximize profit trade policy",
+      "value": 9.0
+    },
+    "TRADE_POLICY_PREPARING_FOR_WAR_PER_PROVINCE_SCORE": {
+      "comment": "Score per enemy province while preparing war for attack bonus trade policy (if selectable)",
+      "value": 6.0
+    },
+    "TRADE_POLICY_PROPAGATE_RELIGION_SCORE": {
+      "comment": "Score for propagate religion trade policy (if selectable)",
+      "value": 50.0
+    },
+    "TRADE_POLICY_SPY_OFFENCE_PER_COUNTRY_SCORE": {
+      "comment": "Score per country with merchant for spy offence policy",
+      "value": 5.0
+    },
+    "TRADE_POWER_HOME_BONUS": {
+      "comment": "",
+      "value": 0.1
+    },
+    "TRADE_POWER_HOME_BONUS_MAX": {
+      "comment": "",
+      "value": 1.0
+    },
+    "TRADE_PROPAGATE_DIVIDER": {
+      "comment": "",
+      "value": 5.0
+    },
+    "TRADE_PROPAGATE_THRESHOLD": {
+      "comment": "",
+      "value": 2.0
+    },
+    "TRADE_SHIP_MAX_DAYS_IN_PORT": {
+      "comment": "TRADE_SHIP_MAX_DAYS_IN_PORT",
+      "value": 5.0
+    },
+    "TRADE_SHIP_ORG_LIMIT": {
+      "comment": "TRADE_SHIP_ORG_LIMIT",
+      "value": 0.5
+    },
+    "TRADE_WIND_STRENGTH": {
+      "comment": "_EDEF_TRADE_WIND_STRENGTH_",
+      "value": 0.5
+    }
+  }
+}

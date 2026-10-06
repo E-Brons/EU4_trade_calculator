@@ -22,3 +22,6 @@ frontend/pubspec.lock
 
 # OS
 .DS_Store
+
+# trade verification report (scripts/verify_all.sh)
+verify-out/
