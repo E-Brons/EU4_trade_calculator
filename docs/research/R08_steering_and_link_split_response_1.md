@@ -127,3 +127,25 @@ Method: `backend/scripts/research/venice_b_v2_raw.py` extracts nodes, entries an
 Matched: V-R08-1 controlled 18/18 (products within the truncation interval), V-R08-4 claim 1 (entry-level key counts identical; 0 node-level differences; a first attempt with a plain line diff reported `max_demand` lines only because entries are reordered inside nodes, the order-insensitive comparison is the valid one), claim 2 (13 changed lines U25 -> U26: 7 flag lines, 6 duration lines), V-R08-5 X values (alexandria 25.72 / 33.28 / 33.25 / 33.26, ragusa 62.06 / 62.52 / 62.67 / 62.42 / 62.70, wien 30.17 / 30.45 / 30.36).
 Not independently re-computed: V-R08-1 breadth counts (305/309 ...), V-R08-2, V-R08-5 claim 3, V-R08-3 counts, the stage numbers (one run each).
 Unverifiable: the game rule behind a_c, the ratio X / val, the tie-break of equal `val`.
+
+## Update 2026-10-06 - weight rule on tick-day saves (Q1)
+
+Scope: only saves dated the 1st of a month (R12 final: they contain that day's computation), U04, U10, U14, U20, U25, U27, U28, U29; 413 nodes with >= 2 links and `outgoing` > 0. The 78 start snapshots and U07-U09 hold the uniform pre-tick weights (V-R08-3) and cannot test a weight rule; earlier counts that mixed them in (C-02, C-03, V-R08-5 claim 3, the start-save "pull-direction" test of Q5) are not evidence for or against a rule. Script: `backend/scripts/research/r08w_models.py` (single run, not yet independently re-computed).
+
+### W-1 Link order
+`steer_power` index i of an entry = the i-th outgoing link in `data/tradenodes.json` order (R05). In the Venice saves VEN's merchants at `alexandria` (index 1) and `ragusa` (index 1) and `wien` (key absent = index 0) all steer to `venice`, VEN's home node, not to `genua` as V-R08-1 / the Venice header state.
+
+### W-2 Rank of `add` is by steering pull, not by `val`
+`add = trunc3(a_c / rank)`, rank = order of the entry among the add-carrying steering entries of the same (node, link) by `eff x a_c` (eff = val - t_out + t_in). Example U04 `deccan` link 0: MIR (eff 28.53, a 0.089) ranks above SND (eff 33.78, a 0.074) because 2.54 > 2.50. a_c estimated per country by voting over the intervals `[add x rank, (add + 0.001) x rank)` with that ranking: 1,668 of 1,742 (save, country) estimates have every interval in agreement.
+
+### W-3 Weight rule
+```
+pull(link i) = sum over entries with key `type` steering to link i of eff x a_c
+weight_i     = pull_i / sum over links of pull
+```
+Passive pullers (in `pull_power` without a merchant) and collectors do not count; adding passive pullers in any assignment (first reachable link, split, unique, nearest) lowers the fit (72 -> 17-38 of 157). Test: nodes whose steering countries all have a consistent a_c: 119 of 120 lie inside the weight range allowed by the a_c intervals (+-0.001 for the stored 3 decimals); 89 of 120 match within 0.0015 at the interval midpoints, all 31 others within 0.0053. `val` instead of `eff` fails the nodes with transfers (U04 ivory_coast, cuiaba, doab: errors 0.08-0.14). The one miss, U04 `rio_grande`, has three countries whose a_c rests on a single entry. Confidence: confirmed on the testable nodes (two games, 120 node instances); the rule for the others is the same rule with unknown a_c.
+
+### W-4 What is still open
+- a_c of countries that never rank in the top 5 of a link (no `add` anywhere: 121 nodes have such a steerer) and of the 105 nodes with an inconsistent estimate: a_c is not stored in the save (country block searched: only `transfer_home_bonus`, `trade_mission`, merchants).
+- Weights of the 67 nodes with no steering entry.
+- What sets a_c (0.05 x (1 + trade steering) is the obvious reading; not sourced).

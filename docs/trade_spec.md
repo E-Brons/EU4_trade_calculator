@@ -18,7 +18,7 @@ Each stage can be verified alone (from the save's recorded upstream values) and 
 | pull_power | pull_power = effective power of the countries that steer here, or do not collect here and collect or steer downstream (R03 rule B) | R03, R04 |
 | retention | retention = retain / (retain + pull) | R03 |
 | current_value | current = gross * retention; outgoing = gross - current | R12 |
-| steer_weights | per-link weights of the forwarded value from the country entries | R08 |
+| steer_weights | weight of link i = sum over steerers on link i of effective power x steering strength / sum over all links | R08 |
 | link_flow | value delivered on link i = outgoing * weight_i * (1 + sum of `add` of the entries on link i) | R08 |
 | income_share | power_fraction = fx(effective / retain); share = fx(current * power_fraction) | R07 |
 | income_efficiency | money = fx(share * (1 + trade_efficiency + merchant bonus)) | R07 |
@@ -36,6 +36,7 @@ kind: constant (game files), read (save input), observed (save input, not derive
 | dlcs | read | dlc_enabled |  |  | enabled DLC |
 | ironman | read |  |  |  | save was a binary Ironman save melted by pdx.tools |
 | trade_efficiency | observed | trade.node[].<tag>.money / .total | income_efficiency | R07 | country trade efficiency, identified at the country's collecting nodes (not stored in the save) |
+| steering_strength | observed | trade.node[].<tag>.add | steer_weights | R08 | country's steering strength: add = trunc3(strength / rank) on each link, identified from the add values (not stored) |
 | merchant_power | observed | trade.node[].<tag>.max_pow | raw_power | R06 | country's flat power on every entry with a merchant (0 in start saves), identified from max_pow minus its known parts |
 | node_id | read | trade.node[].definitions |  |  | trade node id |
 | local_value | read | trade.node[].local_value | link_flow, current_value | R13 | node's own production value (ducats) |

@@ -40,6 +40,8 @@ VARIABLES: tuple[Variable, ...] = (
     _v("ironman", "read", "save was a binary Ironman save melted by pdx.tools"),
     _v("trade_efficiency", "observed", "country trade efficiency, identified at the country's collecting nodes (not stored in the save)",
        "trade.node[].<tag>.money / .total", ("income_efficiency",), ("R07",)),
+    _v("steering_strength", "observed", "country's steering strength: add = trunc3(strength / rank) on each link, identified from the add values (not stored)",
+       "trade.node[].<tag>.add", ("steer_weights",), ("R08",)),
     _v("merchant_power", "observed", "country's flat power on every entry with a merchant (0 in start saves), identified from max_pow minus its known parts",
        "trade.node[].<tag>.max_pow", ("raw_power",), ("R06",)),
     # --- node: read ---

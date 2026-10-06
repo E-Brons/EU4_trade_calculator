@@ -6,7 +6,7 @@
 #   scripts/verify_all.sh -k architecture      extra arguments go to pytest
 #
 # Output: verify-out/stage-report.md (+ .json), the RED -> GREEN dashboard. In CI it is also the job summary.
-# Exit status: 0 when every stage/chain is in the state tests/trade/expected.py says; non-zero on any drift.
+# Exit status: 0 only when every stage and the end-to-end chain reproduce every save; non-zero otherwise.
 set -uo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT/backend" || exit 2

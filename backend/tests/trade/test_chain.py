@@ -1,9 +1,7 @@
-"""calc.calculate (whole world from raw inputs, no recorded values) against every recorded node value and collector income."""
+"""calc.calculate (whole world from raw inputs, no recorded values) against every recorded node value and collector income.
+
+This is the measure of correctness: it passes only when every save is reproduced end to end."""
 from __future__ import annotations
-
-import pytest
-
-from tests.trade.expected import EXPECTED_CHAIN
 
 
 def chain_verdict(report) -> tuple[str, str]:
@@ -20,13 +18,6 @@ def chain_verdict(report) -> tuple[str, str]:
     return "red", "\n".join(lines)
 
 
-def test_chain_status_matches_expectation(full_corpus):
-    verdict, detail = chain_verdict(full_corpus)
-    assert verdict == EXPECTED_CHAIN, f"chain is now {verdict.upper()}, expected {EXPECTED_CHAIN.upper()}.\n{detail}\nUpdate tests/trade/expected.py."
-
-
-def test_chain_is_green(corpus_report, request):
-    if EXPECTED_CHAIN != "green":
-        request.applymarker(pytest.mark.xfail(strict=True, reason="end-to-end chain is RED until every stage is green"))
+def test_chain_is_green(corpus_report):
     verdict, detail = chain_verdict(corpus_report)
     assert verdict == "green", detail

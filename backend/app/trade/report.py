@@ -1,4 +1,4 @@
-"""Renders the RED -> GREEN dashboard (stage table, end-to-end chain, edge-case coverage, stored user cases) as markdown."""
+"""Renders the verification dashboard (stage table, end-to-end chain, edge-case coverage, stored user cases) as markdown."""
 from __future__ import annotations
 
 from collections import Counter
@@ -46,17 +46,19 @@ def user_case_rows(report: corpus.CorpusReport) -> list[list]:
     for sid, entry in report.entries.items():
         if entry["kind"] == "user_case" and sid in report.reports:
             r = report.reports[sid]
-            rows.append([sid, entry["tag"], entry["date"], entry["expected"], r.status.upper(), r.first_failing_stage or "-"])
+            rows.append([sid, entry["tag"], entry["date"], r.status.upper(), r.first_failing_stage or "-"])
     return rows
 
 
 def markdown(report: corpus.CorpusReport) -> str:
-    out = [f"# Trade calculation status (calc {calc.CALC_VERSION}, {len(report.reports)} saves)", "", "## Stages", "",
+    reproduced = sum(r.chain.status == "ok" for r in report.reports.values())
+    out = [f"# Trade calculation status (calc {calc.CALC_VERSION}, {len(report.reports)} saves)", "",
+           f"**Saves reproduced end to end: {reproduced} of {len(report.reports)}**", "", "## Stages", "",
            _table(["stage", "verdict", "checks", "failures", "rate", "saves failing"], stage_table(report)), "",
            f"End-to-end chain: {chain_summary(report)}", ""]
     cases = user_case_rows(report)
     out += ["## Stored user cases", ""]
-    out += [_table(["id", "tag", "date", "expected", "now", "first failing stage"], cases)] if cases else ["none"]
+    out += [_table(["id", "tag", "date", "status", "first failing stage"], cases)] if cases else ["none"]
     out += ["", "## Edge-case coverage", "", _table(["id", "case", "level", "saves exhibiting", "status"], coverage_rows(report))]
     if report.missing:
         out += ["", f"Missing fixtures (no raw file or zip): {', '.join(report.missing)}"]

@@ -44,7 +44,7 @@ STAGE_INFO: dict[str, tuple[str, tuple[str, ...]]] = {
     "pull_power": ("pull_power = effective power of the countries that steer here, or do not collect here and collect or steer downstream (R03 rule B)", ("R03", "R04")),
     "retention": ("retention = retain / (retain + pull)", ("R03",)),
     "current_value": ("current = gross * retention; outgoing = gross - current", ("R12",)),
-    "steer_weights": ("per-link weights of the forwarded value from the country entries", ("R08",)),
+    "steer_weights": ("weight of link i = sum over steerers on link i of effective power x steering strength / sum over all links", ("R08",)),
     "link_flow": ("value delivered on link i = outgoing * weight_i * (1 + sum of `add` of the entries on link i)", ("R08",)),
     "income_share": ("power_fraction = fx(effective / retain); share = fx(current * power_fraction)", ("R07",)),
     "income_efficiency": ("money = fx(share * (1 + trade_efficiency + merchant bonus))", ("R07",)),
@@ -62,6 +62,7 @@ class Observed:
 
     trade_efficiency: dict[str, float] = field(default_factory=dict)
     merchant_power: dict[str, float] = field(default_factory=dict)
+    steering_strength: dict[str, float] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -191,14 +192,51 @@ def rule_current_outgoing(gross: float, retention: float) -> tuple[float, float]
     return current, gross - current
 
 
-def rule_steer_weights(link_count: int, others: Iterable[tuple[int, float]]) -> tuple[float, ...]:
-    """HYPOTHESIS (R08): weight of link i = effective power of non-collectors steering/pulling to link i / all non-collectors."""
+def rule_steer_weights(link_count: int, steerers: Iterable[tuple[int, float, float | None]]) -> tuple[float, ...]:
+    """R08 response_1 W-3 (119 of 120 testable tick-day nodes): weight of link i = sum over the steering merchants on
+    link i of effective power x the country's steering strength, divided by the same sum over all links. Passive pullers
+    and collectors do not count. A single link carries everything. OPEN: a steerer whose strength is unknown (nan
+    result), and nodes with no steerer (R08 Q5)."""
+    if link_count == 1:
+        return (1.0,)
     per_link = [0.0] * link_count
-    for link, power in others:
+    for link, power, strength in steerers:
+        if power == 0:
+            continue
+        if strength is None:
+            return tuple(math.nan for _ in per_link)
         if link < link_count:
-            per_link[link] += power
+            per_link[link] += power * strength
     total = sum(per_link)
-    return tuple(p / total for p in per_link) if total > 0 else tuple(0.0 for _ in per_link)
+    return tuple(p / total for p in per_link) if total > 0 else tuple(math.nan for _ in per_link)
+
+
+def rule_steering_strengths(groups: Iterable[list[tuple[str, float, float]]], rounds: int = 2) -> tuple[dict[str, float], dict[str, bool]]:
+    """R08 W-2: add = trunc3(strength / rank), rank = order by effective power x strength among the add-carrying steering
+    entries of one link. Each entry bounds the strength to [add x rank, (add + 0.001) x rank); a country's strength is
+    the value most of its entries agree on. Start: equal strengths (rank by power). Returns strength and whether every
+    entry of the country agrees. `groups` = per (node, link): [(tag, effective power, add)]."""
+    groups = list(groups)
+    strength: dict[str, float] = defaultdict(lambda: 1.0)
+    consistent: dict[str, bool] = {}
+    for _ in range(rounds):
+        bounds: dict[str, list[tuple[float, float]]] = defaultdict(list)
+        for items in groups:
+            ranked = sorted(items, key=lambda x: -x[1] * strength[x[0]])
+            for rank, (tag, _eff, add) in enumerate(ranked, 1):
+                bounds[tag].append((add * rank, (add + 1.0 / game_data.const("FIXED_POINT_SCALE")) * rank))
+        new: dict[str, float] = {}
+        for tag, ivs in bounds.items():
+            events = sorted([(lo, 1) for lo, _hi in ivs] + [(hi, -1) for _lo, hi in ivs])
+            best, best_at, cur = 0, 0.0, 0
+            for i, (x, d) in enumerate(events):
+                cur += d
+                if d == 1 and cur > best:
+                    best, best_at = cur, (x + events[i + 1][0]) / 2
+            new[tag] = best_at
+            consistent[tag] = best == len(ivs)
+        strength = defaultdict(lambda: 1.0, new)
+    return dict(strength), consistent
 
 
 def rule_link_adds(link_count: int, adds: Iterable[tuple[int, float]]) -> tuple[float, ...]:
@@ -335,7 +373,11 @@ def calculate(inputs: WorldInputs, decisions: Decisions | None = None, observed:
         retention = rule_retention(retain, pull)
         targets = graph.outgoing(node)
         current, outgoing = rule_current_outgoing(gross, retention)
-        weights = rule_steer_weights(len(targets), ((e.steer_link, eff) for e, eff, c, _p in rows if not c))
+        steerers = [(e.steer_link, eff, observed.steering_strength.get(e.tag)) for e, eff, _c, _p in rows if rule_is_steering(decisions.get(e.tag, node))]
+        missing = [e.tag for e, eff, _c, _p in rows if rule_is_steering(decisions.get(e.tag, node)) and eff != 0 and e.tag not in observed.steering_strength]
+        if len(targets) > 1 and missing:
+            raise UnknownVariable("steering strength", f"{missing[0]}@{node}", "R08")
+        weights = rule_steer_weights(len(targets), steerers)
         link_values = rule_link_values(outgoing, weights, rule_link_adds(len(targets), node_adds.get(node, [])))
         for target, v in zip(targets, link_values):
             incoming[target] += v
@@ -370,7 +412,13 @@ def identify_observed(world: World) -> Observed:
         if e.has_trader and rec.max_pow is not None:
             residuals[tag][round(rule_merchant_power_residual(e, rec.max_pow, rec.prev or 0.0), 3)] += 1
     merchant = {tag: c.most_common(1)[0][0] for tag, c in residuals.items()}
-    return Observed(trade_efficiency=efficiency, merchant_power=merchant)
+    groups: dict[tuple[str, int], list[tuple[str, float, float]]] = defaultdict(list)
+    for (node, tag), e in world.inputs.entries.items():
+        rec = world.recorded.entries.get((node, tag))
+        if e.steering and e.add is not None and rec:
+            groups[(node, e.steer_link)].append((tag, rule_effective_power(rec.val or 0.0, e.t_out, e.t_in), e.add))
+    strength, _consistent = rule_steering_strengths(groups.values())
+    return Observed(trade_efficiency=efficiency, merchant_power=merchant, steering_strength=strength)
 
 
 # ----------------------------------------------------------------------------------------------------------------
@@ -465,16 +513,17 @@ def predict_stage(stage: str, world: World) -> list[Pair]:
             out.append(Pair("outgoing", outg, nr.outgoing or 0.0, node))
 
     elif stage == "steer_weights":
-        others_by_node: dict[str, list[tuple[int, float]]] = defaultdict(list)
+        observed = identify_observed(world)
+        steerers_by_node: dict[str, list[tuple[int, float, float | None]]] = defaultdict(list)
         for (node, tag), e in inp.entries.items():
             r = rec.entries[(node, tag)]
-            if r.val is not None and not rule_is_collecting(e, inp.decisions.get(tag, node)):
-                others_by_node[node].append((e.steer_link, rule_effective_power(r.val, e.t_out, e.t_in)))
+            if e.steering:
+                steerers_by_node[node].append((e.steer_link, rule_effective_power(r.val or 0.0, e.t_out, e.t_in), observed.steering_strength.get(tag)))
         for node, nr in rec.nodes.items():
             targets = graph.outgoing(node)
             if not targets or not nr.steer_weights:
                 continue
-            pred = rule_steer_weights(len(targets), others_by_node.get(node, []))
+            pred = rule_steer_weights(len(targets), steerers_by_node.get(node, []))
             for i, (p, rv) in enumerate(zip(pred, nr.steer_weights)):
                 out.append(Pair(f"steer_weight[{i}]", p, rv, node))
 

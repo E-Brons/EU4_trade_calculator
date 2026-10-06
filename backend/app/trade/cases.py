@@ -2,7 +2,7 @@
 
 A case is the flat save text zipped as backend/tests/fixtures/saves_zip/Uxx_TAG.yyyy.mm.dd.eu4.zip (tracked with git LFS, see
 .gitattributes) plus a manifest entry in tests/fixtures/saves/saves.json with kind "user_case" and expected "red".
-When calc.py is fixed the strict-xfail test for that case flips; changing `expected` to "green" turns it into a regression test.
+The case test fails until calc.py reproduces the save (the manifest's `expected` field is informational only).
 The server never commits or pushes anything.
 """
 from __future__ import annotations
