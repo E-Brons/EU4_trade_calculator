@@ -87,3 +87,17 @@ Could not be verified here:
 - "Whether B and C diverge" / determinism: not derivable from saves (the response already says UNKNOWN).
 - The 365-day year is the game calendar's rule, not read from a save.
 - Whether a merchant can be placed in a given 1444 node (game UI rules) and the tag/date premises of IV-13 and IV-15/16 beyond "tag exists".
+
+## Update 2026-10-05 - Venice series U07-U30 (what the first intervention saves show)
+
+Data: the Venice series U07-U30 (player VEN, game 1.37.5, non-Ironman plain-text saves, same mod list as S01, new campaign started 1444.11.11): U07 1444.11.11, U08 11.14, U09 11.30, U10 12.01, U11 12.02, U12 12.11, U13 12.31, U14 1445.01.01, U15 01.02, U16 01.15, U17 01.24, U18 01.30, U19 01.31, U20 02.01, U21 02.03, U22 02.10, U23 02.17, U24 02.28, U25 03.01 (U07-U25: no player action at all); then U26 03.31 (all three VEN merchants recalled during March), U27 04.01, U28 05.01 (ragusa merchant sent again), U29 06.01 (alexandria), U30 07.02 (wien). Scripts: `backend/scripts/research/venice_a_*.py` (loader `venice_load.py`), second pass `venice_a_ver.py` (raw text diff of the `trade` block, own Decimal loop for `prev`).
+
+### V-R14-1 Which saves count as "after a tick"
+Claim: a `trade` block is the result of a monthly computation only from the first 1st of the game (1444.12.1, U10) on; the bookmark state (U07, 1444.11.11, also U08/U09 up to 11.30) is an initial state, not a tick result: `max_pow` has no merchant term (R06 V-R06-1), the stored `prev` follows the bookmark weights (R05 V-R05-1), and 19,074 `max_demand` fields change at the first 1st. All saves of one month after a 1st carry the same computed values (R12 V-R12-1), so any day after a 1st is as good as the 1st for reading computed values; the merchant flags are current on the save day.
+Confidence: confirmed (one game).
+
+### V-R14-2 Comparison of two fresh games
+U07 (new game, VEN, 1444.11.11, nothing touched) differs from the older start snapshot S01 (same tag/date/version/mods) in 3,798 node fields, 2,686 of them `max_demand` (ratio 0.971 to 1.020, median 0.995): two identical fresh games are not identical in their stored `max_demand`; see the R01 Update of the same date. Determinism of A -> B/C (request_1 Q5) is therefore not testable as planned: UNKNOWN.
+
+### V-R14-3 First intervention performed
+Recall of all three merchants (U25 -> U26/U27) and re-sending them one per month (U28, U29, U30) is the pair/sequence IV-14-style "merchant none -> steer": results in R08/R09/R07 Updates of the same date. Not done yet: embargo, ships, privateers, trade company, idea/tech, transfers, away collection.

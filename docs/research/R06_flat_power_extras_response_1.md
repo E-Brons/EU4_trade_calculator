@@ -98,3 +98,35 @@ Corrected:
 - "a node-specific +5 like VER rheinland in S80": VER's deviation at rheinland is +10 (17.0 against 7.0 at its other nodes), MKL's at north_sea is +5; both are node-specific, the sizes differ.
 
 Unverifiable here: the cross-check "476 of 476 entries with ships" belongs to the ship analysis and is verified in R11; the three constants' origin.
+
+## Update 2026-10-05 - Venice series U07-U30 (controlled game)
+
+Data: the Venice series U07-U30 (player VEN, game 1.37.5, non-Ironman plain-text saves, same mod list as S01, new campaign started 1444.11.11): U07 1444.11.11, U08 11.14, U09 11.30, U10 12.01, U11 12.02, U12 12.11, U13 12.31, U14 1445.01.01, U15 01.02, U16 01.15, U17 01.24, U18 01.30, U19 01.31, U20 02.01, U21 02.03, U22 02.10, U23 02.17, U24 02.28, U25 03.01 (U07-U25: no player action at all); then U26 03.31 (all three VEN merchants recalled during March), U27 04.01, U28 05.01 (ragusa merchant sent again), U29 06.01 (alexandria), U30 07.02 (wien). Scripts: `backend/scripts/research/venice_a_*.py` (loader `venice_load.py`), second pass `venice_a_ver.py` (raw text diff of the `trade` block, own Decimal loop for `prev`).
+
+### V-R06-1 The merchant term R is 0 until the first 1st of the game and then 2 per merchant entry
+Claim: residual R = `max_pow - province_power - ship_power - prev - 5 x has_capital` (entries without node modifier) is 0 for every entry in U07, U08, U09 (1444.11.11 - 11.30) and from U10 (1444.12.1) on equals the country value for every entry with `has_trader` and 0 for entries without. So "R = 0 in the start snapshots" (C-Q1.1) is the state before the first monthly computation, not a property of start versus played games.
+Source: `venice_r06.py` (per-save table) and `venice_a_r06.py`.
+Quote (merchant entries by R): U07 843 x 0.0; U08 784 x 0.0; U09 774 x 0.0; U10 988 x 2.0 and 5 x 7.0, no-merchant entries 409 x 0.0 and 7 x 2.0; U14 (1.1) 1,044 x 2.0 and 7 x 7.0, no-merchant 444 x 0.0; U20 (2.1) 1,049 / 7, 443 x 0.0; U25 (3.1) 1,051 / 7, 438 x 0.0; U27 (4.1) 1,047 / 7, 442 x 0.0; U30 1,051 / 7, 439 x 0.0.
+Confidence: confirmed.
+
+### V-R06-2 Between 1sts the extras stay at the last 1st value, whatever the merchant does
+Claim: an entry whose merchant arrived after the last 1st has R = 0 until the next 1st (all 2 / 8 / 11 / 4 such entries in U11 / U12 / U13 / U16 had no `has_trader` at the preceding 1st); an entry whose merchant left keeps R until the next 1st (U12: 23 of 30, U13: 41 of 48, U26: 4 of 4 had `has_trader` at the preceding 1st). The other 7 of the no-merchant entries with R = 2 already appear in U10 itself: they had `has_trader` in U09 (11.30; `gujarat` NGA, `persia` SIS, `wien` LBV, `saxony` ANH and BRU, `rheinland` WBG and TTL) and had lost it by the save of the first 1st while still carrying R = 2, so the computation of the 1st saw the merchants that the flags of the same save no longer show (order inside the 1st: inferred).
+Quote: U11 (12.02) 2 merchant entries with R = 0, U12 (12.11) 8, U13 (12.31) 11, U16 (1.15) 4 (all become 2.0 at U14/U20); no-merchant entries with R = 2.0: U10 7, U11 14, U12 30, U13 48, U26 (03.31, VEN's three recalled merchants plus one) 4; all 0 again on the next 1st (U14 0, U27 0).
+Confidence: confirmed. This is the probable explanation of the 4 entries with R but no `has_trader` (TMB `timbuktu`, SCA `carribean_trade`; both saves were taken mid-month): inferred, those entries were not followed across a tick.
+
+### V-R06-3 `merchant_recalled`: duration in days, 3,650 at creation, effect on `max_pow` at the next 1st
+Claim: the node-entry modifier `merchant_recalled` (`power` -10) is created with `duration` 3650 and loses 1 per day; it is visible at once but its -10 enters `max_pow` at the next 1st; the entry keeps `has_trader`.
+Source: `venice_a_r06b.py` (arrivals / departures) and a listing of the node-entry modifiers of U07-U30 (`modifier` keys with `power`, `duration`); the residual per entry as in `venice_a_r06.py`.
+Quote: HED `ethiopia`: modifier first seen in U09 (11.30) with duration 3637, 3636 at U10 (12.01), 3635 at U11 (12.02), 3626 at U12 (12.11) (if the countdown is 1 per day from 3650 the modifier was created on about 11.17); NJR `ethiopia` 3644 at 11.30 (about 11.24); TRE `astrakhan` 3650 at U12 (12.11). Residuals: HED 0.0 at 11.30 (NJR has no `max_pow` yet), both -8.0 (= 2 - 10) at 12.01 and later; TRE 2.0 at 12.11 and 12.31, -8.0 at 1.1. All three entries keep `has_trader` to U30 (duration 3,423 / 3,430 / 3,447 at 07.02).
+Confidence: confirmed for the rows; the end of the modifier is not reached (10 years).
+VEN's own recall of three merchants (U26) and re-sending (U28-U30) created no `merchant_recalled` modifier at all: UNKNOWN why (AI recall versus player recall, or the circumstances of the recall).
+
+### V-R06-4 A third +5 reform
+Claim: R = 2 + 5 x [reform in {`mercantilistic_approach_reform`, `pious_merchants_reform`, `arabic_plutocracy_reform`}]: of 663 countries with merchants in U10, R = 7 for exactly two, Ormuz and Oman, both with `arabic_plutocracy_reform`, and R = 2 for the other 661 (0 exceptions in U10-U30). `venice_merchants_reform` (VEN) gives 2. The +15 term (`trade_ideas` level >= 5) is not testable in 1444-1445 (no country has it).
+Source: `venice_a_r06.py`. Confidence: confirmed as an association (2 countries).
+
+### Not settled
+Game names and values of 2, 5, 15; SND/MKL/VER/TMB/SCA cases of the TUR campaign (except V-R06-2); the request_2 rows below.
+
+### Verification 2026-10-05 (second pass)
+V-R06-1/2 use a second implementation: residual re-derived from the raw text diff counts of `max_pow` / `prev` / `province_power` lines (`venice_a_ver.py 1`: no `max_pow` line changes between 1sts, lines of `max_pow` change on the 1sts only) and `venice_r06.py` (own loop) versus `venice_a_r06.py` (country-level formula).

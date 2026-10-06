@@ -175,3 +175,11 @@ All items below are outside the core question; none changes the rule in section 
 | Data row: 2 collect-away and 18 steer-away exceptions (SUN, DLI, S80/U01) | C-07 for SUN malacca; the remaining steering/passive deviations belong to R01 |
 | Data row: additive vs multiplicative on a 1444 start | closed by C-01 (multiplicative at all baselines 1.045-2.137); start snapshots have no away collector |
 | Data row: the within-country switch is one country | C-04 (14 switches, 13 of 14 at the expected ratio) |
+
+## 10. Note 2026-10-05 - Venice series U07-U30 (replication; no rule changes)
+
+New data (saves U07-U30, a hands-off game of VEN from 1444.11.11 to 1445.7.2; details and scripts in `R02_away_collection_penalty_response_1.md`, section 'Update 2026-10-05 - Venice series', VA-1..VA-4, with second-pass verification):
+- The rule of section 1 reproduces in a game outside the TUR campaign: 449 away-collecting entries of AI countries (23 countries, 25 country-node pairs) have `max_demand` = 0.5 x a class value of the country in 438 cases; steering away is not halved (12,320 of 12,388; the 68 others are embargo or top-node-class effects). The 11 exceptions are one pair (GEN crimea), moved to R01 request_2 as a side question (base at an embargoed top-province node).
+- Replication of the closed row 'additive vs multiplicative on a 1444 start': the additive form `md - 0.5` is also excluded at md about 1.0 by 3-decimal data in a 1444 game (KTU ganges_delta 1.009 -> 0.505, additive would be 0.509; ARA genua 1.067 -> 0.534, additive 0.567).
+- A start snapshot contains collecting-away merchants (5,028 entries in the 78 start snapshots) but with no `money` and no penalty: the penalty, the money and the +2 flat merchant power first appear at the first 1st of a game (38 away merchants in a fresh game, 23 remaining at 1444.12.1, all with money, 19 at exactly 0.5 x their previous `max_demand`). So the count 'away collectors in the 78 start snapshots: 0' of section 4 (collector = entry with `total`/`money`) is a statement about un-ticked snapshots, not about start-type games as such: a game advanced to its first 1st has them.
+- `capital` differs from `trade_port` in 0 of 33,120 further country-saves; R15 Q2 is unchanged.

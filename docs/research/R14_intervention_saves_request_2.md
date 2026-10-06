@@ -31,6 +31,8 @@ Start saves: 35 saves S01-S35, all dated 1444.11.11 (the bookmark start), one pl
 | Random generator | top level `multiplayer_random_seed` and `multiplayer_random_count`; all 35 start saves have distinct seeds (counts 161,807-162,914); S79, S80, U01, U02 share the seed `2624455014`, counts 6,464,168 (1665.4.22) and 38,897,052 (1682.4.18), about 5,230 draws a day (6,201 days of 365); re-saving without playing leaves the `trade` block unchanged (U02 = S79, U01 = S80) |
 | Ship factor and uncounted fleets | `ship_power = f x base` with f in {1.0, 1.05, 1.1, 1.2} per node entry; 14 of 239 protect fleets are not counted (R11 response_1 C-03, C-05) |
 
+- Update 2026-10-05, Venice series U07-U30 (`response_1`, 'Update 2026-10-05 - Venice series'): computed trade values are those of the last 1st of a month (first one 1444.12.1); a save on any day after a 1st is as good as the 1st for reading computed values, the merchant flags are current on the save day; the bookmark save (1444.11.11) is not a monthly computation. First intervention performed: recall of all merchants, then re-sending them one per month (R08/R09/R07 Updates). Do not re-ask the 'which day counts as after a tick' question.
+
 ## Points to answer
 
 **Q1 (closes request_1 Q1) - Re-issue the full matrix (about 20 pairs).** Missing: a matrix without factual errors. Use the goal's case list and the draft's ids where the case survives; for every pair give: id, country, start save (one of S01-S80 only; say which) and date, node, the exact state in that save (from the facts above), and the one change. Fix at least: IV-01 (home-node collect: a country with a free merchant and the node of its `has_capital`; FRA conflict resolved), IV-02/IV-03 (away collect with/without province power; a free-merchant country, or a two-step pair "recall, then place"), IV-04/IV-05/IV-06 (steer into 2- and 3-link nodes: use `tunis`, `alexandria`, `wien`, `champagne`, `north_sea` with a country that has no steering merchant there), IV-07 (collect -> steer at a non-capital node, since a capital node has no away penalty), IV-08 (two merchants steering the same link: name the two countries and the node), IV-12 (ships at a passive foreign node: a node where the country has an entry and no `has_trader`), IV-13 (ship type mix: a start save whose country has both types; ENG 1550 does not exist), IV-14 (recall at a node where the country does have a merchant), IV-17 (trade company region: a node where the country has provinces), IV-18 (move the main trade port: BRA 1444 or PRU in S62), IV-19 (trade-efficiency idea), IV-20 (country below the propagation threshold: replace `OPM`). Give the date convention once and use it for every pair. Expected form: the table plus a column "fact used (row of the facts table above)" for every entry. Where a needed fact is missing, do not fill the cell; put the question in "Facts to extract from the saves" (e.g. "number of free merchants of country X in save Sxx", "links of node Y", "does country Z own a province in node W").
@@ -55,10 +57,9 @@ List, as numbered questions, every fact your matrix needs that is not in the tab
 
 ## Data needed to complete the research
 
-| Open item (from response_1 and other topics) | What settles it (exact field / pair / extra save) |
+| Open item | What settles it |
 |---|---|
-| Whether B and C diverge given the same A | two C saves from one A, compare `multiplayer_random_count` and the whole `trade` block (Q5 experiment) |
-| Which day counts as "after a tick" for an A save; whether 1444.11.11 is such a day | R12 (monthly tick timing): compare `trade` identities in a save on the 1st against one mid-month (played saves S79/S80 fail some identities, start saves pass) |
+| Whether B and C diverge given the same A (two fresh games with identical setup already differ in stored `max_demand`: Venice U07 vs S01, 2,686 of 3,798 differing fields; see R01) | two C saves from one A, compare `multiplayer_random_count` and the whole `trade` block (Q5 experiment) |
 | Away penalty form (`x 0.5` vs `- 0.5`) for a country with non-zero `reduced_trade_penalty_on_non_main_tradenode` | not in the save; needs a country with a known reduction source |
 | Exact embargo reduction formula | embargo on/off pair with embargoers' own power at the node (Q3 b) |
 | Steering weights rule, `add` rule | Q8 (a), (b) |
@@ -66,4 +67,4 @@ List, as numbered questions, every fact your matrix needs that is not in the tab
 | Ship factor f, uncounted fleets | Q8 (d) and a save on the 1st after a tick |
 | Whether `has_capital` follows the capital or the main trade port | Q8 (e) |
 | Trade company region, blockade, mercantilism effects on province power | pairs in the R13 request_2 table "Data needed to complete the research" |
-| The facts listed under "Facts to extract from the saves" | scripts over the 82 saves |
+| The facts listed under "Facts to extract from the saves" | scripts over the 82 saves and the Venice series U07-U30 |

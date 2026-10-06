@@ -169,3 +169,33 @@ Corrected (old -> new, why):
 Additional fact found: HOL english_channel has f = 1.0 in S79 and S80 (no leader in the counted fleets) and f = 1.1 in U03, U04, U05 (leader with maneuver 2 in the counted fleet): same country and node, f changes with the leader (supports the leader cause and a per-fleet, not per-country, effect).
 
 Unverifiable by this pass: the pulling-node per-frigate range (+0.004 to +0.25) and the effect of ships on downstream flows (needs a full replay through link flow; the steering weights rule R08 is unknown); the mechanism (modifier names and values) of the national idea sets and of the leader effect (no game files in the saves); the meaning of `on_my_way`.
+
+## Update 2026-10-05 - Venice series U07-U30 (new game, VEN, 1444.11.11 to 1445.07.02)
+
+Status: scripts `backend/scripts/research/venice_c_ships.py`, `venice_c_fleet_lag.py`, `venice_c_shipdelta.py`, `venice_c_x_home.py`, `venice_c_ver3.py` (F), `venice_c_ver6.py`; loader `venice_load.py`, independent regex readers `venice_c_raw.py`. First ship data outside the TUR campaign and the first with a single known fleet: VEN's "2nd Fleet" (3 barques, no leader) plus an unassigned "1st Fleet" (9 galleys, 13 cogs). The player changed the 2nd Fleet's protect mission twice between saves; everything else about the fleet was left alone.
+
+### VH-1 `f` = 1 and `ship_power` is inside `max_pow` with coefficient 1, in a clean single-fleet case (confirms U-1, U-2)
+Claim: 3 barques give `ship_power 6.0` = 3 x 2.0 (`barque` trade_power 2.0 in `light_ships.json`), i.e. f = 1.0, when the country has no national idea unlocked (`active_idea_groups = {VEN_ideas: 0}`) and the fleet has no leader; the term is additive in `max_pow` with coefficient 1: at the four node-pairs of the two fleet moves the change of `max_pow` equals the change of `ship_power` plus the change of `province_power` plus the change of `prev` with residual 0.000.
+Source: `venice_c_shipdelta.py`, independent `venice_c_ver6.py`.
+Quote: `venice` 1445.1.31 -> 2.1: max_pow 110.637 -> 104.681 (-5.956 = -6.000 + 0.044); `ragusa` 1.31 -> 2.1: 46.482 -> 52.520 (+6.038 = +6.000 + 0.029 + 0.009); `ragusa` 2.28 -> 3.1: 52.520 -> 46.539 (-5.981 = -6.000 + 0.014 + 0.005); `alexandria` 2.28 -> 3.1: 21.936 -> 27.941 (+6.005 = +6.000 + 0.005). `val` = `max_pow` x `max_demand`: venice 110.637 x 1.323 = 146.37, 104.681 x 1.323 = 138.49.
+Confidence: confirmed (4 of 4 node-pairs; f = 1 only for this case: national idea sets and leaders are not varied here).
+Also: the other fleet (9 galleys + 13 cogs, no mission) adds nothing anywhere (no `light_ship` in any entry for it), as in C-02.
+
+### VH-2 The ship term follows the mission with a lag to the next 1st; the field of the country does not lag
+Claim: the node whose VEN entry carries `light_ship`/`ship_power` is the node of the fleet's `protect_mission.node` as it was at the last 1st, not the current mission node and not the fleet's position: the country field `num_ships_protecting_trade` changes at once.
+Source: `venice_c_fleet_lag.py`, independent `venice_c_ver3.py` F.
+Rows (mission node index: 79 venice, 59 ragusa, 47 alexandria): 1444.11.11 no mission, no ship entry, field absent; 11.14 mission 79, field 3, no ship entry; 11.30 same; 12.1 ship entry at venice; 1445.1.15 mission 79, entry venice; 1.24 mission 59 (ragusa), entry still venice (also 1.30, 1.31); 2.1 entry at ragusa; 2.3 mission 59, entry ragusa; 2.10 mission 47 (alexandria), entry still ragusa (2.17, 2.28); 3.1 entry at alexandria (3.31 to 7.2 unchanged). The fleet is at sea on a patrol route while this happens (`location` 1312, 1932, 1319, 1313-1315 ...): the entry is at the mission node even when the fleet is elsewhere.
+Confidence: confirmed (3 of 3 mission events: assignment, two changes).
+Consequence for the calculation: the ship term of a what-if change of a mission appears after the next 1st; a save taken between two 1sts shows the previous assignment.
+
+### VH-3 `on_my_way` is false for a counted fleet, also while it moves
+Claim: `protect_mission.on_my_way = no` in every save from 11.14 to 7.2 (23 of 23), including saves where the fleet is sailing to a new mission node (1445.1.24 - 2.3, 2.10 - 2.28), and the fleet is counted. So `on_my_way = no` is not what excludes the four S79 fleets of U-4 (`on_my_way` meaning: still UNKNOWN; these four stay unexplained).
+Source: `venice_c_fleet_lag.py`. Confidence: confirmed as an observation.
+
+### VH-4 The ship on the collecting home node: `total` moves by about -1%, efficiency does not move with it
+Claim: VEN collects at `venice` (home) without a merchant. The ship term sat at `venice` from 12.1 to 1.31 (not before: 11.11-11.30 the mission existed but the entry did not), and left on 2.1: VEN's `total` there 5.689 (1.31) -> 5.634 (2.1), `power_fraction` 0.603 -> 0.591; `money/total` was 1.1200 with no ship term (11.11-11.30), 1.1199 with it (12.1-1.31) and 1.1699 without it again (2.1 on). So the ship term does not change the efficiency X at the collecting node (X equal with and without the term), and the +0.05 step of X at 2.1 is not caused by the ship leaving (it was 1.12 in the ship-less snapshots before).
+Caveat: every country's values change at a 1st, so the change of `total` is not an isolated ship effect (inferred: the drop is the ship's 6.0 of 110.6 power = 5.4% diluted by the node's other power).
+Source: `venice_c_x_home.py`. Confidence: confirmed (observation); the cause of the X step is UNKNOWN (R07).
+
+### Verification 2026-10-05 (second pass, Venice series)
+VH-1: the four residuals recomputed with the regex readers (`venice_c_ver6.py`): identical. VH-2: mission node and entry location read from the raw text (`venice_c_ver3.py` F): identical for all 24 saves. VH-3 and VH-4 computed once (parsed; the X values for the 24 saves are also in `venice_c_ver3.py` C, identical).

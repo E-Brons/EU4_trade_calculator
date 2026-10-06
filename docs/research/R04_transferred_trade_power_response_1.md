@@ -102,3 +102,22 @@ Method: new code `backend/scripts/research/ver2_c_stages.py` (project `verify_wo
 Matched: `transfers` 0 failures in 436 (U03), 436 (U04), 432 (U05), S79 0/358, S80 0/414, 78 start saves 0/5,624; over all 85 saves 0 failures in 8,472 checks. `pull_power` 0/77, 0/77, 1/77 (U05 `ethiopia`, calc 244.865, recorded 247.475) and `retain_power` 0/80, 0/80, 1/80 (U05 `gulf_of_aden`, calc 787.827, recorded 795.345); over all 85 saves `retain_power` 1 failure in 6,800 checks and `pull_power` 5 failures in 6,050 (S79 and its copy U02 at `chesapeake_bay` 607.474 vs 646.532 and `ohio` 402.981 vs 440.306, U05 1), i.e. 3 distinct nodes. The AFA difference equals AFA's `top_power` value (2.61 and 7.518 in the node lists).
 Corrected: nothing in the numbers. Label: the transfers result is `confirmed` for the saves listed (85 saves, 2 duplicates, one campaign for the 7 played saves).
 Unverifiable: BEI exception (not examined in U03-U05), origin of the flat 0.05, subject types with another fraction.
+
+## Update 2026-10-05 - Venice series U07-U30 (first non-colonial transfers)
+
+Data: Venice series U07-U30 (see the R12 Update of the same date for the series description); scripts `backend/scripts/research/venice_a_r04.py` and `venice_a_r04b.py` (whole corpus S01-S80, U01-U06 plus the series).
+
+### V-R04-1 Plain vassals transfer their whole power: t_out = val - 0.1
+Claim: two vassals give with a factor 1.0 instead of 0.5: `t_out = val - 0.100` exactly (the known rule `t_out = f x (val - 0.1)` with f = 0.5 for colonial nations and trade protectorates gives `0.5 x val - 0.05`).
+Source: `venice_a_r04.py`, `venice_a_r04b.py` (ratio `t_out / (val - 0.1)` per giver-save; subject type from the `dependency={ first second subject_type }` block of the same save).
+Quote: AVR (vassal of GAZ, `dependency` start 1435.1.1, `subject_type="vassal"`): `persia` val 1.986, `t_out` 1.886, `t_to` {GAZ: 1.886}; `astrakhan` val 9.487, `t_out` 9.387; the receiver GAZ has `t_in` 1.886 / 9.387 and `t_from` {AVR: ...} (U15-U24, i.e. 1445.1.1 to 2.28; country flag `transfer_trade_power_to=[GAZ]` until 2.17, then absent at 2.28 while the `t_out` entries are still there until the next 1st). LDU (vassal of MRA): `kongo` val 1.986, `t_out` 1.886; `zambezi` val 10.852, `t_out` 10.752 (U27, 1445.4.1). Over the whole corpus plus the series: colony givers ratio 0.5 in 534 giver-saves; trade_protectorate givers (SND, BEI) 0.5 in 10; vassal givers 1.0 in 12 (AVR 11, LDU 1); no other ratio occurs.
+Confidence: confirmed as an association with the subject type (two givers, both plain vassals); the cause (subject type `vassal` versus a diplomatic setting such as a transfer action) is UNKNOWN.
+
+### V-R04-2 The country flag moves at once, the entries follow the 1st
+AVR: flag `transfer_trade_power_to=[GAZ]` first seen 1444.12.31 (U13), present through 1445.2.17 (U23), absent from 1445.2.28 (U24); the `t_out` / `t_in` entries first appear on 1445.1.1 (U14, the next 1st after the flag) and are still present on 1445.2.28 (U24, flag already gone), absent on 1445.3.1 (U25). LDU: flag seen 1445.3.31 (U26), `t_out` entries only on 1445.4.1 (U27); on 1445.5.1 (U28) the flag is still there but there are no `t_out` entries (unexplained; same type of case as BEI in S80), flag absent on 1445.6.1 (U29). Consistent with R12: entries change only on a 1st, country fields at once.
+
+### Not addressed
+Venice has no subject of its own; the rows of request_2 about BEI and small `val` are unchanged.
+
+### Verification 2026-10-05 (second pass)
+The vassal ratio was counted twice: by `venice_a_r04.py` (parsed entries, class `val-0.1`) and by `venice_a_r04b.py` (ratio and `dependency` block from the raw text); the corpus-only rerun lists the same 12 vassal giver-saves and 534 + 10 for the others.

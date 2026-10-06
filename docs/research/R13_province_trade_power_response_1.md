@@ -84,3 +84,20 @@ Independent recomputation (new code, not the author's logic): `backend/scripts/r
 - C-03: the remark "additive, not multiplicative" downgraded to `inferred` (a class at 1.5 also exists, 122 provinces, consistent with 1.2 x 1.25).
 
 **Could not be verified / not re-tested:** the coastal-node lists for M = 1.45 vs 1.2 (nippon 52, malacca 42, ..., samarkand 50, ...), which are `inferred` in the response; the 310 played-save failures were counted but their cause (stale between ticks) is not tested; the statement that start-save surpluses are "a flat integer in no province's trade_power" is reproduced as a count but its mechanism stays UNKNOWN; the sentence on `trade_company` ownership and blockade fields not being found cannot be checked by a positive test.
+
+## Update 2026-10-05 - Venice series U07-U30
+
+Data: the Venice series U07-U30 (player VEN, game 1.37.5, non-Ironman plain-text saves, same mod list as S01, new campaign started 1444.11.11): U07 1444.11.11, U08 11.14, U09 11.30, U10 12.01, U11 12.02, U12 12.11, U13 12.31, U14 1445.01.01, U15 01.02, U16 01.15, U17 01.24, U18 01.30, U19 01.31, U20 02.01, U21 02.03, U22 02.10, U23 02.17, U24 02.28, U25 03.01 (U07-U25: no player action at all); then U26 03.31 (all three VEN merchants recalled during March), U27 04.01, U28 05.01 (ragusa merchant sent again), U29 06.01 (alexandria), U30 07.02 (wien). Scripts: `backend/scripts/research/venice_a_*.py` (loader `venice_load.py`), second pass `venice_a_ver.py` (raw text diff of the `trade` block, own Decimal loop for `prev`).
+
+### V-R13-1 `province_power` equals the controlled-province sum on the 1st, and drifts in between
+Claim: C-02 (`province_power` of C at N = sum of stored `trade_power` of the provinces with `trade=N`, `controller=C`) holds for 100 % of the entries in every save written on a 1st or right at the start, and only for 63-98 % in the other saves, because the provinces' stored `trade_power` moves on days other than the 1st while the node entries stay frozen.
+Source: `venice_a_r13.py`.
+Quote (entries equal / entries): U07 (1444.11.11) 773/773; U08 (11.14) 756/773; U09 (11.30) 743/773; U10 (12.01) 773/773; U11 (12.02) 749/773; U12 (12.11) 721/773; U13 (12.31) 709/773; U14 (1445.01.01) 773/773; U15 (01.02) 513/773; U16-U19 510-511/773; U20 (02.01) 773/773; U21 (02.03) 611/773; U22-U24 606-610/773; U25 (03.01) 772/772; U26 (03.31) 484/772; U27 (04.01) 772/772; U28 (05.01) 772/772; U29 (06.01) 772/772; U30 (07.02) 512/772. Provinces whose stored `trade_power` changed since the previous save: 122 (U07 -> U08), 18 (U08 -> U09), 0 (U09 -> U10), 53 (U10 -> U11), 33, 25, 0 (U13 -> U14), 962 (U14 -> U15, 1.1 -> 1.2), 12, 3, 1, 0, 0 (U19 -> U20), 525 (U20 -> U21, 2.1 -> 2.3), 1, 5, 3, 0 (U24 -> U25), 1,045 (U25 -> U26, 3.1 -> 3.31), 1 (U26 -> U27), 51 (U27 -> U28), 954 (U28 -> U29), 1,038 (U29 -> U30). In U14 -> U15 the provinces that changed differ only in `trade_power` (no change of `local_autonomy` or development), so the stored province value is recomputed on days of its own, not with the node tick.
+Confidence: confirmed. This tests the earlier inference ("played-save failures of `province_power` are mid-month staleness"): confirmed by the 1st-of-month saves of a controlled game.
+Caveats: the day on which the provinces are recomputed is not visible with the saves taken (962 provinces move between 1.1 and 1.2, 1,045 between 3.1 and 3.31, 525 between 2.1 and 2.3); the cause of the changes (autonomy change at the 1st shows in `local_autonomy` of 1,209 provinces between U24 and U25 without a change of `trade_power`) is not analysed here.
+
+### V-R13-2 Not settled by this series
+Composition of `M`, building effects, trade company region, blockade, mercantilism, incense: no intervention of that kind was made; the R13 request_2 rows stay.
+
+### Verification 2026-10-05 (second pass)
+V-R13-1 was checked by two paths: `venice_a_r13.py` (parsed `provinces` block) and the equal 773/773 at the 1st against the node-side `province_power` field classes in `venice_a_fields.py` (`province_power` changes only on the 1sts: 262 fields U19 -> U20, 167 U24 -> U25, 289 U26 -> U27).

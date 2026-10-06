@@ -147,3 +147,85 @@ New data: U06 (TUR, in-game 1696.3.25; next save after U05 1693.4.15; same campa
 
 ### What settles it (U06 adds)
 - Which modifiers lowered TUR's domestic-class scalar by 0.018 and raised its foreign-class scalar by 0.062 between U05 and U06 with no change of ideas, reforms, policies, modifier list and mercantilism: the game definition of `max_demand` (request_2 Q1) and the values of the tech level 23 and the parliament issue `charter_trade_companies`; or two saves of one country that differ only in one technology level.
+
+## Update 2026-10-05 - Venice series U07-U30 (new game, VEN, 1444.11.11 to 1445.07.02)
+
+Status: scripts `backend/scripts/research/venice_c_md_evolution.py`, `venice_c_ven_md.py`, `venice_c_natexp2.py`, `venice_c_foreign.py`, `venice_c_foreign2.py`, `venice_c_homebonus.py`, `venice_c_homebonus2.py`, `venice_c_embargo.py`, `venice_c_tick_scalar.py`, `venice_c_firsttick.py` (loader `venice_load.py`), every kept claim re-run with the independent regex readers `venice_c_raw.py` / `venice_c_ver1..5.py` (section 'Verification 2026-10-05 (second pass, Venice series)' at the end). Labels: `confirmed` = whole set, exceptions listed; `inferred` otherwise.
+
+New data (stored as U07-U30): one fresh game as Venice (VEN), 24 saves. U07-U25 (1444.11.11, .11.14, .11.30, .12.01, .12.02, .12.11, .12.31, 1445.1.1, .1.2, .1.15, .1.24, .1.30, .1.31, .2.1, .2.3, .2.10, .2.17, .2.28, .3.1) are hands-off (no merchant action; VEN's three merchants steer; the fleet mission of VEN's 3-barque fleet was changed by the player twice, see R11). U26-U30 (1445.3.31, .4.1, .5.1, .6.1, .7.2): all three merchants recalled before 03.31 (no `has_trader` in the trade entries at 03.31), then one merchant re-sent per month (ragusa by 05.01, alexandria by 06.01, wien by 07.02). VEN never has an embargo, never collects away, has `trade_port = capital = 112` (node `venice`, an end node with no outgoing link). The same scenario as the older start snapshot S01 (VEN, 1444.11.11, same version and mods), but a different game (different `campaign_id`).
+
+### VS-1 `max_demand` changes only when a 1st of the month is crossed
+Claim: in the Venice series every `max_demand` value (53,290 country-node values per save) is identical between two saves unless a 1st of a month lies between them. 15 of 15 consecutive pairs without a 1st in between: 0 changed values; 8 of 8 pairs crossing a 1st: 19,074 (11.30 -> 12.01), 3,843 (12.31 -> 1.1), 14,704 (1.31 -> 2.1), 7,796 (2.28 -> 3.1), 21,020 (3.31 -> 4.1), 22,369 (4.1 -> 5.1), 9,339 (5.1 -> 6.1), 8,605 (6.1 -> 7.2) changed values.
+Applies when: all countries and nodes of this game. Source: `venice_c_md_evolution.py` (per-pair table), independent `venice_c_ver1.py`.
+Quote (VEN `venice`, `max_demand`): 1.323 on 1445.3.1 and on 1445.3.31 although the country field `transfer_home_bonus` is already 0.0 on 03.31 (0.3 on 03.1); 1.023 on 1445.4.1.
+Confidence: confirmed. Consequence: within a month every stored `max_demand` is the value of the last 1st; a player action of the month (merchant recall, embargo, ...) shows in `max_demand` only at the next 1st (VS-2, VS-5).
+Caveat: the embargo and recall events happen between the 1st's; a change made on the 1st itself after the tick could not be observed.
+
+### VS-2 Home-node bonus: 0.1 per steering merchant, clean test outside the TUR/BNG campaign (updates C-06, V8, V10)
+Claim: VEN's `max_demand` at its home node `venice` = base + `transfer_home_bonus`, where `transfer_home_bonus` (country field) = 0.1 x the number of VEN's steering merchants, and the bonus enters `max_demand` at the next 1st. The foreign class does not move with it.
+Source: `venice_c_ven_md.py`, independent `venice_c_ver3.py`.
+Rows (VEN, md at `venice` / md at every foreign node / field / steering merchants):
+| save | md venice | md foreign | `transfer_home_bonus` | steering merchants |
+|---|---|---|---|---|
+| 1444.11.11 (U07, before any tick) | 1.013 | 0.937 | 0.0 | 3 |
+| 1444.11.14 - 11.30 (U08, U09) | 1.013 | 0.937 | 0.3 | 3 |
+| 1444.12.1 - 12.31 (U10-U13) | 1.313 | 0.937 | 0.3 | 3 |
+| 1445.1.1 - 3.1 (U14-U25) | 1.323 | 0.946 | 0.3 | 3 |
+| 1445.3.31 (U26) | 1.323 | 0.946 | 0.0 | 0 (recalled) |
+| 1445.4.1 (U27) | 1.023 | 0.946 | 0.0 | 0 |
+| 1445.5.1 (U28) | 1.122 | 0.945 | 0.1 | 1 (ragusa) |
+| 1445.6.1 (U29) | 1.222 | 0.945 | 0.2 | 2 (+ alexandria) |
+| 1445.7.2 (U30) | 1.322 | 0.945 | 0.3 | 3 (+ wien) |
+So md(venice) - 0.937/0.946/0.945 = 0.076/0.077/0.077 (the base, without bonus; see the 1.013 and 1.023 rows) and +0.3 after the first 1st (1.313 - 1.013 = 0.300; 1.322 - 1.023 = 0.299 with the base 1.022 after 5.1), +0.1 per re-sent merchant. The field itself changes at once (0.0 -> 0.3 between 11.11 and 11.14; 0.3 -> 0.0 by 03.31 after the recall); `max_demand` follows at the next 1st (VS-1).
+Answers: the home bonus exists for a country other than BNG/TUR/C05/C08/C10 (V8, V10 asked for this); nobody collects away, no embargo, top-province node = home node; the bonus is absent in a start snapshot (U07, S01) because the first 1st has not happened yet, not because start snapshots differ.
+Population (all countries, U08-U30): 7,355 of 7,574 country-saves with >= 1 steering merchant have field = 0.1 x (steering merchant entries, i.e. entries with `has_trader` and `type`); restricting to merchants whose node has the home node downstream fits 7,422; 144 country-saves fit neither (e.g. BUR with one steerer at rheinland, home champagne, field 0.0; GEN, SAV, NOV, CHE, ORI, NAP, LIG, VER in 1444.11.14 with field 0.0 and one steerer). Steering direction does not matter in this case: VEN's steerers at alexandria and ragusa steer link 1 (genua) and the wien steerer link 0 (saxony), none towards `venice`; but each of the three nodes has `venice` as a direct link, so "merchant in a node adjacent to home" is not separated from "any steering merchant".
+Confidence: confirmed for VEN (24 of 24 saves, 5 values of the count); inferred for the general rule (97.1% of country-saves).
+
+### VS-3 The per-country scalar depends on the ruler's DIP skill: +0.005 per point in the foreign class (new; first identified cause of a scalar difference)
+Claim: between two fresh games of the same scenario (S01 and U07, both VEN 1444.11.11) the foreign-class `max_demand` of a country changes by exactly 0.005 x (change of the current ruler's DIP skill) for the 34 countries whose scalar differs at all; in 535 countries with the same ruler DIP it is identical in both games.
+Source: `venice_c_natexp2.py` (ruler = `history` monarch block whose id equals the country's current `monarch` id), independent `venice_c_ver2.py`.
+Quote: of 666 countries present in both games, 2 have no ruler block; 535 have the same ruler DIP and the same `max_demand` at every node (S01 and U07); 129 have a different ruler DIP (random rulers of tribes and some small states): in 34 the foreign-class value changed, in all 34 by exactly 0.005 x delta-DIP (YOL +3 -> +0.015: 1.036 -> 1.051; AWN -4 -> -0.020: 1.049 -> 1.029; YAQ -6 -> -0.030: 1.049 -> 1.019; TUA +4 -> +0.020; RAG, BRE, SIE, FRI, HSA among them); 88 are one-class countries (the same value at all 80 nodes; no change although the DIP changed: AAC, FRN, ULM, ABE, APA ...); 7 are two-class countries with classes {1.009, 1.036} that did not respond (BLM, BNJ, MAA, TAN, TNK, TEA, TTT; delta-DIP -2, -5, +3, +3, +3, -4, +2). The domestic (home) class did not change in any of the 34.
+Cross-section (U07): 238 of 281 two-class countries with a ruler satisfy foreign - domestic = 0.012 + 0.005 x DIP exactly (DIP 0..6; same 237-238 of 281 in S01, S10, S30); the other 43 have further terms (e.g. SWE +0.027, GOT +0.172, EFR +0.172, HDR +0.127, ORM +0.132, VEN 0.0 (domestic above foreign)). The formula fails in later-era saves (S50 111 of 254, S67 19 of 285, S78 39 of 311, S79 0 of 45, U06 1 of 30; `venice_c_dip_corpus.py`), so it is a description of the 1444 state, not a general formula.
+Confidence: confirmed for the 34 responders (natural experiment: a single random difference); the mechanism and name of the game effect are UNKNOWN (request_2 Q7); why 95 countries do not respond is UNKNOWN (88 one-class ones have no foreign/domestic difference; the 7 non-responders have the same foreign value 1.036).
+Relation to earlier open items: this is a term of the per-country scalar (V4, request_2 Q1); it is not the cause of the home `money/total` steps of 0.05 between identical peers at 1444 (SWE/DAN/BRA, R07): those steps are 10 times larger, and in the 25 countries with `feudalism_reform` the home X is 1.07 at ruler DIP 1, 3 and 5 in every country, but 1.07 or 1.12 at DIP 2 and 1.07 or 1.17 at DIP 4 (`venice_c_xdip.py`, U07), so X is not a function of the ruler's DIP.
+
+### VS-4 How the scalar moves over time (new)
+Claims:
+- (confirmed) The foreign-class scalar of VEN did not react to the recall or re-adding of its merchants: 0.946 on 03.1, 03.31 and 04.1 (3 merchants, then 0), 0.945 from 05.1 (1, 2 and 3 merchants alike). Only the home class moved (VS-2).
+- (confirmed) Number of countries whose most common `max_demand` changed at a 1st: 236 (1444.12.1), 47 (1445.1.1), 184 (2.1), 98 (3.1), 263 (4.1), 280 (5.1), 117 (6.1), 108 (7.2) of 666; typical size +0.002 (median), 224 of the 236 first-tick changes positive.
+- (confirmed) First tick, large steps: GEN +0.202 (0.935 -> 1.137), NOV +0.202 (0.944 -> 1.146), HSA +0.102, RAG +0.100, PSK +0.100; all five are republics with reform `merchants_reform` (GEN, HSA, RAG) or `veche_republic` (NOV, PSK). Of the 32 republics the other 26 changed by at most 0.002 at that tick, and VEN (`venice_merchants_reform`) by 0.000. Their merchants at the first tick: GEN 2 collecting away + 1 steering; NOV 1 home + 1 away + 1 steering; HSA 3 steering; RAG 1 home + 2 steering; PSK 1 home + 1 steering. No pattern in merchant actions (HSA has no collecting merchant, VEN has three steering ones like HSA).
+- (negative, inferred) No numeric country-block field tracks the tick changes: best correlations of the change with the change of a field over the 666 countries were `corruption` r = 0.83 at the first tick (n = 31 countries that carry the field; in 12 of the 30 countries where corruption changed the scalar did not) and <= 0.58 (`max_sailors`) at the other ticks; `venice_c_tick_scalar.py`, `venice_c_corruption.py`.
+Confidence: confirmed for the counts; the cause of the drift and of the five republic steps is UNKNOWN.
+
+### VS-5 Embargo: timing and the formula on nine new rows (updates C-05, C-06)
+Claims:
+- (confirmed) The embargo appears in the country block (`trade_embargoed_by`) first and lowers `max_demand` only at the next 1st: LAN embargoed by GEN from 1445.1.1 (not on 12.31), LAN at crimea 1.057 on 1.1 through 1.31 and 0.953 from 2.1; GEN embargoed by LAN from 1.15 (not on 1.2), GEN at alexandria 1.137 on 1.31, 1.136 from 2.1; ENG embargoed by FRA by 3.31 (not on 3.1), ENG at champagne 1.073 on 3.31, 0.899 from 4.1.
+- (confirmed, inferred mechanism) Using the response_1 definition (`own = max_pow - prev`; predicted reduction = 0.5 x sum of embargoer own / (sum of all own + 5 x NH); observed reduction = 1 - md/cap with cap = the country's value at nodes with no embargoer own power), U30 rows outside the embargoed country's home node:
+| embargoed, embargoer | node | md | cap | observed % | predicted % | ratio |
+|---|---|---|---|---|---|---|
+| ENG, FRA | rheinland | 1.044 | 1.047 | 0.29 | 0.23 | 1.3 |
+| ENG, FRA | bordeaux | 0.946 | 1.047 | 9.65 | 7.62 | 1.27 |
+| ENG, FRA | champagne | 0.896 | 1.047 | 14.42 | 12.11 | 1.19 |
+| ENG, FRA | valencia | 0.955 | 1.047 | 8.79 | 7.68 | 1.14 |
+| GEN, LAN | alexandria | 1.137 | 1.142 | 0.44 | 0.42 | 1.05 |
+| GEN, LAN | champagne | 1.139 | 1.142 | 0.26 | 0.34 | 0.76 |
+| LAN, GEN | crimea | 0.949 | 1.063 | 10.72 | 11.21 | 0.96 |
+| LAN, GEN | constantinople | 1.050 | 1.063 | 1.22 | 5.03 | 0.24 |
+| LAN, GEN | champagne | 1.060 | 1.063 | 0.28 | 0.34 | 0.82 |
+7 of 9 rows are within 2.5 percentage points of the formula; the ENG rows are 14-27% larger than predicted (like the BNG/DEC/RUS factors of V6/Q4) and `constantinople` (LAN) is 4 times smaller. The exactness question stays open; the Venice rows are consistent with "approximately right, not exact".
+Source: `venice_c_embargo.py` (`analyse`, `summary`), independent `venice_c_ver4.py` (D) and `venice_c_ver5.py` (3).
+Confidence: confirmed for the timing (3 of 3 embargoes); inferred for the magnitude.
+
+### What settles it (Venice series adds)
+- The game effect behind +0.005 per ruler-DIP point (Q7), and what the 7 non-responders and the 88 one-class countries have in common.
+- Why five republics rise by 0.1-0.2 at the first 1st and why VEN does not (country-block fields of GEN, NOV, HSA, RAG, PSK against VEN at 1444.11.30 and 1444.12.1).
+- Whether a steering merchant must be in a node adjacent to / upstream of the home node to count for `transfer_home_bonus` (144 unexplained country-saves; a save with a steering merchant in a node with no link path to home).
+- Embargo magnitude per embargoer (unchanged).
+
+### Verification 2026-10-05 (second pass, Venice series)
+Independent recomputation with regex readers over the raw files (`venice_c_raw.py`: no clausewitz parser, no cache) in `venice_c_ver1.py` (VS-1), `venice_c_ver2.py` (VS-3), `venice_c_ver3.py` (VS-2), `venice_c_ver4.py` (VS-5 timing), `venice_c_ver5.py` (VS-3 cross-section, VS-2 population, VS-5 rows):
+- VS-1: identical counts for all 23 pairs (0 x 15; 19,074 / 3,843 / 14,704 / 7,796 / 21,020 / 22,369 / 9,339 / 8,605).
+- VS-2: identical table for all 24 saves (md, field, steering entries); population 7,355 true / 219 false, identical.
+- VS-3: 34 of 34 differing countries exact; 129 countries with a changed ruler, 34 changed / 95 unchanged (88 one-class + 7 non-responders); cross-section 238 of 281 (1 country without a ruler block). Error found and corrected by this pass: the first version of the ruler lookup took the first monarch block of the `1444.11.11` history entry, which for native tribes is the regency "Native Council" (DIP 3 in all of them) in some saves; the ruler must be the block whose id equals the country's current `monarch` id. With the wrong lookup the natural experiment looked like 24 of 112; with the right one it is 34 of 34, and the cross-section count changed from 215 to 238 of 281.
+- VS-5: timing identical; the nine U30 rows identical.
+- VS-4: the per-tick counts and the five republic steps were checked once more by `venice_c_firsttick.py` (merchant classes) only; the drift cause stays UNKNOWN, so nothing is claimed beyond the counts.
