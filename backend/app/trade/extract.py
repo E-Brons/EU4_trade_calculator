@@ -93,7 +93,8 @@ def extract_world(path: str | Path, save_id: str = "", graph=None) -> World:
         for key in n:
             if not (_TAG.match(key) and isinstance(n[key], dict)) and key not in NODE_KEYS:
                 unmapped[f"node.{key}"] += 1
-        nodes[nid] = NodeInput(nid, _f(n.get("local_value"), 0.0), bool(n.get("trade_company_region")))
+        nodes[nid] = NodeInput(nid, _f(n.get("local_value"), 0.0), bool(n.get("trade_company_region")),
+                               tuple(float(x) for x in as_list(n.get("steer_power"))))
         rec_nodes[nid] = NodeRecorded(
             current=_f(n.get("current")),
             outgoing=_f(n.get("outgoing")),

@@ -167,3 +167,15 @@ Claim (P06): XAL made the only steerer at california: weights [0, 1, 0, 0] -> [1
 Claim (E21): Naxos (164) ceded by NAX to VEN on 1444.12.01: on 1444.12.03 and 1444.12.15 NAX has no node entries but is still listed in `top_power` at alexandria (2.046) and constantinople (9.579); on 1445.01.01 it is gone. Confidence: confirmed for `top_power`; `incoming.add`, `max`, `pull_power` and `retain_power` were not extracted.
 
 P02 (recall of every steerer at hangzhou) is void: MNG still steers there at t1 and t2 although its AI was switched off; the weights stay [0, 1, 0].
+
+## Update 2026-10-07 - weights without steerers
+
+Source: the 17 clean saves of `corpus.selected()` (datasets/eu4/1.37.5: venice-1444 U10-U29, tur-campaign U04, exp-core-1444 U30, obs-1444-cas/eng/fra/tur U33-U40) and the bookmark save U07 (VEN 1444.11.11, before the first computation; zip from the git LFS cache). Script: `backend/scripts/research/r08_no_steerer_weights.py [U07 path]`. A node "without steerers" has no country entry with `type` (no steering merchant); 228 such node-saves with >= 2 links.
+
+### V3-R08-1 A node nobody steers keeps its stored weights; they are not recomputed
+Claim: the weights of an unsteered node are a stored state. (a) Between consecutive saves of one series, a node unsteered in both has identical weights in 140 of 140 cases. (b) Across independent games (exp-core-1444, obs-1444-cas/eng/fra/tur, venice-1444) every unsteered node has the same weights in all of them (0 nodes differ). (c) In all 84 (node, series) pairs of the 1444 games they equal the bookmark weights of U07 exactly. Shapes in the data: one-hot 81, uniform 131, other 16, including all-zero vectors (polynesia_node [0, 0, 0], ivory_coast [0, 0, 0, 0], carribean_trade, st_lawrence) and single-link nodes stored as 0. The only cross-game difference is tur-campaign (1691): polynesia_node [1, 0, 0], i.e. a later state, consistent with "keep the last value". Confidence: confirmed (1444 games); inferred for later eras (one save).
+Refuted: weights from the non-collecting countries' power toward their downstream collecting/steering nodes (64 of 228 exact, all of them coincidences with the bookmark values), uniform always (67 of 228).
+Not observed: a node losing its last steerer (0 transitions in the corpus and in the 2026-10-07 experiment saves); that its weights then freeze at the last computed values is inferred from (a)-(c).
+
+### Consequence for the calculator
+`rule_steer_weights` returns nan for unsteered multi-link nodes and 1.0 for single-link nodes. Taking the save's stored weights for nodes without steerers removes 682 of the 1,660 `steer_weights` failures (618 nan + 64 single-link nodes stored as 0). The remaining 978 are at steered nodes: 960 nan (a steerer whose strength is not identified) and 18 wrong; that is a separate open item (identification of the steering strength).

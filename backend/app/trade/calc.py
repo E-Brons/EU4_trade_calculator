@@ -32,7 +32,7 @@ from app.trade.types import (
     WorldInputs,
 )
 
-CALC_VERSION = "0.2.1"
+CALC_VERSION = "0.2.2"
 
 STAGE_INFO: dict[str, tuple[str, tuple[str, ...]]] = {
     "propagation": ("prev = sum over downstream nodes with province_power / TRADE_PROPAGATE_DIVIDER >= TRADE_PROPAGATE_THRESHOLD of fx(province_power / TRADE_PROPAGATE_DIVIDER)", ("R05",)),
@@ -64,6 +64,7 @@ class Observed:
     merchant_power: dict[str, float] = field(default_factory=dict)
     steering_strength: dict[str, float] = field(default_factory=dict)
     transfer_fraction: dict[str, float] = field(default_factory=dict)
+    default_steering_strength: float | None = None   # most common identified strength, for steerers without `add`
 
 
 @dataclass(frozen=True)
@@ -204,11 +205,16 @@ def rule_current_outgoing(gross: float, retention: float) -> tuple[float, float]
     return current, gross - current
 
 
-def rule_steer_weights(link_count: int, steerers: Iterable[tuple[int, float, float | None]]) -> tuple[float, ...]:
+def rule_steer_weights(link_count: int, steerers: Iterable[tuple[int, float, float | None]],
+                       stored: tuple[float, ...] = ()) -> tuple[float, ...]:
     """R08 response_1 W-3 (119 of 120 testable tick-day nodes): weight of link i = sum over the steering merchants on
     link i of effective power x the country's steering strength, divided by the same sum over all links. Passive pullers
-    and collectors do not count. A single link carries everything. OPEN: a steerer whose strength is unknown (nan
-    result), and nodes with no steerer (R08 Q5)."""
+    and collectors do not count. R08 V3-R08-1 (228 unsteered node-saves, 17 clean saves): where no merchant steers the
+    game keeps the stored weights (unchanged month to month 140/140, equal to the bookmark values 84/84), so they are
+    returned as they are. A single steered link carries everything. OPEN: a steerer whose strength is unknown (nan)."""
+    steerers = [s for s in steerers if s[1] != 0]
+    if not steerers and len(stored) == link_count:
+        return tuple(stored)
     if link_count == 1:
         return (1.0,)
     per_link = [0.0] * link_count
@@ -385,11 +391,14 @@ def calculate(inputs: WorldInputs, decisions: Decisions | None = None, observed:
         retention = rule_retention(retain, pull)
         targets = graph.outgoing(node)
         current, outgoing = rule_current_outgoing(gross, retention)
-        steerers = [(e.steer_link, eff, observed.steering_strength.get(e.tag)) for e, eff, _c, _p in rows if rule_is_steering(decisions.get(e.tag, node))]
-        missing = [e.tag for e, eff, _c, _p in rows if rule_is_steering(decisions.get(e.tag, node)) and eff != 0 and e.tag not in observed.steering_strength]
+        strength_of = lambda tag: observed.steering_strength.get(tag, observed.default_steering_strength)  # noqa: E731
+        steerers = [(e.steer_link, eff, strength_of(e.tag)) for e, eff, _c, _p in rows if rule_is_steering(decisions.get(e.tag, node))]
+        missing = [e.tag for e, eff, _c, _p in rows if rule_is_steering(decisions.get(e.tag, node)) and eff != 0 and strength_of(e.tag) is None]
         if len(targets) > 1 and missing:
             raise UnknownVariable("steering strength", f"{missing[0]}@{node}", "R08")
-        weights = rule_steer_weights(len(targets), steerers)
+        weights = rule_steer_weights(len(targets), steerers, info.stored_steer_weights if info else ())
+        if len(targets) == 1:
+            weights = (1.0,)  # a single link carries the whole outgoing value even where the save stores weight 0
         link_values = rule_link_values(outgoing, weights, rule_link_adds(len(targets), node_adds.get(node, [])))
         for target, v in zip(targets, link_values):
             incoming[target] += v
@@ -438,8 +447,13 @@ def identify_observed(world: World) -> Observed:
             if f is not None:
                 fractions[tag][f] += 1
     fraction = {tag: c.most_common(1)[0][0] for tag, c in fractions.items()}
+    # Steerers that carry no `add` (outside the link's bonus ranking; 2,447 entries in the 17 clean saves, effective
+    # power ~2) do not reveal their strength; they get the save's most common identified strength (0.05 in 57 % and
+    # 0.06 in 27 % of 3,826 identified countries). They move a node's weights very little but made the node unknown.
+    modes = Counter(round(s, 2) for s in strength.values())
+    default = modes.most_common(1)[0][0] if modes else None
     return Observed(trade_efficiency=efficiency, merchant_power=merchant, steering_strength=strength,
-                    transfer_fraction=fraction)
+                    transfer_fraction=fraction, default_steering_strength=default)
 
 
 # ----------------------------------------------------------------------------------------------------------------
@@ -540,12 +554,13 @@ def predict_stage(stage: str, world: World) -> list[Pair]:
         for (node, tag), e in inp.entries.items():
             r = rec.entries[(node, tag)]
             if e.steering:
-                steerers_by_node[node].append((e.steer_link, rule_effective_power(r.val or 0.0, e.t_out, e.t_in), observed.steering_strength.get(tag)))
+                steerers_by_node[node].append((e.steer_link, rule_effective_power(r.val or 0.0, e.t_out, e.t_in),
+                                               observed.steering_strength.get(tag, observed.default_steering_strength)))
         for node, nr in rec.nodes.items():
             targets = graph.outgoing(node)
             if not targets or not nr.steer_weights:
                 continue
-            pred = rule_steer_weights(len(targets), steerers_by_node.get(node, []))
+            pred = rule_steer_weights(len(targets), steerers_by_node.get(node, []), inp.nodes[node].stored_steer_weights)
             for i, (p, rv) in enumerate(zip(pred, nr.steer_weights)):
                 out.append(Pair(f"steer_weight[{i}]", p, rv, node))
 

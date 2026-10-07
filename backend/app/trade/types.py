@@ -60,6 +60,7 @@ class NodeInput:
     node_id: str
     local_value: float = 0.0
     trade_company_region: bool = False
+    stored_steer_weights: tuple[float, ...] = ()   # weights in the save; kept by the game where nobody steers (R08 V3-R08-1)
 
 
 @dataclass(frozen=True)
