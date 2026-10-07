@@ -1,0 +1,8 @@
+[01:19:08] start: MAM ../../diversity/out/obs-1444-MAM/MAM_1444.12.01.eu4
+[01:20:37] step 0: {'patch': '../patches/identity.py'}
+[01:21:13]   patch identity.py: reloading
+[01:22:20] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-H-MAM-C/t1_1445.01.01.eu4'}
+[01:22:20]   run to 1445.01.01
+[01:23:19] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-H-MAM-C/t2_1445.02.01.eu4'}
+[01:23:19]   run to 1445.02.01
+[01:24:19] restored dlc_load.json and continue_game.json

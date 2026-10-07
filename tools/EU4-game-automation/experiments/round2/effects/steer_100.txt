@@ -1,0 +1,4 @@
+add_country_modifier = {
+	name = exp_trade_steering_100
+	duration = -1
+}

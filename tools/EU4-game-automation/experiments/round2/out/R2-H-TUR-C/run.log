@@ -1,0 +1,8 @@
+[01:34:54] start: TUR ../../diversity/out/_old_run_1/A_TUR_1444.12.01.eu4
+[01:36:27] step 0: {'patch': '../patches/identity.py'}
+[01:37:09]   patch identity.py: reloading
+[01:38:19] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-H-TUR-C/t1_1445.01.01.eu4'}
+[01:38:19]   run to 1445.01.01
+[01:39:18] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-H-TUR-C/t2_1445.02.01.eu4'}
+[01:39:18]   run to 1445.02.01
+[01:40:26] restored dlc_load.json and continue_game.json

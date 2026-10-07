@@ -1,0 +1,22 @@
+{
+ "nation": "VEN",
+ "mods": [],
+ "observe": true,
+ "ai_off": [
+  "VEN"
+ ],
+ "base_save": "../bases/U10_VEN.1444.12.01.eu4",
+ "script": [
+  {
+   "patch": "../patches/b5c_recall_alexandria.py"
+  },
+  {
+   "date": "1445.01.01",
+   "outfname": "../out/R2-B5c/t1_1445.01.01.eu4"
+  },
+  {
+   "date": "1445.02.01",
+   "outfname": "../out/R2-B5c/t2_1445.02.01.eu4"
+  }
+ ]
+}

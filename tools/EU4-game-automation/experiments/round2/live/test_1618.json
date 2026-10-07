@@ -1,0 +1,3 @@
+{"nation": "FRA", "start_date": "1618.05.23", "base_save": null, "mods": [], "observe": true,
+ "script": [{"date": "1618.06.01", "outfname": "../out/live_1618/A_1618.06.01.eu4"},
+            {"date": "1618.07.01", "outfname": "../out/live_1618/C_1618.07.01.eu4"}]}

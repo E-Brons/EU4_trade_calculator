@@ -1,0 +1,22 @@
+{
+ "nation": "NED",
+ "mods": [],
+ "observe": true,
+ "ai_off": [
+  "NED"
+ ],
+ "base_save": "../../diversity/out/obs-1618-NED/NED_1618.06.01.eu4",
+ "script": [
+  {
+   "effects": "../effects/ned_trade_company.txt"
+  },
+  {
+   "date": "1618.07.01",
+   "outfname": "../out/R2-TC/t1_1618.07.01.eu4"
+  },
+  {
+   "date": "1618.08.01",
+   "outfname": "../out/R2-TC/t2_1618.08.01.eu4"
+  }
+ ]
+}

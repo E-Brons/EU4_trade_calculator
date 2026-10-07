@@ -1,0 +1,8 @@
+[21:00:27] start: MOS 1444.11.11
+[21:01:36] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-MOS/MOS_1444.12.01.eu4'}
+[21:01:36]   run to 1444.12.01
+[21:02:34] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-MOS/MOS_1445.01.01.eu4'}
+[21:02:34]   run to 1445.01.01
+[21:03:34] step 2: {'date': '1445.02.01', 'outfname': '../out/obs-1444-MOS/MOS_1445.02.01.eu4'}
+[21:03:34]   run to 1445.02.01
+[21:04:33] restored dlc_load.json and continue_game.json

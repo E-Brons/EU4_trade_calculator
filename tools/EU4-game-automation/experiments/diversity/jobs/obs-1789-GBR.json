@@ -1,0 +1,24 @@
+{
+ "nation": "GBR",
+ "start_date": "1789.07.14",
+ "base_save": null,
+ "mods": [],
+ "observe": true,
+ "script": [
+  {
+   "date": "1789.08.01",
+   "outfname": "../out/obs-1789-GBR/GBR_1789.08.01.eu4"
+  },
+  {
+   "date": "1789.09.01",
+   "outfname": "../out/obs-1789-GBR/GBR_1789.09.01.eu4"
+  },
+  {
+   "date": "1789.10.01",
+   "outfname": "../out/obs-1789-GBR/GBR_1789.10.01.eu4"
+  }
+ ],
+ "ai_off": [
+  "GBR"
+ ]
+}

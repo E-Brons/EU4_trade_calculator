@@ -1,0 +1,8 @@
+[23:12:19] start: VEN ../../out/E00/base_1444.12.01.eu4
+[23:14:04] step 0: {'patch': '../patches/transfer_man_05.py'}
+[23:14:45]   patch transfer_man_05.py: reloading
+[23:15:59] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-T05/t1_1445.01.01.eu4'}
+[23:15:59]   run to 1445.01.01
+[23:17:06] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-T05/t2_1445.02.01.eu4'}
+[23:17:06]   run to 1445.02.01
+[23:18:14] restored dlc_load.json and continue_game.json

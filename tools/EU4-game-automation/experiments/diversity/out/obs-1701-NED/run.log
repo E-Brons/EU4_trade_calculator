@@ -1,0 +1,9 @@
+[21:44:37] start: NED 1701.09.01
+[21:46:01] step 0: {'date': '1701.10.01', 'outfname': '../out/obs-1701-NED/NED_1701.10.01.eu4'}
+[21:46:01]   run to 1701.10.01
+[21:46:48]   save has player=O00, expected NED: retrying the tag switch (1)
+[21:47:22] step 1: {'date': '1701.11.01', 'outfname': '../out/obs-1701-NED/NED_1701.11.01.eu4'}
+[21:47:22]   run to 1701.11.01
+[21:48:22] step 2: {'date': '1701.12.01', 'outfname': '../out/obs-1701-NED/NED_1701.12.01.eu4'}
+[21:48:22]   run to 1701.12.01
+[21:49:21] restored dlc_load.json and continue_game.json

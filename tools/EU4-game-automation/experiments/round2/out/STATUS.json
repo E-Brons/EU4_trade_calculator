@@ -1,0 +1,617 @@
+{
+ "R2-C-U10": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-C-U10/t1_1445.01.01.eu4",
+    "sha256": "0c0bfcfc57cf3b83d71e14a865f3fe23705185120cb658e163df74c056dd5c6c",
+    "bytes": 35708841,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-C-U10/t2_1445.02.01.eu4",
+    "sha256": "b94f7da6beb17c00ab3b0662cc7da054249aa6fb0bf0636f614c825d5eb7a6f5",
+    "bytes": 36217172,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 334
+ },
+ "R2-B5a": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-B5a/t1_1445.01.01.eu4",
+    "sha256": "6df986da1a8c0c6a1a4a8a7a7c5d6cc6bb1be1fb51504c98bf19a72de6e84d29",
+    "bytes": 35696215,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-B5a/t2_1445.02.01.eu4",
+    "sha256": "48c9bcfdce46b3489242bfdf1127b9963e09a546adc346e557886d838b41dd32",
+    "bytes": 36147800,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 326
+ },
+ "R2-B5b": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-B5b/t1_1445.01.01.eu4",
+    "sha256": "e8265896238fa74847bf19bbcea1e30c7a75cedd50a5892cf7d96214a018d9c6",
+    "bytes": 35744012,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-B5b/t2_1445.02.01.eu4",
+    "sha256": "233b6eb70df1ad3a1d4b199d8275d95a5b460edd8fb18cc76009d3db0e237de9",
+    "bytes": 36250406,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 326
+ },
+ "R2-B5c": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-B5c/t1_1445.01.01.eu4",
+    "sha256": "32ea6eab1743e446be17f4347394b3df5d3b04ca6aaf1e725842443377c5c840",
+    "bytes": 35693313,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-B5c/t2_1445.02.01.eu4",
+    "sha256": "ed83c35afdb1250365ac55f7ccee62535833d081336ca8474e31cb159c713f25",
+    "bytes": 36169854,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 318
+ },
+ "R2-T05": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-T05/t1_1445.01.01.eu4",
+    "sha256": "35b3515039056902c4f861752a1a20071bd262c76a0078da319ab0086865cf73",
+    "bytes": 35777595,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-T05/t2_1445.02.01.eu4",
+    "sha256": "1c4b6d44b8878081323df0398f8d1a800b7e1d3a3293e3b06df084c852f726fa",
+    "bytes": 36247494,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 355
+ },
+ "R2-T10": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-T10/t1_1445.01.01.eu4",
+    "sha256": "b73904815de1184be756fa7e3fe0c3405ca6a6ce66001551de57f80fed82a6b3",
+    "bytes": 35665888,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-T10/t2_1445.02.01.eu4",
+    "sha256": "678f32ce694967d8f6ee6990c39411c67cc55eadb570c71b93e859ad076fbd7c",
+    "bytes": 36166244,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 354
+ },
+ "R2-PORT": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-PORT/t1_1445.01.01.eu4",
+    "sha256": "ebabb234edf70c7b483cd6462da90dcdeac3f24be5c0d9509883660ba0325706",
+    "bytes": 35694972,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-PORT/t2_1445.02.01.eu4",
+    "sha256": "d9be211b166728d3b05f6b95ed566d80f579b72476bbab82f6202b288dbf0e8b",
+    "bytes": 36184296,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 317
+ },
+ "R2-CAP": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-CAP/t1_1445.01.01.eu4",
+    "sha256": "69076ff408e76107aeca4393dfd1e2ab95377887bbb478d18322b7f9c363f07a",
+    "bytes": 35677441,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-CAP/t2_1445.02.01.eu4",
+    "sha256": "c87b63d3e641c4db4c0cf3aeee11d7a39577a496d6ebd0a10427f629cb41933c",
+    "bytes": 36139534,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 249,
+  "first_attempt_error": "WorkerError: RuntimeError: console did not open (a pop-up may hold the keyboard focus)"
+ },
+ "R2-EMB": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-EMB/t1_1445.01.01.eu4",
+    "sha256": "a1a5a28a2dc97c98cce8c562e104a0f1dcb7319c9144cd912a7c99b5ba03f896",
+    "bytes": 35677754,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-EMB/t2_1445.02.01.eu4",
+    "sha256": "28b3cd6fb280371f70e6cc278800ab99aa192d5d22ff9d9a7b8c9576310a6615",
+    "bytes": 36180669,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 347
+ },
+ "R2-B4": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-B4/t1_1445.01.01.eu4",
+    "sha256": "88a2166c125d74688141cd86c110bf62bc21aa5f3b77faad51d3963b9486ddb2",
+    "bytes": 35701227,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-B4/t2_1445.02.01.eu4",
+    "sha256": "9c7a82a28261248189bea69f8f52c0887615fb73371d7b23c791bddf23ff052f",
+    "bytes": 36138336,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 313
+ },
+ "R2-STEER50": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-STEER50/t1_1445.01.01.eu4",
+    "sha256": "9525a73e030a524c5bc033d1ee2fe7f793bdc9feb00862b038820ae19f18ccee",
+    "bytes": 35725242,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-STEER50/t2_1445.02.01.eu4",
+    "sha256": "f36527730a18b5b97d2f301bcf529cb11d040d20eb89d801a857fe63b2f49a2e",
+    "bytes": 36189468,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 240
+ },
+ "R2-STEER100": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-STEER100/t1_1445.01.01.eu4",
+    "sha256": "5939b1c702fc4e87bba354e20a5278b9017795b28d211a08a7d41298a264cd67",
+    "bytes": 35676899,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-STEER100/t2_1445.02.01.eu4",
+    "sha256": "838d42490a2b2a1804dac0ad30594b704381905b7d1475f32787fdfc22424186",
+    "bytes": 36135291,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 237
+ },
+ "R2-IDEA1": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-IDEA1/t1_1445.01.01.eu4",
+    "sha256": "857d257737545287135952acf4aabb7b7e6e31087bec847f60d8f06e1a07c0a1",
+    "bytes": 35667172,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-IDEA1/t2_1445.02.01.eu4",
+    "sha256": "d74265a380017e4e43fe51e66e8fb6c8fc443d9cc61b8231e13f7a5cc1620119",
+    "bytes": 36182081,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 237
+ },
+ "R2-IDEA2": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-IDEA2/t1_1445.01.01.eu4",
+    "sha256": "e65991e0524d09ef62b70fc4cb527ff6cc399f7c9edf607c697782ecf91aba6c",
+    "bytes": 35829351,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-IDEA2/t2_1445.02.01.eu4",
+    "sha256": "065e84ba1ea354ea3108a1c6ac0cf32d09375cae91fd17537082deb7053e1ee5",
+    "bytes": 36316659,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 243
+ },
+ "R2-COT": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-COT/t1_1445.01.01.eu4",
+    "sha256": "a20fabf42f6d97d5a20cf498c131e5bfd04ebe8f10085b29017cc825d1ef10ca",
+    "bytes": 35800134,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-COT/t2_1445.02.01.eu4",
+    "sha256": "93772a699bfd7dff12e8b262ffc3ce964ec5b27a9360bf92326183b21a75002e",
+    "bytes": 36251730,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 240
+ },
+ "R2-DEPOT": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-DEPOT/t1_1445.01.01.eu4",
+    "sha256": "4caf7340a85719dc918ebf32fb1783710bffed4d51c68f74028a000e9ff127c0",
+    "bytes": 35670325,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-DEPOT/t2_1445.02.01.eu4",
+    "sha256": "d3f60ab2b9a0d44b1ee6c851529fd5dde194abb36ddb727a9e661729f057cd90",
+    "bytes": 36135408,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 238
+ },
+ "R2-TRIB": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-TRIB/t1_1445.01.01.eu4",
+    "sha256": "a8823d2ff6890aaadf75772bd0e3b8fe0890de8b99eff6250487c84a8a4490ad",
+    "bytes": 35772214,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-TRIB/t2_1445.02.01.eu4",
+    "sha256": "e4f5aba463e0d241053ea8021e24b9eb8f1eb8c336117d2264b77950341c710b",
+    "bytes": 36273831,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 238
+ },
+ "R2-SHIPCON": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-SHIPCON/t1_1445.01.01.eu4",
+    "sha256": "4bd898182c844b90c971b49c079c954dbdd193135826719bff7b54d561425462",
+    "bytes": 35700736,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-SHIPCON/t2_1445.02.01.eu4",
+    "sha256": "9b657442becda51a0d32148221c9acde1f423ab3f0ded96e7548b07ae484dae3",
+    "bytes": 36218355,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 314
+ },
+ "R2-PRIV": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-PRIV/t1_1445.01.01.eu4",
+    "sha256": "77a2cf25a4c996b5c5658eddf26160f9608c71c45c386f94272c144cd7597624",
+    "bytes": 35712634,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-PRIV/t2_1445.02.01.eu4",
+    "sha256": "b409cf2e0887679c8e67483fe95e53fcf7658a1f5d0ca328a95380c3ec1dd3b9",
+    "bytes": 36194824,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 315
+ },
+ "R2-DIPFRESH": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-DIPFRESH/base_1444.12.01.eu4",
+    "sha256": "c55397d4c4fdee9c134480128edc650c52224b2dea642fd96d2f12b6ee816dfb",
+    "bytes": 34864604,
+    "date": "1444.12.1"
+   }
+  ],
+  "seconds": 142
+ },
+ "R2-C-NED18": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-C-NED18/t1_1618.07.01.eu4",
+    "sha256": "eb0e9e398631fc47c7c5f5b7290a35e5cf70af6d88cbb33005435ef0050103d2",
+    "bytes": 45871860,
+    "date": "1618.7.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-C-NED18/t2_1618.08.01.eu4",
+    "sha256": "533a0c84b643db0f1f3a3682eba766a9f7bd1fc2fc33a77275b94a6e177d56d2",
+    "bytes": 46231004,
+    "date": "1618.8.1"
+   }
+  ],
+  "seconds": 320
+ },
+ "R2-TC": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-TC/t1_1618.07.01.eu4",
+    "sha256": "a0d52e03bf7ab10bef9bf566f2b13462288a1c2249f2d54801512165940984e0",
+    "bytes": 45942955,
+    "date": "1618.7.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-TC/t2_1618.08.01.eu4",
+    "sha256": "1e111638db06737f5a454fef3cdaa9ed8356dc66cfd36150198cb8399d37b3fb",
+    "bytes": 46218496,
+    "date": "1618.8.1"
+   }
+  ],
+  "seconds": 257
+ },
+ "R2-H-MAM-C": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-H-MAM-C/t1_1445.01.01.eu4",
+    "sha256": "092965c14edff4ebbc264b3cfd22bb02ed38b723cd530ad190f1ebaffeac10e1",
+    "bytes": 35666129,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-H-MAM-C/t2_1445.02.01.eu4",
+    "sha256": "ee28fc6ef82287e56ac51a89b5502301e407401d092f5de1c9331855a525fbf5",
+    "bytes": 36162831,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 312
+ },
+ "R2-H-MAM-B1": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-H-MAM-B1/t1_1445.01.01.eu4",
+    "sha256": "6e4c3b8afc5c6fd7095de4f6cf8eb1ce90df2fc40dd3275735983808f1904d10",
+    "bytes": 35638411,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-H-MAM-B1/t2_1445.02.01.eu4",
+    "sha256": "839a0644007601f6eba5c77eddb88e37155787c3ce1ee5162a17d08164e76ea4",
+    "bytes": 36124912,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 319
+ },
+ "R2-H-MAM-B2": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-H-MAM-B2/t1_1445.01.01.eu4",
+    "sha256": "5d1b8baca43a12cc0232e3648deaa3e8f36693179151bfbea8f927069239307e",
+    "bytes": 35675648,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-H-MAM-B2/t2_1445.02.01.eu4",
+    "sha256": "49ed753d1c6103145daaaa8f7973c82ad71688a160e08b67301ec0381ba48da6",
+    "bytes": 36171852,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 316
+ },
+ "R2-H-TUR-C": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-H-TUR-C/t1_1445.01.01.eu4",
+    "sha256": "aa429895296f0503ab7b1dcc2b329f30ac1c55ac935a8fe4762f63bb46148900",
+    "bytes": 35720928,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-H-TUR-C/t2_1445.02.01.eu4",
+    "sha256": "d21f3a664c982125bfeec0a2c4f4badc4a885813c3bf59ce7879ba3813c354c9",
+    "bytes": 36191116,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 332
+ },
+ "R2-H-TUR-B1": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-H-TUR-B1/t1_1445.01.01.eu4",
+    "sha256": "30369fc4f460712e4d8c6a471bc09b73205aaa80abf2bcc6cd5fa26e2feab5b8",
+    "bytes": 35713195,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/jobs/../out/R2-H-TUR-B1/t2_1445.02.01.eu4",
+    "sha256": "3533ea080b65645891b3caddfce11e299273ab5a1b7f52f1a37bc19fa1323048",
+    "bytes": 36196015,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 327
+ }
+}

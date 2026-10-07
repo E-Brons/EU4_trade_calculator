@@ -1,0 +1,8 @@
+[22:56:09] start: VEN ../../out/E00/base_1444.12.01.eu4
+[22:57:46] step 0: {'patch': '../patches/b5a_recall_home.py'}
+[22:58:23]   patch b5a_recall_home.py: reloading
+[22:59:34] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-B5a/t1_1445.01.01.eu4'}
+[22:59:34]   run to 1445.01.01
+[23:00:35] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-B5a/t2_1445.02.01.eu4'}
+[23:00:35]   run to 1445.02.01
+[23:01:35] restored dlc_load.json and continue_game.json

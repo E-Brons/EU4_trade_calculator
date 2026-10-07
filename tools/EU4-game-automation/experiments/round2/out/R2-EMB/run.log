@@ -1,0 +1,8 @@
+[00:16:39] start: VEN ../../out/E00/base_1444.12.01.eu4
+[00:18:22] step 0: {'patch': '../patches/embargo_rag.py'}
+[00:19:02]   patch embargo_rag.py: reloading
+[00:20:15] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-EMB/t1_1445.01.01.eu4'}
+[00:20:15]   run to 1445.01.01
+[00:21:20] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-EMB/t2_1445.02.01.eu4'}
+[00:21:20]   run to 1445.02.01
+[00:22:25] restored dlc_load.json and continue_game.json

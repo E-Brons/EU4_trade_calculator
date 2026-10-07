@@ -1,3 +1,4 @@
 __pycache__/
-# experiment saves (~35 MB each, ~3 GB): kept locally; store selected ones as LFS zips if needed
-experiments/out/**/*.eu4
+# experiment saves (~35-60 MB each): kept locally; selected ones go to datasets/ (LFS zips) via backend/scripts/add_save.py
+experiments/**/out/**/*.eu4
+experiments/round2/bases/

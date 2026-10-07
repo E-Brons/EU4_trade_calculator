@@ -1,0 +1,8 @@
+[21:58:13] start: PRU 1756.05.15
+[21:59:40] step 0: {'date': '1756.06.01', 'outfname': '../out/obs-1756-PRU/PRU_1756.06.01.eu4'}
+[21:59:40]   run to 1756.06.01
+[22:00:39] step 1: {'date': '1756.07.01', 'outfname': '../out/obs-1756-PRU/PRU_1756.07.01.eu4'}
+[22:00:39]   run to 1756.07.01
+[22:01:41] step 2: {'date': '1756.08.01', 'outfname': '../out/obs-1756-PRU/PRU_1756.08.01.eu4'}
+[22:01:41]   run to 1756.08.01
+[22:02:42] restored dlc_load.json and continue_game.json

@@ -1,0 +1,8 @@
+[22:04:35] start: QNG 1756.05.15
+[22:06:02] step 0: {'date': '1756.06.01', 'outfname': '../out/obs-1756-QNG/QNG_1756.06.01.eu4'}
+[22:06:02]   run to 1756.06.01
+[22:07:00] step 1: {'date': '1756.07.01', 'outfname': '../out/obs-1756-QNG/QNG_1756.07.01.eu4'}
+[22:07:00]   run to 1756.07.01
+[22:08:02] step 2: {'date': '1756.08.01', 'outfname': '../out/obs-1756-QNG/QNG_1756.08.01.eu4'}
+[22:08:02]   run to 1756.08.01
+[22:09:10] restored dlc_load.json and continue_game.json

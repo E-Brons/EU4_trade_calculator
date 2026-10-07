@@ -1,0 +1,19 @@
+{
+ "nation": "VEN",
+ "mods": [
+  "mod/eu4_experiments.mod"
+ ],
+ "observe": true,
+ "ai_off": [],
+ "base_save": null,
+ "script": [
+  {
+   "effects": "../effects/gen_dip_plus2.txt"
+  },
+  {
+   "date": "1444.12.01",
+   "outfname": "../out/R2-DIPFRESH/base_1444.12.01.eu4"
+  }
+ ],
+ "start_date": "1444.11.11"
+}

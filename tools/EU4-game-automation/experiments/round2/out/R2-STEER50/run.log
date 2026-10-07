@@ -1,0 +1,8 @@
+[00:27:38] start: VEN ../../out/E00/base_1444.12.01.eu4
+[00:29:08] step 0: {'effects': '../effects/steer_50.txt'}
+[00:29:08]   effects: ../effects/steer_50.txt
+[00:29:37] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-STEER50/t1_1445.01.01.eu4'}
+[00:29:37]   run to 1445.01.01
+[00:30:37] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-STEER50/t2_1445.02.01.eu4'}
+[00:30:37]   run to 1445.02.01
+[00:31:38] restored dlc_load.json and continue_game.json

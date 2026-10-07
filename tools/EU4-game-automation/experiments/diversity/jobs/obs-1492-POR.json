@@ -1,0 +1,24 @@
+{
+ "nation": "POR",
+ "start_date": "1492.01.01",
+ "base_save": null,
+ "mods": [],
+ "observe": true,
+ "script": [
+  {
+   "date": "1492.02.01",
+   "outfname": "../out/obs-1492-POR/POR_1492.02.01.eu4"
+  },
+  {
+   "date": "1492.03.01",
+   "outfname": "../out/obs-1492-POR/POR_1492.03.01.eu4"
+  },
+  {
+   "date": "1492.04.01",
+   "outfname": "../out/obs-1492-POR/POR_1492.04.01.eu4"
+  }
+ ],
+ "ai_off": [
+  "POR"
+ ]
+}

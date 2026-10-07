@@ -1,0 +1,8 @@
+[21:08:59] start: POR 1492.01.01
+[21:10:14] step 0: {'date': '1492.02.01', 'outfname': '../out/obs-1492-POR/POR_1492.02.01.eu4'}
+[21:10:14]   run to 1492.02.01
+[21:11:18] step 1: {'date': '1492.03.01', 'outfname': '../out/obs-1492-POR/POR_1492.03.01.eu4'}
+[21:11:18]   run to 1492.03.01
+[21:12:15] step 2: {'date': '1492.04.01', 'outfname': '../out/obs-1492-POR/POR_1492.04.01.eu4'}
+[21:12:15]   run to 1492.04.01
+[21:13:14] restored dlc_load.json and continue_game.json

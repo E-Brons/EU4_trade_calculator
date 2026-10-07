@@ -8,3 +8,5 @@
  exp_merchants:0 "Experiment: merchants"
  exp_prov_trade_power:0 "Experiment: prov_trade_power"
  exp_trade_power:0 "Experiment: flat trade power"
+ exp_trade_steering_50:0 "Experiment: +50% trade steering"
+ exp_trade_steering_100:0 "Experiment: +100% trade steering"

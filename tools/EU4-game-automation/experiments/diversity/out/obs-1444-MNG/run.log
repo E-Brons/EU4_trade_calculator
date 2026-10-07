@@ -1,0 +1,8 @@
+[20:28:48] start: MNG 1444.11.11
+[20:29:58] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-MNG/MNG_1444.12.01.eu4'}
+[20:29:58]   run to 1444.12.01
+[20:30:55] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-MNG/MNG_1445.01.01.eu4'}
+[20:30:55]   run to 1445.01.01
+[20:31:54] step 2: {'date': '1445.02.01', 'outfname': '../out/obs-1444-MNG/MNG_1445.02.01.eu4'}
+[20:31:54]   run to 1445.02.01
+[20:32:55] restored dlc_load.json and continue_game.json

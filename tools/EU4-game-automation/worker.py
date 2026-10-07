@@ -399,6 +399,9 @@ def main() -> None:
     for d in (PENDING, PROCESSING, DONE, FAILED, SHOTS, BIN):
         d.mkdir(parents=True, exist_ok=True)
     helper("front")  # compile the helper up front so the first job is not slow
+    # keep the displays awake while the worker runs: a sleeping external display drops out of the display list and
+    # the game window then fits no screen (diversity batch 2026-10-07: 23 jobs lost)
+    subprocess.Popen(["caffeinate", "-d", "-i", "-w", str(os.getpid())])
     threading.Thread(target=heartbeat_loop, daemon=True).start()
     print(f"EU4 automation worker ready. Bridge: {BRIDGE}  (Ctrl-C to stop)", flush=True)
     started = Path(__file__).stat().st_mtime

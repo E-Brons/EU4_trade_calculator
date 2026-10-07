@@ -1,0 +1,8 @@
+[21:35:17] start: MUG 1618.05.23
+[21:36:41] step 0: {'date': '1618.06.01', 'outfname': '../out/obs-1618-MUG/MUG_1618.06.01.eu4'}
+[21:36:41]   run to 1618.06.01
+[21:37:39] step 1: {'date': '1618.07.01', 'outfname': '../out/obs-1618-MUG/MUG_1618.07.01.eu4'}
+[21:37:39]   run to 1618.07.01
+[21:38:41] step 2: {'date': '1618.08.01', 'outfname': '../out/obs-1618-MUG/MUG_1618.08.01.eu4'}
+[21:38:41]   run to 1618.08.01
+[21:39:50] restored dlc_load.json and continue_game.json

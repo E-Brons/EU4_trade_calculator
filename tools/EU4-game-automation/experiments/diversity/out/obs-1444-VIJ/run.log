@@ -1,0 +1,8 @@
+[20:39:26] start: VIJ 1444.11.11
+[20:40:36] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-VIJ/VIJ_1444.12.01.eu4'}
+[20:40:36]   run to 1444.12.01
+[20:41:33] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-VIJ/VIJ_1445.01.01.eu4'}
+[20:41:33]   run to 1445.01.01
+[20:42:32] step 2: {'date': '1445.02.01', 'outfname': '../out/obs-1444-VIJ/VIJ_1445.02.01.eu4'}
+[20:42:32]   run to 1445.02.01
+[20:43:33] restored dlc_load.json and continue_game.json

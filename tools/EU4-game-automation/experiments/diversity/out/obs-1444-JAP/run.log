@@ -1,0 +1,8 @@
+[22:25:14] start: JAP 1444.11.11
+[22:26:25] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-JAP/JAP_1444.12.01.eu4'}
+[22:26:25]   run to 1444.12.01
+[22:27:08]   save has player=O00, expected JAP: retrying the tag switch (1)
+[22:27:29]   save has player=O00, expected JAP: retrying the tag switch (2)
+[22:27:49]   save has player=O00, expected JAP: retrying the tag switch (3)
+[22:27:49] FAILED: JobError: could not write a save as JAP (player=O00)
+[22:27:51] restored dlc_load.json and continue_game.json

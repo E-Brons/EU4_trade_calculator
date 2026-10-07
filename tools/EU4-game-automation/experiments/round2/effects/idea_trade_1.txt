@@ -1,0 +1,2 @@
+add_idea_group = trade_ideas
+add_idea = shrewd_commerce_practise

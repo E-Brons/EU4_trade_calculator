@@ -1,0 +1,6 @@
+[18:48:39] start: CAS 1444.11.11
+[18:49:44] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-CAS/A_CAS_1444.12.01.eu4'}
+[18:49:44]   run to 1444.12.01
+[18:50:41] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-CAS/C_CAS_1445.01.01.eu4'}
+[18:50:41]   run to 1445.01.01
+[18:51:47] restored dlc_load.json and continue_game.json

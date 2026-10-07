@@ -1,0 +1,8 @@
+[01:24:19] start: MAM ../../diversity/out/obs-1444-MAM/MAM_1444.12.01.eu4
+[01:25:52] step 0: {'patch': '../patches/home_mam_recall_aleppo.py'}
+[01:26:29]   patch home_mam_recall_aleppo.py: reloading
+[01:27:39] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-H-MAM-B1/t1_1445.01.01.eu4'}
+[01:27:39]   run to 1445.01.01
+[01:28:38] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-H-MAM-B1/t2_1445.02.01.eu4'}
+[01:28:38]   run to 1445.02.01
+[01:29:38] restored dlc_load.json and continue_game.json

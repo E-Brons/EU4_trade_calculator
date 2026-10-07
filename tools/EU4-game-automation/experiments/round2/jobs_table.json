@@ -1,0 +1,650 @@
+[
+ {
+  "id": "R2-B5a",
+  "rows": [
+   "R07 row 1 (size of the merchant term at home)",
+   "R07 row 2 (+0.05 steps)"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "patch": "../patches/b5a_recall_home.py"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-B5a/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-B5a/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "VEN home merchant at venice recalled",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E01c (round 1)",
+  "start_date": null
+ },
+ {
+  "id": "R2-B5b",
+  "rows": [
+   "R07 row 1",
+   "R01 row 7 (transfer_home_bonus: alexandria steerer leaves)"
+  ],
+  "base": "../bases/U10_VEN.1444.12.01.eu4",
+  "script": [
+   {
+    "patch": "../patches/b5b_place_home.py"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-B5b/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-B5b/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "VEN alexandria steerer -> merchant at home venice",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [],
+  "control": "R2-C-U10",
+  "start_date": null
+ },
+ {
+  "id": "R2-B5c",
+  "rows": [
+   "R01 row 7 (transfer_home_bonus counting)",
+   "R07 row 1 (B5b minus this = home merchant)"
+  ],
+  "base": "../bases/U10_VEN.1444.12.01.eu4",
+  "script": [
+   {
+    "patch": "../patches/b5c_recall_alexandria.py"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-B5c/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-B5c/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "VEN alexandria steerer recalled",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [],
+  "control": "R2-C-U10",
+  "start_date": null
+ },
+ {
+  "id": "R2-C-U10",
+  "rows": [
+   "control for U10 jobs"
+  ],
+  "base": "../bases/U10_VEN.1444.12.01.eu4",
+  "script": [
+   {
+    "patch": "../patches/identity.py"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-C-U10/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-C-U10/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "identity patch (save + reload)",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [],
+  "control": "-",
+  "start_date": null
+ },
+ {
+  "id": "R2-B4",
+  "rows": [
+   "R01 row 7",
+   "R09 row 10",
+   "R08 row 1 (weights without VEN at wien)"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "patch": "../patches/b4_recall_wien.py"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-B4/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-B4/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "VEN wien steerer recalled",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E01c (round 1)",
+  "start_date": null
+ },
+ {
+  "id": "R2-T05",
+  "rows": [
+   "R04 row 4 (what sets the fraction)",
+   "R04 row 2 (flag without t_out)",
+   "R04 row 3 (transfers by diplomatic setting)"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "patch": "../patches/transfer_man_05.py"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-T05/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-T05/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "transfer relation MAN -> VEN amount 0.5",
+  "ai_off": [
+   "VEN",
+   "MAN"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E01c (round 1)",
+  "start_date": null
+ },
+ {
+  "id": "R2-T10",
+  "rows": [
+   "R04 row 4 (what sets the fraction)",
+   "R04 row 2 (flag without t_out)",
+   "R04 row 3 (transfers by diplomatic setting)"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "patch": "../patches/transfer_man_10.py"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-T10/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-T10/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "transfer relation MAN -> VEN amount 1.0",
+  "ai_off": [
+   "VEN",
+   "MAN"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E01c (round 1)",
+  "start_date": null
+ },
+ {
+  "id": "R2-TRIB",
+  "rows": [
+   "R04 row 4 (subject types)",
+   "fix of void E20c"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "effects": "../effects/tributary_man.txt"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-TRIB/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-TRIB/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "MAN tributary of VEN (with forced_tributary_state flag)",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E01d (round 1)",
+  "start_date": null
+ },
+ {
+  "id": "R2-PORT",
+  "rows": [
+   "R02 row 1",
+   "R09 row 6",
+   "R14 open row (has_capital)"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "patch": "../patches/port_zara.py"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-PORT/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-PORT/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "VEN trade_port 112 -> 4753 (ragusa node), capital unchanged",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E01c (round 1)",
+  "start_date": null
+ },
+ {
+  "id": "R2-CAP",
+  "rows": [
+   "R02 row 1",
+   "R09 row 6"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "effects": "../effects/capital_zara.txt"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-CAP/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-CAP/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "VEN capital 112 -> 4753 (ragusa node) via set_capital (does trade_port follow?)",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E01d (round 1)",
+  "start_date": null
+ },
+ {
+  "id": "R2-EMB",
+  "rows": [
+   "R01 row 4 (embargo size)",
+   "R10 row 4 (magnitude)",
+   "R10 row 5 (money)",
+   "R07 row 3"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "patch": "../patches/embargo_rag.py"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-EMB/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-EMB/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "VEN embargo on RAG (save patch, U25 format)",
+  "ai_off": [
+   "VEN",
+   "RAG"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E01c (round 1)",
+  "start_date": null
+ },
+ {
+  "id": "R2-IDEA1",
+  "rows": [
+   "R01 row 3 (cap, single idea)",
+   "R06 row 1 (constants)",
+   "R07 row 4",
+   "R08 row 2"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "effects": "../effects/idea_trade_1.txt"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-IDEA1/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-IDEA1/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "trade_ideas group + first idea (effects; add_idea untested)",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E01d (round 1)",
+  "start_date": null
+ },
+ {
+  "id": "R2-IDEA2",
+  "rows": [
+   "as R2-IDEA1 (compare with it)"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "effects": "../effects/idea_trade_2.txt"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-IDEA2/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-IDEA2/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "trade_ideas + first two ideas",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "R2-IDEA1",
+  "start_date": null
+ },
+ {
+  "id": "R2-STEER50",
+  "rows": [
+   "R08 row 2 (strength a_c functional form)"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "effects": "../effects/steer_50.txt"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-STEER50/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-STEER50/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "+50 % trade_steering",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E01d / E08 (round 1)",
+  "start_date": null
+ },
+ {
+  "id": "R2-STEER100",
+  "rows": [
+   "R08 row 2 (strength a_c functional form)"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "effects": "../effects/steer_100.txt"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-STEER100/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-STEER100/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "+100 % trade_steering",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E01d / E08 (round 1)",
+  "start_date": null
+ },
+ {
+  "id": "R2-SHIPCON",
+  "rows": [
+   "R11 row 4 (income effect)",
+   "R05 row 4 (threshold with ships)"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "patch": "../patches/ships_constantinople.py"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-SHIPCON/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-SHIPCON/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "VEN light ships protect constantinople",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E01c (round 1)",
+  "start_date": null
+ },
+ {
+  "id": "R2-PRIV",
+  "rows": [
+   "R10 rows 1-2 (privateer power, residual nodes)",
+   "R07 row 3"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "patch": "../patches/privateer_ragusa.py"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-PRIV/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-PRIV/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "VEN fleet privateer_mission at ragusa (experimental format)",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E01c (round 1)",
+  "start_date": null
+ },
+ {
+  "id": "R2-TC",
+  "rows": [
+   "R13 row 4 (trade company region effects)",
+   "R14 open row (trade company)"
+  ],
+  "base": "../../diversity/out/obs-1618-NED/NED_1618.06.01.eu4",
+  "script": [
+   {
+    "effects": "../effects/ned_trade_company.txt"
+   },
+   {
+    "date": "1618.07.01",
+    "outfname": "../out/R2-TC/t1_1618.07.01.eu4"
+   },
+   {
+    "date": "1618.08.01",
+    "outfname": "../out/R2-TC/t2_1618.08.01.eu4"
+   }
+  ],
+  "change": "NED territories added to a trade company (effect untested)",
+  "ai_off": [
+   "NED"
+  ],
+  "mods": [],
+  "control": "R2-C-NED18",
+  "start_date": null
+ },
+ {
+  "id": "R2-C-NED18",
+  "rows": [
+   "control for NED 1618 jobs"
+  ],
+  "base": "../../diversity/out/obs-1618-NED/NED_1618.06.01.eu4",
+  "script": [
+   {
+    "patch": "../patches/identity.py"
+   },
+   {
+    "date": "1618.07.01",
+    "outfname": "../out/R2-C-NED18/t1_1618.07.01.eu4"
+   },
+   {
+    "date": "1618.08.01",
+    "outfname": "../out/R2-C-NED18/t2_1618.08.01.eu4"
+   }
+  ],
+  "change": "identity patch",
+  "ai_off": [
+   "NED"
+  ],
+  "mods": [],
+  "control": "-",
+  "start_date": null
+ },
+ {
+  "id": "R2-COT",
+  "rows": [
+   "R13 row 1 (centre-of-trade step)",
+   "fix of void E16"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "effects": "../effects/cot_verona.txt"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-COT/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-COT/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "Verona (108) centre of trade level 1 -> 2",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E01d (round 1)",
+  "start_date": null
+ },
+ {
+  "id": "R2-DEPOT",
+  "rows": [
+   "R13 row 3 (buildings other than the marketplace)"
+  ],
+  "base": "../../out/E00/base_1444.12.01.eu4",
+  "script": [
+   {
+    "effects": "../effects/depot_venezia.txt"
+   },
+   {
+    "date": "1445.01.01",
+    "outfname": "../out/R2-DEPOT/t1_1445.01.01.eu4"
+   },
+   {
+    "date": "1445.02.01",
+    "outfname": "../out/R2-DEPOT/t2_1445.02.01.eu4"
+   }
+  ],
+  "change": "trade depot built in Venezia (112)",
+  "ai_off": [
+   "VEN"
+  ],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E01d (round 1) / E17 marketplace",
+  "start_date": null
+ },
+ {
+  "id": "R2-DIPFRESH",
+  "rows": [
+   "R01 row 2 (cross-game DIP pattern)"
+  ],
+  "base": null,
+  "start_date": "1444.11.11",
+  "script": [
+   {
+    "effects": "../effects/gen_dip_plus2.txt"
+   },
+   {
+    "date": "1444.12.01",
+    "outfname": "../out/R2-DIPFRESH/base_1444.12.01.eu4"
+   }
+  ],
+  "change": "new game; GEN ruler DIP +2 on 1444.11.11 (before the first tick)",
+  "ai_off": [],
+  "mods": [
+   "mod/eu4_experiments.mod"
+  ],
+  "control": "E00 base (another fresh game) and the S01/U07 pattern"
+ }
+]

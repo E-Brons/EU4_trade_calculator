@@ -1,0 +1,3 @@
+108 = {
+	add_center_of_trade_level = 1
+}

@@ -1,0 +1,8 @@
+[22:09:10] start: GBR 1789.07.14
+[22:10:37] step 0: {'date': '1789.08.01', 'outfname': '../out/obs-1789-GBR/GBR_1789.08.01.eu4'}
+[22:10:37]   run to 1789.08.01
+[22:11:37] step 1: {'date': '1789.09.01', 'outfname': '../out/obs-1789-GBR/GBR_1789.09.01.eu4'}
+[22:11:37]   run to 1789.09.01
+[22:12:37] step 2: {'date': '1789.10.01', 'outfname': '../out/obs-1789-GBR/GBR_1789.10.01.eu4'}
+[22:12:37]   run to 1789.10.01
+[22:13:43] restored dlc_load.json and continue_game.json

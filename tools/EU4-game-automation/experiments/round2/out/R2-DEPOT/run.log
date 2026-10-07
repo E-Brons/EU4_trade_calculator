@@ -1,0 +1,8 @@
+[00:47:36] start: VEN ../../out/E00/base_1444.12.01.eu4
+[00:49:05] step 0: {'effects': '../effects/depot_venezia.txt'}
+[00:49:05]   effects: ../effects/depot_venezia.txt
+[00:49:34] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-DEPOT/t1_1445.01.01.eu4'}
+[00:49:34]   run to 1445.01.01
+[00:50:34] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-DEPOT/t2_1445.02.01.eu4'}
+[00:50:34]   run to 1445.02.01
+[00:51:34] restored dlc_load.json and continue_game.json

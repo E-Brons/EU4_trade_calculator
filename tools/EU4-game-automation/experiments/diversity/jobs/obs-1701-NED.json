@@ -1,0 +1,24 @@
+{
+ "nation": "NED",
+ "start_date": "1701.09.01",
+ "base_save": null,
+ "mods": [],
+ "observe": true,
+ "script": [
+  {
+   "date": "1701.10.01",
+   "outfname": "../out/obs-1701-NED/NED_1701.10.01.eu4"
+  },
+  {
+   "date": "1701.11.01",
+   "outfname": "../out/obs-1701-NED/NED_1701.11.01.eu4"
+  },
+  {
+   "date": "1701.12.01",
+   "outfname": "../out/obs-1701-NED/NED_1701.12.01.eu4"
+  }
+ ],
+ "ai_off": [
+  "NED"
+ ]
+}

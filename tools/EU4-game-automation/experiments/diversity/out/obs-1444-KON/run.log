@@ -1,0 +1,8 @@
+[20:56:23] start: KON 1444.11.11
+[20:57:30] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-KON/KON_1444.12.01.eu4'}
+[20:57:30]   run to 1444.12.01
+[20:58:27] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-KON/KON_1445.01.01.eu4'}
+[20:58:27]   run to 1445.01.01
+[20:59:26] step 2: {'date': '1445.02.01', 'outfname': '../out/obs-1444-KON/KON_1445.02.01.eu4'}
+[20:59:26]   run to 1445.02.01
+[21:00:27] restored dlc_load.json and continue_game.json

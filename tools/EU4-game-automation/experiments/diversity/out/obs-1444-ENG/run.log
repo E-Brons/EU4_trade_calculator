@@ -1,0 +1,6 @@
+[18:51:47] start: ENG 1444.11.11
+[18:53:25] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-ENG/A_ENG_1444.12.01.eu4'}
+[18:53:25]   run to 1444.12.01
+[18:54:24] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-ENG/C_ENG_1445.01.01.eu4'}
+[18:54:24]   run to 1445.01.01
+[18:55:21] restored dlc_load.json and continue_game.json

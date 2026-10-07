@@ -1,0 +1,24 @@
+{
+ "nation": "QNG",
+ "start_date": "1756.05.15",
+ "base_save": null,
+ "mods": [],
+ "observe": true,
+ "script": [
+  {
+   "date": "1756.06.01",
+   "outfname": "../out/obs-1756-QNG/QNG_1756.06.01.eu4"
+  },
+  {
+   "date": "1756.07.01",
+   "outfname": "../out/obs-1756-QNG/QNG_1756.07.01.eu4"
+  },
+  {
+   "date": "1756.08.01",
+   "outfname": "../out/obs-1756-QNG/QNG_1756.08.01.eu4"
+  }
+ ],
+ "ai_off": [
+  "QNG"
+ ]
+}

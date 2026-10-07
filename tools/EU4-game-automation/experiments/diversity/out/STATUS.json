@@ -1,0 +1,720 @@
+{
+ "obs-1444-CAS": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-CAS/A_CAS_1444.12.01.eu4",
+    "sha256": "b2a30945844e10dff5b934dad6ca0d3aef2e3216cc67ad7df8ee9a650b5e83c5",
+    "bytes": 34856282,
+    "date": "1444.12.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-CAS/C_CAS_1445.01.01.eu4",
+    "sha256": "1494459e2d99910066c8d9df75dda9a2f53e525666b0ef8e6e1e11560a05ed09",
+    "bytes": 35652955,
+    "date": "1445.1.1"
+   }
+  ],
+  "seconds": 189
+ },
+ "obs-1444-ENG": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-ENG/A_ENG_1444.12.01.eu4",
+    "sha256": "db954dce2753b9a9541565a270d8de6da823bf1a06b11f5618416cf558bf22d4",
+    "bytes": 34859698,
+    "date": "1444.12.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-ENG/C_ENG_1445.01.01.eu4",
+    "sha256": "13f7bb81f5ad6d4c10c0ab6d37b5d4d3174e84e589225ebb4fdc823ee72c587a",
+    "bytes": 35746546,
+    "date": "1445.1.1"
+   }
+  ],
+  "seconds": 214
+ },
+ "obs-1444-FRA": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-FRA/A_FRA_1444.12.01.eu4",
+    "sha256": "0c9197230efb75365b51e8069f811eee22e92d2fafde82fd5bbe71504061cf78",
+    "bytes": 34831178,
+    "date": "1444.12.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-FRA/C_FRA_1445.01.01.eu4",
+    "sha256": "ea67d88b1faf856a1e267ad0940d7d2e8418e31b1e928381a96f268db75d6488",
+    "bytes": 35677737,
+    "date": "1445.1.1"
+   }
+  ],
+  "seconds": 175
+ },
+ "obs-1444-TUR": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-TUR/A_TUR_1444.12.01.eu4",
+    "sha256": "8175a7f8902d93f6461aa86a8f28e6944642c103919100857e2f0b0a582d26c4",
+    "bytes": 34850941,
+    "date": "1444.12.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-TUR/C_TUR_1445.01.01.eu4",
+    "sha256": "b14fe0584f03606dd4567c85c78b3d5b41a58aa2bc2de31c205ad634b488882a",
+    "bytes": 35659711,
+    "date": "1445.1.1"
+   }
+  ],
+  "seconds": 227
+ },
+ "obs-1444-POR": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-POR/POR_1444.12.01.eu4",
+    "sha256": "62cd33fc66e016957e3acdb02acf884c3b0af25f52b68cfd705c880afeda69d1",
+    "bytes": 34879751,
+    "date": "1444.12.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-POR/POR_1445.01.01.eu4",
+    "sha256": "42db1173dc192b0fb8c86d394220a9fd35ad99e7e798e06ce8b31aa4ab47a16b",
+    "bytes": 35782598,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-POR/POR_1445.02.01.eu4",
+    "sha256": "51423c82de44ff93d2fd037a041946b0fcfb759b1159693604dc10b3f22dc937",
+    "bytes": 36256822,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 248
+ },
+ "obs-1444-MAM": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-MAM/MAM_1444.12.01.eu4",
+    "sha256": "51cdba3206c7827a46fda6a117dec58024ebfcec7e20f7ad87263ada92b8ad1d",
+    "bytes": 34848397,
+    "date": "1444.12.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-MAM/MAM_1445.01.01.eu4",
+    "sha256": "e6a14b72e4bde59ea41787237f97e8d33a1757c7095a1233ffc15cf088d1c372",
+    "bytes": 35635284,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-MAM/MAM_1445.02.01.eu4",
+    "sha256": "08b0cdf21b96d23ce96787178ff5058e0f4405e438e517df7cfcd80b4d7e4820",
+    "bytes": 36138807,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 251
+ },
+ "obs-1444-MNG": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-MNG/MNG_1444.12.01.eu4",
+    "sha256": "0cb56acd2bb3fd0326c1c7b96c81c2b660c5e4e2885d7cd2e229b718f4e74544",
+    "bytes": 34899692,
+    "date": "1444.12.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-MNG/MNG_1445.01.01.eu4",
+    "sha256": "6fc1b1c18f0fc2f56a2b57136e5e779b4a68ef40693e9a91c41a3b0704a9a8f4",
+    "bytes": 35695487,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-MNG/MNG_1445.02.01.eu4",
+    "sha256": "3333eeceeb2bd378587318add991f9d7d1993b0cfaa384e74b93e1a11dd1624c",
+    "bytes": 36233033,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 247
+ },
+ "obs-1444-ASH": {
+  "ok": false,
+  "steps": [],
+  "error": "JobError: could not write a save as ASH (player=O00)",
+  "seconds": 157,
+  "first_attempt_error": "JobError: could not write a save as ASH (player=O00)"
+ },
+ "obs-1444-VIJ": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-VIJ/VIJ_1444.12.01.eu4",
+    "sha256": "d0cd12b6aebcbd78c427dcbfd70eb1edc01f658711014da87d56eea971df35ce",
+    "bytes": 34878734,
+    "date": "1444.12.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-VIJ/VIJ_1445.01.01.eu4",
+    "sha256": "51ea25651ac9db90f85ae1e659668dab2f12caee68207231f5ccc1caa832c565",
+    "bytes": 35705844,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-VIJ/VIJ_1445.02.01.eu4",
+    "sha256": "936d93381f491b70788bb884bd4794e7bf3fd70d196a0fe3698612c82b22dfcb",
+    "bytes": 36204369,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 246,
+  "first_attempt_error": "WorkerError: RuntimeError: console did not accept text: 'ai VIJ'"
+ },
+ "obs-1444-MLC": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-MLC/MLC_1444.12.01.eu4",
+    "sha256": "307cf9ca2650103286ce2dc9e9fa04a2029402800025ed80fa0128f36e9842d2",
+    "bytes": 34823816,
+    "date": "1444.12.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-MLC/MLC_1445.01.01.eu4",
+    "sha256": "5d494e590a120b0d92f14bef14e15713434a2aff4195a3b06ed2a3416e5adf79",
+    "bytes": 35671382,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-MLC/MLC_1445.02.01.eu4",
+    "sha256": "3769638e0829302d6e624f288bf78090cdda84be974226e4cb90aebd5162e2b9",
+    "bytes": 36174479,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 247
+ },
+ "obs-1444-KON": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-KON/KON_1444.12.01.eu4",
+    "sha256": "1bda9a1290d360507b31ff8c3a481572b0a0658c85926ef907cd65fd531d8c77",
+    "bytes": 34868685,
+    "date": "1444.12.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-KON/KON_1445.01.01.eu4",
+    "sha256": "450efe90526fe0264b9cfd10bff0c9f8d843e187ba635e67783d7b8c4240a19a",
+    "bytes": 35786591,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-KON/KON_1445.02.01.eu4",
+    "sha256": "c39fd754e5cf0d79c31fe2861528fb83f783adc55cb861fe122f16139468cf20",
+    "bytes": 36278541,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 244
+ },
+ "obs-1444-MOS": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-MOS/MOS_1444.12.01.eu4",
+    "sha256": "6ed64c3fcd4d8d65b926f744e9a9655470cb6e9a8efb9c1ae7adbdcc1d558a12",
+    "bytes": 34882883,
+    "date": "1444.12.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-MOS/MOS_1445.01.01.eu4",
+    "sha256": "6150b7b4349ad8b91dafeec5853d8369f9d6dde1674d3525f88448107c803cf3",
+    "bytes": 35691455,
+    "date": "1445.1.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1444-MOS/MOS_1445.02.01.eu4",
+    "sha256": "66a37393416805b3cfbe42e0a867aa7d14c3cba43a595675281c555e967648f1",
+    "bytes": 36173245,
+    "date": "1445.2.1"
+   }
+  ],
+  "seconds": 246
+ },
+ "obs-1492-CAS": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1492-CAS/CAS_1492.02.01.eu4",
+    "sha256": "327c700998468c738dd9eb9eeb3743e20711638e7188d76059274bff5e11a960",
+    "bytes": 36765964,
+    "date": "1492.2.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1492-CAS/CAS_1492.03.01.eu4",
+    "sha256": "bb7f03e8f5f3ee8a492993e89c6cc932a253bc5c2e511f28bd2e5ec4aa1c1d96",
+    "bytes": 37239643,
+    "date": "1492.3.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1492-CAS/CAS_1492.04.01.eu4",
+    "sha256": "dffc402728b80e5785067e6808e3c6b26c477eb16c307d360d6c3149092675cc",
+    "bytes": 37392313,
+    "date": "1492.4.1"
+   }
+  ],
+  "seconds": 265
+ },
+ "obs-1492-POR": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1492-POR/POR_1492.02.01.eu4",
+    "sha256": "06934594e342e44119d2c7b67dfaff3f40c69576123bcc7c152aff53470a8a54",
+    "bytes": 36864748,
+    "date": "1492.2.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1492-POR/POR_1492.03.01.eu4",
+    "sha256": "a38baab1d38f596a1acdc5a6746d1e19ba252709536c588a4c9bc46a3de934af",
+    "bytes": 37264381,
+    "date": "1492.3.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1492-POR/POR_1492.04.01.eu4",
+    "sha256": "761208efa4003a1deeb7ad8bc705438959d24404f4bf880f4398400eb3cd712e",
+    "bytes": 37453455,
+    "date": "1492.4.1"
+   }
+  ],
+  "seconds": 255
+ },
+ "obs-1492-TUR": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1492-TUR/TUR_1492.02.01.eu4",
+    "sha256": "2c209097e8981a91079cb76ebb7799baa7787bad721ee794fccae77961e7b6d3",
+    "bytes": 36790624,
+    "date": "1492.2.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1492-TUR/TUR_1492.03.01.eu4",
+    "sha256": "65447ba31d93b2585fd68a2f923760efc4c0f4ca71333e3135a68ed74353ae6b",
+    "bytes": 37275512,
+    "date": "1492.3.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1492-TUR/TUR_1492.04.01.eu4",
+    "sha256": "8585a6eb0ed127fe9b48b718787278b0f2ab2a14da06cc7af0238829da4a3305",
+    "bytes": 37468559,
+    "date": "1492.4.1"
+   }
+  ],
+  "seconds": 243
+ },
+ "obs-1618-NED": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1618-NED/NED_1618.06.01.eu4",
+    "sha256": "ce350bf241d4ea3f80c1b3a1ff266296fe3591cf9eca105b26cfc1a7d2f3e81c",
+    "bytes": 44801810,
+    "date": "1618.6.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1618-NED/NED_1618.07.01.eu4",
+    "sha256": "c5799fa13db63bdc3c97c4e280838fb4e86a541f584ae930598d2e5f4cc2921e",
+    "bytes": 45892723,
+    "date": "1618.7.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1618-NED/NED_1618.08.01.eu4",
+    "sha256": "06e871b645342f331a06764c7085025eb7abe0890608e13d36241ac83d18cad9",
+    "bytes": 46202111,
+    "date": "1618.8.1"
+   }
+  ],
+  "seconds": 261,
+  "first_attempt_error": "WorkerError: RuntimeError: console did not accept text: 'ai NED'"
+ },
+ "obs-1618-ENG": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1618-ENG/ENG_1618.06.01.eu4",
+    "sha256": "78642ba8aa75c0b12d8b11d94c0779efa465d35382866d8d8d7318097e52e4f9",
+    "bytes": 44681962,
+    "date": "1618.6.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1618-ENG/ENG_1618.07.01.eu4",
+    "sha256": "c45d387e6f7787af2e030d8a48c99930287b425d0e021e6e5784fd897f95cdae",
+    "bytes": 45768389,
+    "date": "1618.7.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1618-ENG/ENG_1618.08.01.eu4",
+    "sha256": "adff69de0f67b2d6f192b44028f51b4bccc26166dd48945c6ee9fcbf0d2053ed",
+    "bytes": 46217387,
+    "date": "1618.8.1"
+   }
+  ],
+  "seconds": 269
+ },
+ "obs-1618-SPA": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1618-SPA/SPA_1618.06.01.eu4",
+    "sha256": "8be14adc95a9fc94593190d97d959143a155aa0bf0ac6bfba480273fb8f4df58",
+    "bytes": 44733856,
+    "date": "1618.6.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1618-SPA/SPA_1618.07.01.eu4",
+    "sha256": "a71e0898c96450144cb0c2fdc455f1c4e98498674d09ff00d8a4e6fa4abb7165",
+    "bytes": 45848261,
+    "date": "1618.7.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1618-SPA/SPA_1618.08.01.eu4",
+    "sha256": "0ad205856b52d3f3080c03c2828b048ae7bc75b5c8a9df45cca5e5a6ad7f3b3a",
+    "bytes": 46163138,
+    "date": "1618.8.1"
+   }
+  ],
+  "seconds": 268
+ },
+ "obs-1618-MUG": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1618-MUG/MUG_1618.06.01.eu4",
+    "sha256": "e4a6531e3df151320b8ed147e9c3112b630c609c5035a4ba9279314c44cdb299",
+    "bytes": 44666402,
+    "date": "1618.6.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1618-MUG/MUG_1618.07.01.eu4",
+    "sha256": "2a87c93b1be3c5dee4acab0c54712dd3552b3ff4c8a99143236dd18f1be7012f",
+    "bytes": 45978282,
+    "date": "1618.7.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1618-MUG/MUG_1618.08.01.eu4",
+    "sha256": "0f4b17c87d7d7e1775d6ffbf61464ca6cfec370a56769c428199e838048f7764",
+    "bytes": 46371157,
+    "date": "1618.8.1"
+   }
+  ],
+  "seconds": 273
+ },
+ "obs-1701-ENG": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1701-ENG/ENG_1701.10.01.eu4",
+    "sha256": "aab00cefeebd8261b0582163373e12d420e15d099026bdf2568c3c09b8a12476",
+    "bytes": 49324907,
+    "date": "1701.10.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1701-ENG/ENG_1701.11.01.eu4",
+    "sha256": "198859ae6d05b1520469685af5f9d48d779019c430f47ac1d84c4cc001a00f11",
+    "bytes": 49890564,
+    "date": "1701.11.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1701-ENG/ENG_1701.12.01.eu4",
+    "sha256": "5a9dd29ed82bb6837a8874a321fa5573218af75727b0131b0aac204715c14909",
+    "bytes": 50148133,
+    "date": "1701.12.1"
+   }
+  ],
+  "seconds": 287
+ },
+ "obs-1701-NED": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1701-NED/NED_1701.10.01.eu4",
+    "sha256": "dc053d2545e519e8648d8ae2e411c0e092c2ffcabba9dbbdbba614aee07ab2c1",
+    "bytes": 49406241,
+    "date": "1701.10.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1701-NED/NED_1701.11.01.eu4",
+    "sha256": "cb0348c1bd2b2a5ea82bb0b14544b032c7e3a95216b0e055e525eaa7bafaa9ab",
+    "bytes": 49841286,
+    "date": "1701.11.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1701-NED/NED_1701.12.01.eu4",
+    "sha256": "6e7b20b9de368b004f8bc3ac1ae55965c30503f0d7161cab254b8068b1e7aa29",
+    "bytes": 50152597,
+    "date": "1701.12.1"
+   }
+  ],
+  "seconds": 284
+ },
+ "obs-1701-MUG": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1701-MUG/MUG_1701.10.01.eu4",
+    "sha256": "40ff06e041a6d94a4f0fd69d8f165f86222a323119ac207d4a46a4963f5a6cba",
+    "bytes": 49337651,
+    "date": "1701.10.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1701-MUG/MUG_1701.11.01.eu4",
+    "sha256": "22166b6275d9fea33bb6723e44d9a9af4c9500b6e47607ae2f7a8473343c069f",
+    "bytes": 49821325,
+    "date": "1701.11.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1701-MUG/MUG_1701.12.01.eu4",
+    "sha256": "ef26cef5770c088f324d8cff51682ee70cc0b67aa7ff727053f8c334d335cc46",
+    "bytes": 50211685,
+    "date": "1701.12.1"
+   }
+  ],
+  "seconds": 261
+ },
+ "obs-1756-GBR": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1756-GBR/GBR_1756.06.01.eu4",
+    "sha256": "d7c45a5a6282b6ee1afd7567f2732a5122b315863f071d1dc22f919b6fa4f11d",
+    "bytes": 55522117,
+    "date": "1756.6.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1756-GBR/GBR_1756.07.01.eu4",
+    "sha256": "5551074146533c4d3e650d4a6cd27fc8c03c64b2dca74828b9c15f746137e83d",
+    "bytes": 56471059,
+    "date": "1756.7.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1756-GBR/GBR_1756.08.01.eu4",
+    "sha256": "1e4733ba16d29fc16e8c634f99f2819312e6c6af6eeb5600affe81ef1d340bfb",
+    "bytes": 56886397,
+    "date": "1756.8.1"
+   }
+  ],
+  "seconds": 271
+ },
+ "obs-1756-PRU": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1756-PRU/PRU_1756.06.01.eu4",
+    "sha256": "6dabfc01886f87dd4bf527c232feeb204a615daa72739654e8fa6d80135d4e67",
+    "bytes": 55537601,
+    "date": "1756.6.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1756-PRU/PRU_1756.07.01.eu4",
+    "sha256": "e77fddaf45171cd3f2aec3ff62708fa72b3a7d86cd1b0f58666bfd47d85df33d",
+    "bytes": 56503063,
+    "date": "1756.7.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1756-PRU/PRU_1756.08.01.eu4",
+    "sha256": "cdeff6517720d608251c6e46c6716838095529e4ec50ab66f2b7c26830bb5e63",
+    "bytes": 56981459,
+    "date": "1756.8.1"
+   }
+  ],
+  "seconds": 269
+ },
+ "obs-1756-QNG": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1756-QNG/QNG_1756.06.01.eu4",
+    "sha256": "ddc949aa0ca455e82aafef261191c651aa5abda295d070762e1d133d92f3b80a",
+    "bytes": 55418526,
+    "date": "1756.6.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1756-QNG/QNG_1756.07.01.eu4",
+    "sha256": "a8fd45d07c2e48c035315d30406cf4fde79abec44fd81d5f0169777ecfc374e5",
+    "bytes": 56513652,
+    "date": "1756.7.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1756-QNG/QNG_1756.08.01.eu4",
+    "sha256": "c63d3acc175ee4f082625f0a59e14e72754fb175350b286df527e82d057a14f4",
+    "bytes": 56878186,
+    "date": "1756.8.1"
+   }
+  ],
+  "seconds": 275,
+  "first_attempt_error": "JobError: expected screen ['mode'], last seen {'screen': 'select', 'scores': {'menu': 34.9, 'select': 13.5, 'mode': 43.8, 'intro': 30.6, 'ingame': 34.1, 'achieve': 37.7}}"
+ },
+ "obs-1789-GBR": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1789-GBR/GBR_1789.08.01.eu4",
+    "sha256": "9fb8b77940d369a286b2ecc09e96d8d2ba54e43e73e25fbfe78ab49ae4bd2843",
+    "bytes": 56657032,
+    "date": "1789.8.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1789-GBR/GBR_1789.09.01.eu4",
+    "sha256": "24af017413984edc79b0bf400aa53c1eaba5f920e0de19c4727d072e28503805",
+    "bytes": 57808087,
+    "date": "1789.9.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1789-GBR/GBR_1789.10.01.eu4",
+    "sha256": "7d7bc658c2168d6f100862961ac1c82161aeb59f6a46c09c2f96b082ab78d4c8",
+    "bytes": 58341896,
+    "date": "1789.10.1"
+   }
+  ],
+  "seconds": 273
+ },
+ "obs-1789-FRA": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1789-FRA/FRA_1789.08.01.eu4",
+    "sha256": "06b35f0a97546be427d73a21e6ade494967b210072ca26a4a852c9eaf9981c91",
+    "bytes": 56653601,
+    "date": "1789.8.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1789-FRA/FRA_1789.09.01.eu4",
+    "sha256": "0f1e478647e2ad4811cb5b3f0cf7d3d8ed7be8be00c5d3d3dda99a27d7a1df8c",
+    "bytes": 58030893,
+    "date": "1789.9.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1789-FRA/FRA_1789.10.01.eu4",
+    "sha256": "5ddf9a24932e01de8b842698d1789f53e53c2d0c9e02901b71afe1955e77e11d",
+    "bytes": 58442467,
+    "date": "1789.10.1"
+   }
+  ],
+  "seconds": 277
+ },
+ "obs-1789-USA": {
+  "ok": true,
+  "steps": [
+   {
+    "step": 0,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1789-USA/USA_1789.08.01.eu4",
+    "sha256": "7a0987e0375f0358d55c8f95c1f56ff82d6981c3bdbae4f7a5a3d57a043ba9d1",
+    "bytes": 56620234,
+    "date": "1789.8.1"
+   },
+   {
+    "step": 1,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1789-USA/USA_1789.09.01.eu4",
+    "sha256": "93608be33541242c46681ab86cc63e0c65b014fc9bcfe3ef89caf6b068847b14",
+    "bytes": 57864827,
+    "date": "1789.9.1"
+   },
+   {
+    "step": 2,
+    "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/diversity/jobs/../out/obs-1789-USA/USA_1789.10.01.eu4",
+    "sha256": "97dc6abe460ecf465278b75b5533d7d9d4a3ee649f0a447fff0ec6cb7db2b710",
+    "bytes": 58313548,
+    "date": "1789.10.1"
+   }
+  ],
+  "seconds": 259
+ },
+ "obs-1444-JAP": {
+  "ok": false,
+  "steps": [],
+  "error": "JobError: could not write a save as JAP (player=O00)",
+  "seconds": 156,
+  "first_attempt_error": "JobError: could not write a save as JAP (player=O00)"
+ }
+}

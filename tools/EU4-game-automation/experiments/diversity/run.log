@@ -1,0 +1,522 @@
+installed /Users/elkanabronstein/Documents/Paradox Interactive/Europa Universalis IV/mod/eu4_experiments
+obs-1444-POR [18:45:45] start: POR 1444.11.11
+obs-1444-POR [18:46:51] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-POR/A_POR_1444.12.01.eu4'}
+obs-1444-POR [18:46:51]   run to 1444.12.01
+obs-1444-POR [18:47:43] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-POR/C_POR_1445.01.01.eu4'}
+obs-1444-POR [18:47:43]   run to 1445.01.01
+obs-1444-POR [18:48:39] restored dlc_load.json and continue_game.json
+obs-1444-POR: OK in 173 s
+obs-1444-CAS [18:48:39] start: CAS 1444.11.11
+obs-1444-CAS [18:49:44] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-CAS/A_CAS_1444.12.01.eu4'}
+obs-1444-CAS [18:49:44]   run to 1444.12.01
+obs-1444-CAS [18:50:41] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-CAS/C_CAS_1445.01.01.eu4'}
+obs-1444-CAS [18:50:41]   run to 1445.01.01
+obs-1444-CAS [18:51:47] restored dlc_load.json and continue_game.json
+obs-1444-CAS: OK in 189 s
+obs-1444-ENG [18:51:47] start: ENG 1444.11.11
+obs-1444-ENG [18:53:25] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-ENG/A_ENG_1444.12.01.eu4'}
+obs-1444-ENG [18:53:25]   run to 1444.12.01
+obs-1444-ENG [18:54:24] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-ENG/C_ENG_1445.01.01.eu4'}
+obs-1444-ENG [18:54:24]   run to 1445.01.01
+obs-1444-ENG [18:55:21] restored dlc_load.json and continue_game.json
+obs-1444-ENG: OK in 214 s
+obs-1444-FRA [18:55:21] start: FRA 1444.11.11
+obs-1444-FRA [18:56:26] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-FRA/A_FRA_1444.12.01.eu4'}
+obs-1444-FRA [18:56:26]   run to 1444.12.01
+obs-1444-FRA [18:57:21] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-FRA/C_FRA_1445.01.01.eu4'}
+obs-1444-FRA [18:57:21]   run to 1445.01.01
+obs-1444-FRA [18:58:16] restored dlc_load.json and continue_game.json
+obs-1444-FRA: OK in 175 s
+obs-1444-TUR [18:58:16] start: TUR 1444.11.11
+obs-1444-TUR [18:59:21] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-TUR/A_TUR_1444.12.01.eu4'}
+obs-1444-TUR [18:59:21]   run to 1444.12.01
+obs-1444-TUR [19:00:16] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-TUR/C_TUR_1445.01.01.eu4'}
+obs-1444-TUR [19:00:16]   run to 1445.01.01
+obs-1444-TUR [19:02:03] restored dlc_load.json and continue_game.json
+obs-1444-TUR: OK in 227 s
+obs-1444-MAM [19:02:03] start: MAM 1444.11.11
+obs-1444-MAM [19:02:28] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1444-MAM [19:02:30] restored dlc_load.json and continue_game.json
+obs-1444-MAM: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1444-MAM [19:02:30] start: MAM 1444.11.11
+obs-1444-MAM [19:02:52] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1444-MAM [19:02:53] restored dlc_load.json and continue_game.json
+obs-1444-MAM: FAILED in 23 s
+obs-1444-MNG [19:02:53] start: MNG 1444.11.11
+obs-1444-MNG [19:03:15] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1444-MNG [19:03:17] restored dlc_load.json and continue_game.json
+obs-1444-MNG: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1444-MNG [19:03:17] start: MNG 1444.11.11
+obs-1444-MNG [19:03:39] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1444-MNG [19:03:41] restored dlc_load.json and continue_game.json
+obs-1444-MNG: FAILED in 24 s
+obs-1444-ASH [19:03:41] start: ASH 1444.11.11
+obs-1444-ASH [19:04:03] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1444-ASH [19:04:04] restored dlc_load.json and continue_game.json
+obs-1444-ASH: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1444-ASH [19:04:04] start: ASH 1444.11.11
+obs-1444-ASH [19:04:27] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1444-ASH [19:04:28] restored dlc_load.json and continue_game.json
+obs-1444-ASH: FAILED in 24 s
+obs-1444-VIJ [19:04:28] start: VIJ 1444.11.11
+obs-1444-VIJ [19:04:50] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1444-VIJ [19:04:52] restored dlc_load.json and continue_game.json
+obs-1444-VIJ: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1444-VIJ [19:04:52] start: VIJ 1444.11.11
+obs-1444-VIJ [19:05:14] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1444-VIJ [19:05:15] restored dlc_load.json and continue_game.json
+obs-1444-VIJ: FAILED in 23 s
+obs-1444-MLC [19:05:15] start: MLC 1444.11.11
+obs-1444-MLC [19:05:37] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1444-MLC [19:05:39] restored dlc_load.json and continue_game.json
+obs-1444-MLC: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1444-MLC [19:05:39] start: MLC 1444.11.11
+obs-1444-MLC [19:06:01] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1444-MLC [19:06:02] restored dlc_load.json and continue_game.json
+obs-1444-MLC: FAILED in 24 s
+obs-1444-KON [19:06:02] start: KON 1444.11.11
+obs-1444-KON [19:06:24] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1444-KON [19:06:25] restored dlc_load.json and continue_game.json
+obs-1444-KON: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1444-KON [19:06:25] start: KON 1444.11.11
+obs-1444-KON [19:06:48] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1444-KON [19:06:49] restored dlc_load.json and continue_game.json
+obs-1444-KON: FAILED in 24 s
+obs-1444-MOS [19:06:49] start: MOS 1444.11.11
+obs-1444-MOS [19:07:12] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1444-MOS [19:07:13] restored dlc_load.json and continue_game.json
+obs-1444-MOS: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1444-MOS [19:07:13] start: MOS 1444.11.11
+obs-1444-MOS [19:07:36] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1444-MOS [19:07:37] restored dlc_load.json and continue_game.json
+obs-1444-MOS: FAILED in 24 s
+obs-1492-CAS [19:07:37] start: CAS 1492.01.01
+obs-1492-CAS [19:07:59] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1492-CAS [19:08:01] restored dlc_load.json and continue_game.json
+obs-1492-CAS: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1492-CAS [19:08:01] start: CAS 1492.01.01
+obs-1492-CAS [19:08:23] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1492-CAS [19:08:24] restored dlc_load.json and continue_game.json
+obs-1492-CAS: FAILED in 23 s
+obs-1492-POR [19:08:24] start: POR 1492.01.01
+obs-1492-POR [19:08:46] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1492-POR [19:08:48] restored dlc_load.json and continue_game.json
+obs-1492-POR: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1492-POR [19:08:48] start: POR 1492.01.01
+obs-1492-POR [19:09:11] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1492-POR [19:09:12] restored dlc_load.json and continue_game.json
+obs-1492-POR: FAILED in 24 s
+obs-1492-TUR [19:09:12] start: TUR 1492.01.01
+obs-1492-TUR [19:09:37] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1492-TUR [19:09:38] restored dlc_load.json and continue_game.json
+obs-1492-TUR: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1492-TUR [19:09:38] start: TUR 1492.01.01
+obs-1492-TUR [19:10:01] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1492-TUR [19:10:02] restored dlc_load.json and continue_game.json
+obs-1492-TUR: FAILED in 24 s
+obs-1618-NED [19:10:02] start: NED 1618.05.23
+obs-1618-NED [19:10:27] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1618-NED [19:10:28] restored dlc_load.json and continue_game.json
+obs-1618-NED: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1618-NED [19:10:28] start: NED 1618.05.23
+obs-1618-NED [19:10:53] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1618-NED [19:10:54] restored dlc_load.json and continue_game.json
+obs-1618-NED: FAILED in 26 s
+obs-1618-ENG [19:10:54] start: ENG 1618.05.23
+obs-1618-ENG [19:11:16] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1618-ENG [19:11:18] restored dlc_load.json and continue_game.json
+obs-1618-ENG: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1618-ENG [19:11:18] start: ENG 1618.05.23
+obs-1618-ENG [19:11:40] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1618-ENG [19:11:42] restored dlc_load.json and continue_game.json
+obs-1618-ENG: FAILED in 24 s
+obs-1618-SPA [19:11:42] start: SPA 1618.05.23
+obs-1618-SPA [19:12:04] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1618-SPA [19:12:06] restored dlc_load.json and continue_game.json
+obs-1618-SPA: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1618-SPA [19:12:06] start: SPA 1618.05.23
+obs-1618-SPA [19:12:28] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1618-SPA [19:12:30] restored dlc_load.json and continue_game.json
+obs-1618-SPA: FAILED in 24 s
+obs-1618-MUG [19:12:30] start: MUG 1618.05.23
+obs-1618-MUG [19:12:52] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1618-MUG [19:12:53] restored dlc_load.json and continue_game.json
+obs-1618-MUG: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1618-MUG [19:12:53] start: MUG 1618.05.23
+obs-1618-MUG [19:13:16] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1618-MUG [19:13:18] restored dlc_load.json and continue_game.json
+obs-1618-MUG: FAILED in 24 s
+obs-1701-ENG [19:13:18] start: ENG 1701.09.01
+obs-1701-ENG [19:13:40] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1701-ENG [19:13:41] restored dlc_load.json and continue_game.json
+obs-1701-ENG: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1701-ENG [19:13:41] start: ENG 1701.09.01
+obs-1701-ENG [19:14:04] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1701-ENG [19:14:05] restored dlc_load.json and continue_game.json
+obs-1701-ENG: FAILED in 24 s
+obs-1701-NED [19:14:05] start: NED 1701.09.01
+obs-1701-NED [19:14:28] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1701-NED [19:14:29] restored dlc_load.json and continue_game.json
+obs-1701-NED: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1701-NED [19:14:29] start: NED 1701.09.01
+obs-1701-NED [19:14:51] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1701-NED [19:14:53] restored dlc_load.json and continue_game.json
+obs-1701-NED: FAILED in 24 s
+obs-1701-MUG [19:14:53] start: MUG 1701.09.01
+obs-1701-MUG [19:15:15] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1701-MUG [19:15:17] restored dlc_load.json and continue_game.json
+obs-1701-MUG: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1701-MUG [19:15:17] start: MUG 1701.09.01
+obs-1701-MUG [19:15:39] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1701-MUG [19:15:41] restored dlc_load.json and continue_game.json
+obs-1701-MUG: FAILED in 24 s
+obs-1756-GBR [19:15:41] start: GBR 1756.05.15
+obs-1756-GBR [19:16:03] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1756-GBR [19:16:04] restored dlc_load.json and continue_game.json
+obs-1756-GBR: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1756-GBR [19:16:04] start: GBR 1756.05.15
+obs-1756-GBR [19:16:20] FAILED: WorkerError: worker not running (start it in your own iTerm tab: python3 tools/EU4-game-automation/worker.py)
+obs-1756-GBR [19:16:21] restored dlc_load.json and continue_game.json
+obs-1756-GBR: FAILED in 17 s
+obs-1756-PRU [19:16:21] start: PRU 1756.05.15
+obs-1756-PRU [19:16:43] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1756-PRU [19:16:45] restored dlc_load.json and continue_game.json
+obs-1756-PRU: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1756-PRU [19:16:45] start: PRU 1756.05.15
+obs-1756-PRU [19:17:07] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1756-PRU [19:17:08] restored dlc_load.json and continue_game.json
+obs-1756-PRU: FAILED in 24 s
+obs-1756-QNG [19:17:08] start: QNG 1756.05.15
+obs-1756-QNG [19:17:30] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1756-QNG [19:17:32] restored dlc_load.json and continue_game.json
+obs-1756-QNG: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1756-QNG [19:17:32] start: QNG 1756.05.15
+obs-1756-QNG [19:17:54] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1756-QNG [19:17:56] restored dlc_load.json and continue_game.json
+obs-1756-QNG: FAILED in 24 s
+obs-1789-GBR [19:17:56] start: GBR 1789.07.14
+obs-1789-GBR [19:18:18] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1789-GBR [19:18:19] restored dlc_load.json and continue_game.json
+obs-1789-GBR: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1789-GBR [19:18:19] start: GBR 1789.07.14
+obs-1789-GBR [19:18:42] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1789-GBR [19:18:43] restored dlc_load.json and continue_game.json
+obs-1789-GBR: FAILED in 24 s
+obs-1789-FRA [19:18:43] start: FRA 1789.07.14
+obs-1789-FRA [19:19:06] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1789-FRA [19:19:07] restored dlc_load.json and continue_game.json
+obs-1789-FRA: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1789-FRA [19:19:07] start: FRA 1789.07.14
+obs-1789-FRA [19:19:29] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1789-FRA [19:19:31] restored dlc_load.json and continue_game.json
+obs-1789-FRA: FAILED in 23 s
+obs-1789-USA [19:19:31] start: USA 1789.07.14
+obs-1789-USA [19:19:53] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1789-USA [19:19:54] restored dlc_load.json and continue_game.json
+obs-1789-USA: failed (WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]), retrying once
+obs-1789-USA [19:19:54] start: USA 1789.07.14
+obs-1789-USA [19:20:16] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+obs-1789-USA [19:20:18] restored dlc_load.json and continue_game.json
+obs-1789-USA: FAILED in 24 s
+done: 5/28 ok
+installed /Users/elkanabronstein/Documents/Paradox Interactive/Europa Universalis IV/mod/eu4_experiments
+obs-1444-POR [20:20:29] start: POR 1444.11.11
+obs-1444-POR [20:21:39] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-POR/POR_1444.12.01.eu4'}
+obs-1444-POR [20:21:39]   run to 1444.12.01
+obs-1444-POR [20:22:37] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-POR/POR_1445.01.01.eu4'}
+obs-1444-POR [20:22:37]   run to 1445.01.01
+obs-1444-POR [20:23:37] step 2: {'date': '1445.02.01', 'outfname': '../out/obs-1444-POR/POR_1445.02.01.eu4'}
+obs-1444-POR [20:23:37]   run to 1445.02.01
+obs-1444-POR [20:24:37] restored dlc_load.json and continue_game.json
+obs-1444-POR: OK in 248 s
+obs-1444-CAS: already ok, skipped
+obs-1444-ENG: already ok, skipped
+obs-1444-FRA: already ok, skipped
+obs-1444-TUR: already ok, skipped
+obs-1444-MAM [20:24:37] start: MAM 1444.11.11
+obs-1444-MAM [20:25:48] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-MAM/MAM_1444.12.01.eu4'}
+obs-1444-MAM [20:25:48]   run to 1444.12.01
+obs-1444-MAM [20:26:46] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-MAM/MAM_1445.01.01.eu4'}
+obs-1444-MAM [20:26:46]   run to 1445.01.01
+obs-1444-MAM [20:27:46] step 2: {'date': '1445.02.01', 'outfname': '../out/obs-1444-MAM/MAM_1445.02.01.eu4'}
+obs-1444-MAM [20:27:46]   run to 1445.02.01
+obs-1444-MAM [20:28:48] restored dlc_load.json and continue_game.json
+obs-1444-MAM: OK in 251 s
+obs-1444-MNG [20:28:48] start: MNG 1444.11.11
+obs-1444-MNG [20:29:58] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-MNG/MNG_1444.12.01.eu4'}
+obs-1444-MNG [20:29:58]   run to 1444.12.01
+obs-1444-MNG [20:30:55] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-MNG/MNG_1445.01.01.eu4'}
+obs-1444-MNG [20:30:55]   run to 1445.01.01
+obs-1444-MNG [20:31:54] step 2: {'date': '1445.02.01', 'outfname': '../out/obs-1444-MNG/MNG_1445.02.01.eu4'}
+obs-1444-MNG [20:31:54]   run to 1445.02.01
+obs-1444-MNG [20:32:55] restored dlc_load.json and continue_game.json
+obs-1444-MNG: OK in 247 s
+obs-1444-ASH [20:32:55] start: ASH 1444.11.11
+obs-1444-ASH [20:34:03] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-ASH/ASH_1444.12.01.eu4'}
+obs-1444-ASH [20:34:03]   run to 1444.12.01
+obs-1444-ASH [20:34:48]   save has player=O00, expected ASH: retrying the tag switch (1)
+obs-1444-ASH [20:35:08]   save has player=O00, expected ASH: retrying the tag switch (2)
+obs-1444-ASH [20:35:29]   save has player=O00, expected ASH: retrying the tag switch (3)
+obs-1444-ASH [20:35:29] FAILED: JobError: could not write a save as ASH (player=O00)
+obs-1444-ASH [20:35:30] restored dlc_load.json and continue_game.json
+obs-1444-ASH: failed (JobError: could not write a save as ASH (player=O00)), retrying once
+obs-1444-ASH [20:35:30] start: ASH 1444.11.11
+obs-1444-ASH [20:36:38] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-ASH/ASH_1444.12.01.eu4'}
+obs-1444-ASH [20:36:38]   run to 1444.12.01
+obs-1444-ASH [20:37:22]   save has player=O00, expected ASH: retrying the tag switch (1)
+obs-1444-ASH [20:37:43]   save has player=O00, expected ASH: retrying the tag switch (2)
+obs-1444-ASH [20:38:03]   save has player=O00, expected ASH: retrying the tag switch (3)
+obs-1444-ASH [20:38:03] FAILED: JobError: could not write a save as ASH (player=O00)
+obs-1444-ASH [20:38:05] restored dlc_load.json and continue_game.json
+obs-1444-ASH: FAILED in 155 s
+obs-1444-VIJ [20:38:05] start: VIJ 1444.11.11
+obs-1444-VIJ [20:39:25] FAILED: WorkerError: RuntimeError: console did not accept text: 'ai VIJ'
+obs-1444-VIJ [20:39:26] restored dlc_load.json and continue_game.json
+obs-1444-VIJ: failed (WorkerError: RuntimeError: console did not accept text: 'ai VIJ'), retrying once
+obs-1444-VIJ [20:39:26] start: VIJ 1444.11.11
+obs-1444-VIJ [20:40:36] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-VIJ/VIJ_1444.12.01.eu4'}
+obs-1444-VIJ [20:40:36]   run to 1444.12.01
+obs-1444-VIJ [20:41:33] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-VIJ/VIJ_1445.01.01.eu4'}
+obs-1444-VIJ [20:41:33]   run to 1445.01.01
+obs-1444-VIJ [20:42:32] step 2: {'date': '1445.02.01', 'outfname': '../out/obs-1444-VIJ/VIJ_1445.02.01.eu4'}
+obs-1444-VIJ [20:42:32]   run to 1445.02.01
+obs-1444-VIJ [20:43:33] restored dlc_load.json and continue_game.json
+obs-1444-VIJ: OK in 246 s
+obs-1444-MLC [20:43:33] start: MLC 1444.11.11
+obs-1444-MLC [20:44:43] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-MLC/MLC_1444.12.01.eu4'}
+obs-1444-MLC [20:44:43]   run to 1444.12.01
+obs-1444-MLC [20:45:40] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-MLC/MLC_1445.01.01.eu4'}
+obs-1444-MLC [20:45:40]   run to 1445.01.01
+obs-1444-MLC [20:46:39] step 2: {'date': '1445.02.01', 'outfname': '../out/obs-1444-MLC/MLC_1445.02.01.eu4'}
+obs-1444-MLC [20:46:39]   run to 1445.02.01
+obs-1444-MLC [20:47:40] restored dlc_load.json and continue_game.json
+obs-1444-MLC: OK in 247 s
+obs-1444-KON [20:47:40] start: KON 1444.11.11
+obs-1444-KON [20:48:21] FAILED: WorkerError: worker not running (start it in your own iTerm tab: python3 tools/EU4-game-automation/worker.py)
+obs-1444-KON [20:48:24] restored dlc_load.json and continue_game.json
+obs-1444-KON: environment problem (WorkerError: worker not running (start it in your own iTerm tab: python3 tools/EU4-game-automation/worker.py)): stopping the batch; fix it and rerun (finished jobs are skipped)
+done: 9/10 ok
+installed /Users/elkanabronstein/Documents/Paradox Interactive/Europa Universalis IV/mod/eu4_experiments
+obs-1444-POR: already ok, skipped
+obs-1444-CAS: already ok, skipped
+obs-1444-ENG: already ok, skipped
+obs-1444-FRA: already ok, skipped
+obs-1444-TUR: already ok, skipped
+obs-1444-MAM: already ok, skipped
+obs-1444-MNG: already ok, skipped
+obs-1444-ASH [20:51:07] start: ASH 1444.11.11
+obs-1444-ASH [20:52:18] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-ASH/ASH_1444.12.01.eu4'}
+obs-1444-ASH [20:52:18]   run to 1444.12.01
+obs-1444-ASH [20:53:03]   save has player=O00, expected ASH: retrying the tag switch (1)
+obs-1444-ASH [20:53:24]   save has player=O00, expected ASH: retrying the tag switch (2)
+obs-1444-ASH [20:53:44]   save has player=O00, expected ASH: retrying the tag switch (3)
+obs-1444-ASH [20:53:44] FAILED: JobError: could not write a save as ASH (player=O00)
+obs-1444-ASH [20:53:46] restored dlc_load.json and continue_game.json
+obs-1444-ASH: failed (JobError: could not write a save as ASH (player=O00)), retrying once
+obs-1444-ASH [20:53:46] start: ASH 1444.11.11
+obs-1444-ASH [20:54:57] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-ASH/ASH_1444.12.01.eu4'}
+obs-1444-ASH [20:54:57]   run to 1444.12.01
+obs-1444-ASH [20:55:40]   save has player=O00, expected ASH: retrying the tag switch (1)
+obs-1444-ASH [20:56:01]   save has player=O00, expected ASH: retrying the tag switch (2)
+obs-1444-ASH [20:56:21]   save has player=O00, expected ASH: retrying the tag switch (3)
+obs-1444-ASH [20:56:21] FAILED: JobError: could not write a save as ASH (player=O00)
+obs-1444-ASH [20:56:23] restored dlc_load.json and continue_game.json
+obs-1444-ASH: FAILED in 157 s
+obs-1444-VIJ: already ok, skipped
+obs-1444-MLC: already ok, skipped
+obs-1444-KON [20:56:23] start: KON 1444.11.11
+obs-1444-KON [20:57:30] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-KON/KON_1444.12.01.eu4'}
+obs-1444-KON [20:57:30]   run to 1444.12.01
+obs-1444-KON [20:58:27] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-KON/KON_1445.01.01.eu4'}
+obs-1444-KON [20:58:27]   run to 1445.01.01
+obs-1444-KON [20:59:26] step 2: {'date': '1445.02.01', 'outfname': '../out/obs-1444-KON/KON_1445.02.01.eu4'}
+obs-1444-KON [20:59:26]   run to 1445.02.01
+obs-1444-KON [21:00:27] restored dlc_load.json and continue_game.json
+obs-1444-KON: OK in 244 s
+obs-1444-MOS [21:00:27] start: MOS 1444.11.11
+obs-1444-MOS [21:01:36] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-MOS/MOS_1444.12.01.eu4'}
+obs-1444-MOS [21:01:36]   run to 1444.12.01
+obs-1444-MOS [21:02:34] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-MOS/MOS_1445.01.01.eu4'}
+obs-1444-MOS [21:02:34]   run to 1445.01.01
+obs-1444-MOS [21:03:34] step 2: {'date': '1445.02.01', 'outfname': '../out/obs-1444-MOS/MOS_1445.02.01.eu4'}
+obs-1444-MOS [21:03:34]   run to 1445.02.01
+obs-1444-MOS [21:04:33] restored dlc_load.json and continue_game.json
+obs-1444-MOS: OK in 246 s
+obs-1492-CAS [21:04:33] start: CAS 1492.01.01
+obs-1492-CAS [21:05:50] step 0: {'date': '1492.02.01', 'outfname': '../out/obs-1492-CAS/CAS_1492.02.01.eu4'}
+obs-1492-CAS [21:05:50]   run to 1492.02.01
+obs-1492-CAS [21:06:57] step 1: {'date': '1492.03.01', 'outfname': '../out/obs-1492-CAS/CAS_1492.03.01.eu4'}
+obs-1492-CAS [21:06:57]   run to 1492.03.01
+obs-1492-CAS [21:07:57] step 2: {'date': '1492.04.01', 'outfname': '../out/obs-1492-CAS/CAS_1492.04.01.eu4'}
+obs-1492-CAS [21:07:57]   run to 1492.04.01
+obs-1492-CAS [21:08:59] restored dlc_load.json and continue_game.json
+obs-1492-CAS: OK in 265 s
+obs-1492-POR [21:08:59] start: POR 1492.01.01
+obs-1492-POR [21:10:14] step 0: {'date': '1492.02.01', 'outfname': '../out/obs-1492-POR/POR_1492.02.01.eu4'}
+obs-1492-POR [21:10:14]   run to 1492.02.01
+obs-1492-POR [21:11:18] step 1: {'date': '1492.03.01', 'outfname': '../out/obs-1492-POR/POR_1492.03.01.eu4'}
+obs-1492-POR [21:11:18]   run to 1492.03.01
+obs-1492-POR [21:12:15] step 2: {'date': '1492.04.01', 'outfname': '../out/obs-1492-POR/POR_1492.04.01.eu4'}
+obs-1492-POR [21:12:15]   run to 1492.04.01
+obs-1492-POR [21:13:14] restored dlc_load.json and continue_game.json
+obs-1492-POR: OK in 255 s
+obs-1492-TUR [21:13:14] start: TUR 1492.01.01
+obs-1492-TUR [21:14:23] step 0: {'date': '1492.02.01', 'outfname': '../out/obs-1492-TUR/TUR_1492.02.01.eu4'}
+obs-1492-TUR [21:14:23]   run to 1492.02.01
+obs-1492-TUR [21:15:21] step 1: {'date': '1492.03.01', 'outfname': '../out/obs-1492-TUR/TUR_1492.03.01.eu4'}
+obs-1492-TUR [21:15:21]   run to 1492.03.01
+obs-1492-TUR [21:16:18] step 2: {'date': '1492.04.01', 'outfname': '../out/obs-1492-TUR/TUR_1492.04.01.eu4'}
+obs-1492-TUR [21:16:18]   run to 1492.04.01
+obs-1492-TUR [21:17:17] restored dlc_load.json and continue_game.json
+obs-1492-TUR: OK in 243 s
+obs-1618-NED [21:17:17] start: NED 1618.05.23
+obs-1618-NED [21:18:41] step 0: {'date': '1618.06.01', 'outfname': '../out/obs-1618-NED/NED_1618.06.01.eu4'}
+obs-1618-NED [21:18:41]   run to 1618.06.01
+obs-1618-NED [21:19:39] step 1: {'date': '1618.07.01', 'outfname': '../out/obs-1618-NED/NED_1618.07.01.eu4'}
+obs-1618-NED [21:19:39]   run to 1618.07.01
+obs-1618-NED [21:20:38] step 2: {'date': '1618.08.01', 'outfname': '../out/obs-1618-NED/NED_1618.08.01.eu4'}
+obs-1618-NED [21:20:38]   run to 1618.08.01
+obs-1618-NED [21:21:58] FAILED: WorkerError: RuntimeError: console did not accept text: 'ai NED'
+obs-1618-NED [21:21:59] restored dlc_load.json and continue_game.json
+obs-1618-NED: failed (WorkerError: RuntimeError: console did not accept text: 'ai NED'), retrying once
+obs-1618-NED [21:21:59] start: NED 1618.05.23
+obs-1618-NED [21:23:23] step 0: {'date': '1618.06.01', 'outfname': '../out/obs-1618-NED/NED_1618.06.01.eu4'}
+obs-1618-NED [21:23:23]   run to 1618.06.01
+obs-1618-NED [21:24:20] step 1: {'date': '1618.07.01', 'outfname': '../out/obs-1618-NED/NED_1618.07.01.eu4'}
+obs-1618-NED [21:24:20]   run to 1618.07.01
+obs-1618-NED [21:25:20] step 2: {'date': '1618.08.01', 'outfname': '../out/obs-1618-NED/NED_1618.08.01.eu4'}
+obs-1618-NED [21:25:20]   run to 1618.08.01
+obs-1618-NED [21:26:20] restored dlc_load.json and continue_game.json
+obs-1618-NED: OK in 261 s
+obs-1618-ENG [21:26:20] start: ENG 1618.05.23
+obs-1618-ENG [21:27:44] step 0: {'date': '1618.06.01', 'outfname': '../out/obs-1618-ENG/ENG_1618.06.01.eu4'}
+obs-1618-ENG [21:27:44]   run to 1618.06.01
+obs-1618-ENG [21:28:41] step 1: {'date': '1618.07.01', 'outfname': '../out/obs-1618-ENG/ENG_1618.07.01.eu4'}
+obs-1618-ENG [21:28:41]   run to 1618.07.01
+obs-1618-ENG [21:29:48] step 2: {'date': '1618.08.01', 'outfname': '../out/obs-1618-ENG/ENG_1618.08.01.eu4'}
+obs-1618-ENG [21:29:48]   run to 1618.08.01
+obs-1618-ENG [21:30:49] restored dlc_load.json and continue_game.json
+obs-1618-ENG: OK in 269 s
+obs-1618-SPA [21:30:49] start: SPA 1618.05.23
+obs-1618-SPA [21:32:13] step 0: {'date': '1618.06.01', 'outfname': '../out/obs-1618-SPA/SPA_1618.06.01.eu4'}
+obs-1618-SPA [21:32:13]   run to 1618.06.01
+obs-1618-SPA [21:33:11] step 1: {'date': '1618.07.01', 'outfname': '../out/obs-1618-SPA/SPA_1618.07.01.eu4'}
+obs-1618-SPA [21:33:11]   run to 1618.07.01
+obs-1618-SPA [21:34:11] step 2: {'date': '1618.08.01', 'outfname': '../out/obs-1618-SPA/SPA_1618.08.01.eu4'}
+obs-1618-SPA [21:34:11]   run to 1618.08.01
+obs-1618-SPA [21:35:17] restored dlc_load.json and continue_game.json
+obs-1618-SPA: OK in 268 s
+obs-1618-MUG [21:35:17] start: MUG 1618.05.23
+obs-1618-MUG [21:36:41] step 0: {'date': '1618.06.01', 'outfname': '../out/obs-1618-MUG/MUG_1618.06.01.eu4'}
+obs-1618-MUG [21:36:41]   run to 1618.06.01
+obs-1618-MUG [21:37:39] step 1: {'date': '1618.07.01', 'outfname': '../out/obs-1618-MUG/MUG_1618.07.01.eu4'}
+obs-1618-MUG [21:37:39]   run to 1618.07.01
+obs-1618-MUG [21:38:41] step 2: {'date': '1618.08.01', 'outfname': '../out/obs-1618-MUG/MUG_1618.08.01.eu4'}
+obs-1618-MUG [21:38:41]   run to 1618.08.01
+obs-1618-MUG [21:39:50] restored dlc_load.json and continue_game.json
+obs-1618-MUG: OK in 273 s
+obs-1701-ENG [21:39:50] start: ENG 1701.09.01
+obs-1701-ENG [21:41:15] step 0: {'date': '1701.10.01', 'outfname': '../out/obs-1701-ENG/ENG_1701.10.01.eu4'}
+obs-1701-ENG [21:41:15]   run to 1701.10.01
+obs-1701-ENG [21:42:30] step 1: {'date': '1701.11.01', 'outfname': '../out/obs-1701-ENG/ENG_1701.11.01.eu4'}
+obs-1701-ENG [21:42:30]   run to 1701.11.01
+obs-1701-ENG [21:43:31] step 2: {'date': '1701.12.01', 'outfname': '../out/obs-1701-ENG/ENG_1701.12.01.eu4'}
+obs-1701-ENG [21:43:31]   run to 1701.12.01
+obs-1701-ENG [21:44:37] restored dlc_load.json and continue_game.json
+obs-1701-ENG: OK in 287 s
+obs-1701-NED [21:44:37] start: NED 1701.09.01
+obs-1701-NED [21:46:01] step 0: {'date': '1701.10.01', 'outfname': '../out/obs-1701-NED/NED_1701.10.01.eu4'}
+obs-1701-NED [21:46:01]   run to 1701.10.01
+obs-1701-NED [21:46:48]   save has player=O00, expected NED: retrying the tag switch (1)
+obs-1701-NED [21:47:22] step 1: {'date': '1701.11.01', 'outfname': '../out/obs-1701-NED/NED_1701.11.01.eu4'}
+obs-1701-NED [21:47:22]   run to 1701.11.01
+obs-1701-NED [21:48:22] step 2: {'date': '1701.12.01', 'outfname': '../out/obs-1701-NED/NED_1701.12.01.eu4'}
+obs-1701-NED [21:48:22]   run to 1701.12.01
+obs-1701-NED [21:49:21] restored dlc_load.json and continue_game.json
+obs-1701-NED: OK in 284 s
+obs-1701-MUG [21:49:21] start: MUG 1701.09.01
+obs-1701-MUG [21:50:45] step 0: {'date': '1701.10.01', 'outfname': '../out/obs-1701-MUG/MUG_1701.10.01.eu4'}
+obs-1701-MUG [21:50:45]   run to 1701.10.01
+obs-1701-MUG [21:51:44] step 1: {'date': '1701.11.01', 'outfname': '../out/obs-1701-MUG/MUG_1701.11.01.eu4'}
+obs-1701-MUG [21:51:44]   run to 1701.11.01
+obs-1701-MUG [21:52:44] step 2: {'date': '1701.12.01', 'outfname': '../out/obs-1701-MUG/MUG_1701.12.01.eu4'}
+obs-1701-MUG [21:52:44]   run to 1701.12.01
+obs-1701-MUG [21:53:43] restored dlc_load.json and continue_game.json
+obs-1701-MUG: OK in 261 s
+obs-1756-GBR [21:53:43] start: GBR 1756.05.15
+obs-1756-GBR [21:55:09] step 0: {'date': '1756.06.01', 'outfname': '../out/obs-1756-GBR/GBR_1756.06.01.eu4'}
+obs-1756-GBR [21:55:09]   run to 1756.06.01
+obs-1756-GBR [21:56:07] step 1: {'date': '1756.07.01', 'outfname': '../out/obs-1756-GBR/GBR_1756.07.01.eu4'}
+obs-1756-GBR [21:56:07]   run to 1756.07.01
+obs-1756-GBR [21:57:11] step 2: {'date': '1756.08.01', 'outfname': '../out/obs-1756-GBR/GBR_1756.08.01.eu4'}
+obs-1756-GBR [21:57:11]   run to 1756.08.01
+obs-1756-GBR [21:58:13] restored dlc_load.json and continue_game.json
+obs-1756-GBR: OK in 271 s
+obs-1756-PRU [21:58:13] start: PRU 1756.05.15
+obs-1756-PRU [21:59:40] step 0: {'date': '1756.06.01', 'outfname': '../out/obs-1756-PRU/PRU_1756.06.01.eu4'}
+obs-1756-PRU [21:59:40]   run to 1756.06.01
+obs-1756-PRU [22:00:39] step 1: {'date': '1756.07.01', 'outfname': '../out/obs-1756-PRU/PRU_1756.07.01.eu4'}
+obs-1756-PRU [22:00:39]   run to 1756.07.01
+obs-1756-PRU [22:01:41] step 2: {'date': '1756.08.01', 'outfname': '../out/obs-1756-PRU/PRU_1756.08.01.eu4'}
+obs-1756-PRU [22:01:41]   run to 1756.08.01
+obs-1756-PRU [22:02:42] restored dlc_load.json and continue_game.json
+obs-1756-PRU: OK in 269 s
+obs-1756-QNG [22:02:42] start: QNG 1756.05.15
+obs-1756-QNG [22:04:33] FAILED: JobError: expected screen ['mode'], last seen {'screen': 'select', 'scores': {'menu': 34.9, 'select': 13.5, 'mode': 43.8, 'intro': 30.6, 'ingame': 34.1, 'achieve': 37.7}}
+obs-1756-QNG [22:04:35] restored dlc_load.json and continue_game.json
+obs-1756-QNG: failed (JobError: expected screen ['mode'], last seen {'screen': 'select', 'scores': {'menu': 34.9, 'select': 13.5, 'mode': 43.8, 'intro': 30.6, 'ingame': 34.1, 'achieve': 37.7}}), retrying once
+obs-1756-QNG [22:04:35] start: QNG 1756.05.15
+obs-1756-QNG [22:06:02] step 0: {'date': '1756.06.01', 'outfname': '../out/obs-1756-QNG/QNG_1756.06.01.eu4'}
+obs-1756-QNG [22:06:02]   run to 1756.06.01
+obs-1756-QNG [22:07:00] step 1: {'date': '1756.07.01', 'outfname': '../out/obs-1756-QNG/QNG_1756.07.01.eu4'}
+obs-1756-QNG [22:07:00]   run to 1756.07.01
+obs-1756-QNG [22:08:02] step 2: {'date': '1756.08.01', 'outfname': '../out/obs-1756-QNG/QNG_1756.08.01.eu4'}
+obs-1756-QNG [22:08:02]   run to 1756.08.01
+obs-1756-QNG [22:09:10] restored dlc_load.json and continue_game.json
+obs-1756-QNG: OK in 275 s
+obs-1789-GBR [22:09:10] start: GBR 1789.07.14
+obs-1789-GBR [22:10:37] step 0: {'date': '1789.08.01', 'outfname': '../out/obs-1789-GBR/GBR_1789.08.01.eu4'}
+obs-1789-GBR [22:10:37]   run to 1789.08.01
+obs-1789-GBR [22:11:37] step 1: {'date': '1789.09.01', 'outfname': '../out/obs-1789-GBR/GBR_1789.09.01.eu4'}
+obs-1789-GBR [22:11:37]   run to 1789.09.01
+obs-1789-GBR [22:12:37] step 2: {'date': '1789.10.01', 'outfname': '../out/obs-1789-GBR/GBR_1789.10.01.eu4'}
+obs-1789-GBR [22:12:37]   run to 1789.10.01
+obs-1789-GBR [22:13:43] restored dlc_load.json and continue_game.json
+obs-1789-GBR: OK in 273 s
+obs-1789-FRA [22:13:43] start: FRA 1789.07.14
+obs-1789-FRA [22:15:10] step 0: {'date': '1789.08.01', 'outfname': '../out/obs-1789-FRA/FRA_1789.08.01.eu4'}
+obs-1789-FRA [22:15:10]   run to 1789.08.01
+obs-1789-FRA [22:16:22] step 1: {'date': '1789.09.01', 'outfname': '../out/obs-1789-FRA/FRA_1789.09.01.eu4'}
+obs-1789-FRA [22:16:22]   run to 1789.09.01
+obs-1789-FRA [22:17:22] step 2: {'date': '1789.10.01', 'outfname': '../out/obs-1789-FRA/FRA_1789.10.01.eu4'}
+obs-1789-FRA [22:17:22]   run to 1789.10.01
+obs-1789-FRA [22:18:20] restored dlc_load.json and continue_game.json
+obs-1789-FRA: OK in 277 s
+obs-1789-USA [22:18:20] start: USA 1789.07.14
+obs-1789-USA [22:19:44] step 0: {'date': '1789.08.01', 'outfname': '../out/obs-1789-USA/USA_1789.08.01.eu4'}
+obs-1789-USA [22:19:44]   run to 1789.08.01
+obs-1789-USA [22:20:42] step 1: {'date': '1789.09.01', 'outfname': '../out/obs-1789-USA/USA_1789.09.01.eu4'}
+obs-1789-USA [22:20:42]   run to 1789.09.01
+obs-1789-USA [22:21:40] step 2: {'date': '1789.10.01', 'outfname': '../out/obs-1789-USA/USA_1789.10.01.eu4'}
+obs-1789-USA [22:21:40]   run to 1789.10.01
+obs-1789-USA [22:22:39] restored dlc_load.json and continue_game.json
+obs-1789-USA: OK in 259 s
+obs-1444-JAP [22:22:39] start: JAP 1444.11.11
+obs-1444-JAP [22:23:48] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-JAP/JAP_1444.12.01.eu4'}
+obs-1444-JAP [22:23:48]   run to 1444.12.01
+obs-1444-JAP [22:24:31]   save has player=O00, expected JAP: retrying the tag switch (1)
+obs-1444-JAP [22:24:52]   save has player=O00, expected JAP: retrying the tag switch (2)
+obs-1444-JAP [22:25:13]   save has player=O00, expected JAP: retrying the tag switch (3)
+obs-1444-JAP [22:25:13] FAILED: JobError: could not write a save as JAP (player=O00)
+obs-1444-JAP [22:25:14] restored dlc_load.json and continue_game.json
+obs-1444-JAP: failed (JobError: could not write a save as JAP (player=O00)), retrying once
+obs-1444-JAP [22:25:14] start: JAP 1444.11.11
+obs-1444-JAP [22:26:25] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-JAP/JAP_1444.12.01.eu4'}
+obs-1444-JAP [22:26:25]   run to 1444.12.01
+obs-1444-JAP [22:27:08]   save has player=O00, expected JAP: retrying the tag switch (1)
+obs-1444-JAP [22:27:29]   save has player=O00, expected JAP: retrying the tag switch (2)
+obs-1444-JAP [22:27:49]   save has player=O00, expected JAP: retrying the tag switch (3)
+obs-1444-JAP [22:27:49] FAILED: JobError: could not write a save as JAP (player=O00)
+obs-1444-JAP [22:27:51] restored dlc_load.json and continue_game.json
+obs-1444-JAP: FAILED in 156 s
+done: 27/29 ok

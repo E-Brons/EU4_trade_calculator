@@ -6,7 +6,7 @@
 Spec (paths are relative to the job file):
 {
   "nation": "VEN",                 # country the saves are written for (player=<nation> in every save)
-  "start_date": "1444.11.11",      # only the default 1444.11.11 bookmark is supported for new games
+  "start_date": "1444.11.11",      # a bookmark date (BOOKMARKS: 1444.11.11 ... 1792.09.21) for new games
   "base_save": null,               # or a .eu4 file to continue from instead of a new game
   "mods": [],                      # enabled_mods entries for dlc_load.json, e.g. "mod/x.mod"
   "observe": true,                 # spectator mode between steps: AI runs every country, no event pop-ups
@@ -48,6 +48,12 @@ NATION_VEN = (1003, 642)      # Venice on the default nation-select camera
 NATION_PLAY = (1876, 1310)
 MODE_PLAY = (1147, 924)
 INTRO_CLOSE = (1024, 1132)
+RANDOM_NATION = (1876, 1251)
+BOOKMARK_SCROLL_DOWN = (356, 478)   # list arrow; 10 clicks reach the end of the list
+# bookmark -> (scrolled to the end?, row index); rows at y = 140 + 53 * index, x = 190 (verified live 2026-10-07)
+BOOKMARKS = {"1444.11.11": (False, 0), "1453.05.29": (False, 4), "1492.01.01": (False, 5), "1508.12.10": (False, 6),
+             "1618.05.23": (True, 0), "1701.09.01": (True, 1), "1718.12.17": (True, 2), "1756.05.15": (True, 3),
+             "1776.07.04": (True, 4), "1789.07.14": (True, 5), "1792.09.21": (True, 6)}
 
 
 class JobError(RuntimeError):
@@ -57,6 +63,12 @@ class JobError(RuntimeError):
 def _date(s: str) -> dt.date:
     y, m, d = (int(x) for x in s.split("."))
     return dt.date(y, m, d)
+
+
+def _player(path: str) -> str | None:
+    with open(path, "rb") as f:
+        m = re.search(rb'\nplayer="(\w+)"', f.read(4096))
+    return m.group(1).decode() if m else None
 
 
 def game_running() -> bool:
@@ -106,9 +118,17 @@ class Runner:
 
     def save_to(self, name: str) -> dict:
         """Write a save as <nation> (tag in, save, back to observer) and return worker info incl. the save's date."""
-        if self.observe:
-            self.console(f"tag {self.nation}")
-        info = submit("save", name=name, timeout=300)
+        for attempt in range(3):
+            if self.observe:
+                self.console(f"tag {self.nation}")
+                time.sleep(1)
+            info = submit("save", name=name, timeout=300)
+            player = _player(info["path"])
+            if player == self.nation:
+                break
+            self.log(f"  save has player={player}, expected {self.nation}: retrying the tag switch ({attempt + 1})")
+        else:
+            raise JobError(f"could not write a save as {self.nation} (player={player})")
         if self.observe:
             self.enter_observe()
         if info.get("format") != "EU4txt":
@@ -142,11 +162,20 @@ class Runner:
         if base_save:
             self.load_save(self.path(base_save), already_in_menu=True)
         else:
-            if self.spec.get("start_date", "1444.11.11") != "1444.11.11":
-                raise JobError("start_date other than 1444.11.11 is not supported yet (use base_save)")
+            start = self.spec.get("start_date", "1444.11.11")
+            if start not in BOOKMARKS:
+                raise JobError(f"start_date {start} is not a known bookmark: {sorted(BOOKMARKS)} (or use base_save)")
             submit("click", x=SINGLE_PLAYER[0], y=SINGLE_PLAYER[1])
             self.wait_screen({"select"}, 60)
-            submit("click", x=NATION_VEN[0], y=NATION_VEN[1])
+            scrolled, row = BOOKMARKS[start]
+            if start == "1444.11.11":
+                submit("click", x=NATION_VEN[0], y=NATION_VEN[1])
+            else:
+                for _ in range(10 if scrolled else 0):
+                    submit("click", x=BOOKMARK_SCROLL_DOWN[0], y=BOOKMARK_SCROLL_DOWN[1])
+                submit("click", x=190, y=140 + 53 * row)
+                time.sleep(4)
+                submit("click", x=RANDOM_NATION[0], y=RANDOM_NATION[1])  # any country; `tag <nation>` follows
             time.sleep(1.5)
             submit("click", x=NATION_PLAY[0], y=NATION_PLAY[1])
             self.wait_screen({"mode"}, 60)
@@ -155,7 +184,7 @@ class Runner:
                 submit("click", x=INTRO_CLOSE[0], y=INTRO_CLOSE[1])
                 time.sleep(1)
             self.wait_screen({"ingame"}, 30)
-            self.current = _date("1444.11.11")
+            self.current = _date(start)
         self.console(f"tag {self.nation}")
         if self.observe:
             self.enter_observe()

@@ -1,0 +1,8 @@
+[20:24:37] start: MAM 1444.11.11
+[20:25:48] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-MAM/MAM_1444.12.01.eu4'}
+[20:25:48]   run to 1444.12.01
+[20:26:46] step 1: {'date': '1445.01.01', 'outfname': '../out/obs-1444-MAM/MAM_1445.01.01.eu4'}
+[20:26:46]   run to 1445.01.01
+[20:27:46] step 2: {'date': '1445.02.01', 'outfname': '../out/obs-1444-MAM/MAM_1445.02.01.eu4'}
+[20:27:46]   run to 1445.02.01
+[20:28:48] restored dlc_load.json and continue_game.json

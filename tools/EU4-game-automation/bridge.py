@@ -32,7 +32,12 @@ def worker_alive() -> bool:
 
 
 def submit(verb: str, timeout: float = 180, **args) -> dict:
-    if not worker_alive():
+    # the heartbeat can lag while the machine is loaded (game start-up): wait up to 30 s before giving up
+    for _ in range(60):
+        if worker_alive():
+            break
+        time.sleep(0.5)
+    else:
         raise WorkerError(f"worker not running ({WORKER_HINT})")
     job_id = f"{time.strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:6]}"
     pending = BRIDGE / "pending"

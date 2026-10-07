@@ -32,3 +32,11 @@ exp_merchants = {
 exp_prov_trade_power = {
 	global_prov_trade_power_modifier = 0.25
 }
+
+exp_trade_steering_50 = {
+	trade_steering = 0.50
+}
+
+exp_trade_steering_100 = {
+	trade_steering = 1.00
+}

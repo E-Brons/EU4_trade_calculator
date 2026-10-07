@@ -1,0 +1,4 @@
+every_owned_province = {
+	limit = { is_territory = yes }
+	add_to_trade_company = NED
+}

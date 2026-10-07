@@ -1,0 +1,8 @@
+[01:08:23] start: NED ../../diversity/out/obs-1618-NED/NED_1618.06.01.eu4
+[01:09:55] step 0: {'patch': '../patches/identity.py'}
+[01:10:29]   patch identity.py: reloading
+[01:11:38] step 1: {'date': '1618.07.01', 'outfname': '../out/R2-C-NED18/t1_1618.07.01.eu4'}
+[01:11:38]   run to 1618.07.01
+[01:12:40] step 2: {'date': '1618.08.01', 'outfname': '../out/R2-C-NED18/t2_1618.08.01.eu4'}
+[01:12:40]   run to 1618.08.01
+[01:13:44] restored dlc_load.json and continue_game.json

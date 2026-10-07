@@ -1,0 +1,8 @@
+[01:40:26] start: TUR ../../diversity/out/_old_run_1/A_TUR_1444.12.01.eu4
+[01:41:59] step 0: {'patch': '../patches/home_tur_recall_home.py'}
+[01:42:36]   patch home_tur_recall_home.py: reloading
+[01:43:46] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-H-TUR-B1/t1_1445.01.01.eu4'}
+[01:43:46]   run to 1445.01.01
+[01:44:52] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-H-TUR-B1/t2_1445.02.01.eu4'}
+[01:44:52]   run to 1445.02.01
+[01:45:53] restored dlc_load.json and continue_game.json

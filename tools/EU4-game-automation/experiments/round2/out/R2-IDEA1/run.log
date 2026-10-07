@@ -1,0 +1,8 @@
+[00:35:36] start: VEN ../../out/E00/base_1444.12.01.eu4
+[00:37:05] step 0: {'effects': '../effects/idea_trade_1.txt'}
+[00:37:05]   effects: ../effects/idea_trade_1.txt
+[00:37:34] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-IDEA1/t1_1445.01.01.eu4'}
+[00:37:34]   run to 1445.01.01
+[00:38:34] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-IDEA1/t2_1445.02.01.eu4'}
+[00:38:34]   run to 1445.02.01
+[00:39:33] restored dlc_load.json and continue_game.json

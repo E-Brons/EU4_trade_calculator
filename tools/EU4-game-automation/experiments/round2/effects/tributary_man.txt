@@ -1,0 +1,6 @@
+set_country_flag = forced_tributary_state
+create_subject = {
+	subject_type = tributary_state
+	subject = MAN
+}
+clr_country_flag = forced_tributary_state

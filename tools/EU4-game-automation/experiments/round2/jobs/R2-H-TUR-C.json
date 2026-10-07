@@ -1,0 +1,23 @@
+{
+ "nation": "TUR",
+ "start_date": "1444.11.11",
+ "base_save": "../../diversity/out/_old_run_1/A_TUR_1444.12.01.eu4",
+ "mods": [],
+ "observe": true,
+ "ai_off": [
+  "TUR"
+ ],
+ "script": [
+  {
+   "patch": "../patches/identity.py"
+  },
+  {
+   "date": "1445.01.01",
+   "outfname": "../out/R2-H-TUR-C/t1_1445.01.01.eu4"
+  },
+  {
+   "date": "1445.02.01",
+   "outfname": "../out/R2-H-TUR-C/t2_1445.02.01.eu4"
+  }
+ ]
+}

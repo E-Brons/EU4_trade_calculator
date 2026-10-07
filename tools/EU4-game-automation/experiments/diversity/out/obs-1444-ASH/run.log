@@ -1,0 +1,8 @@
+[20:53:46] start: ASH 1444.11.11
+[20:54:57] step 0: {'date': '1444.12.01', 'outfname': '../out/obs-1444-ASH/ASH_1444.12.01.eu4'}
+[20:54:57]   run to 1444.12.01
+[20:55:40]   save has player=O00, expected ASH: retrying the tag switch (1)
+[20:56:01]   save has player=O00, expected ASH: retrying the tag switch (2)
+[20:56:21]   save has player=O00, expected ASH: retrying the tag switch (3)
+[20:56:21] FAILED: JobError: could not write a save as ASH (player=O00)
+[20:56:23] restored dlc_load.json and continue_game.json

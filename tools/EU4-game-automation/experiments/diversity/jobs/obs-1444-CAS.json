@@ -1,0 +1,24 @@
+{
+ "nation": "CAS",
+ "start_date": "1444.11.11",
+ "base_save": null,
+ "mods": [],
+ "observe": true,
+ "script": [
+  {
+   "date": "1444.12.01",
+   "outfname": "../out/obs-1444-CAS/CAS_1444.12.01.eu4"
+  },
+  {
+   "date": "1445.01.01",
+   "outfname": "../out/obs-1444-CAS/CAS_1445.01.01.eu4"
+  },
+  {
+   "date": "1445.02.01",
+   "outfname": "../out/obs-1444-CAS/CAS_1445.02.01.eu4"
+  }
+ ],
+ "ai_off": [
+  "CAS"
+ ]
+}

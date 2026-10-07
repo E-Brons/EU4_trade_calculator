@@ -1,0 +1,294 @@
+installed /Users/elkanabronstein/Documents/Paradox Interactive/Europa Universalis IV/mod/eu4_experiments
+R2-C-U10 [22:50:35] start: VEN ../bases/U10_VEN.1444.12.01.eu4
+R2-C-U10 [22:52:10] step 0: {'patch': '../patches/identity.py'}
+R2-C-U10 [22:52:44]   patch identity.py: reloading
+R2-C-U10 [22:53:57] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-C-U10/t1_1445.01.01.eu4'}
+R2-C-U10 [22:53:57]   run to 1445.01.01
+R2-C-U10 [22:55:03] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-C-U10/t2_1445.02.01.eu4'}
+R2-C-U10 [22:55:03]   run to 1445.02.01
+R2-C-U10 [22:56:09] restored dlc_load.json and continue_game.json
+R2-C-U10: OK in 334 s
+R2-B5a [22:56:09] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-B5a [22:57:46] step 0: {'patch': '../patches/b5a_recall_home.py'}
+R2-B5a [22:58:23]   patch b5a_recall_home.py: reloading
+R2-B5a [22:59:34] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-B5a/t1_1445.01.01.eu4'}
+R2-B5a [22:59:34]   run to 1445.01.01
+R2-B5a [23:00:35] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-B5a/t2_1445.02.01.eu4'}
+R2-B5a [23:00:35]   run to 1445.02.01
+R2-B5a [23:01:35] restored dlc_load.json and continue_game.json
+R2-B5a: OK in 326 s
+R2-B5b [23:01:35] start: VEN ../bases/U10_VEN.1444.12.01.eu4
+R2-B5b [23:03:10] step 0: {'patch': '../patches/b5b_place_home.py'}
+R2-B5b [23:03:48]   patch b5b_place_home.py: reloading
+R2-B5b [23:04:57] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-B5b/t1_1445.01.01.eu4'}
+R2-B5b [23:04:57]   run to 1445.01.01
+R2-B5b [23:05:59] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-B5b/t2_1445.02.01.eu4'}
+R2-B5b [23:05:59]   run to 1445.02.01
+R2-B5b [23:07:01] restored dlc_load.json and continue_game.json
+R2-B5b: OK in 326 s
+R2-B5c [23:07:01] start: VEN ../bases/U10_VEN.1444.12.01.eu4
+R2-B5c [23:08:31] step 0: {'patch': '../patches/b5c_recall_alexandria.py'}
+R2-B5c [23:09:08]   patch b5c_recall_alexandria.py: reloading
+R2-B5c [23:10:18] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-B5c/t1_1445.01.01.eu4'}
+R2-B5c [23:10:18]   run to 1445.01.01
+R2-B5c [23:11:19] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-B5c/t2_1445.02.01.eu4'}
+R2-B5c [23:11:19]   run to 1445.02.01
+R2-B5c [23:12:19] restored dlc_load.json and continue_game.json
+R2-B5c: OK in 318 s
+R2-T05 [23:12:19] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-T05 [23:14:04] step 0: {'patch': '../patches/transfer_man_05.py'}
+R2-T05 [23:14:45]   patch transfer_man_05.py: reloading
+R2-T05 [23:15:59] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-T05/t1_1445.01.01.eu4'}
+R2-T05 [23:15:59]   run to 1445.01.01
+R2-T05 [23:17:06] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-T05/t2_1445.02.01.eu4'}
+R2-T05 [23:17:06]   run to 1445.02.01
+R2-T05 [23:18:14] restored dlc_load.json and continue_game.json
+R2-T05: OK in 355 s
+R2-T10 [23:18:14] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-T10 [23:20:00] step 0: {'patch': '../patches/transfer_man_10.py'}
+R2-T10 [23:20:40]   patch transfer_man_10.py: reloading
+R2-T10 [23:21:57] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-T10/t1_1445.01.01.eu4'}
+R2-T10 [23:21:57]   run to 1445.01.01
+R2-T10 [23:23:03] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-T10/t2_1445.02.01.eu4'}
+R2-T10 [23:23:03]   run to 1445.02.01
+R2-T10 [23:24:08] restored dlc_load.json and continue_game.json
+R2-T10: OK in 354 s
+R2-PORT [23:24:08] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-PORT [23:30:07] FAILED: WorkerError: no answer within 300s (job 20261007-232507-91efd9)
+R2-PORT [23:30:37] quit failed: worker not running (start it in your own iTerm tab: python3 tools/EU4-game-automation/worker.py)
+R2-PORT [23:30:37] restored dlc_load.json and continue_game.json
+R2-PORT: failed (WorkerError: no answer within 300s (job 20261007-232507-91efd9)), retrying once
+R2-PORT [23:30:37] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-PORT [23:31:07] FAILED: WorkerError: worker not running (start it in your own iTerm tab: python3 tools/EU4-game-automation/worker.py)
+R2-PORT [23:31:37] quit failed: worker not running (start it in your own iTerm tab: python3 tools/EU4-game-automation/worker.py)
+R2-PORT [23:31:37] restored dlc_load.json and continue_game.json
+R2-PORT: FAILED in 60 s
+R2-CAP [23:31:37] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-CAP [23:32:08] FAILED: WorkerError: worker not running (start it in your own iTerm tab: python3 tools/EU4-game-automation/worker.py)
+R2-CAP [23:32:38] quit failed: worker not running (start it in your own iTerm tab: python3 tools/EU4-game-automation/worker.py)
+R2-CAP [23:32:38] restored dlc_load.json and continue_game.json
+R2-CAP: environment problem (WorkerError: worker not running (start it in your own iTerm tab: python3 tools/EU4-game-automation/worker.py)): stopping the batch; fix it and rerun (finished jobs are skipped)
+done: 6/7 ok
+installed /Users/elkanabronstein/Documents/Paradox Interactive/Europa Universalis IV/mod/eu4_experiments
+R2-C-U10: already ok, skipped
+R2-B5a: already ok, skipped
+R2-B5b: already ok, skipped
+R2-B5c: already ok, skipped
+R2-T05: already ok, skipped
+R2-T10: already ok, skipped
+R2-PORT [00:05:58] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-PORT [00:07:31] step 0: {'patch': '../patches/port_zara.py'}
+R2-PORT [00:08:06]   patch port_zara.py: reloading
+R2-PORT [00:09:14] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-PORT/t1_1445.01.01.eu4'}
+R2-PORT [00:09:14]   run to 1445.01.01
+R2-PORT [00:10:15] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-PORT/t2_1445.02.01.eu4'}
+R2-PORT [00:10:15]   run to 1445.02.01
+R2-PORT [00:11:15] restored dlc_load.json and continue_game.json
+R2-PORT: OK in 317 s
+R2-CAP [00:11:15] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-CAP [00:12:28] FAILED: WorkerError: RuntimeError: console did not open (a pop-up may hold the keyboard focus)
+R2-CAP [00:12:30] restored dlc_load.json and continue_game.json
+R2-CAP: failed (WorkerError: RuntimeError: console did not open (a pop-up may hold the keyboard focus)), retrying once
+R2-CAP [00:12:30] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-CAP [00:14:08] step 0: {'effects': '../effects/capital_zara.txt'}
+R2-CAP [00:14:08]   effects: ../effects/capital_zara.txt
+R2-CAP [00:14:37] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-CAP/t1_1445.01.01.eu4'}
+R2-CAP [00:14:37]   run to 1445.01.01
+R2-CAP [00:15:37] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-CAP/t2_1445.02.01.eu4'}
+R2-CAP [00:15:37]   run to 1445.02.01
+R2-CAP [00:16:39] restored dlc_load.json and continue_game.json
+R2-CAP: OK in 249 s
+R2-EMB [00:16:39] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-EMB [00:18:22] step 0: {'patch': '../patches/embargo_rag.py'}
+R2-EMB [00:19:02]   patch embargo_rag.py: reloading
+R2-EMB [00:20:15] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-EMB/t1_1445.01.01.eu4'}
+R2-EMB [00:20:15]   run to 1445.01.01
+R2-EMB [00:21:20] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-EMB/t2_1445.02.01.eu4'}
+R2-EMB [00:21:20]   run to 1445.02.01
+R2-EMB [00:22:25] restored dlc_load.json and continue_game.json
+R2-EMB: OK in 347 s
+R2-B4 [00:22:25] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-B4 [00:23:55] step 0: {'patch': '../patches/b4_recall_wien.py'}
+R2-B4 [00:24:32]   patch b4_recall_wien.py: reloading
+R2-B4 [00:25:39] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-B4/t1_1445.01.01.eu4'}
+R2-B4 [00:25:39]   run to 1445.01.01
+R2-B4 [00:26:39] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-B4/t2_1445.02.01.eu4'}
+R2-B4 [00:26:39]   run to 1445.02.01
+R2-B4 [00:27:38] restored dlc_load.json and continue_game.json
+R2-B4: OK in 313 s
+R2-STEER50 [00:27:38] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-STEER50 [00:29:08] step 0: {'effects': '../effects/steer_50.txt'}
+R2-STEER50 [00:29:08]   effects: ../effects/steer_50.txt
+R2-STEER50 [00:29:37] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-STEER50/t1_1445.01.01.eu4'}
+R2-STEER50 [00:29:37]   run to 1445.01.01
+R2-STEER50 [00:30:37] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-STEER50/t2_1445.02.01.eu4'}
+R2-STEER50 [00:30:37]   run to 1445.02.01
+R2-STEER50 [00:31:38] restored dlc_load.json and continue_game.json
+R2-STEER50: OK in 240 s
+R2-STEER100 [00:31:38] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-STEER100 [00:33:08] step 0: {'effects': '../effects/steer_100.txt'}
+R2-STEER100 [00:33:08]   effects: ../effects/steer_100.txt
+R2-STEER100 [00:33:36] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-STEER100/t1_1445.01.01.eu4'}
+R2-STEER100 [00:33:36]   run to 1445.01.01
+R2-STEER100 [00:34:36] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-STEER100/t2_1445.02.01.eu4'}
+R2-STEER100 [00:34:36]   run to 1445.02.01
+R2-STEER100 [00:35:36] restored dlc_load.json and continue_game.json
+R2-STEER100: OK in 237 s
+R2-IDEA1 [00:35:36] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-IDEA1 [00:37:05] step 0: {'effects': '../effects/idea_trade_1.txt'}
+R2-IDEA1 [00:37:05]   effects: ../effects/idea_trade_1.txt
+R2-IDEA1 [00:37:34] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-IDEA1/t1_1445.01.01.eu4'}
+R2-IDEA1 [00:37:34]   run to 1445.01.01
+R2-IDEA1 [00:38:34] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-IDEA1/t2_1445.02.01.eu4'}
+R2-IDEA1 [00:38:34]   run to 1445.02.01
+R2-IDEA1 [00:39:33] restored dlc_load.json and continue_game.json
+R2-IDEA1: OK in 237 s
+R2-IDEA2 [00:39:33] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-IDEA2 [00:41:03] step 0: {'effects': '../effects/idea_trade_2.txt'}
+R2-IDEA2 [00:41:03]   effects: ../effects/idea_trade_2.txt
+R2-IDEA2 [00:41:33] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-IDEA2/t1_1445.01.01.eu4'}
+R2-IDEA2 [00:41:33]   run to 1445.01.01
+R2-IDEA2 [00:42:33] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-IDEA2/t2_1445.02.01.eu4'}
+R2-IDEA2 [00:42:33]   run to 1445.02.01
+R2-IDEA2 [00:43:36] restored dlc_load.json and continue_game.json
+R2-IDEA2: OK in 243 s
+R2-COT [00:43:36] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-COT [00:45:08] step 0: {'effects': '../effects/cot_verona.txt'}
+R2-COT [00:45:08]   effects: ../effects/cot_verona.txt
+R2-COT [00:45:36] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-COT/t1_1445.01.01.eu4'}
+R2-COT [00:45:36]   run to 1445.01.01
+R2-COT [00:46:36] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-COT/t2_1445.02.01.eu4'}
+R2-COT [00:46:36]   run to 1445.02.01
+R2-COT [00:47:36] restored dlc_load.json and continue_game.json
+R2-COT: OK in 240 s
+R2-DEPOT [00:47:36] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-DEPOT [00:49:05] step 0: {'effects': '../effects/depot_venezia.txt'}
+R2-DEPOT [00:49:05]   effects: ../effects/depot_venezia.txt
+R2-DEPOT [00:49:34] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-DEPOT/t1_1445.01.01.eu4'}
+R2-DEPOT [00:49:34]   run to 1445.01.01
+R2-DEPOT [00:50:34] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-DEPOT/t2_1445.02.01.eu4'}
+R2-DEPOT [00:50:34]   run to 1445.02.01
+R2-DEPOT [00:51:34] restored dlc_load.json and continue_game.json
+R2-DEPOT: OK in 238 s
+R2-TRIB [00:51:34] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-TRIB [00:53:03] step 0: {'effects': '../effects/tributary_man.txt'}
+R2-TRIB [00:53:03]   effects: ../effects/tributary_man.txt
+R2-TRIB [00:53:32] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-TRIB/t1_1445.01.01.eu4'}
+R2-TRIB [00:53:32]   run to 1445.01.01
+R2-TRIB [00:54:32] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-TRIB/t2_1445.02.01.eu4'}
+R2-TRIB [00:54:32]   run to 1445.02.01
+R2-TRIB [00:55:32] restored dlc_load.json and continue_game.json
+R2-TRIB: OK in 238 s
+R2-SHIPCON [00:55:32] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-SHIPCON [00:57:01] step 0: {'patch': '../patches/ships_constantinople.py'}
+R2-SHIPCON [00:57:38]   patch ships_constantinople.py: reloading
+R2-SHIPCON [00:58:46] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-SHIPCON/t1_1445.01.01.eu4'}
+R2-SHIPCON [00:58:46]   run to 1445.01.01
+R2-SHIPCON [00:59:46] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-SHIPCON/t2_1445.02.01.eu4'}
+R2-SHIPCON [00:59:46]   run to 1445.02.01
+R2-SHIPCON [01:00:46] restored dlc_load.json and continue_game.json
+R2-SHIPCON: OK in 314 s
+R2-PRIV [01:00:46] start: VEN ../../out/E00/base_1444.12.01.eu4
+R2-PRIV [01:02:16] step 0: {'patch': '../patches/privateer_ragusa.py'}
+R2-PRIV [01:02:53]   patch privateer_ragusa.py: reloading
+R2-PRIV [01:04:01] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-PRIV/t1_1445.01.01.eu4'}
+R2-PRIV [01:04:01]   run to 1445.01.01
+R2-PRIV [01:05:01] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-PRIV/t2_1445.02.01.eu4'}
+R2-PRIV [01:05:01]   run to 1445.02.01
+R2-PRIV [01:06:01] restored dlc_load.json and continue_game.json
+R2-PRIV: OK in 315 s
+R2-DIPFRESH [01:06:01] start: VEN 1444.11.11
+R2-DIPFRESH [01:07:06] step 0: {'effects': '../effects/gen_dip_plus2.txt'}
+R2-DIPFRESH [01:07:06]   effects: ../effects/gen_dip_plus2.txt
+R2-DIPFRESH [01:07:29] step 1: {'date': '1444.12.01', 'outfname': '../out/R2-DIPFRESH/base_1444.12.01.eu4'}
+R2-DIPFRESH [01:07:29]   run to 1444.12.01
+R2-DIPFRESH [01:08:23] restored dlc_load.json and continue_game.json
+R2-DIPFRESH: OK in 142 s
+R2-C-NED18 [01:08:23] start: NED ../../diversity/out/obs-1618-NED/NED_1618.06.01.eu4
+R2-C-NED18 [01:09:55] step 0: {'patch': '../patches/identity.py'}
+R2-C-NED18 [01:10:29]   patch identity.py: reloading
+R2-C-NED18 [01:11:38] step 1: {'date': '1618.07.01', 'outfname': '../out/R2-C-NED18/t1_1618.07.01.eu4'}
+R2-C-NED18 [01:11:38]   run to 1618.07.01
+R2-C-NED18 [01:12:40] step 2: {'date': '1618.08.01', 'outfname': '../out/R2-C-NED18/t2_1618.08.01.eu4'}
+R2-C-NED18 [01:12:40]   run to 1618.08.01
+R2-C-NED18 [01:13:44] restored dlc_load.json and continue_game.json
+R2-C-NED18: OK in 320 s
+R2-TC [01:13:44] start: NED ../../diversity/out/obs-1618-NED/NED_1618.06.01.eu4
+R2-TC [01:15:16] step 0: {'effects': '../effects/ned_trade_company.txt'}
+R2-TC [01:15:16]   effects: ../effects/ned_trade_company.txt
+R2-TC [01:15:45] step 1: {'date': '1618.07.01', 'outfname': '../out/R2-TC/t1_1618.07.01.eu4'}
+R2-TC [01:15:45]   run to 1618.07.01
+R2-TC [01:16:49] step 2: {'date': '1618.08.01', 'outfname': '../out/R2-TC/t2_1618.08.01.eu4'}
+R2-TC [01:16:49]   run to 1618.08.01
+R2-TC [01:18:01] restored dlc_load.json and continue_game.json
+R2-TC: OK in 257 s
+done: 22/22 ok
+installed /Users/elkanabronstein/Documents/Paradox Interactive/Europa Universalis IV/mod/eu4_experiments
+R2-C-U10: already ok, skipped
+R2-B5a: already ok, skipped
+R2-B5b: already ok, skipped
+R2-B5c: already ok, skipped
+R2-T05: already ok, skipped
+R2-T10: already ok, skipped
+R2-PORT: already ok, skipped
+R2-CAP: already ok, skipped
+R2-EMB: already ok, skipped
+R2-B4: already ok, skipped
+R2-STEER50: already ok, skipped
+R2-STEER100: already ok, skipped
+R2-IDEA1: already ok, skipped
+R2-IDEA2: already ok, skipped
+R2-COT: already ok, skipped
+R2-DEPOT: already ok, skipped
+R2-TRIB: already ok, skipped
+R2-SHIPCON: already ok, skipped
+R2-PRIV: already ok, skipped
+R2-DIPFRESH: already ok, skipped
+R2-C-NED18: already ok, skipped
+R2-TC: already ok, skipped
+R2-H-MAM-C [01:19:08] start: MAM ../../diversity/out/obs-1444-MAM/MAM_1444.12.01.eu4
+R2-H-MAM-C [01:20:37] step 0: {'patch': '../patches/identity.py'}
+R2-H-MAM-C [01:21:13]   patch identity.py: reloading
+R2-H-MAM-C [01:22:20] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-H-MAM-C/t1_1445.01.01.eu4'}
+R2-H-MAM-C [01:22:20]   run to 1445.01.01
+R2-H-MAM-C [01:23:19] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-H-MAM-C/t2_1445.02.01.eu4'}
+R2-H-MAM-C [01:23:19]   run to 1445.02.01
+R2-H-MAM-C [01:24:19] restored dlc_load.json and continue_game.json
+R2-H-MAM-C: OK in 312 s
+R2-H-MAM-B1 [01:24:19] start: MAM ../../diversity/out/obs-1444-MAM/MAM_1444.12.01.eu4
+R2-H-MAM-B1 [01:25:52] step 0: {'patch': '../patches/home_mam_recall_aleppo.py'}
+R2-H-MAM-B1 [01:26:29]   patch home_mam_recall_aleppo.py: reloading
+R2-H-MAM-B1 [01:27:39] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-H-MAM-B1/t1_1445.01.01.eu4'}
+R2-H-MAM-B1 [01:27:39]   run to 1445.01.01
+R2-H-MAM-B1 [01:28:38] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-H-MAM-B1/t2_1445.02.01.eu4'}
+R2-H-MAM-B1 [01:28:38]   run to 1445.02.01
+R2-H-MAM-B1 [01:29:38] restored dlc_load.json and continue_game.json
+R2-H-MAM-B1: OK in 319 s
+R2-H-MAM-B2 [01:29:38] start: MAM ../../diversity/out/obs-1444-MAM/MAM_1444.12.01.eu4
+R2-H-MAM-B2 [01:31:08] step 0: {'patch': '../patches/home_mam_aleppo_to_home.py'}
+R2-H-MAM-B2 [01:31:48]   patch home_mam_aleppo_to_home.py: reloading
+R2-H-MAM-B2 [01:32:55] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-H-MAM-B2/t1_1445.01.01.eu4'}
+R2-H-MAM-B2 [01:32:55]   run to 1445.01.01
+R2-H-MAM-B2 [01:33:54] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-H-MAM-B2/t2_1445.02.01.eu4'}
+R2-H-MAM-B2 [01:33:54]   run to 1445.02.01
+R2-H-MAM-B2 [01:34:54] restored dlc_load.json and continue_game.json
+R2-H-MAM-B2: OK in 316 s
+R2-H-TUR-C [01:34:54] start: TUR ../../diversity/out/_old_run_1/A_TUR_1444.12.01.eu4
+R2-H-TUR-C [01:36:27] step 0: {'patch': '../patches/identity.py'}
+R2-H-TUR-C [01:37:09]   patch identity.py: reloading
+R2-H-TUR-C [01:38:19] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-H-TUR-C/t1_1445.01.01.eu4'}
+R2-H-TUR-C [01:38:19]   run to 1445.01.01
+R2-H-TUR-C [01:39:18] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-H-TUR-C/t2_1445.02.01.eu4'}
+R2-H-TUR-C [01:39:18]   run to 1445.02.01
+R2-H-TUR-C [01:40:26] restored dlc_load.json and continue_game.json
+R2-H-TUR-C: OK in 332 s
+R2-H-TUR-B1 [01:40:26] start: TUR ../../diversity/out/_old_run_1/A_TUR_1444.12.01.eu4
+R2-H-TUR-B1 [01:41:59] step 0: {'patch': '../patches/home_tur_recall_home.py'}
+R2-H-TUR-B1 [01:42:36]   patch home_tur_recall_home.py: reloading
+R2-H-TUR-B1 [01:43:46] step 1: {'date': '1445.01.01', 'outfname': '../out/R2-H-TUR-B1/t1_1445.01.01.eu4'}
+R2-H-TUR-B1 [01:43:46]   run to 1445.01.01
+R2-H-TUR-B1 [01:44:52] step 2: {'date': '1445.02.01', 'outfname': '../out/R2-H-TUR-B1/t2_1445.02.01.eu4'}
+R2-H-TUR-B1 [01:44:52]   run to 1445.02.01
+R2-H-TUR-B1 [01:45:53] restored dlc_load.json and continue_game.json
+R2-H-TUR-B1: OK in 327 s
+done: 27/27 ok

@@ -1,0 +1,8 @@
+[21:26:20] start: ENG 1618.05.23
+[21:27:44] step 0: {'date': '1618.06.01', 'outfname': '../out/obs-1618-ENG/ENG_1618.06.01.eu4'}
+[21:27:44]   run to 1618.06.01
+[21:28:41] step 1: {'date': '1618.07.01', 'outfname': '../out/obs-1618-ENG/ENG_1618.07.01.eu4'}
+[21:28:41]   run to 1618.07.01
+[21:29:48] step 2: {'date': '1618.08.01', 'outfname': '../out/obs-1618-ENG/ENG_1618.08.01.eu4'}
+[21:29:48]   run to 1618.08.01
+[21:30:49] restored dlc_load.json and continue_game.json
