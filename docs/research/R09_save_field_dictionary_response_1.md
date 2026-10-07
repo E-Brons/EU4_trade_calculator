@@ -265,3 +265,10 @@ Source: single-change experiments run in the game (EU4 1.37.5) with the automati
 - `transfer_home_bonus`: 0.000 as soon as one merchant collects away (P03); unchanged (0.200) when the ragusa steerer steers away from the home node (P01); a steerer at constantinople, which has no link into the home node, adds nothing (P04). See R01 V2-R01-4. Confirmed (P03), inferred (counting rule).
 - `top_power` of a country that lost its last province keeps it until the next 1st (E21, NAX: alexandria 2.046, constantinople 9.579 on 12.03 and 12.15). Confirmed.
 - `has_capital` (E19): capital and trade port moved together within the venice node; not decided which one it follows.
+
+## Update 2026-10-08 - experiment round 2
+
+Source: 27 single-change jobs run in the game by the automation (`tools/EU4-game-automation/experiments/round2/`: `PLAN.md`, `RESULTS.md`, scripts `analysis/`); saves under `round2/out/<id>/` (t1 = 1445.1.1, t2 = 1445.2.1; all dated, player and plain text checked). Controls as in round 1 (E01c / E01d on the E00 base) plus R2-C-U10, R2-H-MAM-C, R2-H-TUR-C, R2-C-NED18. **Void:** every merchant recall by save patch (R2-B5a, R2-B4, R2-B5c, R2-H-MAM-B1, R2-H-TUR-B1 and the recall half of R2-B5b / R2-H-MAM-B2): the patched save has no merchant at the node, t1 has it again (cause unknown); the embargo (R2-EMB) and privateer (R2-PRIV) patches are dropped on load; R2-TC added nothing (no territory province). No claim below rests on a recall.
+
+### V4-R09-1 `has_capital` follows `trade_port`; `transfer_home_bonus` is stored
+Claim: R2-PORT (only the trade port moved) moves `has_capital` (V4-R02-1); `transfer_home_bonus` is a stored country field used as written for two months (V4-R01-3). Confidence: confirmed / inferred (update rule).

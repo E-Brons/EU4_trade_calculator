@@ -209,3 +209,10 @@ Claim (E07): +50 % `global_ship_trade_power` raises VEN `ship_power` at venice 4
 
 ### V2-R11-2 Moving one fleet
 Claim (P05): VEN's light-ship fleet moved by a save patch from venice to ragusa: `ship_power` 4.000 and `light_ship` 2 move from venice to ragusa, `max_pow` -4.000 / +4.000, no upstream `prev` change. This is the one-assignment pair asked for; its income ratio (`money/total` at the collecting home node) has not been extracted yet. Confidence: confirmed (power fields).
+
+## Update 2026-10-08 - experiment round 2
+
+Source: 27 single-change jobs run in the game by the automation (`tools/EU4-game-automation/experiments/round2/`: `PLAN.md`, `RESULTS.md`, scripts `analysis/`); saves under `round2/out/<id>/` (t1 = 1445.1.1, t2 = 1445.2.1; all dated, player and plain text checked). Controls as in round 1 (E01c / E01d on the E00 base) plus R2-C-U10, R2-H-MAM-C, R2-H-TUR-C, R2-C-NED18. **Void:** every merchant recall by save patch (R2-B5a, R2-B4, R2-B5c, R2-H-MAM-B1, R2-H-TUR-B1 and the recall half of R2-B5b / R2-H-MAM-B2): the patched save has no merchant at the node, t1 has it again (cause unknown); the embargo (R2-EMB) and privateer (R2-PRIV) patches are dropped on load; R2-TC added nothing (no territory province). No claim below rests on a recall.
+
+### V4-R11-1 Ship power moves 1:1 with the fleet; income effect of one fleet
+Claim (R2-SHIPCON): 2 barques (2.0 each, `common/units`) moved from VEN's home node to constantinople: `ship_power` 4.000 / `max_pow` +4.000 there, -4.000 at venice, no `prev` change; VEN home `total` -0.8 % (5.307 -> 5.264). Per-type values (frigates etc.) still need later-era saves. Confidence: confirmed.

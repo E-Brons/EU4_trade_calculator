@@ -252,3 +252,16 @@ Claim (P01, P04): VEN's ragusa merchant steering to genua instead of venice (P01
 ### Refuted
 - VS-3 / V14 as a mechanism ("the ruler's DIP adds 0.005 per point to the foreign class"): V2-R01-1.
 - "0.1 per steering merchant" (V13) as a complete rule: the constantinople steerer of P04 adds nothing (V2-R01-4).
+
+## Update 2026-10-08 - experiment round 2
+
+Source: 27 single-change jobs run in the game by the automation (`tools/EU4-game-automation/experiments/round2/`: `PLAN.md`, `RESULTS.md`, scripts `analysis/`); saves under `round2/out/<id>/` (t1 = 1445.1.1, t2 = 1445.2.1; all dated, player and plain text checked). Controls as in round 1 (E01c / E01d on the E00 base) plus R2-C-U10, R2-H-MAM-C, R2-H-TUR-C, R2-C-NED18. **Void:** every merchant recall by save patch (R2-B5a, R2-B4, R2-B5c, R2-H-MAM-B1, R2-H-TUR-B1 and the recall half of R2-B5b / R2-H-MAM-B2): the patched save has no merchant at the node, t1 has it again (cause unknown); the embargo (R2-EMB) and privateer (R2-PRIV) patches are dropped on load; R2-TC added nothing (no territory province). No claim below rests on a recall.
+
+### V4-R01-1 Ruler DIP has no effect on `max_demand` at the first tick either
+Claim (R2-DIPFRESH): GEN's ruler DIP 3 -> 5 in a new game before the first tick; on 1444.12.1 GEN's `max_demand` equals that of another new game with DIP 3 (E00 base) in 80 of 80 nodes, while the U10 game differs from E00 by +0.1 in 78 GEN nodes at equal DIP. The cross-game pattern (VS-3 / V14) has another cause. Confidence: confirmed (one country, two games).
+
+### V4-R01-2 One trade idea
+Claim (R2-IDEA1): the `trade_ideas` group with its first idea (`shrewd_commerce_practise`, `global_trade_power = 0.2`, `common/ideas/00_basic_ideas.txt`) adds +0.200 to VEN's `max_demand` in every node; ideas 2-3 (`merchants`, `trade_range_modifier`, R2-IDEA2) change no trade-block field. Confidence: confirmed.
+
+### V4-R01-3 `transfer_home_bonus` enters the home `max_demand` 1:1 (side observation)
+Claim: in the five void recall jobs the patch also wrote `transfer_home_bonus` - 0.1; with the merchants restored the game kept the written value on t1 and t2 and the home entry's `max_demand` is lower by exactly 0.100 (VEN venice 1.213 -> 1.113 twice, 1.313 -> 1.213; MAM alexandria 1.232 -> 1.132; TUR constantinople 1.207 -> 1.107), nothing else in the country's entries changes. So the home value = value without the bonus + the stored field, at end and non-end home nodes. The counting rule (which steerers count) stays open. Confidence: confirmed for the 1:1 term (5 jobs x 2 dates); the field's update rule inferred.

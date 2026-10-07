@@ -105,3 +105,10 @@ Source: single-change experiments run in the game (EU4 1.37.5) with the automati
 
 ### V2-R10-1 Node aggregates of a vanished country (second case)
 Claim (E21): NAX loses its only province on 1444.12.01; on 1444.12.03 and 12.15 it has no entries but stays in `top_power` at alexandria (2.046) and constantinople (9.579); gone on 1445.01.01. This is the second case asked for after U05 AFA. Confidence: confirmed for `top_power`.
+
+## Update 2026-10-08 - experiment round 2
+
+Source: 27 single-change jobs run in the game by the automation (`tools/EU4-game-automation/experiments/round2/`: `PLAN.md`, `RESULTS.md`, scripts `analysis/`); saves under `round2/out/<id>/` (t1 = 1445.1.1, t2 = 1445.2.1; all dated, player and plain text checked). Controls as in round 1 (E01c / E01d on the E00 base) plus R2-C-U10, R2-H-MAM-C, R2-H-TUR-C, R2-C-NED18. **Void:** every merchant recall by save patch (R2-B5a, R2-B4, R2-B5c, R2-H-MAM-B1, R2-H-TUR-B1 and the recall half of R2-B5b / R2-H-MAM-B2): the patched save has no merchant at the node, t1 has it again (cause unknown); the embargo (R2-EMB) and privateer (R2-PRIV) patches are dropped on load; R2-TC added nothing (no territory province). No claim below rests on a recall.
+
+### V4-R10-1 Embargo and privateer patches are void
+Claim: a patched embargo (`trade_embargoes` / `trade_embargoed_by`, U25 format) and a protect mission renamed to `privateer_mission` are removed by the game on load (no such key on t1); both questions need the state written by the game. Candidate constants: `EMBARGO_BASE_EFFICIENCY = 0.5`, `EMBARGO_MERCANTILISM_EFFICIENCY = 50`, `PIRATES_TRADE_POWER_FACTOR = 1.5`, `PRIVATEER_INCOME_COLLECTION_EFF = 0.5` (defines.lua). Confidence: confirmed (void).

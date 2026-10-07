@@ -174,3 +174,13 @@ Claim (E06): +10 % `trade_efficiency` raises VEN venice `money/total` 1.320 -> 1
 
 ### V2-R07-2 Technology level 4 and merchant capacity
 Claim: dip tech 3 -> 4 (E10) and adm tech 3 -> 4 (E11) change no VEN trade field (X included). +1 merchant (E13) raises the envoy count 3 -> 4 and changes nothing else (with VEN's AI off the merchant is not placed). Confidence: confirmed (VEN).
+
+## Update 2026-10-08 - experiment round 2
+
+Source: 27 single-change jobs run in the game by the automation (`tools/EU4-game-automation/experiments/round2/`: `PLAN.md`, `RESULTS.md`, scripts `analysis/`); saves under `round2/out/<id>/` (t1 = 1445.1.1, t2 = 1445.2.1; all dated, player and plain text checked). Controls as in round 1 (E01c / E01d on the E00 base) plus R2-C-U10, R2-H-MAM-C, R2-H-TUR-C, R2-C-NED18. **Void:** every merchant recall by save patch (R2-B5a, R2-B4, R2-B5c, R2-H-MAM-B1, R2-H-TUR-B1 and the recall half of R2-B5b / R2-H-MAM-B2): the patched save has no merchant at the node, t1 has it again (cause unknown); the embargo (R2-EMB) and privateer (R2-PRIV) patches are dropped on load; R2-TC added nothing (no territory province). No claim below rests on a recall.
+
+### V4-R07-1 The merchant term is TRADE_MERCHANT_PRESENT = 0.1, also at a non-end home node
+Claim: `common/defines.lua` line 1201 `TRADE_MERCHANT_PRESENT = 0.1, -- bonus on income if trade present`. A merchant placed to collect at home raises X = money/total - 1 by exactly 0.10: VEN venice (end node, R2-B5b vs R2-C-U10) 0.12 -> 0.22 (t1), 0.17 -> 0.27 (t2); MAM alexandria (3 outgoing links, R2-H-MAM-B2 vs C) 0.07 -> 0.17 (t1, t2); `transfer_home_bonus` unchanged (0.3, 0.2). The power gain (+2) adds only where the share is below 1 (`total` +0.6 % / +0.3 %). Confidence: confirmed (two nations, two dates).
+
+### V4-R07-2 Trade steering income at home
+Claim (R2-STEER50/100 vs E01d): VEN home `total` 5.353 -> 5.616 -> 5.834 at +50 / +100 % trade steering (more value steered home); X unchanged. Confidence: confirmed.

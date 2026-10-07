@@ -140,3 +140,10 @@ Claim (E14): a node modifier `{key=exp_trade_power power=10}` on VEN at ragusa a
 
 ### V2-R06-2 The +15 term and the trade idea group
 Claim (E22): completing `trade_ideas` (all 7 ideas, console `add_idea_group trade_ideas VEN`) adds +15.000 to `max_pow` at each node where VEN has a merchant (ragusa, venice, wien) at t1; `max_demand` +0.200 everywhere; `add` 0.071 -> 0.083. So a +15 merchant-node term is carried by the trade idea group (which idea is not separated: the command grants all seven). Confidence: confirmed for the group; the single idea is inferred-open.
+
+## Update 2026-10-08 - experiment round 2
+
+Source: 27 single-change jobs run in the game by the automation (`tools/EU4-game-automation/experiments/round2/`: `PLAN.md`, `RESULTS.md`, scripts `analysis/`); saves under `round2/out/<id>/` (t1 = 1445.1.1, t2 = 1445.2.1; all dated, player and plain text checked). Controls as in round 1 (E01c / E01d on the E00 base) plus R2-C-U10, R2-H-MAM-C, R2-H-TUR-C, R2-C-NED18. **Void:** every merchant recall by save patch (R2-B5a, R2-B4, R2-B5c, R2-H-MAM-B1, R2-H-TUR-B1 and the recall half of R2-B5b / R2-H-MAM-B2): the patched save has no merchant at the node, t1 has it again (cause unknown); the embargo (R2-EMB) and privateer (R2-PRIV) patches are dropped on load; R2-TC added nothing (no territory province). No claim below rests on a recall.
+
+### V4-R06-1 Capital power +5 moves with the main trade port; merchant at home +2
+Claim: R2-PORT `max_pow` +5.000 at the new home node (TRADE_CAPITAL_POWER); R2-B5b / R2-H-MAM-B2: a merchant collecting at home adds +2.000 `max_pow` (venice 110.681 -> 112.681, alexandria 110.564 -> 112.564). Open: -5.000 more at the old home node after the port move. Confidence: confirmed.

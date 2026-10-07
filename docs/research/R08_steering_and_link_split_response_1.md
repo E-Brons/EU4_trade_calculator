@@ -179,3 +179,10 @@ Not observed: a node losing its last steerer (0 transitions in the corpus and in
 
 ### Consequence for the calculator
 `rule_steer_weights` returns nan for unsteered multi-link nodes and 1.0 for single-link nodes. Taking the save's stored weights for nodes without steerers removes 682 of the 1,660 `steer_weights` failures (618 nan + 64 single-link nodes stored as 0). The remaining 978 are at steered nodes: 960 nan (a steerer whose strength is not identified) and 18 wrong; that is a separate open item (identification of the steering strength).
+
+## Update 2026-10-08 - experiment round 2
+
+Source: 27 single-change jobs run in the game by the automation (`tools/EU4-game-automation/experiments/round2/`: `PLAN.md`, `RESULTS.md`, scripts `analysis/`); saves under `round2/out/<id>/` (t1 = 1445.1.1, t2 = 1445.2.1; all dated, player and plain text checked). Controls as in round 1 (E01c / E01d on the E00 base) plus R2-C-U10, R2-H-MAM-C, R2-H-TUR-C, R2-C-NED18. **Void:** every merchant recall by save patch (R2-B5a, R2-B4, R2-B5c, R2-H-MAM-B1, R2-H-TUR-B1 and the recall half of R2-B5b / R2-H-MAM-B2): the patched save has no merchant at the node, t1 has it again (cause unknown); the embargo (R2-EMB) and privateer (R2-PRIV) patches are dropped on load; R2-TC added nothing (no territory province). No claim below rests on a recall.
+
+### V4-R08-1 Steering strength = TRADE_ADDED_VALUE_MODIFER x (1 + trade_steering)
+Claim: VEN's `add` on its rank-1 steering entries (ragusa, wien) is 0.071 (E01d), 0.083 (+25 %, E08), 0.096 (+50 %, R2-STEER50), 0.121 (+100 %, R2-STEER100): +0.05 per +100 % = `TRADE_ADDED_VALUE_MODIFER = 0.05` (defines.lua 1204) x the modifier; the base 0.071 = 0.05 x 1.42-1.44 (`VEN_ideas` start `trade_steering = 0.33` plus about 0.1 unknown). A country without steering modifiers has 0.05, the most common identified strength in the corpus (57 % of 3,826). Confidence: confirmed (one country, four levels).

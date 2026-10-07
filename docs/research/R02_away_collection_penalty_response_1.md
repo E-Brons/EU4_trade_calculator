@@ -132,3 +132,10 @@ Claim (P03): VEN's ragusa merchant switched from steering to collecting away: ra
 
 ### V2-R02-2 `has_capital` with capital and trade port moved together (inconclusive)
 Claim (E19): moving the capital from Venezia (112) to Padova (4729) moved `trade_port` too; `has_capital` stays at venice (both provinces are in the venice node). Whether `has_capital` follows the capital or the trade port is therefore not decided. VEN `province_power` at venice falls by 0.200 at t2. Confidence: confirmed for what was observed; the question stays open.
+
+## Update 2026-10-08 - experiment round 2
+
+Source: 27 single-change jobs run in the game by the automation (`tools/EU4-game-automation/experiments/round2/`: `PLAN.md`, `RESULTS.md`, scripts `analysis/`); saves under `round2/out/<id>/` (t1 = 1445.1.1, t2 = 1445.2.1; all dated, player and plain text checked). Controls as in round 1 (E01c / E01d on the E00 base) plus R2-C-U10, R2-H-MAM-C, R2-H-TUR-C, R2-C-NED18. **Void:** every merchant recall by save patch (R2-B5a, R2-B4, R2-B5c, R2-H-MAM-B1, R2-H-TUR-B1 and the recall half of R2-B5b / R2-H-MAM-B2): the patched save has no merchant at the node, t1 has it again (cause unknown); the embargo (R2-EMB) and privateer (R2-PRIV) patches are dropped on load; R2-TC added nothing (no territory province). No claim below rests on a recall.
+
+### V4-R02-1 The home node is the node of the main trade port
+Claim (R2-PORT): moving only `trade_port` 112 (Venezia, venice node) -> 4753 (Zara, ragusa node), capital unchanged, moves `has_capital` to VEN's ragusa entry; ragusa `max_demand` 1.036 -> 1.213 (home value), `max_pow` +5.000 (`TRADE_CAPITAL_POWER = 5.0`, defines.lua 1195); the merchant still collecting at venice is now away: `max_demand` 1.213 -> 0.507 (about 0.5 x 1.013). R2-CAP: `set_capital` moves `trade_port` with it (as E19). Answers R15 Q2 (a)/(b) for the save: the main trade port decides. Open detail: venice `max_pow` falls by 10.000 (5 = capital power, 5 unexplained). Confidence: confirmed (one country).

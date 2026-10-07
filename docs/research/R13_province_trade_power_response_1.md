@@ -124,3 +124,10 @@ Claim: in one game saved every 2nd day from the base 1444.12.01, 1,006 of 3,925 
 and the 2nd in January there, so it is not a fixed day of the month. Consequence for the calculator: on a 1st the node
 `province_power` equals the sum of the provinces' `trade_power` (V-R13-1) because the province values still hold the
 previous bulk update; after the bulk day they differ until the next 1st. Evidence: `tools/EU4-game-automation/experiments/out/E23/d_1444.12.03.eu4` ... `d_1444.12.31.eu4`, `analysis/a9_e23_recompute_days.py`. Confidence: confirmed (bulk update after the 1st), inferred (day varies by month).
+
+## Update 2026-10-08 - experiment round 2
+
+Source: 27 single-change jobs run in the game by the automation (`tools/EU4-game-automation/experiments/round2/`: `PLAN.md`, `RESULTS.md`, scripts `analysis/`); saves under `round2/out/<id>/` (t1 = 1445.1.1, t2 = 1445.2.1; all dated, player and plain text checked). Controls as in round 1 (E01c / E01d on the E00 base) plus R2-C-U10, R2-H-MAM-C, R2-H-TUR-C, R2-C-NED18. **Void:** every merchant recall by save patch (R2-B5a, R2-B4, R2-B5c, R2-H-MAM-B1, R2-H-TUR-B1 and the recall half of R2-B5b / R2-H-MAM-B2): the patched save has no merchant at the node, t1 has it again (cause unknown); the embargo (R2-EMB) and privateer (R2-PRIV) patches are dropped on load; R2-TC added nothing (no territory province). No claim below rests on a recall.
+
+### V4-R13-1 Centre of trade and trade depot
+Claim: R2-COT Verona (108) centre of trade 1 -> 2 (`province_trade_power_value` 5 -> 10, `common/centers_of_trade`): `trade_power` 11.354 -> 18.824 (+7.470 = 5 x 1.494: the flat value is multiplied like the base), VEN `province_power` +7.470, upstream `prev` +1.494; R2-DEPOT trade depot in Venezia (`province_trade_power_modifier = 1`): 53.200 -> 83.600 (+30.4 = base 30.4 x 1.0) at once. Confidence: confirmed.

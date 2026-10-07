@@ -111,3 +111,10 @@ Claim (E01a vs E01b, two runs from the same save): 4,859 of 73,073 trade-block f
 
 ### V2-R14-2 Pairs now done
 Single-change pairs were run for: away collection (P03), steering link change (P01), trade steering (E08), trade efficiency (E06), trade-power modifiers (E03-E05), ship modifier (E07) and fleet move (P05), province modifiers, marketplace, mercantilism, autonomy (E09, E17, E12, E18), merchant capacity (E13), technology (E10, E11), idea group (E22), subjects (E20a/b/d), a vanished country (E21). Void: E16 (no-op), E20c (relation not created), P02 (recall did not hold), P06 (country too small for the propagation question), E19 (capital and trade port moved together). Results per topic in the R01-R13 responses.
+
+## Update 2026-10-08 - experiment round 2
+
+Source: 27 single-change jobs run in the game by the automation (`tools/EU4-game-automation/experiments/round2/`: `PLAN.md`, `RESULTS.md`, scripts `analysis/`); saves under `round2/out/<id>/` (t1 = 1445.1.1, t2 = 1445.2.1; all dated, player and plain text checked). Controls as in round 1 (E01c / E01d on the E00 base) plus R2-C-U10, R2-H-MAM-C, R2-H-TUR-C, R2-C-NED18. **Void:** every merchant recall by save patch (R2-B5a, R2-B4, R2-B5c, R2-H-MAM-B1, R2-H-TUR-B1 and the recall half of R2-B5b / R2-H-MAM-B2): the patched save has no merchant at the node, t1 has it again (cause unknown); the embargo (R2-EMB) and privateer (R2-PRIV) patches are dropped on load; R2-TC added nothing (no territory province). No claim below rests on a recall.
+
+### V4-R14-1 What the automation can and cannot set by save patch
+Claim: placements by patch hold (round 1 P01/P03, R2-B5b / R2-H-MAM-B2 home merchants); recalls by patch do not (5 jobs: the merchant is restored on load, cause unknown); patched embargo and privateer missions are removed on load; `transfer_home_bonus` written by a patch is kept. Effects via `run` work (R2-COT, R2-DEPOT, R2-TRIB with `forced_tributary_state`, R2-IDEA1); `add_to_trade_company` needs territory provinces. Confidence: confirmed.

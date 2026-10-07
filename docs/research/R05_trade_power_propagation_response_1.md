@@ -165,3 +165,10 @@ Claim (E14): a node modifier with power 10 at VEN ragusa raises ragusa `max_pow`
 
 ### V2-R05-4 A start-zero link (inconclusive)
 Claim (P06): XAL made the only steerer at california (link index 0): the node's weights go from [0, 1, 0, 0] to [1, 0, 0, 0] at the next tick and XAL `max_pow` 0.87 -> 2.87 (merchant term 2). XAL's `province_power` is far below 10, so whether a start-zero link propagates once positive is not answered. Confidence: confirmed for the weights only.
+
+## Update 2026-10-08 - experiment round 2
+
+Source: 27 single-change jobs run in the game by the automation (`tools/EU4-game-automation/experiments/round2/`: `PLAN.md`, `RESULTS.md`, scripts `analysis/`); saves under `round2/out/<id>/` (t1 = 1445.1.1, t2 = 1445.2.1; all dated, player and plain text checked). Controls as in round 1 (E01c / E01d on the E00 base) plus R2-C-U10, R2-H-MAM-C, R2-H-TUR-C, R2-C-NED18. **Void:** every merchant recall by save patch (R2-B5a, R2-B4, R2-B5c, R2-H-MAM-B1, R2-H-TUR-B1 and the recall half of R2-B5b / R2-H-MAM-B2): the patched save has no merchant at the node, t1 has it again (cause unknown); the embargo (R2-EMB) and privateer (R2-PRIV) patches are dropped on load; R2-TC added nothing (no territory province). No claim below rests on a recall.
+
+### V4-R05-1 Ships neither propagate nor count for the gate
+Claim (R2-SHIPCON): VEN's 2 light ships moved to constantinople (VEN `province_power` 2.8 there): `ship_power` 4.000 and `max_pow` +4.000 at constantinople, no `prev` change in any node. The gate is `province_power / TRADE_PROPAGATE_DIVIDER (5) >= TRADE_PROPAGATE_THRESHOLD (2)` (defines.lua 1205-1206) on province power only. Confidence: confirmed.

@@ -129,3 +129,13 @@ Source: single-change experiments run in the game (EU4 1.37.5) with the automati
 ### V2-R04-1 Becoming a subject creates no transfer at the subject's collecting home node
 Claim (E20a/b/d): Mantua (MAN, home node venice) made a vassal, a march or a personal-union junior of VEN: in two months no `t_out` / transfer appears at venice; MAN `max_demand` changes by -0.004 at every node (personal union: +0.001 at t2). E20c (tributary) is void: the relation was not created (MAN has no overlord in the saves). Confidence: confirmed (MAN's own fields; other-country fields are noisy, but `t_out` is either present or not).
 Consequence: the fraction by subject type cannot be read from a subject that collects in its home node; it needs a subject with power in a node where it does not collect.
+
+## Update 2026-10-08 - experiment round 2
+
+Source: 27 single-change jobs run in the game by the automation (`tools/EU4-game-automation/experiments/round2/`: `PLAN.md`, `RESULTS.md`, scripts `analysis/`); saves under `round2/out/<id>/` (t1 = 1445.1.1, t2 = 1445.2.1; all dated, player and plain text checked). Controls as in round 1 (E01c / E01d on the E00 base) plus R2-C-U10, R2-H-MAM-C, R2-H-TUR-C, R2-C-NED18. **Void:** every merchant recall by save patch (R2-B5a, R2-B4, R2-B5c, R2-H-MAM-B1, R2-H-TUR-B1 and the recall half of R2-B5b / R2-H-MAM-B2): the patched save has no merchant at the node, t1 has it again (cause unknown); the embargo (R2-EMB) and privateer (R2-PRIV) patches are dropped on load; R2-TC added nothing (no territory province). No claim below rests on a recall.
+
+### V4-R04-1 The transfer fraction is the relation's `amount` (causal)
+Claim (R2-T05 / R2-T10): adding `transfer_trade_power={ amount=0.500 / 1.000 ... first="MAN" second="VEN" start_date=1444.12.1 }` gives MAN `t_out = fx(amount x (val - 0.1))` in all 4 of its nodes on 1445.1.1 (venice val 18.843: 9.371 / 18.743; ragusa, wien 4.157: 2.028 / 4.057; alexandria 2.135: 1.017 / 2.035), 8 of 8 exact; the first `t_out` comes on the first 1st after the relation date. Confidence: confirmed.
+
+### V4-R04-2 A tributary transfers nothing
+Claim (R2-TRIB): `dependency` VEN -> MAN `subject_type="tributary_state"` (created with the overlord flag `forced_tributary_state`) gives MAN no `t_out` on t1 or t2. With `common/subject_types/00_subject_types.txt` (`transfer_trade_power = yes` only for colony, eyalet, commercial_enterprise, trade_protectorate) and round-1 E20a/b/d: only those types and an explicit relation transfer. Confidence: confirmed (tributary, vassal, march, union).
