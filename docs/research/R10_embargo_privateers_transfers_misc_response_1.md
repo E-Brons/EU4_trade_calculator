@@ -98,3 +98,10 @@ Same data and tables as `R01_power_multiplier_response_1.md`, 'Update 2026-10-05
 
 ### Verification 2026-10-05 (second pass, Venice series)
 VX-1: parsed count (0 of 1,975) and regex count (0 of 1,896 after the reader fix) agree; the fix was found by this pass (first regex run: 24 mismatches, all nodes where an entry carries a nested `t_from` block that the regex skipped). VX-2 was computed once (parser). VX-3: timing and the nine rows reproduced by the regex readers (`venice_c_ver4.py` D, `venice_c_ver5.py` 3); the ruler and other R01 claims are verified in the R01 document.
+
+## Update 2026-10-07 - controlled experiments (E00-P06)
+
+Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.
+
+### V2-R10-1 Node aggregates of a vanished country (second case)
+Claim (E21): NAX loses its only province on 1444.12.01; on 1444.12.03 and 12.15 it has no entries but stays in `top_power` at alexandria (2.046) and constantinople (9.579); gone on 1445.01.01. This is the second case asked for after U05 AFA. Confidence: confirmed for `top_power`.

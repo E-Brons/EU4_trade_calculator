@@ -33,6 +33,8 @@
 
 ## Data needed to complete the research
 
+2026-10-07: rows updated after the controlled experiments (response_1, section 'Update 2026-10-07 - controlled experiments (E00-P06)'; saves under `tools/EU4-game-automation/experiments/out/`). Answered rows were removed.
+
 | Open item | What settles it |
 |---|---|
 | Cause of the 58 residual nodes (V4) | for each residual value, the countries block of that save: a country whose navy (fleets with privateer mission, `light_ship` counts, ship types) times `PIRATES_TRADE_POWER_FACTOR` (1.5 from the goal; to be confirmed by Q3(a)) or another fleet quantity equals the residual; whether the residual country also has `trade_embargoes` or privateer flags |
@@ -41,5 +43,5 @@
 | Exact embargo magnitude and stacking (new rows: FRA on ENG, GEN on LAN, LAN on GEN, V9; timing is settled: next 1st) | per-embargoer factor against the embargoer's `mercantilism`, policies and ideas from the countries block; then an embargo on/off pair (R14 IV-15 and the reverse from R14 request_1 Q3) with two embargoers of different mercantilism |
 | Embargo on `money` (income) in addition to power | `money`/`total` share of an embargoed collector compared with the predicted value (stage income_efficiency, R07) |
 | 35 `cape_of_good_hope` nodes without `total` and PIR `potential` -0.001 | the sign and size of `potential` in all 35 nodes (likely a 3-decimal truncation artefact of an empty node) |
-| Node aggregates holding the power of a country without an entry (V8: U05 AFA) | a second case of a country losing its last province or a merchant being recalled between two saves, and the next tick-day save: `top_power`, `max`, `pull_power`, `retain_power`, `incoming.add` of the nodes before and after |
+| Node aggregates holding the power of a country without an entry (V8: U05 AFA); second case E21 (NAX): `top_power` kept until the next 1st | `max`, `pull_power`, `retain_power`, `incoming.add` of alexandria and constantinople in the E21 saves (`tools/EU4-game-automation/experiments/out/E21/`) |
 | `total - sum(val)` and the residual nodes in U03-U05 | the same decomposition as in response_1 C-01/C-02 applied to these saves (province controllers, `p_pow`, entries) |

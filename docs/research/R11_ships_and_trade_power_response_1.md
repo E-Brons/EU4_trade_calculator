@@ -199,3 +199,13 @@ Source: `venice_c_x_home.py`. Confidence: confirmed (observation); the cause of 
 
 ### Verification 2026-10-05 (second pass, Venice series)
 VH-1: the four residuals recomputed with the regex readers (`venice_c_ver6.py`): identical. VH-2: mission node and entry location read from the raw text (`venice_c_ver3.py` F): identical for all 24 saves. VH-3 and VH-4 computed once (parsed; the X values for the 24 saves are also in `venice_c_ver3.py` C, identical).
+
+## Update 2026-10-07 - controlled experiments (E00-P06)
+
+Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.
+
+### V2-R11-1 `global_ship_trade_power` scales ship power; ships enter `max_pow` 1:1
+Claim (E07): +50 % `global_ship_trade_power` raises VEN `ship_power` at venice 4.000 -> 6.000 and `max_pow` +2.000 (2 light ships on a protect-trade mission at venice). Confidence: confirmed.
+
+### V2-R11-2 Moving one fleet
+Claim (P05): VEN's light-ship fleet moved by a save patch from venice to ragusa: `ship_power` 4.000 and `light_ship` 2 move from venice to ragusa, `max_pow` -4.000 / +4.000, no upstream `prev` change. This is the one-assignment pair asked for; its income ratio (`money/total` at the collecting home node) has not been extracted yet. Confidence: confirmed (power fields).

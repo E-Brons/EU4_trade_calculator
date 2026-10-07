@@ -255,3 +255,13 @@ Method: `venice_b_v2_claims.py` (raw-text extraction of thb, envoy actions and `
 Matched: all VEN rows of V-R09-1 and V-R09-2; the rule 665 of 665 at U30 and U27; 13 changed lines between U25 and U26.
 Not independently re-computed: the played-save counts (869 of 870), the corpus tick-day table (95 of 105 / 4,544 of 4,550), the ship and `trade_mission` observations, the `merchant_recalled` countdown.
 Unverifiable: the game names and definitions of these fields (no parser-source lookup in this round).
+
+## Update 2026-10-07 - controlled experiments (E00-P06)
+
+Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.
+
+### V2-R09-1 Fields confirmed by single changes
+- `merchants` / envoys: +1 merchant modifier (E13) raises the envoy count 3 -> 4 at once. Confirmed.
+- `transfer_home_bonus`: 0.000 as soon as one merchant collects away (P03); unchanged (0.200) when the ragusa steerer steers away from the home node (P01); a steerer at constantinople, which has no link into the home node, adds nothing (P04). See R01 V2-R01-4. Confirmed (P03), inferred (counting rule).
+- `top_power` of a country that lost its last province keeps it until the next 1st (E21, NAX: alexandria 2.046, constantinople 9.579 on 12.03 and 12.15). Confirmed.
+- `has_capital` (E19): capital and trade port moved together within the venice node; not decided which one it follows.

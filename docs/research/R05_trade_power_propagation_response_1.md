@@ -149,3 +149,19 @@ VEN has 3 light ships at `alexandria` (`ship_power` 6.0) and no `province_power`
 
 ### Verification 2026-10-05 (second pass)
 V-R05-1 recomputed with `venice_a_ver.py 2` (own loop, Decimal, weights read from the first save): exact for every entry at the 8 later 1sts (1,413 / 1,500 / 1,504 / 1,501 / 1,501 / 1,501 / 1,501 / 1,502).
+
+## Update 2026-10-07 - controlled experiments (E00-P06)
+
+Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.
+
+### V2-R05-1 `prev` = home `province_power` / 5, same tick
+Claim (E09): +25 % `global_prov_trade_power_modifier` raises VEN `province_power` at venice 99.655 -> 114.317 at t1, and VEN `prev` at alexandria, ragusa and wien (the upstream nodes) 19.931 -> 22.863 = 114.317 / 5 in the same save. Confidence: confirmed.
+
+### V2-R05-2 The threshold lies between 9.716 and 10.196
+Claim (E15): Piedmont (103) base production 7 -> 10 (province trade power 4.08 -> 4.80) raises SAV `province_power` at genua 9.716 -> 10.436 at t1, and SAV `prev` 2.087 (= 10.436 / 5) appears at alexandria, champagne, ragusa, tunis and valencia; in the control there is no SAV `prev` at 9.716, and `prev` 2.039 appears at t2 after natural growth to 10.196. Consistent with `>= 10`; exactly 10.000 not observed. Confidence: confirmed for the bracket.
+
+### V2-R05-3 Flat node power and ship power stay local
+Claim (E14): a node modifier with power 10 at VEN ragusa raises ragusa `max_pow` by 10.000 (`val` +10.360) and changes no `province_power` and no upstream `prev`. Claim (P05): moving VEN's light-ship fleet (2 light ships) from venice to ragusa moves `ship_power` 4.000 and `light_ship` 2 between the nodes (`max_pow` -4.000 / +4.000) and changes no upstream `prev`: ships at venice (where VEN's `province_power` is far above 10) add nothing to `prev`. Confidence: confirmed (VEN).
+
+### V2-R05-4 A start-zero link (inconclusive)
+Claim (P06): XAL made the only steerer at california (link index 0): the node's weights go from [0, 1, 0, 0] to [1, 0, 0, 0] at the next tick and XAL `max_pow` 0.87 -> 2.87 (merchant term 2). XAL's `province_power` is far below 10, so whether a start-zero link propagates once positive is not answered. Confidence: confirmed for the weights only.

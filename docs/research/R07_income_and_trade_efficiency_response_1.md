@@ -164,3 +164,13 @@ Method: `venice_b_v2_mvsn.py` and `venice_b_v2_frozen.py` re-extract the entries
 Matched: the full M vs N table (all four rows, identical counts); the entry-level key differences between same-month saves (no `money`, `total`, `val`, `max_pow` change); VEN `money` and `total` values quoted above.
 Not independently re-computed: the first-tick histogram (Claim 2), the religion / technology-group splits, the cross-section medians, the away pairs, the U19 -> U20 field list.
 Unverifiable: the game definition of the +0.10 and of the +0.05 steps; what sets the extra e.
+
+## Update 2026-10-07 - controlled experiments (E00-P06)
+
+Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.
+
+### V2-R07-1 Trade efficiency adds 1:1 to the income factor X
+Claim (E06): +10 % `trade_efficiency` raises VEN venice `money/total` 1.320 -> 1.420 at t1 and 1.270 -> 1.370 at t2; the four controls give 1.3198-1.3200 (t1) and 1.2698-1.2700 (t2). So `money = total x X` with the efficiency modifier additive inside X. In all controls X drops by 0.05 between 1445.01.01 and 1445.02.01 (a -0.05 step of the kind listed in request_2, cause not identified). Confidence: confirmed (ratio; income levels themselves vary +-0.6 %).
+
+### V2-R07-2 Technology level 4 and merchant capacity
+Claim: dip tech 3 -> 4 (E10) and adm tech 3 -> 4 (E11) change no VEN trade field (X included). +1 merchant (E13) raises the envoy count 3 -> 4 and changes nothing else (with VEN's AI off the merchant is not placed). Confidence: confirmed (VEN).

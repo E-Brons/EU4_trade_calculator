@@ -57,14 +57,15 @@ List, as numbered questions, every fact your matrix needs that is not in the tab
 
 ## Data needed to complete the research
 
+2026-10-07: rows updated after the controlled experiments (response_1, section 'Update 2026-10-07 - controlled experiments (E00-P06)'; saves under `tools/EU4-game-automation/experiments/out/`). Answered rows were removed.
+
 | Open item | What settles it |
 |---|---|
-| Whether B and C diverge given the same A (two fresh games with identical setup already differ in stored `max_demand`: Venice U07 vs S01, 2,686 of 3,798 differing fields; see R01) | two C saves from one A, compare `multiplayer_random_count` and the whole `trade` block (Q5 experiment) |
 | Away penalty form (`x 0.5` vs `- 0.5`) for a country with non-zero `reduced_trade_penalty_on_non_main_tradenode` | not in the save; needs a country with a known reduction source |
 | Exact embargo reduction formula | embargo on/off pair with embargoers' own power at the node (Q3 b) |
-| Steering weights rule, `add` rule | Q8 (a), (b) |
-| Home bonus and `transfer_home_bonus` rule | Q8 (c) |
-| Ship factor f, uncounted fleets | Q8 (d) and a save on the 1st after a tick |
-| Whether `has_capital` follows the capital or the main trade port | Q8 (e) |
-| Trade company region, blockade, mercantilism effects on province power | pairs in the R13 request_2 table "Data needed to complete the research" |
+| Steering weights rule, `add` rule (2026-10-07: link change P01, trade steering E08 done; see R08 request_2) | Q8 (a), (b); the pairs listed in R08 request_2 |
+| `transfer_home_bonus` counting rule (inferred from P01/P04, see R01 request_2) | Q8 (c); the corpus test and one more pair listed in R01 request_2 |
+| Ship factor f of national idea sets, uncounted fleets (the global ship modifier is settled: E07) | Q8 (d) and a save on the 1st after a tick |
+| Whether `has_capital` follows the capital or the main trade port (E19 moved both: not decided) | Q8 (e): a pair moving only one of the two to another node |
+| Trade company region and blockade effects on province power (mercantilism settled: E12) | pairs in the R13 request_2 table "Data needed to complete the research" |
 | The facts listed under "Facts to extract from the saves" | scripts over the 82 saves and the Venice series U07-U30 |

@@ -121,3 +121,11 @@ Venice has no subject of its own; the rows of request_2 about BEI and small `val
 
 ### Verification 2026-10-05 (second pass)
 The vassal ratio was counted twice: by `venice_a_r04.py` (parsed entries, class `val-0.1`) and by `venice_a_r04b.py` (ratio and `dependency` block from the raw text); the corpus-only rerun lists the same 12 vassal giver-saves and 534 + 10 for the others.
+
+## Update 2026-10-07 - controlled experiments (E00-P06)
+
+Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.
+
+### V2-R04-1 Becoming a subject creates no transfer at the subject's collecting home node
+Claim (E20a/b/d): Mantua (MAN, home node venice) made a vassal, a march or a personal-union junior of VEN: in two months no `t_out` / transfer appears at venice; MAN `max_demand` changes by -0.004 at every node (personal union: +0.001 at t2). E20c (tributary) is void: the relation was not created (MAN has no overlord in the saves). Confidence: confirmed (MAN's own fields; other-country fields are noisy, but `t_out` is either present or not).
+Consequence: the fraction by subject type cannot be read from a subject that collects in its home node; it needs a subject with power in a node where it does not collect.

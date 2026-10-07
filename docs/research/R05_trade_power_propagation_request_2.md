@@ -35,10 +35,11 @@
 
 ## Data needed to complete the research
 
+2026-10-07: rows updated after the controlled experiments (response_1, section 'Update 2026-10-07 - controlled experiments (E00-P06)'; saves under `tools/EU4-game-automation/experiments/out/`). Answered rows were removed.
+
 | Open item | What settles it |
 |---|---|
-| `>` vs `>=` at exactly `province_power` = 10.000 | a stored `province_power` of exactly 10.000 at a downstream node of an entry |
-| What defines the links that never propagate: zero weight at the bookmark state (31 links in the Venice game, e.g. XAL `california` -> `mexico`) or weight never positive so far. In the series no such link turned positive, and links that are 0 now but were positive at the bookmark do propagate | a game in which a link with weight 0 in the bookmark state becomes positive (a merchant steering onto it, e.g. at `california` onto the link to `mexico`), saved on that day and on the following 1sts: `prev` of the entries whose `province_power` at the downstream node is >= 10, read before and after |
+| `>` vs `>=` at exactly `province_power` = 10.000 (2026-10-07, E15: the gate lies between 9.716 and 10.196) | a stored `province_power` of exactly 10.000 at a downstream node of an entry (e.g. a province change sized to bring SAV's genua value to 10.000) |
+| What defines the links that never propagate: zero weight at the bookmark state (31 links in the Venice game, e.g. XAL `california` -> `mexico`) or weight never positive so far. 2026-10-07: a steerer turned a california link positive (P06, weights [0,1,0,0] -> [1,0,0,0]), but no country there has `province_power` >= 10 downstream | a start-zero link turned positive whose downstream node holds a country with `province_power` >= 10, read on the following 1sts (`prev` upstream before and after) |
 | Modifier behind MOR's 0.25 ship factor | `modifier` entries, `active_idea_groups` levels, `government` reforms and `flags` of `countries.MOR` in S80; a save in which MOR owns ships downstream of a node where its `province_power` >= 10 (U03-U05: none); another country with the same modifier and downstream ships |
-| "Ships do not propagate" outside the played campaign (start saves have no ships; Venice has 3 light ships at `alexandria` but no `province_power` there) | a game where several countries have ships assigned downstream of a node (R14 IV-09 to IV-12: light ships +N) and the upstream `prev` read before and after |
 | Whether the threshold 10 also applies when ships propagate | a case with ships at a downstream node where the country's `province_power` < 10 (R14 IV-12 / IV-20) |

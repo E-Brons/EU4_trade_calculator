@@ -33,10 +33,11 @@
 
 ## Data needed to complete the research
 
+2026-10-07: rows updated after the controlled experiments (response_1, section 'Update 2026-10-07 - controlled experiments (E00-P06)'; saves under `tools/EU4-game-automation/experiments/out/`). Answered rows were removed.
+
 | Open item | What settles it |
 |---|---|
-| Does `has_capital` follow the capital province or the main trade port when they differ? | Pair (R14 IV-18 family, "moving the main trade port"): same country, same date, only the main trade port moved to another node; read which node carries `has_capital` and where `max_demand` is halved |
+| Does `has_capital` follow the capital province or the main trade port when they differ? (2026-10-07, E19: moving VEN's capital 112 -> 4729 moved `trade_port` too, both in the venice node: not decided) | a save pair in which only the main trade port moves to a province in another node (capital unchanged), or only the capital moves to another node while the trade port stays; read which node carries `has_capital` and where `max_demand` is halved |
 | Form of `r`: `(1+mods)*(0.5+r)` vs `(1+mods)*0.5 + r` | A save of a country that has `reduced_trade_penalty_on_non_main_tradenode` > 0 collecting away (candidates come from Q2(b)); compare md away / md foreign |
 | Colonial nation with no `has_capital` entry (87 country-saves): penalised everywhere? | List what these 87 have in common in the countries block (capital province in a trade node? `trade_port` missing?) and whether any collects at the node of its capital |
 | The 2 collect-away exceptions and 18 steer-away exceptions (SUN, DLI in S80/U01) | Find in the countries block of S80 what differs for SUN and DLI (`trade_embargoed_by`, modifiers, subject state) and whether a hidden embargo exists; check the opposite direction `trade_embargoes` of other countries listing SUN |
-| The within-country switch (V6) is one country and its control node changed by +19% in the same interval | A pair of saves of one game, same date and nothing else changed, in which one steering merchant is switched to collecting away at an unembargoed foreign node (R14 IV-02/IV-03), with `max_demand` of that node and of a steering control node read in both saves |

@@ -41,15 +41,17 @@
 
 ## Data needed to complete the research
 
+2026-10-07: rows updated after the controlled experiments (response_1, section 'Update 2026-10-07 - controlled experiments (E00-P06)'; saves under `tools/EU4-game-automation/experiments/out/`). Answered rows were removed.
+
 | Open item (from response_1) | What settles it (exact field / pair) |
 |---|---|
 | 7 failures of `power_fraction` and the `retain_power` mismatch in S64 `genua` (SPI 0.124, GEN 0.271, KNI 0.022 vs retain_power 326.299); `num_collectors` 7 exceptions (S64 `genua` 8 vs 7, S79/U02 `california` 9 vs 8 and `english_channel` 9 vs 8, S80/U01 `gulf_of_siam` 2 vs 1) | all entries of those nodes (`total`, `val`, `t_in`, `t_out`, `power_fraction`, `money`), to find the entry that is counted but absent (a stale entry of a vanished country is one candidate: U05 AFA) |
-| Node fields that keep the power of a country without an entry (U05 `ethiopia`, `gulf_of_aden`: `top_power`, `max`, `pull_power`, `retain_power`, link `incoming.add`) | a second case of a country losing its last province between two saves, and the next tick-day save after it (a merchant recall is settled: flags and `transfer_home_bonus` at once, the rest at the tick) |
+| Node fields that keep the power of a country without an entry: `top_power` confirmed by a second case (E21, NAX) | `max`, `pull_power`, `retain_power`, link `incoming.add` in the E21 saves (`tools/EU4-game-automation/experiments/out/E21/`) |
 | 160 nodes where `p_pow` differs from the sum of province `trade_power` (148 played-save, 12 start-save whole numbers +1..+5 in colonial-nation tags) | the colonial nation's country block (S43 C01, S56/S59/S60 C05, S65/S66 C05, S72 COL): a field equal to the surplus; see R13 request_2 Q4 |
 | 58 nodes with `total` above `sum(val)` not explained by rebel provinces (R10) | privateer-fleet intervention saves; see R10 |
 | `potential` formula where `total` is absent (`cape_of_good_hope`) | nothing in the saves; only a source for Q7 |
-| `trade_port != capital`: which one `has_capital` follows | an intervention pair that moves only the main trade port (draft IV-18, to be re-issued in R14 request_2) |
+| `trade_port != capital`: which one `has_capital` follows (E19 moved both within the venice node: not decided) | a pair that moves only the main trade port to another node, or only the capital to another node |
 | `traded`, `traded_bonus`, `trade_mission` meaning (`trade_mission` is written from the first tick on and is independent of the merchant count in the Venice series) | per-good sums over the country's collecting nodes (`traded[i]` vs sum of node shares of good i) in a start save; for `trade_mission` the country fields of a few countries whose value is known (SWE 0.142, DAN 0.25, NOR 0.666, SHL 1.142) compared with their counts of provinces, cities, ports, estates or missions |
 | envoy `action=1` (8 cases) | the 8 envoys (save, tag, node state) compared with `merchant_recalled` modifiers |
 | why `num_ships_protecting_trade` is 98 for S79 TUR with 100 ships on missions | the two not-counted fleets (see R11 request_2 Q4) |
-| `transfer_home_bonus`: source, cap, merchants in transit (Q8) | the game text or parser documentation (Q8); a country with 4 or more steering merchants, and a sent merchant saved while still travelling, reading the field each day |
+| `transfer_home_bonus`: source, counting rule, merchants in transit (Q8). 2026-10-07: 0 when one merchant collects away (P03); steerers in nodes with a direct link into the home node count whatever they steer, a steerer two links away does not (P01, P04; inferred) | the game text or parser documentation (Q8); the corpus test of the counting rule (R01 request_2); a sent merchant saved while still travelling (needs a merchant sent through the game's interface; `stop` steps of 2 days) |

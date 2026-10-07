@@ -39,10 +39,11 @@ Definitions: `extras = max_pow - province_power - ship_power - prev` of an entry
 
 ## Data needed to complete the research
 
+2026-10-07: rows updated after the controlled experiments (response_1, section 'Update 2026-10-07 - controlled experiments (E00-P06)'; saves under `tools/EU4-game-automation/experiments/out/`). Answered rows were removed.
+
 | Open item | What settles it |
 |---|---|
-| Game names and values of the constants 2, 5, 15 (Venice: a third +5 reform, `arabic_plutocracy_reform`, Ormuz and Oman; `venice_merchants_reform` gives +0) | the game definitions (`common/governments/*reforms*`, `common/ideas`, modifiers) of the merchant-power effects; or pairs of saves differing by exactly one adopted idea or one reform, `max_pow` of the same merchant entry read at the next 1st |
-| Whether the term also applies to collecting-away merchants after the first 1st (steering, home and passive classes carry it in Venice: 1,044 of 1,044 merchant entries at 1445.1.1) | a save on a 1st where the same country has merchants of all four classes, including one collecting away (R14 IV-02 / IV-03) |
+| Game names and values of the constants 2, 5, 15 (Venice: a third +5 reform, `arabic_plutocracy_reform`, Ormuz and Oman; `venice_merchants_reform` gives +0). 2026-10-07: completing `trade_ideas` adds +15.000 at every merchant node (E22); a newly placed merchant carries 2 (P04) | which single trade idea carries the +15 (a pair adding one idea level via an effect file, not the whole group); the sources of the +5 terms: pairs differing by exactly one reform, `max_pow` of the same merchant entry read at the next 1st |
 | MKL's +5 at `north_sea` only in U05 (not in U04) | MKL's `modifier` list, flags and reform stack in U04 and U05 and its merchant assignment at `north_sea`; the same node one month later |
 | SND's extra +5 and VER rheinland's +10 (and the missing recall term there) | SND's and VER's `modifier` lists, flags, subject type and reform stack in the four played saves; a save where SND is not a TUR vassal or VER's merchant moved from `rheinland` |
 | Entries with R but no `has_trader` (TMB timbuktu, SCA carribean_trade): the Venice series shows that an entry whose merchant left since the last 1st keeps R until the next 1st (U26: 4 of 4), which fits; not shown for these two entries | the same country-node at the preceding and the following 1st: `has_trader` and `max_pow` at each date |

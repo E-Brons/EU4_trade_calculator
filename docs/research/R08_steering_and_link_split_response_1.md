@@ -149,3 +149,21 @@ Passive pullers (in `pull_power` without a merchant) and collectors do not count
 - a_c of countries that never rank in the top 5 of a link (no `add` anywhere: 121 nodes have such a steerer) and of the 105 nodes with an inconsistent estimate: a_c is not stored in the save (country block searched: only `transfer_home_bonus`, `trade_mission`, merchants).
 - Weights of the 67 nodes with no steering entry.
 - What sets a_c (0.05 x (1 + trade steering) is the obvious reading; not sourced).
+
+## Update 2026-10-07 - controlled experiments (E00-P06)
+
+Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.
+
+### V2-R08-1 One steerer's weight share moves with it, additively per link
+Claim (P01): VEN's ragusa merchant switched from steering to venice (index 1) to genua (index 2): ragusa weights [0.254, 0.631, 0.114] (control E01c, t1) -> [0.254, 0.067, 0.678]: exactly 0.564 moves from the venice link to the genua link, the pest link is unchanged; link `add` venice 0.219 -> 0.017, genua 0.032 -> 0.266 (t2 the same within 0.001). VEN's `val` is 48.189 of 101.264 summed `val` of the ragusa steerers (share 0.476), so the moved weight is 1.185 x VEN's `val` share - the same kind of VEN factor above 1 as in response_1 (1.26 / 1.42 / 1.47). Confidence: confirmed (additivity per link); the factor is open.
+
+### V2-R08-2 Trade steering modifier and the link bonus
+Claim (E08): +25 % `trade_steering` raises `add` on VEN's steering entries ragusa and wien 0.071 -> 0.083 (+0.012; not 0.071 x 1.25). Completing `trade_ideas` (E22) gives the same 0.083. Confidence: confirmed (VEN).
+
+### V2-R08-3 A sole steerer gets weight 1 on its link
+Claim (P06): XAL made the only steerer at california: weights [0, 1, 0, 0] -> [1, 0, 0, 0] at the next tick. Confidence: confirmed (one node).
+
+### V2-R08-4 A country that lost its last province stays in `top_power` until the next 1st
+Claim (E21): Naxos (164) ceded by NAX to VEN on 1444.12.01: on 1444.12.03 and 1444.12.15 NAX has no node entries but is still listed in `top_power` at alexandria (2.046) and constantinople (9.579); on 1445.01.01 it is gone. Confidence: confirmed for `top_power`; `incoming.add`, `max`, `pull_power` and `retain_power` were not extracted.
+
+P02 (recall of every steerer at hangzhou) is void: MNG still steers there at t1 and t2 although its AI was switched off; the weights stay [0, 1, 0].

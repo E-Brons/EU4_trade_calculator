@@ -101,3 +101,26 @@ Composition of `M`, building effects, trade company region, blockade, mercantili
 
 ### Verification 2026-10-05 (second pass)
 V-R13-1 was checked by two paths: `venice_a_r13.py` (parsed `provinces` block) and the equal 773/773 at the 1st against the node-side `province_power` field classes in `venice_a_fields.py` (`province_power` changes only on the 1sts: 262 fields U19 -> U20, 167 U24 -> U25, 289 U26 -> U27).
+
+## Update 2026-10-07 - controlled experiments (E00-P06)
+
+Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.
+
+### V2-R13-1 `M` is 1 + additive terms
+Claim: at Venezia (112) the stored `trade_power` 53.2 = 30.4 x 1.75 in the controls; +25 % `global_prov_trade_power_modifier` (E09) gives 60.8 = 30.4 x 2.00 at t1; a marketplace (E17) gives 68.4 = 30.4 x 2.25 at t1; mercantilism 25 -> 35 (E12) gives 59.28 = 30.4 x 1.95 at t2 (+0.20 for +10 points, i.e. +0.02 per point). So `trade_power = base x (1 + S + sum of modifiers)`, with S = 0.75 at Venezia (its composition is open). Confidence: confirmed (one province; VEN `province_power` moves by the same factors: E12 x1.1176 at venice, x1.1141 at ragusa, x1.1142 at constantinople).
+
+### V2-R13-2 Autonomy factor
+Claim (E18): Padova (4729) autonomy 0.75 -> 25.8: `trade_power` 3.137 unchanged at t1, 2.743 at t2 (autonomy 25.7); ratio 0.8744 against (1 - 0.005 x 25.7) / (1 - 0.005 x 0.625) = 0.8742. Confirmed: factor (1 - 0.005 x autonomy).
+
+### V2-R13-3 Update timing differs by input
+Claim: a building (E17) and a province modifier (E09) act at the first tick (t1); mercantilism (E12) and autonomy (E18) only at t2. Which days a province is recomputed is open; E23 (a save every 2nd day 1444.12.03-1445.01.02; `stop` cannot step one day) is pending.
+
+E16 (centre of trade +1) is void: Venezia was already at level 3.
+
+### V2-R13-4 Province `trade_power` is updated in bulk once a month, one or two days after the 1st (E23)
+Claim: in one game saved every 2nd day from the base 1444.12.01, 1,006 of 3,925 provinces change `trade_power` between
+1444.12.01 and 12.03, then only 0-3 provinces per 2-day step up to 12.31 (isolated, different owners). The Venice series
+(another game) has 53 changes 1444.12.1 -> 12.2 and 962 changes 1445.1.1 -> 1.2: the bulk day is the 3rd in December
+and the 2nd in January there, so it is not a fixed day of the month. Consequence for the calculator: on a 1st the node
+`province_power` equals the sum of the provinces' `trade_power` (V-R13-1) because the province values still hold the
+previous bulk update; after the bulk day they differ until the next 1st. Evidence: `tools/EU4-game-automation/experiments/out/E23/d_1444.12.03.eu4` ... `d_1444.12.31.eu4`, `analysis/a9_e23_recompute_days.py`. Confidence: confirmed (bulk update after the 1st), inferred (day varies by month).

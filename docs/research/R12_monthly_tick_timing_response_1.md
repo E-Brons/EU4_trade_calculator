@@ -107,3 +107,13 @@ Not a timing effect: V-R12-2 shows the link identity exact in all 24 saves at ev
 
 ### Verification 2026-10-05 (second pass)
 V-R12-1 was recomputed with a different method (`venice_a_ver.py 1`: multiset difference of the raw text lines of the `trade` block, key names taken from the line text, not from the parser): same split (1sts: tens of thousands of lines, dominated by `max_demand`; other days: 5 to 548 lines in `has_trader`, `type`, `steer_power`, `duration`, `key`, `power`, `power_modifier`). V-R12-2 uses the project-independent integer-thousandths code of the R12 round (`final_r12_identities.py` logic re-implemented in `venice_a_identities.py`).
+
+## Update 2026-10-07 - controlled experiments (E00-P06)
+
+Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.
+
+### V2-R12-1 C-06 of the final is now observed
+Claim (E21): a country that loses its last province between two 1sts (NAX, 1444.12.01) keeps its `top_power` rows (alexandria 2.046, constantinople 9.579) on 12.03 and 12.15 and loses them at 1445.01.01. The final's C-06 (inferred) is confirmed for `top_power`.
+
+### V2-R12-2 Province inputs that wait longer than one tick
+Claim: a mercantilism change (E12) and an autonomy change (E18) made on 1444.12.01 do not show in the province `trade_power` on 1445.01.01, only on 1445.02.01 (R13), while a building (E17) and a province trade-power modifier (E09) show at once. On which days a province's stored `trade_power` is recomputed is R13's open question (E23, a save every 2nd day 1444.12.03-1445.01.02, is pending).

@@ -36,12 +36,14 @@
 
 ## Data needed to complete the research
 
+2026-10-07: rows updated after the controlled experiments (response_1, section 'Update 2026-10-07 - controlled experiments (E00-P06)'; saves under `tools/EU4-game-automation/experiments/out/`). Answered rows were removed.
+
 | Open item | What settles it |
 |---|---|
 | Source of the +0.10 merchant term (behaviour settled: home included) | the define or modifier text (Q2) |
-| The +0.05 steps: the extra e at the first tick (299 of 601 countries, follows religion and technology group), VEN +0.05 at the 1445.02.01 tick, and the +0.05 / -0.05 steps of 4-5% of the countries at every tick (SWE / DAN, BRA at 1444) | the trade-efficiency tooltip breakdown (tag, date, every line) for a few countries with e = 0 and e = 0.05 at the same tick, and for VEN before and after 1445.02.01; or the modifier lists with values of countries that step |
+| The +0.05 steps: the extra e at the first tick (299 of 601 countries, follows religion and technology group), VEN +0.05 at the 1445.02.01 tick in the Venice series and -0.05 at the same tick in the experiment base game (venice X 1.320 -> 1.270 in all four controls), and the +0.05 / -0.05 steps of 4-5% of the countries at every tick (SWE / DAN, BRA at 1444) | the trade-efficiency tooltip breakdown (tag, date, every line) for a few countries with e = 0 and e = 0.05 at the same tick, and for VEN before and after 1445.02.01; or the modifier lists with values of countries that step |
 | Tariffs / embargo / privateer effect on `money` (no instance) | scan the corpus for home collectors with `trade_embargoed_by` or privateer power and compare X with the same-reform peers |
-| Decomposition of X in the played saves | list `modifier`, `flags`, reforms and `active_idea_groups` of `countries.TUR` (S79, S80, U03, U04, U05) and compare with Q1's sourced sum |
+| Decomposition of X in the played saves (2026-10-07: a `trade_efficiency` modifier adds 1:1 to X, E06; dip/adm tech 4 add nothing, E10/E11) | list `modifier`, `flags`, reforms and `active_idea_groups` of `countries.TUR` (S79, S80, U03, U04, U05) and compare with Q1's sourced sum; single-change pairs for the remaining X sources (one reform, one policy, one estate privilege), `money/total` of a collecting entry at the next 1st |
 | Home X changes of unknown cause (6 of 22 countries U03 -> U04, 5 of 14 U04 -> U05, nothing visible changed) | the complete modifier lists with values of those countries at both dates, and the game effects of every modifier key that appears or disappears |
 | Trade efficiency of tech level 23 (adm/dip) and of the parliament issues `reduce_trade_regulations` / `charter_trade_companies` (U06 +0.05 is their joint effect) | the game values (Q6); or saves of one country in which only the adm tech, only the dip tech or only the parliament issue changes, with `money` and `total` of a collecting entry read before and after |
 | Source of TUR's 9th merchant (8 -> 9 between U05 and U06) | the merchant-capacity modifiers of 1.37.5 and TUR's technology, idea, policy and government state; or saves that differ only in one of them with `countries.TUR.merchants` read before and after |

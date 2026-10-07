@@ -35,10 +35,12 @@
 
 ## Data needed to complete the research
 
+2026-10-07: rows updated after the controlled experiments (response_1, section 'Update 2026-10-07 - controlled experiments (E00-P06)'; saves under `tools/EU4-game-automation/experiments/out/`). Answered rows were removed.
+
 | Open item | What settles it |
 |---|---|
 | Behaviour of the 0.05 offset when `val` < 1.4 (smallest giver seen) and the origin of the constant | an entry of a giver with `val` below 1 (a colonial nation with a single province, or one with power reduced by a known amount) with its `t_out`; or a pair of saves of one giver where only `val` changes by a known amount |
 | Why BEI has the transfer flag but no `t_out` (S80, U01; not examined in U03-U05); Venice shows the same for LDU on 1445.5.1 (U28: flag, no entries, the month after its only `t_out` entries) | saves of BEI (or another subject that just received the transfer flag) on the tick day and the following days: the country-block flag and the node `t_out` read at each date |
 | Transfers created by peace deals, trade companies, leagues, other diplomatic settings (Venice: plain vassals AVR and LDU also give, with factor 1.0; cause of the flag not visible) | a save containing a transfer whose giver has no `transfer_trade_power_to` flag; a pair of saves that differ only by the diplomatic setting on one subject (release/annex/transfer action) |
-| What sets the fraction: 0.5 (colony: 534 giver-saves; trade_protectorate: SND, BEI) versus 1.0 (vassal: AVR, LDU) | givers of each other subject type (march, tributary, personal union, daimyo, ...) with their `t_out / (val - 0.1)`; a vassal that does not give, or a colony that gives 1.0 |
+| What sets the fraction: 0.5 (colony: 534 giver-saves; trade_protectorate: SND, BEI) versus 1.0 (vassal: AVR, LDU). 2026-10-07: MAN made vassal / march / personal-union junior of VEN shows no transfer at its collecting home node in two months (E20a/b/d); the tributary relation could not be created (E20c) | a subject of each type with power in a node where it does not collect (not its home node), saved on the next two 1sts with `t_out / (val - 0.1)`; a tributary created by a working command or diplomatic action; whether the transfer needs the `transfer_trade_power_to` setting rather than the subject relation |
 | Whether steering downstream makes a non-collecting receiver pull (one tag, two nodes of one save) | another save where a merchant-less transfer receiver has no downstream collection but steers downstream, with the node's `pull_power` |

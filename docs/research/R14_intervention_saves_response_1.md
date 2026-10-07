@@ -101,3 +101,13 @@ U07 (new game, VEN, 1444.11.11, nothing touched) differs from the older start sn
 
 ### V-R14-3 First intervention performed
 Recall of all three merchants (U25 -> U26/U27) and re-sending them one per month (U28, U29, U30) is the pair/sequence IV-14-style "merchant none -> steer": results in R08/R09/R07 Updates of the same date. Not done yet: embargo, ships, privateers, trade company, idea/tech, transfers, away collection.
+
+## Update 2026-10-07 - controlled experiments (E00-P06)
+
+Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.
+
+### V2-R14-1 B and C diverge given the same A
+Claim (E01a vs E01b, two runs from the same save): 4,859 of 73,073 trade-block fields differ at t1 and 8,029 at t2, mostly other countries' `max_demand` and AI-driven fields; VEN's own entries are identical (101 of 103 fields across the four controls; venice `money`/`total` +-0.6 %). So intervention pairs must compare the changed country's fields (or identities), not whole-world diffs. Confirmed.
+
+### V2-R14-2 Pairs now done
+Single-change pairs were run for: away collection (P03), steering link change (P01), trade steering (E08), trade efficiency (E06), trade-power modifiers (E03-E05), ship modifier (E07) and fleet move (P05), province modifiers, marketplace, mercantilism, autonomy (E09, E17, E12, E18), merchant capacity (E13), technology (E10, E11), idea group (E22), subjects (E20a/b/d), a vanished country (E21). Void: E16 (no-op), E20c (relation not created), P02 (recall did not hold), P06 (country too small for the propagation question), E19 (capital and trade port moved together). Results per topic in the R01-R13 responses.

@@ -130,3 +130,13 @@ Game names and values of 2, 5, 15; SND/MKL/VER/TMB/SCA cases of the TUR campaign
 
 ### Verification 2026-10-05 (second pass)
 V-R06-1/2 use a second implementation: residual re-derived from the raw text diff counts of `max_pow` / `prev` / `province_power` lines (`venice_a_ver.py 1`: no `max_pow` line changes between 1sts, lines of `max_pow` change on the 1sts only) and `venice_r06.py` (own loop) versus `venice_a_r06.py` (country-level formula).
+
+## Update 2026-10-07 - controlled experiments (E00-P06)
+
+Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.
+
+### V2-R06-1 Node power modifier and merchant terms
+Claim (E14): a node modifier `{key=exp_trade_power power=10}` on VEN at ragusa adds 10.000 to `max_pow` (1:1), `val` +10.360, no change of `province_power` or upstream `prev`. Claim (P04): a newly placed fourth VEN merchant steering at constantinople carries the merchant term R = 2 (`max_pow` +2.000) at the first tick. Claim (P03): a merchant switched from steering to collecting away keeps its term (`max_pow` unchanged at ragusa) - this answers whether collecting-away merchants carry the term after the first 1st. Confidence: confirmed.
+
+### V2-R06-2 The +15 term and the trade idea group
+Claim (E22): completing `trade_ideas` (all 7 ideas, console `add_idea_group trade_ideas VEN`) adds +15.000 to `max_pow` at each node where VEN has a merchant (ragusa, venice, wien) at t1; `max_demand` +0.200 everywhere; `add` 0.071 -> 0.083. So a +15 merchant-node term is carried by the trade idea group (which idea is not separated: the command grants all seven). Confidence: confirmed for the group; the single idea is inferred-open.
