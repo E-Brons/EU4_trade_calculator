@@ -1,0 +1,8 @@
+[23:57:37] start: VEN ../out/E00/base_1444.12.01.eu4
+[23:59:07] step 0: {'effects': '../effects/mod_global_own_trade_power.txt'}
+[23:59:07]   effects: ../effects/mod_global_own_trade_power.txt
+[23:59:36] step 1: {'date': '1445.01.01', 'outfname': '../out/E04/t1_1445.01.01.eu4'}
+[23:59:36]   run to 1445.01.01
+[00:00:35] step 2: {'date': '1445.02.01', 'outfname': '../out/E04/t2_1445.02.01.eu4'}
+[00:00:35]   run to 1445.02.01
+[00:01:34] restored dlc_load.json and continue_game.json

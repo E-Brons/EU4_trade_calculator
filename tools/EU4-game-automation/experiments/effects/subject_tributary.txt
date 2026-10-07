@@ -1,0 +1,4 @@
+create_subject = {
+	subject = MAN
+	subject_type = tributary_state
+}

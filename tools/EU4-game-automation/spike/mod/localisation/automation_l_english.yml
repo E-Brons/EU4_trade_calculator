@@ -1,0 +1,4 @@
+﻿l_english:
+ automation.1.t:0 "Automation pause"
+ automation.1.d:0 "The automation spike paused the game on this date."
+ automation.1.a:0 "Continue"

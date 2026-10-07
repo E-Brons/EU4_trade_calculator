@@ -1,0 +1,8 @@
+[01:44:34] start: VEN ../out/E00/base_1444.12.01.eu4
+[01:46:14] step 0: {'patch': '../patches/p06_xal_california_mexico.py'}
+[01:46:55]   patch p06_xal_california_mexico.py: reloading
+[01:48:08] step 1: {'date': '1445.01.01', 'outfname': '../out/P06/t1_1445.01.01.eu4'}
+[01:48:08]   run to 1445.01.01
+[01:49:12] step 2: {'date': '1445.02.01', 'outfname': '../out/P06/t2_1445.02.01.eu4'}
+[01:49:12]   run to 1445.02.01
+[01:50:17] restored dlc_load.json and continue_game.json

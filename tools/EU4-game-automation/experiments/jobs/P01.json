@@ -1,0 +1,24 @@
+{
+ "nation": "VEN",
+ "mods": [
+  "mod/eu4_experiments.mod"
+ ],
+ "observe": true,
+ "base_save": "../out/E00/base_1444.12.01.eu4",
+ "script": [
+  {
+   "patch": "../patches/p01_ragusa_steer_genua.py"
+  },
+  {
+   "date": "1445.01.01",
+   "outfname": "../out/P01/t1_1445.01.01.eu4"
+  },
+  {
+   "date": "1445.02.01",
+   "outfname": "../out/P01/t2_1445.02.01.eu4"
+  }
+ ],
+ "ai_off": [
+  "VEN"
+ ]
+}

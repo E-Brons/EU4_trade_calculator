@@ -1,0 +1,25 @@
+{
+ "nation": "VEN",
+ "mods": [
+  "mod/eu4_experiments.mod"
+ ],
+ "observe": true,
+ "base_save": "../out/E00/base_1444.12.01.eu4",
+ "script": [
+  {
+   "patch": "../patches/p06_xal_california_mexico.py"
+  },
+  {
+   "date": "1445.01.01",
+   "outfname": "../out/P06/t1_1445.01.01.eu4"
+  },
+  {
+   "date": "1445.02.01",
+   "outfname": "../out/P06/t2_1445.02.01.eu4"
+  }
+ ],
+ "ai_off": [
+  "VEN",
+  "XAL"
+ ]
+}

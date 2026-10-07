@@ -1,0 +1,24 @@
+{
+ "nation": "VEN",
+ "mods": [
+  "mod/eu4_experiments.mod"
+ ],
+ "observe": true,
+ "base_save": null,
+ "script": [
+  {
+   "date": "1444.12.01",
+   "outfname": "../out/E00/base_1444.12.01.eu4"
+  },
+  {
+   "date": "1445.01.01",
+   "outfname": "../out/E00/t1_1445.01.01.eu4"
+  },
+  {
+   "date": "1445.02.01",
+   "outfname": "../out/E00/t2_1445.02.01.eu4"
+  }
+ ],
+ "ai_off": [],
+ "start_date": "1444.11.11"
+}

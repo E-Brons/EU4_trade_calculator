@@ -1,0 +1,3 @@
+__pycache__/
+# experiment saves (~35 MB each, ~3 GB): kept locally; store selected ones as LFS zips if needed
+experiments/out/**/*.eu4

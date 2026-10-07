@@ -1,0 +1,28 @@
+{
+ "nation": "VEN",
+ "mods": [
+  "mod/eu4_experiments.mod"
+ ],
+ "observe": true,
+ "base_save": "../out/E00/base_1444.12.01.eu4",
+ "script": [
+  {
+   "effects": "../effects/naxos_ceded.txt"
+  },
+  {
+   "date": "1444.12.03",
+   "outfname": "../out/E21/d_1444.12.03.eu4"
+  },
+  {
+   "date": "1444.12.15",
+   "outfname": "../out/E21/d_1444.12.15.eu4"
+  },
+  {
+   "date": "1445.01.01",
+   "outfname": "../out/E21/t1_1445.01.01.eu4"
+  }
+ ],
+ "ai_off": [
+  "VEN"
+ ]
+}

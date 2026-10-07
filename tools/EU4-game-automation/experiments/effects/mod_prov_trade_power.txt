@@ -1,0 +1,4 @@
+add_country_modifier = {
+	name = exp_prov_trade_power
+	duration = -1
+}

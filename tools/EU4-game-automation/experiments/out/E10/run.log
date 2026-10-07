@@ -1,0 +1,8 @@
+[00:21:12] start: VEN ../out/E00/base_1444.12.01.eu4
+[00:22:41] step 0: {'effects': '../effects/dip_tech_plus1.txt'}
+[00:22:41]   effects: ../effects/dip_tech_plus1.txt
+[00:23:09] step 1: {'date': '1445.01.01', 'outfname': '../out/E10/t1_1445.01.01.eu4'}
+[00:23:09]   run to 1445.01.01
+[00:24:07] step 2: {'date': '1445.02.01', 'outfname': '../out/E10/t2_1445.02.01.eu4'}
+[00:24:07]   run to 1445.02.01
+[00:25:07] restored dlc_load.json and continue_game.json

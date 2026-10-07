@@ -1,0 +1,6 @@
+on_startup = {
+	if = {
+		limit = { tag = VEN }
+		country_event = { id = automation.1 days = 20 }
+	}
+}

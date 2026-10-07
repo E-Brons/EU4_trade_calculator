@@ -1,0 +1,8 @@
+[01:34:06] start: VEN ../out/E00/base_1444.12.01.eu4
+[01:35:35] step 0: {'patch': '../patches/p03_ragusa_collect_away.py'}
+[01:36:12]   patch p03_ragusa_collect_away.py: reloading
+[01:37:19] step 1: {'date': '1445.01.01', 'outfname': '../out/P03/t1_1445.01.01.eu4'}
+[01:37:19]   run to 1445.01.01
+[01:38:18] step 2: {'date': '1445.02.01', 'outfname': '../out/P03/t2_1445.02.01.eu4'}
+[01:38:18]   run to 1445.02.01
+[01:39:23] restored dlc_load.json and continue_game.json

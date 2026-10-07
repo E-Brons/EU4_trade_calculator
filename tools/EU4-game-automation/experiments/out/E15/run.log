@@ -1,0 +1,8 @@
+[00:40:57] start: VEN ../out/E00/base_1444.12.01.eu4
+[00:42:27] step 0: {'effects': '../effects/sav_piedmont_dev.txt'}
+[00:42:27]   effects: ../effects/sav_piedmont_dev.txt
+[00:42:55] step 1: {'date': '1445.01.01', 'outfname': '../out/E15/t1_1445.01.01.eu4'}
+[00:42:55]   run to 1445.01.01
+[00:43:54] step 2: {'date': '1445.02.01', 'outfname': '../out/E15/t2_1445.02.01.eu4'}
+[00:43:54]   run to 1445.02.01
+[00:44:52] restored dlc_load.json and continue_game.json

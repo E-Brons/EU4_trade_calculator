@@ -25,3 +25,6 @@ frontend/pubspec.lock
 
 # trade verification report (scripts/verify_all.sh)
 verify-out/
+
+# EU4 automation worker bridge (jobs, screenshots, compiled helper)
+tools/EU4-game-automation/.bridge/

@@ -1,0 +1,8 @@
+[01:27:31] start: VEN ../out/E00/base_1444.12.01.eu4
+[01:29:12] step 0: {'patch': '../patches/p02_recall_all_steerers_hangzhou.py'}
+[01:30:46]   patch p02_recall_all_steerers_hangzhou.py: reloading
+[01:31:59] step 1: {'date': '1445.01.01', 'outfname': '../out/P02/t1_1445.01.01.eu4'}
+[01:31:59]   run to 1445.01.01
+[01:33:02] step 2: {'date': '1445.02.01', 'outfname': '../out/P02/t2_1445.02.01.eu4'}
+[01:33:02]   run to 1445.02.01
+[01:34:06] restored dlc_load.json and continue_game.json

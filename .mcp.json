@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "eu4-automation": {
+      "command": "python3",
+      "args": ["tools/EU4-game-automation/mcp_server.py"]
+    }
+  }
+}

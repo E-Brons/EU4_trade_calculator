@@ -1,0 +1,3 @@
+103 = {
+	add_base_production = 3
+}

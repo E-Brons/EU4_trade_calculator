@@ -1,0 +1,10 @@
+﻿l_english:
+ exp_trade_efficiency:0 "Experiment: trade_efficiency"
+ exp_global_trade_power:0 "Experiment: global_trade_power"
+ exp_global_own_trade_power:0 "Experiment: global_own_trade_power"
+ exp_global_foreign_trade_power:0 "Experiment: global_foreign_trade_power"
+ exp_global_ship_trade_power:0 "Experiment: global_ship_trade_power"
+ exp_trade_steering:0 "Experiment: trade_steering"
+ exp_merchants:0 "Experiment: merchants"
+ exp_prov_trade_power:0 "Experiment: prov_trade_power"
+ exp_trade_power:0 "Experiment: flat trade power"

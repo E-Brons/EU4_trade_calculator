@@ -1,0 +1,8 @@
+[01:39:23] start: VEN ../out/E00/base_1444.12.01.eu4
+[01:40:52] step 0: {'patch': '../patches/p05_light_ships.py'}
+[01:41:27]   patch p05_light_ships.py: reloading
+[01:42:37] step 1: {'date': '1445.01.01', 'outfname': '../out/P05/t1_1445.01.01.eu4'}
+[01:42:37]   run to 1445.01.01
+[01:43:36] step 2: {'date': '1445.02.01', 'outfname': '../out/P05/t2_1445.02.01.eu4'}
+[01:43:36]   run to 1445.02.01
+[01:44:34] restored dlc_load.json and continue_game.json

@@ -1,0 +1,8 @@
+[00:13:22] start: VEN ../out/E00/base_1444.12.01.eu4
+[00:14:52] step 0: {'effects': '../effects/mod_trade_steering.txt'}
+[00:14:52]   effects: ../effects/mod_trade_steering.txt
+[00:15:21] step 1: {'date': '1445.01.01', 'outfname': '../out/E08/t1_1445.01.01.eu4'}
+[00:15:21]   run to 1445.01.01
+[00:16:19] step 2: {'date': '1445.02.01', 'outfname': '../out/E08/t2_1445.02.01.eu4'}
+[00:16:19]   run to 1445.02.01
+[00:17:19] restored dlc_load.json and continue_game.json

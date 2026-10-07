@@ -1,0 +1,444 @@
+installed /Users/elkanabronstein/Documents/Paradox Interactive/Europa Universalis IV/mod/eu4_experiments
+E00 [22:58:35] start: VEN 1444.11.11
+E00 [22:59:39] step 0: {'date': '1444.12.01', 'outfname': '../out/E00/base_1444.12.01.eu4'}
+E00 [22:59:39]   run to 1444.12.01
+E00 [23:00:30] step 1: {'date': '1445.01.01', 'outfname': '../out/E00/t1_1445.01.01.eu4'}
+E00 [23:00:30]   run to 1445.01.01
+E00 [23:01:23] step 2: {'date': '1445.02.01', 'outfname': '../out/E00/t2_1445.02.01.eu4'}
+E00 [23:01:23]   run to 1445.02.01
+E00 [23:02:15] restored dlc_load.json and continue_game.json
+E00: OK in 220 s
+E01a [23:02:15] start: VEN ../out/E00/base_1444.12.01.eu4
+E01a [23:03:38] step 0: {'date': '1445.01.01', 'outfname': '../out/E01a/t1_1445.01.01.eu4'}
+E01a [23:03:38]   run to 1445.01.01
+E01a [23:05:57] FAILED: WorkerError: RuntimeError: game did not stop within 121.0s
+E01a [23:05:58] restored dlc_load.json and continue_game.json
+E01a: failed (WorkerError: RuntimeError: game did not stop within 121.0s), retrying once
+E01a [23:05:58] start: VEN ../out/E00/base_1444.12.01.eu4
+E01a [23:07:21] step 0: {'date': '1445.01.01', 'outfname': '../out/E01a/t1_1445.01.01.eu4'}
+E01a [23:07:21]   run to 1445.01.01
+E01a [23:09:39] FAILED: WorkerError: RuntimeError: game did not stop within 121.0s
+E01a [23:09:40] restored dlc_load.json and continue_game.json
+E01a: FAILED in 222 s
+E01b [23:09:40] start: VEN ../out/E00/base_1444.12.01.eu4
+E01b [23:11:05] step 0: {'date': '1445.01.01', 'outfname': '../out/E01b/t1_1445.01.01.eu4'}
+E01b [23:11:05]   run to 1445.01.01
+installed /Users/elkanabronstein/Documents/Paradox Interactive/Europa Universalis IV/mod/eu4_experiments
+E00: already ok, skipped
+E01a: already ok, skipped
+E01b [23:33:07] start: VEN ../out/E00/base_1444.12.01.eu4
+E01b [23:34:38] step 0: {'date': '1445.01.01', 'outfname': '../out/E01b/t1_1445.01.01.eu4'}
+E01b [23:34:38]   run to 1445.01.01
+E01b [23:35:36] step 1: {'date': '1445.02.01', 'outfname': '../out/E01b/t2_1445.02.01.eu4'}
+E01b [23:35:36]   run to 1445.02.01
+E01b [23:36:36] restored dlc_load.json and continue_game.json
+E01b: OK in 209 s
+E01c [23:36:36] start: VEN ../out/E00/base_1444.12.01.eu4
+E01c [23:38:04] step 0: {'patch': '../patches/identity.py'}
+E01c [23:38:37]   patch identity.py: reloading
+E01c [23:39:45] step 1: {'date': '1445.01.01', 'outfname': '../out/E01c/t1_1445.01.01.eu4'}
+E01c [23:39:45]   run to 1445.01.01
+E01c [23:40:43] step 2: {'date': '1445.02.01', 'outfname': '../out/E01c/t2_1445.02.01.eu4'}
+E01c [23:40:43]   run to 1445.02.01
+E01c [23:41:42] restored dlc_load.json and continue_game.json
+E01c: OK in 306 s
+E01d [23:41:42] start: VEN ../out/E00/base_1444.12.01.eu4
+E01d [23:43:11] step 0: {'effects': '../effects/empty.txt'}
+E01d [23:43:11]   effects: ../effects/empty.txt
+E01d [23:43:39] step 1: {'date': '1445.01.01', 'outfname': '../out/E01d/t1_1445.01.01.eu4'}
+E01d [23:43:39]   run to 1445.01.01
+E01d [23:44:37] step 2: {'date': '1445.02.01', 'outfname': '../out/E01d/t2_1445.02.01.eu4'}
+E01d [23:44:37]   run to 1445.02.01
+E01d [23:45:35] restored dlc_load.json and continue_game.json
+E01d: OK in 233 s
+P01 [23:45:35] start: VEN ../out/E00/base_1444.12.01.eu4
+P01 [23:47:03] step 0: {'patch': '../patches/p01_alexandria_steer_genua.py'}
+P01 [23:47:36] FAILED: PatchError: VEN has no merchant in alexandria
+P01 [23:47:38] restored dlc_load.json and continue_game.json
+P01: failed (PatchError: VEN has no merchant in alexandria), retrying once
+P01 [23:47:38] start: VEN ../out/E00/base_1444.12.01.eu4
+P01 [23:49:07] step 0: {'patch': '../patches/p01_alexandria_steer_genua.py'}
+P01 [23:49:40] FAILED: PatchError: VEN has no merchant in alexandria
+P01 [23:49:41] restored dlc_load.json and continue_game.json
+P01: FAILED in 124 s
+E02 [23:49:41] start: VEN ../out/E00/base_1444.12.01.eu4
+E02 [23:51:13] step 0: {'effects': '../effects/dip_plus2.txt'}
+E02 [23:51:13]   effects: ../effects/dip_plus2.txt
+E02 [23:51:41] step 1: {'date': '1445.01.01', 'outfname': '../out/E02/t1_1445.01.01.eu4'}
+E02 [23:51:41]   run to 1445.01.01
+E02 [23:52:40] step 2: {'date': '1445.02.01', 'outfname': '../out/E02/t2_1445.02.01.eu4'}
+E02 [23:52:40]   run to 1445.02.01
+E02 [23:53:39] restored dlc_load.json and continue_game.json
+E02: OK in 238 s
+E03 [23:53:39] start: VEN ../out/E00/base_1444.12.01.eu4
+E03 [23:55:11] step 0: {'effects': '../effects/mod_global_trade_power.txt'}
+E03 [23:55:11]   effects: ../effects/mod_global_trade_power.txt
+E03 [23:55:39] step 1: {'date': '1445.01.01', 'outfname': '../out/E03/t1_1445.01.01.eu4'}
+E03 [23:55:39]   run to 1445.01.01
+E03 [23:56:38] step 2: {'date': '1445.02.01', 'outfname': '../out/E03/t2_1445.02.01.eu4'}
+E03 [23:56:38]   run to 1445.02.01
+E03 [23:57:37] restored dlc_load.json and continue_game.json
+E03: OK in 238 s
+E04 [23:57:37] start: VEN ../out/E00/base_1444.12.01.eu4
+E04 [23:59:07] step 0: {'effects': '../effects/mod_global_own_trade_power.txt'}
+E04 [23:59:07]   effects: ../effects/mod_global_own_trade_power.txt
+E04 [23:59:36] step 1: {'date': '1445.01.01', 'outfname': '../out/E04/t1_1445.01.01.eu4'}
+E04 [23:59:36]   run to 1445.01.01
+E04 [00:00:35] step 2: {'date': '1445.02.01', 'outfname': '../out/E04/t2_1445.02.01.eu4'}
+E04 [00:00:35]   run to 1445.02.01
+E04 [00:01:34] restored dlc_load.json and continue_game.json
+E04: OK in 236 s
+E05 [00:01:34] start: VEN ../out/E00/base_1444.12.01.eu4
+E05 [00:03:05] step 0: {'effects': '../effects/mod_global_foreign_trade_power.txt'}
+E05 [00:03:05]   effects: ../effects/mod_global_foreign_trade_power.txt
+E05 [00:03:34] step 1: {'date': '1445.01.01', 'outfname': '../out/E05/t1_1445.01.01.eu4'}
+E05 [00:03:34]   run to 1445.01.01
+E05 [00:04:32] step 2: {'date': '1445.02.01', 'outfname': '../out/E05/t2_1445.02.01.eu4'}
+E05 [00:04:32]   run to 1445.02.01
+E05 [00:05:33] restored dlc_load.json and continue_game.json
+E05: OK in 239 s
+E06 [00:05:33] start: VEN ../out/E00/base_1444.12.01.eu4
+E06 [00:07:02] step 0: {'effects': '../effects/mod_trade_efficiency.txt'}
+E06 [00:07:02]   effects: ../effects/mod_trade_efficiency.txt
+E06 [00:07:31] step 1: {'date': '1445.01.01', 'outfname': '../out/E06/t1_1445.01.01.eu4'}
+E06 [00:07:31]   run to 1445.01.01
+E06 [00:08:29] step 2: {'date': '1445.02.01', 'outfname': '../out/E06/t2_1445.02.01.eu4'}
+E06 [00:08:29]   run to 1445.02.01
+E06 [00:09:28] restored dlc_load.json and continue_game.json
+E06: OK in 236 s
+E07 [00:09:28] start: VEN ../out/E00/base_1444.12.01.eu4
+E07 [00:10:57] step 0: {'effects': '../effects/mod_global_ship_trade_power.txt'}
+E07 [00:10:57]   effects: ../effects/mod_global_ship_trade_power.txt
+E07 [00:11:26] step 1: {'date': '1445.01.01', 'outfname': '../out/E07/t1_1445.01.01.eu4'}
+E07 [00:11:26]   run to 1445.01.01
+E07 [00:12:24] step 2: {'date': '1445.02.01', 'outfname': '../out/E07/t2_1445.02.01.eu4'}
+E07 [00:12:24]   run to 1445.02.01
+E07 [00:13:21] restored dlc_load.json and continue_game.json
+E07: OK in 233 s
+E08 [00:13:22] start: VEN ../out/E00/base_1444.12.01.eu4
+E08 [00:14:52] step 0: {'effects': '../effects/mod_trade_steering.txt'}
+E08 [00:14:52]   effects: ../effects/mod_trade_steering.txt
+E08 [00:15:21] step 1: {'date': '1445.01.01', 'outfname': '../out/E08/t1_1445.01.01.eu4'}
+E08 [00:15:21]   run to 1445.01.01
+E08 [00:16:19] step 2: {'date': '1445.02.01', 'outfname': '../out/E08/t2_1445.02.01.eu4'}
+E08 [00:16:19]   run to 1445.02.01
+E08 [00:17:19] restored dlc_load.json and continue_game.json
+E08: OK in 237 s
+E09 [00:17:19] start: VEN ../out/E00/base_1444.12.01.eu4
+E09 [00:18:47] step 0: {'effects': '../effects/mod_prov_trade_power.txt'}
+E09 [00:18:47]   effects: ../effects/mod_prov_trade_power.txt
+E09 [00:19:16] step 1: {'date': '1445.01.01', 'outfname': '../out/E09/t1_1445.01.01.eu4'}
+E09 [00:19:16]   run to 1445.01.01
+E09 [00:20:14] step 2: {'date': '1445.02.01', 'outfname': '../out/E09/t2_1445.02.01.eu4'}
+E09 [00:20:14]   run to 1445.02.01
+E09 [00:21:12] restored dlc_load.json and continue_game.json
+E09: OK in 233 s
+E10 [00:21:12] start: VEN ../out/E00/base_1444.12.01.eu4
+E10 [00:22:41] step 0: {'effects': '../effects/dip_tech_plus1.txt'}
+E10 [00:22:41]   effects: ../effects/dip_tech_plus1.txt
+E10 [00:23:09] step 1: {'date': '1445.01.01', 'outfname': '../out/E10/t1_1445.01.01.eu4'}
+E10 [00:23:09]   run to 1445.01.01
+E10 [00:24:07] step 2: {'date': '1445.02.01', 'outfname': '../out/E10/t2_1445.02.01.eu4'}
+E10 [00:24:07]   run to 1445.02.01
+E10 [00:25:07] restored dlc_load.json and continue_game.json
+E10: OK in 235 s
+E11 [00:25:07] start: VEN ../out/E00/base_1444.12.01.eu4
+E11 [00:26:38] step 0: {'effects': '../effects/adm_tech_plus1.txt'}
+E11 [00:26:38]   effects: ../effects/adm_tech_plus1.txt
+E11 [00:27:07] step 1: {'date': '1445.01.01', 'outfname': '../out/E11/t1_1445.01.01.eu4'}
+E11 [00:27:07]   run to 1445.01.01
+E11 [00:28:05] step 2: {'date': '1445.02.01', 'outfname': '../out/E11/t2_1445.02.01.eu4'}
+E11 [00:28:05]   run to 1445.02.01
+E11 [00:29:03] restored dlc_load.json and continue_game.json
+E11: OK in 236 s
+E12 [00:29:03] start: VEN ../out/E00/base_1444.12.01.eu4
+E12 [00:30:34] step 0: {'effects': '../effects/mercantilism_plus10.txt'}
+E12 [00:30:34]   effects: ../effects/mercantilism_plus10.txt
+E12 [00:31:03] step 1: {'date': '1445.01.01', 'outfname': '../out/E12/t1_1445.01.01.eu4'}
+E12 [00:31:03]   run to 1445.01.01
+E12 [00:32:02] step 2: {'date': '1445.02.01', 'outfname': '../out/E12/t2_1445.02.01.eu4'}
+E12 [00:32:02]   run to 1445.02.01
+E12 [00:33:01] restored dlc_load.json and continue_game.json
+E12: OK in 238 s
+E13 [00:33:01] start: VEN ../out/E00/base_1444.12.01.eu4
+E13 [00:34:30] step 0: {'effects': '../effects/mod_merchants.txt'}
+E13 [00:34:30]   effects: ../effects/mod_merchants.txt
+E13 [00:34:59] step 1: {'date': '1445.01.01', 'outfname': '../out/E13/t1_1445.01.01.eu4'}
+E13 [00:34:59]   run to 1445.01.01
+E13 [00:35:58] step 2: {'date': '1445.02.01', 'outfname': '../out/E13/t2_1445.02.01.eu4'}
+E13 [00:35:58]   run to 1445.02.01
+E13 [00:36:58] restored dlc_load.json and continue_game.json
+E13: OK in 237 s
+E14 [00:36:58] start: VEN ../out/E00/base_1444.12.01.eu4
+E14 [00:38:30] step 0: {'effects': '../effects/crete_flat_power.txt'}
+E14 [00:38:30]   effects: ../effects/crete_flat_power.txt
+E14 [00:38:59] step 1: {'date': '1445.01.01', 'outfname': '../out/E14/t1_1445.01.01.eu4'}
+E14 [00:38:59]   run to 1445.01.01
+E14 [00:39:57] step 2: {'date': '1445.02.01', 'outfname': '../out/E14/t2_1445.02.01.eu4'}
+E14 [00:39:57]   run to 1445.02.01
+E14 [00:40:57] restored dlc_load.json and continue_game.json
+E14: OK in 240 s
+E15 [00:40:57] start: VEN ../out/E00/base_1444.12.01.eu4
+E15 [00:42:27] step 0: {'effects': '../effects/sav_piedmont_dev.txt'}
+E15 [00:42:27]   effects: ../effects/sav_piedmont_dev.txt
+E15 [00:42:55] step 1: {'date': '1445.01.01', 'outfname': '../out/E15/t1_1445.01.01.eu4'}
+E15 [00:42:55]   run to 1445.01.01
+E15 [00:43:54] step 2: {'date': '1445.02.01', 'outfname': '../out/E15/t2_1445.02.01.eu4'}
+E15 [00:43:54]   run to 1445.02.01
+E15 [00:44:52] restored dlc_load.json and continue_game.json
+E15: OK in 235 s
+E16 [00:44:52] start: VEN ../out/E00/base_1444.12.01.eu4
+E16 [00:46:21] step 0: {'effects': '../effects/venezia_cot.txt'}
+E16 [00:46:21]   effects: ../effects/venezia_cot.txt
+E16 [00:46:50] step 1: {'date': '1445.01.01', 'outfname': '../out/E16/t1_1445.01.01.eu4'}
+E16 [00:46:50]   run to 1445.01.01
+E16 [00:47:49] step 2: {'date': '1445.02.01', 'outfname': '../out/E16/t2_1445.02.01.eu4'}
+E16 [00:47:49]   run to 1445.02.01
+E16 [00:48:49] restored dlc_load.json and continue_game.json
+E16: OK in 237 s
+E17 [00:48:49] start: VEN ../out/E00/base_1444.12.01.eu4
+E17 [00:50:18] step 0: {'effects': '../effects/venezia_marketplace.txt'}
+E17 [00:50:18]   effects: ../effects/venezia_marketplace.txt
+E17 [00:50:47] step 1: {'date': '1445.01.01', 'outfname': '../out/E17/t1_1445.01.01.eu4'}
+E17 [00:50:47]   run to 1445.01.01
+E17 [00:51:45] step 2: {'date': '1445.02.01', 'outfname': '../out/E17/t2_1445.02.01.eu4'}
+E17 [00:51:45]   run to 1445.02.01
+E17 [00:52:43] restored dlc_load.json and continue_game.json
+E17: OK in 234 s
+E18 [00:52:43] start: VEN ../out/E00/base_1444.12.01.eu4
+E18 [00:54:15] step 0: {'effects': '../effects/padova_autonomy.txt'}
+E18 [00:54:15]   effects: ../effects/padova_autonomy.txt
+E18 [00:54:44] step 1: {'date': '1445.01.01', 'outfname': '../out/E18/t1_1445.01.01.eu4'}
+E18 [00:54:44]   run to 1445.01.01
+E18 [00:55:42] step 2: {'date': '1445.02.01', 'outfname': '../out/E18/t2_1445.02.01.eu4'}
+E18 [00:55:42]   run to 1445.02.01
+E18 [00:56:42] restored dlc_load.json and continue_game.json
+E18: OK in 239 s
+E19 [00:56:42] start: VEN ../out/E00/base_1444.12.01.eu4
+E19 [00:58:11] step 0: {'effects': '../effects/capital_padova.txt'}
+E19 [00:58:11]   effects: ../effects/capital_padova.txt
+E19 [00:58:39] step 1: {'date': '1445.01.01', 'outfname': '../out/E19/t1_1445.01.01.eu4'}
+E19 [00:58:39]   run to 1445.01.01
+E19 [00:59:37] step 2: {'date': '1445.02.01', 'outfname': '../out/E19/t2_1445.02.01.eu4'}
+E19 [00:59:37]   run to 1445.02.01
+E19 [01:00:42] restored dlc_load.json and continue_game.json
+E19: OK in 241 s
+E20a [01:00:42] start: VEN ../out/E00/base_1444.12.01.eu4
+E20a [01:02:11] step 0: {'effects': '../effects/subject_vassal.txt'}
+E20a [01:02:11]   effects: ../effects/subject_vassal.txt
+E20a [01:02:40] step 1: {'date': '1445.01.01', 'outfname': '../out/E20a/t1_1445.01.01.eu4'}
+E20a [01:02:40]   run to 1445.01.01
+E20a [01:03:38] step 2: {'date': '1445.02.01', 'outfname': '../out/E20a/t2_1445.02.01.eu4'}
+E20a [01:03:38]   run to 1445.02.01
+E20a [01:04:36] restored dlc_load.json and continue_game.json
+E20a: OK in 234 s
+E20b [01:04:36] start: VEN ../out/E00/base_1444.12.01.eu4
+E20b [01:06:04] step 0: {'effects': '../effects/subject_march.txt'}
+E20b [01:06:04]   effects: ../effects/subject_march.txt
+E20b [01:06:33] step 1: {'date': '1445.01.01', 'outfname': '../out/E20b/t1_1445.01.01.eu4'}
+E20b [01:06:33]   run to 1445.01.01
+E20b [01:07:31] step 2: {'date': '1445.02.01', 'outfname': '../out/E20b/t2_1445.02.01.eu4'}
+E20b [01:07:31]   run to 1445.02.01
+E20b [01:08:29] restored dlc_load.json and continue_game.json
+E20b: OK in 232 s
+E20c [01:08:29] start: VEN ../out/E00/base_1444.12.01.eu4
+E20c [01:09:58] step 0: {'effects': '../effects/subject_tributary.txt'}
+E20c [01:09:58]   effects: ../effects/subject_tributary.txt
+E20c [01:10:27] step 1: {'date': '1445.01.01', 'outfname': '../out/E20c/t1_1445.01.01.eu4'}
+E20c [01:10:27]   run to 1445.01.01
+E20c [01:11:26] step 2: {'date': '1445.02.01', 'outfname': '../out/E20c/t2_1445.02.01.eu4'}
+E20c [01:11:26]   run to 1445.02.01
+E20c [01:12:25] restored dlc_load.json and continue_game.json
+E20c: OK in 237 s
+E20d [01:12:25] start: VEN ../out/E00/base_1444.12.01.eu4
+E20d [01:13:54] step 0: {'effects': '../effects/subject_personal_union.txt'}
+E20d [01:13:54]   effects: ../effects/subject_personal_union.txt
+E20d [01:14:23] step 1: {'date': '1445.01.01', 'outfname': '../out/E20d/t1_1445.01.01.eu4'}
+E20d [01:14:23]   run to 1445.01.01
+E20d [01:15:21] step 2: {'date': '1445.02.01', 'outfname': '../out/E20d/t2_1445.02.01.eu4'}
+E20d [01:15:21]   run to 1445.02.01
+E20d [01:16:19] restored dlc_load.json and continue_game.json
+E20d: OK in 234 s
+E21 [01:16:19] start: VEN ../out/E00/base_1444.12.01.eu4
+E21 [01:17:51] step 0: {'effects': '../effects/naxos_ceded.txt'}
+E21 [01:17:51]   effects: ../effects/naxos_ceded.txt
+E21 [01:18:19] step 1: {'date': '1444.12.02', 'outfname': '../out/E21/d_1444.12.02.eu4'}
+E21 [01:18:19]   run to 1444.12.02
+E21 [01:20:08] FAILED: WorkerError: RuntimeError: game did not stop within 91.0s
+E21 [01:20:09] restored dlc_load.json and continue_game.json
+E21: failed (WorkerError: RuntimeError: game did not stop within 91.0s), retrying once
+E21 [01:20:09] start: VEN ../out/E00/base_1444.12.01.eu4
+E21 [01:21:38] step 0: {'effects': '../effects/naxos_ceded.txt'}
+E21 [01:21:38]   effects: ../effects/naxos_ceded.txt
+E21 [01:22:07] step 1: {'date': '1444.12.02', 'outfname': '../out/E21/d_1444.12.02.eu4'}
+E21 [01:22:07]   run to 1444.12.02
+E21 [01:23:55] FAILED: WorkerError: RuntimeError: game did not stop within 91.0s
+E21 [01:23:57] restored dlc_load.json and continue_game.json
+E21: FAILED in 227 s
+E22 [01:23:57] start: VEN ../out/E00/base_1444.12.01.eu4
+E22 [01:25:26] step 0: {'console_commands': '../console/idea_trade.txt'}
+E22 [01:25:26]   console: ['add_idea_group trade_ideas VEN']
+E22 [01:25:35] step 1: {'date': '1445.01.01', 'outfname': '../out/E22/t1_1445.01.01.eu4'}
+E22 [01:25:35]   run to 1445.01.01
+E22 [01:26:33] step 2: {'date': '1445.02.01', 'outfname': '../out/E22/t2_1445.02.01.eu4'}
+E22 [01:26:33]   run to 1445.02.01
+E22 [01:27:31] restored dlc_load.json and continue_game.json
+E22: OK in 215 s
+P02 [01:27:31] start: VEN ../out/E00/base_1444.12.01.eu4
+P02 [01:29:12] step 0: {'patch': '../patches/p02_recall_all_steerers_hangzhou.py'}
+recalled at hangzhou ['MNG']
+P02 [01:30:46]   patch p02_recall_all_steerers_hangzhou.py: reloading
+P02 [01:31:59] step 1: {'date': '1445.01.01', 'outfname': '../out/P02/t1_1445.01.01.eu4'}
+P02 [01:31:59]   run to 1445.01.01
+P02 [01:33:02] step 2: {'date': '1445.02.01', 'outfname': '../out/P02/t2_1445.02.01.eu4'}
+P02 [01:33:02]   run to 1445.02.01
+P02 [01:34:06] restored dlc_load.json and continue_game.json
+P02: OK in 395 s
+P03 [01:34:06] start: VEN ../out/E00/base_1444.12.01.eu4
+P03 [01:35:35] step 0: {'patch': '../patches/p03_ragusa_collect_away.py'}
+P03 [01:36:12]   patch p03_ragusa_collect_away.py: reloading
+P03 [01:37:19] step 1: {'date': '1445.01.01', 'outfname': '../out/P03/t1_1445.01.01.eu4'}
+P03 [01:37:19]   run to 1445.01.01
+P03 [01:38:18] step 2: {'date': '1445.02.01', 'outfname': '../out/P03/t2_1445.02.01.eu4'}
+P03 [01:38:18]   run to 1445.02.01
+P03 [01:39:23] restored dlc_load.json and continue_game.json
+P03: OK in 317 s
+P05 [01:39:23] start: VEN ../out/E00/base_1444.12.01.eu4
+P05 [01:40:52] step 0: {'patch': '../patches/p05_light_ships.py'}
+light ships -> ragusa
+P05 [01:41:27]   patch p05_light_ships.py: reloading
+P05 [01:42:37] step 1: {'date': '1445.01.01', 'outfname': '../out/P05/t1_1445.01.01.eu4'}
+P05 [01:42:37]   run to 1445.01.01
+P05 [01:43:36] step 2: {'date': '1445.02.01', 'outfname': '../out/P05/t2_1445.02.01.eu4'}
+P05 [01:43:36]   run to 1445.02.01
+P05 [01:44:34] restored dlc_load.json and continue_game.json
+P05: OK in 312 s
+P06 [01:44:34] start: VEN ../out/E00/base_1444.12.01.eu4
+P06 [01:46:14] step 0: {'patch': '../patches/p06_xal_california_mexico.py'}
+P06 [01:46:55]   patch p06_xal_california_mexico.py: reloading
+P06 [01:48:08] step 1: {'date': '1445.01.01', 'outfname': '../out/P06/t1_1445.01.01.eu4'}
+P06 [01:48:08]   run to 1445.01.01
+P06 [01:49:12] step 2: {'date': '1445.02.01', 'outfname': '../out/P06/t2_1445.02.01.eu4'}
+P06 [01:49:12]   run to 1445.02.01
+P06 [01:50:17] restored dlc_load.json and continue_game.json
+P06: OK in 343 s
+P04 [01:50:17] start: VEN ../out/E00/base_1444.12.01.eu4
+P04 [01:51:49] step 0: {'effects': '../effects/mod_merchants.txt'}
+P04 [01:51:49]   effects: ../effects/mod_merchants.txt
+P04 [01:52:18] step 1: {'patch': '../patches/p04_fourth_steerer.py'}
+P04 [01:52:53]   patch p04_fourth_steerer.py: reloading
+P04 [01:54:02] step 2: {'date': '1445.01.01', 'outfname': '../out/P04/t1_1445.01.01.eu4'}
+P04 [01:54:02]   run to 1445.01.01
+P04 [01:55:01] step 3: {'date': '1445.02.01', 'outfname': '../out/P04/t2_1445.02.01.eu4'}
+P04 [01:55:01]   run to 1445.02.01
+P04 [01:55:59] restored dlc_load.json and continue_game.json
+P04: OK in 342 s
+E23 [01:55:59] start: VEN ../out/E00/base_1444.12.01.eu4
+E23 [01:57:28] step 0: {'date': '1444.12.02', 'outfname': '../out/E23/d_1444.12.02.eu4'}
+E23 [01:57:28]   run to 1444.12.02
+E23 [01:59:17] FAILED: WorkerError: RuntimeError: game did not stop within 91.0s
+E23 [01:59:19] restored dlc_load.json and continue_game.json
+E23: failed (WorkerError: RuntimeError: game did not stop within 91.0s), retrying once
+E23 [01:59:19] start: VEN ../out/E00/base_1444.12.01.eu4
+E23 [02:00:48] step 0: {'date': '1444.12.02', 'outfname': '../out/E23/d_1444.12.02.eu4'}
+E23 [02:00:48]   run to 1444.12.02
+E23 [02:02:37] FAILED: WorkerError: RuntimeError: game did not stop within 91.0s
+E23 [02:02:38] restored dlc_load.json and continue_game.json
+E23: FAILED in 200 s
+done: 33/36 ok
+installed /Users/elkanabronstein/Documents/Paradox Interactive/Europa Universalis IV/mod/eu4_experiments
+E00: already ok, skipped
+E01a: already ok, skipped
+E01b: already ok, skipped
+E01c: already ok, skipped
+E01d: already ok, skipped
+P01 [02:15:39] start: VEN ../out/E00/base_1444.12.01.eu4
+P01 [02:17:12] step 0: {'patch': '../patches/p01_ragusa_steer_genua.py'}
+P01 [02:17:49]   patch p01_ragusa_steer_genua.py: reloading
+P01 [02:18:57] step 1: {'date': '1445.01.01', 'outfname': '../out/P01/t1_1445.01.01.eu4'}
+P01 [02:18:57]   run to 1445.01.01
+P01 [02:19:57] step 2: {'date': '1445.02.01', 'outfname': '../out/P01/t2_1445.02.01.eu4'}
+P01 [02:19:57]   run to 1445.02.01
+P01 [02:20:57] restored dlc_load.json and continue_game.json
+P01: OK in 318 s
+E02: already ok, skipped
+E03: already ok, skipped
+E04: already ok, skipped
+E05: already ok, skipped
+E06: already ok, skipped
+E07: already ok, skipped
+E08: already ok, skipped
+E09: already ok, skipped
+E10: already ok, skipped
+E11: already ok, skipped
+E12: already ok, skipped
+E13: already ok, skipped
+E14: already ok, skipped
+E15: already ok, skipped
+E16: already ok, skipped
+E17: already ok, skipped
+E18: already ok, skipped
+E19: already ok, skipped
+E20a: already ok, skipped
+E20b: already ok, skipped
+E20c: already ok, skipped
+E20d: already ok, skipped
+E21 [02:20:57] start: VEN ../out/E00/base_1444.12.01.eu4
+E21 [02:22:29] step 0: {'effects': '../effects/naxos_ceded.txt'}
+E21 [02:22:29]   effects: ../effects/naxos_ceded.txt
+E21 [02:22:58] step 1: {'date': '1444.12.03', 'outfname': '../out/E21/d_1444.12.03.eu4'}
+E21 [02:22:58]   run to 1444.12.03
+E21 [02:23:55] step 2: {'date': '1444.12.15', 'outfname': '../out/E21/d_1444.12.15.eu4'}
+E21 [02:23:55]   run to 1444.12.15
+E21 [02:24:52] step 3: {'date': '1445.01.01', 'outfname': '../out/E21/t1_1445.01.01.eu4'}
+E21 [02:24:52]   run to 1445.01.01
+E21 [02:25:57] restored dlc_load.json and continue_game.json
+E21: OK in 301 s
+E22: already ok, skipped
+P02: already ok, skipped
+P03: already ok, skipped
+P05: already ok, skipped
+P06: already ok, skipped
+P04: already ok, skipped
+E23 [02:25:57] start: VEN ../out/E00/base_1444.12.01.eu4
+E23 [02:27:28] step 0: {'date': '1444.12.03', 'outfname': '../out/E23/d_1444.12.03.eu4'}
+E23 [02:27:28]   run to 1444.12.03
+E23 [02:28:24] step 1: {'date': '1444.12.05', 'outfname': '../out/E23/d_1444.12.05.eu4'}
+E23 [02:28:24]   run to 1444.12.05
+E23 [02:29:21] step 2: {'date': '1444.12.07', 'outfname': '../out/E23/d_1444.12.07.eu4'}
+E23 [02:29:21]   run to 1444.12.07
+E23 [02:30:18] step 3: {'date': '1444.12.09', 'outfname': '../out/E23/d_1444.12.09.eu4'}
+E23 [02:30:18]   run to 1444.12.09
+E23 [02:32:29] step 4: {'date': '1444.12.11', 'outfname': '../out/E23/d_1444.12.11.eu4'}
+E23 [02:32:29]   run to 1444.12.11
+E23 [02:35:06] step 5: {'date': '1444.12.13', 'outfname': '../out/E23/d_1444.12.13.eu4'}
+E23 [02:35:06]   run to 1444.12.13
+E23 [02:37:44] step 6: {'date': '1444.12.15', 'outfname': '../out/E23/d_1444.12.15.eu4'}
+E23 [02:37:44]   run to 1444.12.15
+E23 [02:40:22] step 7: {'date': '1444.12.17', 'outfname': '../out/E23/d_1444.12.17.eu4'}
+E23 [02:40:22]   run to 1444.12.17
+E23 [02:42:59] step 8: {'date': '1444.12.19', 'outfname': '../out/E23/d_1444.12.19.eu4'}
+E23 [02:42:59]   run to 1444.12.19
+E23 [02:45:36] step 9: {'date': '1444.12.21', 'outfname': '../out/E23/d_1444.12.21.eu4'}
+E23 [02:45:36]   run to 1444.12.21
+E23 [02:48:14] step 10: {'date': '1444.12.23', 'outfname': '../out/E23/d_1444.12.23.eu4'}
+E23 [02:48:14]   run to 1444.12.23
+E23 [02:50:51] step 11: {'date': '1444.12.25', 'outfname': '../out/E23/d_1444.12.25.eu4'}
+E23 [02:50:51]   run to 1444.12.25
+E23 [02:53:29] step 12: {'date': '1444.12.27', 'outfname': '../out/E23/d_1444.12.27.eu4'}
+E23 [02:53:29]   run to 1444.12.27
+E23 [02:56:06] step 13: {'date': '1444.12.29', 'outfname': '../out/E23/d_1444.12.29.eu4'}
+E23 [02:56:06]   run to 1444.12.29
+E23 [02:58:38] step 14: {'date': '1444.12.31', 'outfname': '../out/E23/d_1444.12.31.eu4'}
+E23 [02:58:38]   run to 1444.12.31
+E23 [03:01:15] step 15: {'date': '1445.01.02', 'outfname': '../out/E23/d_1445.01.02.eu4'}
+E23 [03:01:15]   run to 1445.01.02
+E23 [03:03:52]   stopped at 1445-01-01, target 1445.01.02 (attempt 1)
+E23 [03:03:52] FAILED: JobError: step to 1445.01.02 is 1 day: EU4 `stop` ignores the next day; use steps of >= 2 days
+E23 [03:03:53] restored dlc_load.json and continue_game.json
+E23: failed (JobError: step to 1445.01.02 is 1 day: EU4 `stop` ignores the next day; use steps of >= 2 days), retrying once
+E23 [03:03:53] start: VEN ../out/E00/base_1444.12.01.eu4
+E23 [03:04:19] FAILED: WorkerError: RuntimeError: no display fits the 2048x1358 window: [(0.0, 0.0, 1512.0, 982.0)]
+E23 [03:04:20] restored dlc_load.json and continue_game.json
+E23: FAILED in 26 s
+done: 35/36 ok

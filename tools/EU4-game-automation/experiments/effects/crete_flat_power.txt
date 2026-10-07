@@ -1,0 +1,8 @@
+163 = {
+	add_trade_modifier = {
+		who = root
+		duration = 3650
+		power = 10
+		key = exp_trade_power
+	}
+}

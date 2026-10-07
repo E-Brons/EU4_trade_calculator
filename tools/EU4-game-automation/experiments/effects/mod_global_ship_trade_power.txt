@@ -1,0 +1,4 @@
+add_country_modifier = {
+	name = exp_global_ship_trade_power
+	duration = -1
+}

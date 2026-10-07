@@ -1,0 +1,8 @@
+[01:04:36] start: VEN ../out/E00/base_1444.12.01.eu4
+[01:06:04] step 0: {'effects': '../effects/subject_march.txt'}
+[01:06:04]   effects: ../effects/subject_march.txt
+[01:06:33] step 1: {'date': '1445.01.01', 'outfname': '../out/E20b/t1_1445.01.01.eu4'}
+[01:06:33]   run to 1445.01.01
+[01:07:31] step 2: {'date': '1445.02.01', 'outfname': '../out/E20b/t2_1445.02.01.eu4'}
+[01:07:31]   run to 1445.02.01
+[01:08:29] restored dlc_load.json and continue_game.json

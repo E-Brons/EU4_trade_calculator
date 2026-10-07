@@ -1,0 +1,8 @@
+[23:36:36] start: VEN ../out/E00/base_1444.12.01.eu4
+[23:38:04] step 0: {'patch': '../patches/identity.py'}
+[23:38:37]   patch identity.py: reloading
+[23:39:45] step 1: {'date': '1445.01.01', 'outfname': '../out/E01c/t1_1445.01.01.eu4'}
+[23:39:45]   run to 1445.01.01
+[23:40:43] step 2: {'date': '1445.02.01', 'outfname': '../out/E01c/t2_1445.02.01.eu4'}
+[23:40:43]   run to 1445.02.01
+[23:41:42] restored dlc_load.json and continue_game.json

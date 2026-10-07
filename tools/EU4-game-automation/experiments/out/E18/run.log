@@ -1,0 +1,8 @@
+[00:52:43] start: VEN ../out/E00/base_1444.12.01.eu4
+[00:54:15] step 0: {'effects': '../effects/padova_autonomy.txt'}
+[00:54:15]   effects: ../effects/padova_autonomy.txt
+[00:54:44] step 1: {'date': '1445.01.01', 'outfname': '../out/E18/t1_1445.01.01.eu4'}
+[00:54:44]   run to 1445.01.01
+[00:55:42] step 2: {'date': '1445.02.01', 'outfname': '../out/E18/t2_1445.02.01.eu4'}
+[00:55:42]   run to 1445.02.01
+[00:56:42] restored dlc_load.json and continue_game.json

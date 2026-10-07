@@ -1,0 +1,77 @@
+{
+ "nation": "VEN",
+ "mods": [
+  "mod/eu4_experiments.mod"
+ ],
+ "observe": true,
+ "base_save": "../out/E00/base_1444.12.01.eu4",
+ "script": [
+  {
+   "date": "1444.12.03",
+   "outfname": "../out/E23/d_1444.12.03.eu4"
+  },
+  {
+   "date": "1444.12.05",
+   "outfname": "../out/E23/d_1444.12.05.eu4"
+  },
+  {
+   "date": "1444.12.07",
+   "outfname": "../out/E23/d_1444.12.07.eu4"
+  },
+  {
+   "date": "1444.12.09",
+   "outfname": "../out/E23/d_1444.12.09.eu4"
+  },
+  {
+   "date": "1444.12.11",
+   "outfname": "../out/E23/d_1444.12.11.eu4"
+  },
+  {
+   "date": "1444.12.13",
+   "outfname": "../out/E23/d_1444.12.13.eu4"
+  },
+  {
+   "date": "1444.12.15",
+   "outfname": "../out/E23/d_1444.12.15.eu4"
+  },
+  {
+   "date": "1444.12.17",
+   "outfname": "../out/E23/d_1444.12.17.eu4"
+  },
+  {
+   "date": "1444.12.19",
+   "outfname": "../out/E23/d_1444.12.19.eu4"
+  },
+  {
+   "date": "1444.12.21",
+   "outfname": "../out/E23/d_1444.12.21.eu4"
+  },
+  {
+   "date": "1444.12.23",
+   "outfname": "../out/E23/d_1444.12.23.eu4"
+  },
+  {
+   "date": "1444.12.25",
+   "outfname": "../out/E23/d_1444.12.25.eu4"
+  },
+  {
+   "date": "1444.12.27",
+   "outfname": "../out/E23/d_1444.12.27.eu4"
+  },
+  {
+   "date": "1444.12.29",
+   "outfname": "../out/E23/d_1444.12.29.eu4"
+  },
+  {
+   "date": "1444.12.31",
+   "outfname": "../out/E23/d_1444.12.31.eu4"
+  },
+  {
+   "date": "1445.01.02",
+   "outfname": "../out/E23/d_1445.01.02.eu4"
+  }
+ ],
+ "ai_off": [
+  "VEN"
+ ]
+}
