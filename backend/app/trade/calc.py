@@ -32,14 +32,14 @@ from app.trade.types import (
     WorldInputs,
 )
 
-CALC_VERSION = "0.2.0"
+CALC_VERSION = "0.2.1"
 
 STAGE_INFO: dict[str, tuple[str, tuple[str, ...]]] = {
     "propagation": ("prev = sum over downstream nodes with province_power / TRADE_PROPAGATE_DIVIDER >= TRADE_PROPAGATE_THRESHOLD of fx(province_power / TRADE_PROPAGATE_DIVIDER)", ("R05",)),
     "raw_power": ("max_pow = province + ship + prev + capital + node modifiers + the country's merchant power on every merchant entry", ("R06", "R11")),
     "multiplier": ("max_demand: multiplier from max_pow to val (observed input until derived)", ("R01", "R02")),
     "val": ("val = fx(max_pow * max_demand) (3-decimal fixed point, truncated)", ("R01",)),
-    "transfers": ("t_out = fx(0.5 * (val - 0.1)) for a subject giving power away; t_in = sum of givers' amounts; potential = fx((t_out - t_in) / total)", ("R04",)),
+    "transfers": ("t_out = fx(f * (val - 0.1)) for a subject giving power away, f = 0.5 or 1.0 identified per giver; t_in = sum of givers' amounts; potential = fx((t_out - t_in) / total)", ("R04",)),
     "retain_power": ("retain_power = sum over collectors of (val - t_out + t_in)", ("R04",)),
     "pull_power": ("pull_power = effective power of the countries that steer here, or do not collect here and collect or steer downstream (R03 rule B)", ("R03", "R04")),
     "retention": ("retention = retain / (retain + pull)", ("R03",)),
@@ -63,6 +63,7 @@ class Observed:
     trade_efficiency: dict[str, float] = field(default_factory=dict)
     merchant_power: dict[str, float] = field(default_factory=dict)
     steering_strength: dict[str, float] = field(default_factory=dict)
+    transfer_fraction: dict[str, float] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -120,9 +121,20 @@ def rule_val(max_pow: float, multiplier: float) -> float:
     return rule_fx(max_pow * multiplier)
 
 
-def rule_transfer_out(val: float) -> float:
-    """R04 + project check (1,855 of 1,855 givers): a subject gives fx(TRANSFER_FRACTION * (val - TRANSFER_MIN_POWER_KEPT))."""
-    return rule_fx(game_data.const("TRANSFER_FRACTION") * (val - game_data.const("TRANSFER_MIN_POWER_KEPT")))
+def rule_transfer_out(val: float, fraction: float | None = None) -> float:
+    """R04: a subject gives fx(fraction * (val - TRANSFER_MIN_POWER_KEPT)). fraction is TRANSFER_FRACTION (0.5; 1,855 of
+    1,855 givers of the 80-save corpus) or TRANSFER_FRACTION_FULL (1.0; the plain vassals AVR, LDU of the Venice series);
+    what selects it is open, so the giver's fraction is identified from its recorded t_out (rule_transfer_fraction)."""
+    f = game_data.const("TRANSFER_FRACTION") if fraction is None else fraction
+    return rule_fx(f * (val - game_data.const("TRANSFER_MIN_POWER_KEPT")))
+
+
+def rule_transfer_fraction(val: float, t_out: float) -> float | None:
+    """The known fraction that reproduces a recorded t_out exactly (None if neither does)."""
+    for f in (game_data.const("TRANSFER_FRACTION"), game_data.const("TRANSFER_FRACTION_FULL")):
+        if abs(rule_transfer_out(val, f) - t_out) < 5e-4:
+            return f
+    return None
 
 
 def rule_potential(t_out: float, t_in: float, node_total: float) -> float:
@@ -339,7 +351,7 @@ def calculate(inputs: WorldInputs, decisions: Decisions | None = None, observed:
     t_in_delta: dict[tuple[str, str], float] = defaultdict(float)
     for node, e, val, _c, _s in first_pass:
         if e.t_out > 0:
-            new_out = rule_transfer_out(val)
+            new_out = rule_transfer_out(val, observed.transfer_fraction.get(e.tag))
             t_out_now[(node, e.tag)] = new_out
             for receiver, amount in e.transfers_to:
                 t_in_delta[(node, receiver)] += amount * (new_out / e.t_out) - amount
@@ -418,7 +430,16 @@ def identify_observed(world: World) -> Observed:
         if e.steering and e.add is not None and rec:
             groups[(node, e.steer_link)].append((tag, rule_effective_power(rec.val or 0.0, e.t_out, e.t_in), e.add))
     strength, _consistent = rule_steering_strengths(groups.values())
-    return Observed(trade_efficiency=efficiency, merchant_power=merchant, steering_strength=strength)
+    fractions: dict[str, Counter[float]] = defaultdict(Counter)
+    for (node, tag), e in world.inputs.entries.items():
+        rec = world.recorded.entries.get((node, tag))
+        if e.t_out > 0 and rec and rec.val is not None:
+            f = rule_transfer_fraction(rec.val, e.t_out)
+            if f is not None:
+                fractions[tag][f] += 1
+    fraction = {tag: c.most_common(1)[0][0] for tag, c in fractions.items()}
+    return Observed(trade_efficiency=efficiency, merchant_power=merchant, steering_strength=strength,
+                    transfer_fraction=fraction)
 
 
 # ----------------------------------------------------------------------------------------------------------------
@@ -461,11 +482,12 @@ def predict_stage(stage: str, world: World) -> list[Pair]:
             out.append(Pair("val", rule_val(r.max_pow, inp.multipliers.get((node, tag), 0.0)), r.val, node, tag))
 
     elif stage == "transfers":
+        fraction = identify_observed(world).transfer_fraction
         received: dict[tuple[str, str], float] = defaultdict(float)
         for (node, tag), e in inp.entries.items():
             r = rec.entries[(node, tag)]
             if e.t_out > 0:
-                out.append(Pair("t_out", rule_transfer_out(r.val or 0.0), e.t_out, node, tag))
+                out.append(Pair("t_out", rule_transfer_out(r.val or 0.0, fraction.get(tag)), e.t_out, node, tag))
                 for receiver, amount in e.transfers_to:
                     received[(node, receiver)] += amount
             nr = rec.nodes[node]

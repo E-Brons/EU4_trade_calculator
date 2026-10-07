@@ -3,11 +3,13 @@
     "note": "Constants that are NOT in the game's defines.lua: found by fitting the 80 fixture saves, then recorded here with their evidence. calc.py reads them through game_data.const() like any define; change only with a new research result and a verified stage.",
     "FIXED_POINT_SCALE": "the game computes and stores values in 3-decimal fixed point with truncation: val 83,201/83,201, power_fraction 42,323/42,330, share_total 42,330/42,330 (README integration log)",
     "TRANSFER_FRACTION": "docs/research/R04 + project check: t_out = trunc3(0.5 * (val - 0.1)) in 1,855/1,855 entries",
-    "TRANSFER_MIN_POWER_KEPT": "same check: val - 2 * t_out is between 0.100 and 0.101 for every giver; origin of the 0.1 unexplained"
+    "TRANSFER_MIN_POWER_KEPT": "same check: val - 2 * t_out is between 0.100 and 0.101 for every giver; origin of the 0.1 unexplained",
+    "TRANSFER_FRACTION_FULL": "docs/research/R04 response_1 V-R04-1 (Venice series U07-U30, 2026-10-05): the plain vassals AVR (of GAZ) and LDU (of MRA) transfer t_out = trunc3(1.0 * (val - 0.1)); every giver of the 80-save corpus used 0.5. What sets the fraction is open (R04 request_2), so calc identifies each giver's fraction from the recorded t_out (identify_observed)"
   },
   "defines": {
     "FIXED_POINT_SCALE": {"value": 1000.0, "comment": "3 decimal fixed point"},
     "TRANSFER_FRACTION": {"value": 0.5, "comment": "share of (val - TRANSFER_MIN_POWER_KEPT) a subject transfers to its overlord"},
-    "TRANSFER_MIN_POWER_KEPT": {"value": 0.1, "comment": "subtracted from val before the transfer fraction is applied"}
+    "TRANSFER_MIN_POWER_KEPT": {"value": 0.1, "comment": "subtracted from val before the transfer fraction is applied"},
+    "TRANSFER_FRACTION_FULL": {"value": 1.0, "comment": "second observed transfer fraction (plain vassals AVR, LDU); identified per giver from its recorded t_out"}
   }
 }
