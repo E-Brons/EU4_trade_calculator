@@ -1,0 +1,91 @@
+{
+  "series": "obs-1444-eng",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game ENG 1444.11.11, spectator mode (AI runs every country), no mods; A = first tick day 1444.12.01, C = next 1st, same session (no reload).",
+  "saves": [
+    {
+      "id": "U35",
+      "file": "U35_ENG.1444.12.01.eu4",
+      "tag": "ENG",
+      "date": "1444.12.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "f5cfb4e5ea630370ce8d4b6357ed073b82bd44a0e1d5d0269953c3d7932f5198",
+      "start_date": "1444.11.11",
+      "seed": "1158168782",
+      "reloaded_from_a": false,
+      "placements": {
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "english_channel": [
+          "collect",
+          null,
+          true,
+          9
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 42,
+        "ai_fleets_in_transit": 5,
+        "ai_fleet_targets": "lubeck 2, safi 1, ganges_delta 1, malacca 1"
+      }
+    },
+    {
+      "id": "U36",
+      "file": "U36_ENG.1445.01.01.eu4",
+      "tag": "ENG",
+      "date": "1445.1.1",
+      "role": "C",
+      "base": "U35",
+      "change": "",
+      "covers": [],
+      "sha256": "ec021367a9bc40796587ed34437ccbaf6c1e192a9a5a551e61962a151718c207",
+      "start_date": "1444.11.11",
+      "seed": "1158168782",
+      "reloaded_from_a": false,
+      "placements": {
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "english_channel": [
+          "collect",
+          null,
+          true,
+          9
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 5,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "gujarat 1, gulf_of_aden 1, ganges_delta 1, the_moluccas 1"
+      }
+    }
+  ]
+}

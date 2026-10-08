@@ -1,0 +1,163 @@
+{
+  "series": "obs-1789-usa",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game USA from the 1789 bookmark, spectator mode, AI of USA off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U86",
+      "file": "U86_USA.1789.08.01.eu4",
+      "tag": "USA",
+      "date": "1789.8.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "d2e84f4197e16f8e76af1d7ab8ec6350040ecc0536bd15415fba66c33e3d6ca5",
+      "start_date": "1789.7.14",
+      "seed": "460779940",
+      "reloaded_from_a": false,
+      "placements": {
+        "rio_grande": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "james_bay": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "california": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "mississippi_river": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "ohio": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "carribean_trade": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "chesapeake_bay": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "st_lawrence": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 95,
+        "ai_fleets_in_transit": 8,
+        "ai_fleet_targets": "carribean_trade 2, cape_of_good_hope 1, gujarat 1, ivory_coast 1, panama 1, cuiaba 1, amazonas_node 1"
+      }
+    },
+    {
+      "id": "U87",
+      "file": "U87_USA.1789.09.01.eu4",
+      "tag": "USA",
+      "date": "1789.9.1",
+      "role": "C",
+      "base": "U86",
+      "change": "",
+      "covers": [],
+      "sha256": "116fc812464c52a5fac8994c60b7fc79055188c1799aa0bde66361b43807db8d",
+      "start_date": "1789.7.14",
+      "seed": "460779940",
+      "reloaded_from_a": false,
+      "placements": {
+        "rio_grande": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "james_bay": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "california": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "mississippi_river": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "ohio": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "carribean_trade": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "chesapeake_bay": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "st_lawrence": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 79,
+        "ai_fleets_in_transit": 7,
+        "ai_fleet_targets": "st_lawrence 1, lubeck 1, malacca 1, gujarat 1, chesapeake_bay 1, panama 1, carribean_trade 1"
+      }
+    }
+  ]
+}

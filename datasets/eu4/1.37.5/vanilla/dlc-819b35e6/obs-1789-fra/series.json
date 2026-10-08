@@ -1,0 +1,115 @@
+{
+  "series": "obs-1789-fra",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game FRA from the 1789 bookmark, spectator mode, AI of FRA off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U84",
+      "file": "U84_FRA.1789.08.01.eu4",
+      "tag": "FRA",
+      "date": "1789.8.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "df9ddf8a97d04aa9e0bebbdc382d8cce0ae092ea0ee365581d093a8ad692d868",
+      "start_date": "1789.7.14",
+      "seed": "534509462",
+      "reloaded_from_a": false,
+      "placements": {
+        "rheinland": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "bordeaux": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "genua": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "english_channel": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 95,
+        "ai_fleets_in_transit": 12,
+        "ai_fleet_targets": "ivory_coast 3, cape_of_good_hope 2, zanzibar 1, gulf_of_aden 1, comorin_cape 1, australia 1, mississippi_river 1, panama 1, cuiaba 1"
+      }
+    },
+    {
+      "id": "U85",
+      "file": "U85_FRA.1789.09.01.eu4",
+      "tag": "FRA",
+      "date": "1789.9.1",
+      "role": "C",
+      "base": "U84",
+      "change": "",
+      "covers": [],
+      "sha256": "59b878677538f2c657fc66270c07f190a08311325826fa6977a6b13778b7cefd",
+      "start_date": "1789.7.14",
+      "seed": "534509462",
+      "reloaded_from_a": false,
+      "placements": {
+        "rheinland": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "bordeaux": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "genua": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "english_channel": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 77,
+        "ai_fleets_in_transit": 8,
+        "ai_fleet_targets": "gujarat 3, brazil 2, mexico 1, panama 1, cuiaba 1"
+      }
+    }
+  ]
+}

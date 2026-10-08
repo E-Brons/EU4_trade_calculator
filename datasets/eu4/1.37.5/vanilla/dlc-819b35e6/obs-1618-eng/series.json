@@ -1,0 +1,91 @@
+{
+  "series": "obs-1618-eng",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game ENG from the 1618 bookmark, spectator mode, AI of ENG off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U64",
+      "file": "U64_ENG.1618.06.01.eu4",
+      "tag": "ENG",
+      "date": "1618.6.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "e4e2dd2cb431c58bdd1c0763de4acfb0f024c2bb08747bafb50cb48425112437",
+      "start_date": "1618.5.23",
+      "seed": "509448546",
+      "reloaded_from_a": false,
+      "placements": {
+        "north_sea": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 156,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U65",
+      "file": "U65_ENG.1618.07.01.eu4",
+      "tag": "ENG",
+      "date": "1618.7.1",
+      "role": "C",
+      "base": "U64",
+      "change": "",
+      "covers": [],
+      "sha256": "573171d90f4bb0f1edcb1cc9976ba01dca1b21dab87589de58b101bc3735c04b",
+      "start_date": "1618.5.23",
+      "seed": "509448546",
+      "reloaded_from_a": false,
+      "placements": {
+        "north_sea": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 54,
+        "ai_fleets_in_transit": 8,
+        "ai_fleet_targets": "malacca 3, genua 1, gujarat 1, comorin_cape 1, gulf_of_aden 1, ganges_delta 1"
+      }
+    }
+  ]
+}

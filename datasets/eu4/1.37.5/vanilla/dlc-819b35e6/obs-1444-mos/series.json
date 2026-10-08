@@ -1,0 +1,91 @@
+{
+  "series": "obs-1444-mos",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game MOS from the 1444 bookmark, spectator mode, AI of MOS off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U52",
+      "file": "U52_MOS.1444.12.01.eu4",
+      "tag": "MOS",
+      "date": "1444.12.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "cabea5f645606b8e428c1311e713c871393b9634b9768d4e18131c786e7c5594",
+      "start_date": "1444.11.11",
+      "seed": "3283115489",
+      "reloaded_from_a": false,
+      "placements": {
+        "kiev": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "kazan": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 43,
+        "ai_fleets_in_transit": 9,
+        "ai_fleet_targets": "gulf_of_aden 2, polynesia_node 2, genua 1, nippon 1, malacca 1, gujarat 1, ganges_delta 1"
+      }
+    },
+    {
+      "id": "U53",
+      "file": "U53_MOS.1445.01.01.eu4",
+      "tag": "MOS",
+      "date": "1445.1.1",
+      "role": "C",
+      "base": "U52",
+      "change": "",
+      "covers": [],
+      "sha256": "60aafd4d0a6e768c93597554fa34ff27d29f2638ce57b2da75ddfadc82716c4e",
+      "start_date": "1444.11.11",
+      "seed": "3283115489",
+      "reloaded_from_a": false,
+      "placements": {
+        "kiev": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "kazan": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 4,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gulf_of_aden 1, malacca 1"
+      }
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "series": "obs-1701-eng",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game ENG from the 1701 bookmark, spectator mode, AI of ENG off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U70",
+      "file": "U70_ENG.1701.10.01.eu4",
+      "tag": "ENG",
+      "date": "1701.10.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "c7da7c33c10a022a1be305c12a29cd58e3c16d97fc095c05af2e74cea092fc23",
+      "start_date": "1701.9.1",
+      "seed": "582812430",
+      "reloaded_from_a": false,
+      "placements": {
+        "ivory_coast": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "carribean_trade": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "chesapeake_bay": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "north_sea": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 64,
+        "ai_fleets_in_transit": 3,
+        "ai_fleet_targets": "chesapeake_bay 2, zanzibar 1"
+      }
+    },
+    {
+      "id": "U71",
+      "file": "U71_ENG.1701.11.01.eu4",
+      "tag": "ENG",
+      "date": "1701.11.1",
+      "role": "C",
+      "base": "U70",
+      "change": "",
+      "covers": [],
+      "sha256": "efedf3b2fd7f64f4b8b0403891563fd0aafdc86d4ea2c2a4ff878bfdae9a50e7",
+      "start_date": "1701.9.1",
+      "seed": "582812430",
+      "reloaded_from_a": false,
+      "placements": {
+        "ivory_coast": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "carribean_trade": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "chesapeake_bay": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "north_sea": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 28,
+        "ai_fleets_in_transit": 3,
+        "ai_fleet_targets": "gujarat 1, zanzibar 1, the_moluccas 1"
+      }
+    }
+  ]
+}

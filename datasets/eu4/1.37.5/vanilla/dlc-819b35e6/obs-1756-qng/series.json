@@ -1,0 +1,139 @@
+{
+  "series": "obs-1756-qng",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game QNG from the 1756 bookmark, spectator mode, AI of QNG off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U80",
+      "file": "U80_QNG.1756.06.01.eu4",
+      "tag": "QNG",
+      "date": "1756.6.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "5a83d506dadcada9890e14aa1640971674d0a6da8def84024f2ec289d6caaa28",
+      "start_date": "1756.5.15",
+      "seed": "569859416",
+      "reloaded_from_a": false,
+      "placements": {
+        "girin": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "chengdu": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "canton": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "hangzhou": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "xian": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "yumen": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 92,
+        "ai_fleets_in_transit": 10,
+        "ai_fleet_targets": "ivory_coast 2, gujarat 2, lubeck 1, cape_of_good_hope 1, gulf_of_aden 1, hormuz 1, nippon 1, polynesia_node 1"
+      }
+    },
+    {
+      "id": "U81",
+      "file": "U81_QNG.1756.07.01.eu4",
+      "tag": "QNG",
+      "date": "1756.7.1",
+      "role": "C",
+      "base": "U80",
+      "change": "",
+      "covers": [],
+      "sha256": "470163d666f471d48ec596f0c46cd27c7483560b93106d2c75192619759469d6",
+      "start_date": "1756.5.15",
+      "seed": "569859416",
+      "reloaded_from_a": false,
+      "placements": {
+        "girin": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "chengdu": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "canton": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "hangzhou": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "xian": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "yumen": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 88,
+        "ai_fleets_in_transit": 6,
+        "ai_fleet_targets": "novgorod 1, carribean_trade 1, comorin_cape 1, zanzibar 1, gujarat 1, panama 1"
+      }
+    }
+  ]
+}

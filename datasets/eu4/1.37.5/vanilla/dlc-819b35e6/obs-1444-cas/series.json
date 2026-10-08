@@ -1,0 +1,91 @@
+{
+  "series": "obs-1444-cas",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game CAS 1444.11.11, spectator mode (AI runs every country), no mods; A = first tick day 1444.12.01, C = next 1st, same session (no reload).",
+  "saves": [
+    {
+      "id": "U33",
+      "file": "U33_CAS.1444.12.01.eu4",
+      "tag": "CAS",
+      "date": "1444.12.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "eb03bffdf13ce8873ce5d67b2142e4267eef6cde4fe45437270159148634418d",
+      "start_date": "1444.11.11",
+      "seed": "3504288245",
+      "reloaded_from_a": false,
+      "placements": {
+        "tunis": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "sevilla": [
+          "collect",
+          null,
+          true,
+          7
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 41,
+        "ai_fleets_in_transit": 7,
+        "ai_fleet_targets": "north_sea 1, english_channel 1, ivory_coast 1, gulf_of_aden 1, nippon 1, malacca 1, comorin_cape 1"
+      }
+    },
+    {
+      "id": "U34",
+      "file": "U34_CAS.1445.01.01.eu4",
+      "tag": "CAS",
+      "date": "1445.1.1",
+      "role": "C",
+      "base": "U33",
+      "change": "",
+      "covers": [],
+      "sha256": "a023162b909efb137fc9f4bb5eb0a48ed81c40308c0913c6c07bd6779b0da804",
+      "start_date": "1444.11.11",
+      "seed": "3504288245",
+      "reloaded_from_a": false,
+      "placements": {
+        "tunis": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "sevilla": [
+          "collect",
+          null,
+          true,
+          7
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 3,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 2"
+      }
+    }
+  ]
+}

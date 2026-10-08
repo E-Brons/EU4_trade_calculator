@@ -1,0 +1,163 @@
+{
+  "series": "obs-1789-gbr",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game GBR from the 1789 bookmark, spectator mode, AI of GBR off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U82",
+      "file": "U82_GBR.1789.08.01.eu4",
+      "tag": "GBR",
+      "date": "1789.8.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "8f61c6588ed7e28c2f90683e92729b518fec1bc047f0174965a0612ff68ed199",
+      "start_date": "1789.7.14",
+      "seed": "565159475",
+      "reloaded_from_a": false,
+      "placements": {
+        "ganges_delta": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "comorin_cape": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "ivory_coast": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "chesapeake_bay": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "st_lawrence": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "north_sea": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "lubeck": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 82,
+        "ai_fleets_in_transit": 8,
+        "ai_fleet_targets": "lubeck 1, cape_of_good_hope 1, gulf_of_aden 1, ivory_coast 1, zanzibar 1, malacca 1, polynesia_node 1, cuiaba 1"
+      }
+    },
+    {
+      "id": "U83",
+      "file": "U83_GBR.1789.09.01.eu4",
+      "tag": "GBR",
+      "date": "1789.9.1",
+      "role": "C",
+      "base": "U82",
+      "change": "",
+      "covers": [],
+      "sha256": "caf1a31742c790b252d6a663c3c8cab11e4014218884fc22aa9613dd348d699e",
+      "start_date": "1789.7.14",
+      "seed": "565159475",
+      "reloaded_from_a": false,
+      "placements": {
+        "ganges_delta": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "comorin_cape": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "ivory_coast": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "chesapeake_bay": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "st_lawrence": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "north_sea": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "lubeck": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 80,
+        "ai_fleets_in_transit": 5,
+        "ai_fleet_targets": "st_lawrence 1, genua 1, carribean_trade 1, ganges_delta 1, cuiaba 1"
+      }
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "series": "obs-1618-mug",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game MUG from the 1618 bookmark, spectator mode, AI of MUG off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U68",
+      "file": "U68_MUG.1618.06.01.eu4",
+      "tag": "MUG",
+      "date": "1618.6.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "c3042d6e4da4cc21add0fe45b08d1bd816fb17855de2fff9d8977324f306e280",
+      "start_date": "1618.5.23",
+      "seed": "536026320",
+      "reloaded_from_a": false,
+      "placements": {
+        "ganges_delta": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "lahore": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "gujarat": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 156,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U69",
+      "file": "U69_MUG.1618.07.01.eu4",
+      "tag": "MUG",
+      "date": "1618.7.1",
+      "role": "C",
+      "base": "U68",
+      "change": "",
+      "covers": [],
+      "sha256": "82a72f7086d51025f48dd7128c93c086270667a0207eded6b8a837a230669cf3",
+      "start_date": "1618.5.23",
+      "seed": "536026320",
+      "reloaded_from_a": false,
+      "placements": {
+        "ganges_delta": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "lahore": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "gujarat": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 51,
+        "ai_fleets_in_transit": 5,
+        "ai_fleet_targets": "genua 1, alexandria 1, gujarat 1, gulf_of_aden 1, the_moluccas 1"
+      }
+    }
+  ]
+}

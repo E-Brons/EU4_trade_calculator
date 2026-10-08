@@ -1,0 +1,91 @@
+{
+  "series": "obs-1492-tur",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game TUR from the 1492 bookmark, spectator mode, AI of TUR off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U58",
+      "file": "U58_TUR.1492.02.01.eu4",
+      "tag": "TUR",
+      "date": "1492.2.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "69b211108d05b949892cf3eed0d7dd5b8502b50dee3c29d2d99b6e93cff570fe",
+      "start_date": "1492.1.1",
+      "seed": "3712178953",
+      "reloaded_from_a": false,
+      "placements": {
+        "aleppo": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "crimea": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 32,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "english_channel 1, gujarat 1, gulf_of_aden 1, ganges_delta 1"
+      }
+    },
+    {
+      "id": "U59",
+      "file": "U59_TUR.1492.03.01.eu4",
+      "tag": "TUR",
+      "date": "1492.3.1",
+      "role": "C",
+      "base": "U58",
+      "change": "",
+      "covers": [],
+      "sha256": "d02400c67c6fed5389308e736ac8f538d0fbeae58e6b2a38b6e013ec976788ff",
+      "start_date": "1492.1.1",
+      "seed": "3712178953",
+      "reloaded_from_a": false,
+      "placements": {
+        "aleppo": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "crimea": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 9,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
+    }
+  ]
+}

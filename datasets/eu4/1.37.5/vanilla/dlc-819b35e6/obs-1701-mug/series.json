@@ -1,0 +1,127 @@
+{
+  "series": "obs-1701-mug",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game MUG from the 1701 bookmark, spectator mode, AI of MUG off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U74",
+      "file": "U74_MUG.1701.10.01.eu4",
+      "tag": "MUG",
+      "date": "1701.10.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "ead7c9d3591f5ecd3946b99d1fe4f70d1c14eea165b401ce3bce297c02992d6d",
+      "start_date": "1701.9.1",
+      "seed": "539858435",
+      "reloaded_from_a": false,
+      "placements": {
+        "ganges_delta": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "doab": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "lahore": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "comorin_cape": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "gujarat": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 77,
+        "ai_fleets_in_transit": 5,
+        "ai_fleet_targets": "chesapeake_bay 2, zanzibar 1, malacca 1, gulf_of_siam 1"
+      }
+    },
+    {
+      "id": "U75",
+      "file": "U75_MUG.1701.11.01.eu4",
+      "tag": "MUG",
+      "date": "1701.11.1",
+      "role": "C",
+      "base": "U74",
+      "change": "",
+      "covers": [],
+      "sha256": "e106265290ed9962b982b6d96b501ccb7f57a021a997e96d4644054de5b62f8e",
+      "start_date": "1701.9.1",
+      "seed": "539858435",
+      "reloaded_from_a": false,
+      "placements": {
+        "ganges_delta": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "doab": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "lahore": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "comorin_cape": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "gujarat": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 40,
+        "ai_fleets_in_transit": 3,
+        "ai_fleet_targets": "gujarat 1, comorin_cape 1, brazil 1"
+      }
+    }
+  ]
+}

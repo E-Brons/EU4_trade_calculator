@@ -1,0 +1,91 @@
+{
+  "series": "obs-1492-cas",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game CAS from the 1492 bookmark, spectator mode, AI of CAS off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U54",
+      "file": "U54_CAS.1492.02.01.eu4",
+      "tag": "CAS",
+      "date": "1492.2.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "c5f566023dce5e914ed6abbde3ffcceba046548699e95a6ac5b7a6f792112100",
+      "start_date": "1492.1.1",
+      "seed": "4040554360",
+      "reloaded_from_a": false,
+      "placements": {
+        "tunis": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "safi": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 29,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "english_channel 1, gujarat 1, gulf_of_aden 1, ganges_delta 1"
+      }
+    },
+    {
+      "id": "U55",
+      "file": "U55_CAS.1492.03.01.eu4",
+      "tag": "CAS",
+      "date": "1492.3.1",
+      "role": "C",
+      "base": "U54",
+      "change": "",
+      "covers": [],
+      "sha256": "1b4910c8b5048bc36ab1996bd51ca5fee7ddcd67d9af70af73f5a0c138ed0f52",
+      "start_date": "1492.1.1",
+      "seed": "4040554360",
+      "reloaded_from_a": false,
+      "placements": {
+        "tunis": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "safi": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 8,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
+    }
+  ]
+}

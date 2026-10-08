@@ -1,0 +1,91 @@
+{
+  "series": "obs-1444-mng",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game MNG from the 1444 bookmark, spectator mode, AI of MNG off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U44",
+      "file": "U44_MNG.1444.12.01.eu4",
+      "tag": "MNG",
+      "date": "1444.12.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "197cba76d0695501f3c8a2650ed99e01d8db72753b76b4204eedfac5ece58cac",
+      "start_date": "1444.11.11",
+      "seed": "3556742546",
+      "reloaded_from_a": false,
+      "placements": {
+        "hangzhou": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "xian": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 45,
+        "ai_fleets_in_transit": 11,
+        "ai_fleet_targets": "zanzibar 3, north_sea 2, bordeaux 1, gulf_of_aden 1, malacca 1, gujarat 1, comorin_cape 1, polynesia_node 1"
+      }
+    },
+    {
+      "id": "U45",
+      "file": "U45_MNG.1445.01.01.eu4",
+      "tag": "MNG",
+      "date": "1445.1.1",
+      "role": "C",
+      "base": "U44",
+      "change": "",
+      "covers": [],
+      "sha256": "aba0b129b17b28a7c4ed579dbd3871dcf2ece81b1298da964495b1e244431569",
+      "start_date": "1444.11.11",
+      "seed": "3556742546",
+      "reloaded_from_a": false,
+      "placements": {
+        "hangzhou": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "xian": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 4,
+        "ai_fleets_in_transit": 5,
+        "ai_fleet_targets": "gulf_of_aden 3, gujarat 1, comorin_cape 1"
+      }
+    }
+  ]
+}

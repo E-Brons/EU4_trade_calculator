@@ -1,0 +1,139 @@
+{
+  "series": "obs-1756-pru",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game PRU from the 1756 bookmark, spectator mode, AI of PRU off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U78",
+      "file": "U78_PRU.1756.06.01.eu4",
+      "tag": "PRU",
+      "date": "1756.6.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "3a054835e05522b742c9cce931714031b454a1c73414ee4e2af5674408e4ed91",
+      "start_date": "1756.5.15",
+      "seed": "604128850",
+      "reloaded_from_a": false,
+      "placements": {
+        "novgorod": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "krakow": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "baltic_sea": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "lubeck": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "english_channel": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 92,
+        "ai_fleets_in_transit": 7,
+        "ai_fleet_targets": "gulf_of_aden 2, carribean_trade 1, zanzibar 1, comorin_cape 1, the_moluccas 1, polynesia_node 1"
+      }
+    },
+    {
+      "id": "U79",
+      "file": "U79_PRU.1756.07.01.eu4",
+      "tag": "PRU",
+      "date": "1756.7.1",
+      "role": "C",
+      "base": "U78",
+      "change": "",
+      "covers": [],
+      "sha256": "8c14568c75abfd57f75999693d64a7626e896196423c63ad8de66afa97656e15",
+      "start_date": "1756.5.15",
+      "seed": "604128850",
+      "reloaded_from_a": false,
+      "placements": {
+        "novgorod": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "krakow": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "baltic_sea": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "lubeck": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "english_channel": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 81,
+        "ai_fleets_in_transit": 3,
+        "ai_fleet_targets": "chesapeake_bay 2, bordeaux 1"
+      }
+    }
+  ]
+}

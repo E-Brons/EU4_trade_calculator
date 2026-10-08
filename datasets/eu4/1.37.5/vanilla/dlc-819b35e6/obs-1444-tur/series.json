@@ -1,0 +1,91 @@
+{
+  "series": "obs-1444-tur",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game TUR 1444.11.11, spectator mode (AI runs every country), no mods; A = first tick day 1444.12.01, C = next 1st, same session (no reload).",
+  "saves": [
+    {
+      "id": "U39",
+      "file": "U39_TUR.1444.12.01.eu4",
+      "tag": "TUR",
+      "date": "1444.12.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "b1c50127fffe263c6c69842a098cddf59abcf31da8abca7c4d5bec123ba380aa",
+      "start_date": "1444.11.11",
+      "seed": "3519338138",
+      "reloaded_from_a": false,
+      "placements": {
+        "alexandria": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "constantinople": [
+          "collect",
+          null,
+          true,
+          3
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 50,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "zanzibar 2, lubeck 1, north_sea 1"
+      }
+    },
+    {
+      "id": "U40",
+      "file": "U40_TUR.1445.01.01.eu4",
+      "tag": "TUR",
+      "date": "1445.1.1",
+      "role": "C",
+      "base": "U39",
+      "change": "",
+      "covers": [],
+      "sha256": "d7603eba032eadea40d8235b1e50bcec901d4c9763cb985515847a1c24967b50",
+      "start_date": "1444.11.11",
+      "seed": "3519338138",
+      "reloaded_from_a": false,
+      "placements": {
+        "alexandria": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "constantinople": [
+          "collect",
+          null,
+          true,
+          3
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 3,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "gujarat 2, comorin_cape 1, gulf_of_aden 1"
+      }
+    }
+  ]
+}

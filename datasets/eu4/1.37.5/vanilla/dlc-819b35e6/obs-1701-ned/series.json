@@ -1,0 +1,151 @@
+{
+  "series": "obs-1701-ned",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game NED from the 1701 bookmark, spectator mode, AI of NED off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U72",
+      "file": "U72_NED.1701.10.01.eu4",
+      "tag": "NED",
+      "date": "1701.10.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "65d562883adf6b99eccd39e61a144ca80d930aa76fc75cf33ae7a017d745f766",
+      "start_date": "1701.9.1",
+      "seed": "557692965",
+      "reloaded_from_a": false,
+      "placements": {
+        "the_moluccas": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "malacca": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "comorin_cape": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "cape_of_good_hope": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "ivory_coast": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "lubeck": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 68,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "gujarat 2, constantinople 1, gulf_of_siam 1"
+      }
+    },
+    {
+      "id": "U73",
+      "file": "U73_NED.1701.11.01.eu4",
+      "tag": "NED",
+      "date": "1701.11.1",
+      "role": "C",
+      "base": "U72",
+      "change": "",
+      "covers": [],
+      "sha256": "6955c84b19f59ec94c3927b5138fa854a3e033ee4338a834212ae385f9d47a3d",
+      "start_date": "1701.9.1",
+      "seed": "557692965",
+      "reloaded_from_a": false,
+      "placements": {
+        "the_moluccas": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "malacca": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "comorin_cape": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "cape_of_good_hope": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "ivory_coast": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "lubeck": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 43,
+        "ai_fleets_in_transit": 5,
+        "ai_fleet_targets": "gulf_of_aden 2, chesapeake_bay 2, constantinople 1"
+      }
+    }
+  ]
+}

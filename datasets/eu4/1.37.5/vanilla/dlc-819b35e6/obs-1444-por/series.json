@@ -1,0 +1,91 @@
+{
+  "series": "obs-1444-por",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game POR from the 1444 bookmark, spectator mode, AI of POR off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U60",
+      "file": "U60_POR.1444.12.01.eu4",
+      "tag": "POR",
+      "date": "1444.12.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "b4546ccc45a981b7bdc72d45d01c48c44e0daecff5be11f07b9371ee8ddddd02",
+      "start_date": "1444.11.11",
+      "seed": "3507176853",
+      "reloaded_from_a": false,
+      "placements": {
+        "tunis": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "safi": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 43,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "safi 1, malacca 1, gujarat 1, polynesia_node 1"
+      }
+    },
+    {
+      "id": "U61",
+      "file": "U61_POR.1445.01.01.eu4",
+      "tag": "POR",
+      "date": "1445.1.1",
+      "role": "C",
+      "base": "U60",
+      "change": "",
+      "covers": [],
+      "sha256": "733160286ec9daaabc8eb214183a7dd914f97ec46bbce69a6a3dc3a0ab5308ed",
+      "start_date": "1444.11.11",
+      "seed": "3507176853",
+      "reloaded_from_a": false,
+      "placements": {
+        "tunis": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "safi": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 3,
+        "ai_fleets_in_transit": 6,
+        "ai_fleet_targets": "tunis 1, hormuz 1, gulf_of_aden 1, gujarat 1, ganges_delta 1, malacca 1"
+      }
+    }
+  ]
+}

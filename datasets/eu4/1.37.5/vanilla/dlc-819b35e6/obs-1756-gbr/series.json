@@ -1,0 +1,163 @@
+{
+  "series": "obs-1756-gbr",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game GBR from the 1756 bookmark, spectator mode, AI of GBR off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U76",
+      "file": "U76_GBR.1756.06.01.eu4",
+      "tag": "GBR",
+      "date": "1756.6.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "40fa81e9b9cd114eea56bf1f631ab5d2d9d0c742d70e0c67b2ea494486b85212",
+      "start_date": "1756.5.15",
+      "seed": "528564688",
+      "reloaded_from_a": false,
+      "placements": {
+        "comorin_cape": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "ivory_coast": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "carribean_trade": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "chesapeake_bay": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "st_lawrence": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "north_sea": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "lubeck": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 95,
+        "ai_fleets_in_transit": 7,
+        "ai_fleet_targets": "carribean_trade 1, cape_of_good_hope 1, zanzibar 1, gulf_of_aden 1, the_moluccas 1, comorin_cape 1, panama 1"
+      }
+    },
+    {
+      "id": "U77",
+      "file": "U77_GBR.1756.07.01.eu4",
+      "tag": "GBR",
+      "date": "1756.7.1",
+      "role": "C",
+      "base": "U76",
+      "change": "",
+      "covers": [],
+      "sha256": "20f8d39b258ec4dd686b5237c1698a32745a9a0aaa313c33705c5f36e2439525",
+      "start_date": "1756.5.15",
+      "seed": "528564688",
+      "reloaded_from_a": false,
+      "placements": {
+        "comorin_cape": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "ivory_coast": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "carribean_trade": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "chesapeake_bay": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "st_lawrence": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "north_sea": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "lubeck": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 76,
+        "ai_fleets_in_transit": 10,
+        "ai_fleet_targets": "gujarat 4, carribean_trade 1, constantinople 1, sevilla 1, the_moluccas 1, chesapeake_bay 1, brazil 1"
+      }
+    }
+  ]
+}

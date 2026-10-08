@@ -1,0 +1,91 @@
+{
+  "series": "obs-1444-vij",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game VIJ from the 1444 bookmark, spectator mode, AI of VIJ off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U46",
+      "file": "U46_VIJ.1444.12.01.eu4",
+      "tag": "VIJ",
+      "date": "1444.12.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "345305a06ff4765dbb5c3acae94f937c81d0c1772a61e601be88f0eef1e34e53",
+      "start_date": "1444.11.11",
+      "seed": "3511383285",
+      "reloaded_from_a": false,
+      "placements": {
+        "ganges_delta": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "deccan": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 46,
+        "ai_fleets_in_transit": 12,
+        "ai_fleet_targets": "north_sea 3, english_channel 1, safi 1, ivory_coast 1, zanzibar 1, malacca 1, ganges_delta 1, comorin_cape 1, girin 1, polynesia_node 1"
+      }
+    },
+    {
+      "id": "U47",
+      "file": "U47_VIJ.1445.01.01.eu4",
+      "tag": "VIJ",
+      "date": "1445.1.1",
+      "role": "C",
+      "base": "U46",
+      "change": "",
+      "covers": [],
+      "sha256": "fbbe6c22b187f2465f69d48b5bd3138526c2336ca32a5e1f0438d52fad61e442",
+      "start_date": "1444.11.11",
+      "seed": "3511383285",
+      "reloaded_from_a": false,
+      "placements": {
+        "ganges_delta": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "deccan": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 5,
+        "ai_fleets_in_transit": 5,
+        "ai_fleet_targets": "gujarat 4, comorin_cape 1"
+      }
+    }
+  ]
+}

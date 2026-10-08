@@ -1,0 +1,103 @@
+{
+  "series": "obs-1444-mlc",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game MLC from the 1444 bookmark, spectator mode, AI of MLC off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U48",
+      "file": "U48_MLC.1444.12.01.eu4",
+      "tag": "MLC",
+      "date": "1444.12.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "43ff98caa8a17a9d3e1ae1bd1d78724eb623c245e3a132412b829f21d9c5bab3",
+      "start_date": "1444.11.11",
+      "seed": "3548956164",
+      "reloaded_from_a": false,
+      "placements": {
+        "gulf_of_siam": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "canton": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "the_moluccas": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 48,
+        "ai_fleets_in_transit": 8,
+        "ai_fleet_targets": "north_sea 4, gulf_of_aden 1, hormuz 1, malacca 1, polynesia_node 1"
+      }
+    },
+    {
+      "id": "U49",
+      "file": "U49_MLC.1445.01.01.eu4",
+      "tag": "MLC",
+      "date": "1445.1.1",
+      "role": "C",
+      "base": "U48",
+      "change": "",
+      "covers": [],
+      "sha256": "b2ba00acc2f2e946608a2911a389192a00622d7de1a3ad3bd0300e01ea1f91d7",
+      "start_date": "1444.11.11",
+      "seed": "3548956164",
+      "reloaded_from_a": false,
+      "placements": {
+        "gulf_of_siam": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "canton": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "the_moluccas": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 7,
+        "ai_fleets_in_transit": 5,
+        "ai_fleet_targets": "gujarat 3, comorin_cape 1, gulf_of_aden 1"
+      }
+    }
+  ]
+}

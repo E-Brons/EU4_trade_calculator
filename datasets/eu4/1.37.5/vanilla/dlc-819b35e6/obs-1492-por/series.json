@@ -1,0 +1,91 @@
+{
+  "series": "obs-1492-por",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game POR from the 1492 bookmark, spectator mode, AI of POR off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U56",
+      "file": "U56_POR.1492.02.01.eu4",
+      "tag": "POR",
+      "date": "1492.2.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "9d687629c4f8cd4e9748d8228f2469c7b38dbfba08766c78698e7301417fdcf6",
+      "start_date": "1492.1.1",
+      "seed": "3999287002",
+      "reloaded_from_a": false,
+      "placements": {
+        "ivory_coast": [
+          "steer",
+          3,
+          true,
+          0
+        ],
+        "safi": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 25,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "english_channel 1, gujarat 1, malacca 1, ganges_delta 1"
+      }
+    },
+    {
+      "id": "U57",
+      "file": "U57_POR.1492.03.01.eu4",
+      "tag": "POR",
+      "date": "1492.3.1",
+      "role": "C",
+      "base": "U56",
+      "change": "",
+      "covers": [],
+      "sha256": "2595143974c82aa92791c534b2e8f4b08302aa718cb7e5ac386e378163f97d08",
+      "start_date": "1492.1.1",
+      "seed": "3999287002",
+      "reloaded_from_a": false,
+      "placements": {
+        "ivory_coast": [
+          "steer",
+          3,
+          true,
+          0
+        ],
+        "safi": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 5,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, gulf_of_aden 1"
+      }
+    }
+  ]
+}

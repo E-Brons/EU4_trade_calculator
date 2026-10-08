@@ -1,0 +1,103 @@
+{
+  "series": "obs-1444-fra",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game FRA 1444.11.11, spectator mode (AI runs every country), no mods; A = first tick day 1444.12.01, C = next 1st, same session (no reload).",
+  "saves": [
+    {
+      "id": "U37",
+      "file": "U37_FRA.1444.12.01.eu4",
+      "tag": "FRA",
+      "date": "1444.12.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "3cbd867528fdec1a3f805f0664b924477aba6e37d0af8ba91a71016cc288b726",
+      "start_date": "1444.11.11",
+      "seed": "3503017312",
+      "reloaded_from_a": false,
+      "placements": {
+        "rheinland": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "bordeaux": [
+          "none",
+          null,
+          false,
+          4
+        ],
+        "champagne": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 44,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "lubeck 1, english_channel 1, hormuz 1, malacca 1"
+      }
+    },
+    {
+      "id": "U38",
+      "file": "U38_FRA.1445.01.01.eu4",
+      "tag": "FRA",
+      "date": "1445.1.1",
+      "role": "C",
+      "base": "U37",
+      "change": "",
+      "covers": [],
+      "sha256": "2fd9c1a7eb66b62ef859faafe08a7dea6a2a3a3a7af4a9adeee573f54555a096",
+      "start_date": "1444.11.11",
+      "seed": "3503017312",
+      "reloaded_from_a": false,
+      "placements": {
+        "rheinland": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "bordeaux": [
+          "none",
+          null,
+          false,
+          4
+        ],
+        "champagne": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 6,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, malacca 1"
+      }
+    }
+  ]
+}

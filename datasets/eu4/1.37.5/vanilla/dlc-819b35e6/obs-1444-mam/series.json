@@ -1,0 +1,91 @@
+{
+  "series": "obs-1444-mam",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game MAM from the 1444 bookmark, spectator mode, AI of MAM off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U42",
+      "file": "U42_MAM.1444.12.01.eu4",
+      "tag": "MAM",
+      "date": "1444.12.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "0d3bfa6985ea5b4005fd4adc8762254d3128d0416d734b280eb0d851621dc0ce",
+      "start_date": "1444.11.11",
+      "seed": "3572037321",
+      "reloaded_from_a": false,
+      "placements": {
+        "gulf_of_aden": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "aleppo": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 48,
+        "ai_fleets_in_transit": 5,
+        "ai_fleet_targets": "english_channel 1, safi 1, gulf_of_aden 1, hormuz 1, malacca 1"
+      }
+    },
+    {
+      "id": "U43",
+      "file": "U43_MAM.1445.01.01.eu4",
+      "tag": "MAM",
+      "date": "1445.1.1",
+      "role": "C",
+      "base": "U42",
+      "change": "",
+      "covers": [],
+      "sha256": "543e0686c383dee2bf1a017b6aefb10f5ef552f38abc33d144da184d6985cf93",
+      "start_date": "1444.11.11",
+      "seed": "3572037321",
+      "reloaded_from_a": false,
+      "placements": {
+        "gulf_of_aden": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "aleppo": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 5,
+        "ai_fleets_in_transit": 3,
+        "ai_fleet_targets": "gujarat 1, comorin_cape 1, malacca 1"
+      }
+    }
+  ]
+}

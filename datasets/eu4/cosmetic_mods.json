@@ -1,0 +1,9 @@
+{
+  "_comment": "Mods known not to change game rules (graphics, sound, UI only). A save whose mods are all listed here belongs to the 'vanilla' dataset; any other mod opens its own dataset (backend/app/trade/quality.py). Add a mod only after checking it touches no common/ or events/ files.",
+  "mods": [
+    "50 Loadingscreens Mod",
+    "Bigger UI V1.37",
+    "Medieval music",
+    "Rebel Flag Variety Pack"
+  ]
+}

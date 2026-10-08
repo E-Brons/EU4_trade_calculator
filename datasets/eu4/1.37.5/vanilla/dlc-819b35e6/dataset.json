@@ -1,0 +1,19 @@
+{
+  "game": "eu4",
+  "game_version": "1.37.5",
+  "mods_key": "vanilla",
+  "cosmetic_mods_present": [
+    "50 Loadingscreens Mod",
+    "Bigger UI V1.37",
+    "Medieval music",
+    "Rebel Flag Variety Pack"
+  ],
+  "dlc_key": "dlc-819b35e6",
+  "dlcs": [
+    "Art of War",
+    "Common Sense",
+    "Rights of Man"
+  ],
+  "protocol": "docs/research/experiments.md",
+  "_comment": "Every save here is clean (backend/app/trade/quality.py): dated the 1st after the game's first trade computation, none of the player's merchants or fleets on the way. Each subfolder is one game (series) with its series.json."
+}

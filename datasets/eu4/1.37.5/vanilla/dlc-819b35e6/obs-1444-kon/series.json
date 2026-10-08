@@ -1,0 +1,79 @@
+{
+  "series": "obs-1444-kon",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game KON from the 1444 bookmark, spectator mode, AI of KON off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U50",
+      "file": "U50_KON.1444.12.01.eu4",
+      "tag": "KON",
+      "date": "1444.12.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "36c2092f003fb96e837dc0ec4114554b13314f37df5a44cf4a2787b5668e8eef",
+      "start_date": "1444.11.11",
+      "seed": "3236298921",
+      "reloaded_from_a": false,
+      "placements": {
+        "kongo": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 49,
+        "ai_fleets_in_transit": 8,
+        "ai_fleet_targets": "zanzibar 2, comorin_cape 2, safi 1, nippon 1, girin 1, polynesia_node 1"
+      }
+    },
+    {
+      "id": "U51",
+      "file": "U51_KON.1445.01.01.eu4",
+      "tag": "KON",
+      "date": "1445.1.1",
+      "role": "C",
+      "base": "U50",
+      "change": "",
+      "covers": [],
+      "sha256": "244c073c9c2321a489c6f50d3d4f4e12904fb9f76ce10bab5ad5e2905831950f",
+      "start_date": "1444.11.11",
+      "seed": "3236298921",
+      "reloaded_from_a": false,
+      "placements": {
+        "kongo": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 4,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "gujarat 3, gulf_of_aden 1"
+      }
+    }
+  ]
+}

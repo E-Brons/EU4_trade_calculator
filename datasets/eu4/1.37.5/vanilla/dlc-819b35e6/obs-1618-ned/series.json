@@ -1,0 +1,115 @@
+{
+  "series": "obs-1618-ned",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game NED from the 1618 bookmark, spectator mode, AI of NED off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U62",
+      "file": "U62_NED.1618.06.01.eu4",
+      "tag": "NED",
+      "date": "1618.6.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "1081ff942cd5bdfdc56fe6b68f8b08aa48a3b8614ed9ca9f351761eaf5b30996",
+      "start_date": "1618.5.23",
+      "seed": "512834587",
+      "reloaded_from_a": false,
+      "placements": {
+        "chesapeake_bay": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "north_sea": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "lubeck": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 155,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U63",
+      "file": "U63_NED.1618.07.01.eu4",
+      "tag": "NED",
+      "date": "1618.7.1",
+      "role": "C",
+      "base": "U62",
+      "change": "",
+      "covers": [],
+      "sha256": "0afb154882952076b6628c2c00e1994492a521454d1338315596665e249a7650",
+      "start_date": "1618.5.23",
+      "seed": "512834587",
+      "reloaded_from_a": false,
+      "placements": {
+        "chesapeake_bay": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "north_sea": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "lubeck": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 59,
+        "ai_fleets_in_transit": 8,
+        "ai_fleet_targets": "comorin_cape 2, malacca 2, genua 1, gujarat 1, gulf_of_aden 1, ganges_delta 1"
+      }
+    }
+  ]
+}

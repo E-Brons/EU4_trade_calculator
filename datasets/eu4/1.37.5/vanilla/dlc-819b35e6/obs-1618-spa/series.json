@@ -1,0 +1,163 @@
+{
+  "series": "obs-1618-spa",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): new game SPA from the 1618 bookmark, spectator mode, AI of SPA off after the start (no own merchant/fleet moves), no mods; three 1sts saved, A = first clean one, C = next.",
+  "saves": [
+    {
+      "id": "U66",
+      "file": "U66_SPA.1618.06.01.eu4",
+      "tag": "SPA",
+      "date": "1618.6.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "a9fd90698c314aef2746c76f7a8f85d9f80c6ccc392ac5c2f2378647536d8448",
+      "start_date": "1618.5.23",
+      "seed": "545255967",
+      "reloaded_from_a": false,
+      "placements": {
+        "mexico": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "philippines": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "ivory_coast": [
+          "steer",
+          3,
+          true,
+          0
+        ],
+        "panama": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "carribean_trade": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "champagne": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "genua": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "english_channel": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 155,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U67",
+      "file": "U67_SPA.1618.07.01.eu4",
+      "tag": "SPA",
+      "date": "1618.7.1",
+      "role": "C",
+      "base": "U66",
+      "change": "",
+      "covers": [],
+      "sha256": "11d7dd53938ad6ea9c69b8e4564f99e3417f8a3a342870e666887fefb58b88d3",
+      "start_date": "1618.5.23",
+      "seed": "545255967",
+      "reloaded_from_a": false,
+      "placements": {
+        "mexico": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "philippines": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "ivory_coast": [
+          "steer",
+          3,
+          true,
+          0
+        ],
+        "panama": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "carribean_trade": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "champagne": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "genua": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "english_channel": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 54,
+        "ai_fleets_in_transit": 6,
+        "ai_fleet_targets": "gujarat 2, malacca 2, genua 1, ganges_delta 1"
+      }
+    }
+  ]
+}
