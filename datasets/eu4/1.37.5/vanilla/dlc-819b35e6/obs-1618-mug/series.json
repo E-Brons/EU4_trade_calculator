@@ -98,6 +98,54 @@
         "ai_fleets_in_transit": 5,
         "ai_fleet_targets": "genua 1, alexandria 1, gujarat 1, gulf_of_aden 1, the_moluccas 1"
       }
+    },
+    {
+      "id": "U218",
+      "file": "U218_MUG.1618.08.01.eu4",
+      "tag": "MUG",
+      "date": "1618.8.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1618-MUG: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "1fc221a8bbd5889578cf58e92d9e4798aae8398ca30e76a1541a45f2b870ff61",
+      "start_date": "1618.5.23",
+      "seed": "536026320",
+      "reloaded_from_a": false,
+      "placements": {
+        "ganges_delta": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "lahore": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "gujarat": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 21,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "english_channel 1, the_moluccas 1"
+      }
     }
   ]
 }

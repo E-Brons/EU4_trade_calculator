@@ -86,6 +86,174 @@
         "ai_fleets_in_transit": 4,
         "ai_fleet_targets": "gujarat 2, comorin_cape 1, gulf_of_aden 1"
       }
+    },
+    {
+      "id": "U181",
+      "file": "U181_TUR.1445.01.01.eu4",
+      "tag": "TUR",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-H-TUR-B1 (patch=home_tur_recall_home.py), t1_1445.01.01.eu4 (stored as observation: a B save must change a merchant or ship placement of A (or record a non-placement change with role observation))",
+      "covers": [],
+      "sha256": "1f6f64a44bb6b96e534b03868e6effcae9c976fa14454ef553bf6f5e59320686",
+      "start_date": "1444.11.11",
+      "seed": "2858865828",
+      "reloaded_from_a": true,
+      "placements": {
+        "alexandria": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "constantinople": [
+          "collect",
+          null,
+          true,
+          3
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 3,
+        "ai_fleet_targets": "malacca 2, gujarat 1"
+      }
+    },
+    {
+      "id": "U182",
+      "file": "U182_TUR.1445.02.01.eu4",
+      "tag": "TUR",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-H-TUR-B1 (patch=home_tur_recall_home.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "0da443b7dc26e95fe7920f3fda70204b8f1fa6abe90ca17bd02e7950deaefed3",
+      "start_date": "1444.11.11",
+      "seed": "2858865828",
+      "reloaded_from_a": true,
+      "placements": {
+        "alexandria": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "constantinople": [
+          "collect",
+          null,
+          true,
+          3
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U183",
+      "file": "U183_TUR.1445.01.01.eu4",
+      "tag": "TUR",
+      "date": "1445.1.1",
+      "role": "C",
+      "base": "U39",
+      "change": "R2-H-TUR-C (patch=identity.py), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "72fa7cf1ba2a9924e387183a8543987bf9f8e013e5c3c9f76bc92e16720059ba",
+      "start_date": "1444.11.11",
+      "seed": "2882889039",
+      "reloaded_from_a": true,
+      "placements": {
+        "alexandria": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "constantinople": [
+          "collect",
+          null,
+          true,
+          3
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 3,
+        "ai_fleet_targets": "comorin_cape 1, gulf_of_aden 1, malacca 1"
+      }
+    },
+    {
+      "id": "U184",
+      "file": "U184_TUR.1445.02.01.eu4",
+      "tag": "TUR",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-H-TUR-C (patch=identity.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "60e1dc71c15a6edbc2c329dbd687b87ba38e1fd4adc596013e2ee6446e152e31",
+      "start_date": "1444.11.11",
+      "seed": "2882889039",
+      "reloaded_from_a": true,
+      "placements": {
+        "alexandria": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "constantinople": [
+          "collect",
+          null,
+          true,
+          3
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
     }
   ]
 }

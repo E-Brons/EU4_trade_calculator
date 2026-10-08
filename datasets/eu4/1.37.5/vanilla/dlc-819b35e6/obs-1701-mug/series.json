@@ -122,6 +122,66 @@
         "ai_fleets_in_transit": 3,
         "ai_fleet_targets": "gujarat 1, comorin_cape 1, brazil 1"
       }
+    },
+    {
+      "id": "U222",
+      "file": "U222_MUG.1701.12.01.eu4",
+      "tag": "MUG",
+      "date": "1701.12.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1701-MUG: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "263fb9c33e8db659ec5f8a54096e6033f7c239c7f9c3bc4f5ec24d73bfae51f8",
+      "start_date": "1701.9.1",
+      "seed": "539858435",
+      "reloaded_from_a": false,
+      "placements": {
+        "ganges_delta": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "doab": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "lahore": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "comorin_cape": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "gujarat": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 20,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "comorin_cape 1, ganges_delta 1, ivory_coast 1, chesapeake_bay 1"
+      }
     }
   ]
 }

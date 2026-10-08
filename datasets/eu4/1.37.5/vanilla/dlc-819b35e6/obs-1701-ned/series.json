@@ -146,6 +146,78 @@
         "ai_fleets_in_transit": 5,
         "ai_fleet_targets": "gulf_of_aden 2, chesapeake_bay 2, constantinople 1"
       }
+    },
+    {
+      "id": "U223",
+      "file": "U223_NED.1701.12.01.eu4",
+      "tag": "NED",
+      "date": "1701.12.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1701-NED: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "be43dd0a30c31694d21746e34dcf587b79cd4398bc472d15b719444f4039e482",
+      "start_date": "1701.9.1",
+      "seed": "557692965",
+      "reloaded_from_a": false,
+      "placements": {
+        "the_moluccas": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "malacca": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "comorin_cape": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "cape_of_good_hope": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "ivory_coast": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "lubeck": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 20,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
     }
   ]
 }

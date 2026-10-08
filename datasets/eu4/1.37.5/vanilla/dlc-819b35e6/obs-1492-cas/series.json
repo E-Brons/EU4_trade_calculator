@@ -86,6 +86,48 @@
         "ai_fleets_in_transit": 1,
         "ai_fleet_targets": "gulf_of_aden 1"
       }
+    },
+    {
+      "id": "U214",
+      "file": "U214_CAS.1492.04.01.eu4",
+      "tag": "CAS",
+      "date": "1492.4.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1492-CAS: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "aa8dbec75cf5c2a415ade53f5f0ddcd9547f12f706660a0427df2c6db035051f",
+      "start_date": "1492.1.1",
+      "seed": "4040554360",
+      "reloaded_from_a": false,
+      "placements": {
+        "tunis": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "safi": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
     }
   ]
 }

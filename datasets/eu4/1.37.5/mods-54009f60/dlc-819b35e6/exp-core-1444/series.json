@@ -1,0 +1,4988 @@
+{
+  "series": "exp-core-1444",
+  "kind": "experiment",
+  "description": "Automated (tools/EU4-game-automation runner): VEN new game 1444.11.11, observe mode, hands-off to 1444.12.01 (E00). Treatments load this A with ai_off VEN; experiment mod eu4_experiments supplies single-key test modifiers.",
+  "saves": [
+    {
+      "id": "U30",
+      "file": "U30_VEN.1444.12.01.eu4",
+      "tag": "VEN",
+      "date": "1444.12.1",
+      "role": "A",
+      "base": null,
+      "change": "",
+      "covers": [],
+      "sha256": "3992e948a571267ed1949b1633784443726f905d72704dcfbce4313fb3d837eb",
+      "start_date": "1444.11.11",
+      "seed": "3535108613",
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 52,
+        "ai_fleets_in_transit": 6,
+        "ai_fleet_targets": "lubeck 2, zanzibar 1, hormuz 1, malacca 1, comorin_cape 1"
+      }
+    },
+    {
+      "id": "U88",
+      "file": "U88_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E00: same session as A, no change",
+      "covers": [],
+      "sha256": "e66f18876082e2f4798543c99cad271ec504ec3ee57819266bea7ac4c8487d81",
+      "start_date": "1444.11.11",
+      "seed": "3535108613",
+      "reloaded_from_a": false,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 5,
+        "ai_fleet_targets": "ganges_delta 2, gujarat 1, gulf_of_aden 1, malacca 1"
+      }
+    },
+    {
+      "id": "U89",
+      "file": "U89_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E00: same session as A, no change",
+      "covers": [],
+      "sha256": "f35ff9912ab976db86df47a193e72f559dc976bbb971a53ab1e9d0ae6a6775b7",
+      "start_date": "1444.11.11",
+      "seed": "3535108613",
+      "reloaded_from_a": false,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 3,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U90",
+      "file": "U90_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "C",
+      "base": "U30",
+      "change": "E01a (no change), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "a03769e936a0661d17196f3ee28d28f08d71edca285d2de1d44d159388247e2d",
+      "start_date": "1444.11.11",
+      "seed": "2964813430",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 3,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U91",
+      "file": "U91_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E01a (no change), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "d2061cba97a2476c0c336a71522894e6b7a57619e38cfa60458b74fda22086bd",
+      "start_date": "1444.11.11",
+      "seed": "2964813430",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U92",
+      "file": "U92_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "C'",
+      "base": "U30",
+      "change": "E01b (no change), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "54b4eb39c9c7626ba635d38f2e76ad5f0fcab5f2842e933ab7e33e4cb89701fd",
+      "start_date": "1444.11.11",
+      "seed": "2958219744",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 3,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "malacca 2"
+      }
+    },
+    {
+      "id": "U93",
+      "file": "U93_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E01b (no change), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "32d0fdaae664024897976c2f8207d6ac292910bb3c6904ff666dd3c3ad76d9e4",
+      "start_date": "1444.11.11",
+      "seed": "2958219744",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U94",
+      "file": "U94_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E01c (patch=identity.py), t1_1445.01.01.eu4 (stored as observation: a B save must change a merchant or ship placement of A (or record a non-placement change with role observation))",
+      "covers": [],
+      "sha256": "d44444c5c2a3c7de71aecf01b6f9f657a534f690a1e5800187947306b443e7fb",
+      "start_date": "1444.11.11",
+      "seed": "2708825245",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 4,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U95",
+      "file": "U95_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E01c (patch=identity.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "cb1f91d69de99b4e9f8ca8f2c4c8d7ada005c5205d82b02a948d42f92080553b",
+      "start_date": "1444.11.11",
+      "seed": "2708825245",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U96",
+      "file": "U96_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E01d (effects=empty.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "5eef3bef71aee14b958b32bad797f20460d0b8dd296f27cf25a505f152505f8e",
+      "start_date": "1444.11.11",
+      "seed": "2678578030",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, malacca 1"
+      }
+    },
+    {
+      "id": "U97",
+      "file": "U97_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E01d (effects=empty.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "c97fd8158378d2969260bd48b865b3482867242bcea0fb3ddb529a7e0c61138a",
+      "start_date": "1444.11.11",
+      "seed": "2678578030",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U98",
+      "file": "U98_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E02 (effects=dip_plus2.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "0d592718854140af649aab23b63a913db6d5eaa9337b1c309f84c45c029c8a68",
+      "start_date": "1444.11.11",
+      "seed": "2985634159",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "comorin_cape 1, gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U99",
+      "file": "U99_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E02 (effects=dip_plus2.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "5e73ab73167fb0e5c5bc1575cff8d056c1909998b1a43fa5451b113c16c19db4",
+      "start_date": "1444.11.11",
+      "seed": "2985634159",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U100",
+      "file": "U100_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E03 (effects=mod_global_trade_power.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "9133a221d7e7c762168b5d27a9f5d378e71c5fed44335c58b62f9b5fe259bc31",
+      "start_date": "1444.11.11",
+      "seed": "2963805309",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 3,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U101",
+      "file": "U101_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E03 (effects=mod_global_trade_power.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "fc1fe935b0fb2b7c787cf53c62f76cdba901fc6a68f96ef3ca6353ad9379f983",
+      "start_date": "1444.11.11",
+      "seed": "2963805309",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gujarat 1"
+      }
+    },
+    {
+      "id": "U102",
+      "file": "U102_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E04 (effects=mod_global_own_trade_power.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "3ea1e5a0c8394d595312fabfbc5b8856fa69811fa4278a2af62f301140e93b22",
+      "start_date": "1444.11.11",
+      "seed": "2724516396",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 3,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gujarat 1"
+      }
+    },
+    {
+      "id": "U103",
+      "file": "U103_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E04 (effects=mod_global_own_trade_power.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "c8ed3ae6878e11cdc6701347ba231f142169a8e206e588ec8044afcef5a8a940",
+      "start_date": "1444.11.11",
+      "seed": "2724516396",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U104",
+      "file": "U104_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E05 (effects=mod_global_foreign_trade_power.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "c4abc64b506f39e36af3194a4052291619ca9e4272ebcb06efb826084d216fe1",
+      "start_date": "1444.11.11",
+      "seed": "2939968986",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, malacca 1"
+      }
+    },
+    {
+      "id": "U105",
+      "file": "U105_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E05 (effects=mod_global_foreign_trade_power.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "7769531484b2f095e8e4683fc0e999df72acc7c7a109bc694af03c50aa6acbe1",
+      "start_date": "1444.11.11",
+      "seed": "2939968986",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U106",
+      "file": "U106_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E06 (effects=mod_trade_efficiency.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "224beb5257288cf3133e310f4442a417eff88d2e1f97d0c4c19e0752748bf54f",
+      "start_date": "1444.11.11",
+      "seed": "2733873956",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "malacca 2, gujarat 1, comorin_cape 1"
+      }
+    },
+    {
+      "id": "U107",
+      "file": "U107_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E06 (effects=mod_trade_efficiency.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "acedd7dfcb0bbf48135c2dc968e3f1e981db311069bc352c0d6295dd6716b08c",
+      "start_date": "1444.11.11",
+      "seed": "2733873956",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U108",
+      "file": "U108_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E07 (effects=mod_global_ship_trade_power.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "70b9fdd14aa0d3615536c3d5b9d26f1341a6a50ab6d8350c138d3a51fc209812",
+      "start_date": "1444.11.11",
+      "seed": "2680163492",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, malacca 1"
+      }
+    },
+    {
+      "id": "U109",
+      "file": "U109_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E07 (effects=mod_global_ship_trade_power.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "6ba5a5fe009844bba811de5a1bd435255a7dd7fe12295fbf3e3894c4eccc7273",
+      "start_date": "1444.11.11",
+      "seed": "2680163492",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U110",
+      "file": "U110_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E08 (effects=mod_trade_steering.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "b96e3320eab82a43e33af194703cf013d859c549a59ccf75668e3b139842e3c8",
+      "start_date": "1444.11.11",
+      "seed": "2946877951",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U111",
+      "file": "U111_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E08 (effects=mod_trade_steering.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "79f7f447dd2b995e39183beea18d3030d204293f5d49b454b51ce145251ceb5d",
+      "start_date": "1444.11.11",
+      "seed": "2946877951",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U112",
+      "file": "U112_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E09 (effects=mod_prov_trade_power.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "cd4dbd3698d12cb89215ed5250469e25fafeec1b1a0683f4ef594681134bf357",
+      "start_date": "1444.11.11",
+      "seed": "2675129356",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U113",
+      "file": "U113_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E09 (effects=mod_prov_trade_power.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "9909c7e7b117867b225e39cd6cbde03d4719f92addc24a0710f2161583464cd2",
+      "start_date": "1444.11.11",
+      "seed": "2675129356",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U114",
+      "file": "U114_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E10 (effects=dip_tech_plus1.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "3ec150e99a662335cd30d745070c6cfa474284319326fa9f469b9d38b7ef78a8",
+      "start_date": "1444.11.11",
+      "seed": "2723878996",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "comorin_cape 1, malacca 1"
+      }
+    },
+    {
+      "id": "U115",
+      "file": "U115_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E10 (effects=dip_tech_plus1.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "bc1489042245735a1af3a8a552ad36dd648afce2a668d3ba25af9df070cf4f2d",
+      "start_date": "1444.11.11",
+      "seed": "2723878996",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U116",
+      "file": "U116_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E11 (effects=adm_tech_plus1.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "fe7d84bea5582f272a8564c843d16792bd19be4c16abe74b7a05d4e8d7caa55c",
+      "start_date": "1444.11.11",
+      "seed": "2944207047",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 4,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "gujarat 1, comorin_cape 1, gulf_of_aden 1, malacca 1"
+      }
+    },
+    {
+      "id": "U117",
+      "file": "U117_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E11 (effects=adm_tech_plus1.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "71905aa6b3b60765cec41c2763e6d37990e20bda9f189c6205d354c3766ec436",
+      "start_date": "1444.11.11",
+      "seed": "2944207047",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U118",
+      "file": "U118_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E12 (effects=mercantilism_plus10.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "24ac9363c5d96bf0e1b9f33d360ec2f73d205bbaf7212f3a5847479148788445",
+      "start_date": "1444.11.11",
+      "seed": "2956023995",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 3,
+        "ai_fleets_in_transit": 3,
+        "ai_fleet_targets": "gujarat 1, comorin_cape 1, gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U119",
+      "file": "U119_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E12 (effects=mercantilism_plus10.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "02ffd316a5e95f66413208bbf3486ff9526b0359025f2140a8ba851a68094482",
+      "start_date": "1444.11.11",
+      "seed": "2956023995",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U120",
+      "file": "U120_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E13 (effects=mod_merchants.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "78b844a785646f456897d12e8c47552a31e111f30dfe153032f210e8f81003e0",
+      "start_date": "1444.11.11",
+      "seed": "2711507694",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, comorin_cape 1"
+      }
+    },
+    {
+      "id": "U121",
+      "file": "U121_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E13 (effects=mod_merchants.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "d91512a613c9bcd5cfe88de0bebfe95dad02337c98d9a1c568f6899b05b5d13d",
+      "start_date": "1444.11.11",
+      "seed": "2711507694",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U122",
+      "file": "U122_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E14 (effects=crete_flat_power.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "a510f57495ec78c4fa58f8c4914a263bab08d7ef94965e0ee19c98c160ad6dd5",
+      "start_date": "1444.11.11",
+      "seed": "2997908501",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 4,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U123",
+      "file": "U123_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E14 (effects=crete_flat_power.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "616b497514617ba01d7817bb40600a6190657b52e033d3730865ba453ee8e15b",
+      "start_date": "1444.11.11",
+      "seed": "2997908501",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U124",
+      "file": "U124_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E15 (effects=sav_piedmont_dev.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "0a5b64d4b13e54d79e4dad31d9575d23764bf38282f6cf36515180da0ed402f8",
+      "start_date": "1444.11.11",
+      "seed": "2710579766",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 4,
+        "ai_fleets_in_transit": 3,
+        "ai_fleet_targets": "gujarat 1, gulf_of_aden 1, malacca 1"
+      }
+    },
+    {
+      "id": "U125",
+      "file": "U125_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E15 (effects=sav_piedmont_dev.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "931ff303d23a15cc15b13717f6be8e1dfa8d3b97db33abdf6466bfaa27a86a73",
+      "start_date": "1444.11.11",
+      "seed": "2710579766",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gujarat 1"
+      }
+    },
+    {
+      "id": "U126",
+      "file": "U126_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E16 (effects=venezia_cot.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "8a3ee0eb8b2cb5ee1dc1c65c239dbf488574ab90f8ab09f117bb4292642d2200",
+      "start_date": "1444.11.11",
+      "seed": "2707197337",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gulf_of_aden 1, malacca 1"
+      }
+    },
+    {
+      "id": "U127",
+      "file": "U127_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E16 (effects=venezia_cot.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "d8172864eba0f6d32a1f9a55881b57d0d22d6fecf1e972bdbbc7ee07d5dd1305",
+      "start_date": "1444.11.11",
+      "seed": "2707197337",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U128",
+      "file": "U128_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E17 (effects=venezia_marketplace.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "0bae9913b365947ce8adc8a86543806cb2481a2e53fe6ed8d178ffcab6985942",
+      "start_date": "1444.11.11",
+      "seed": "2709168603",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 4,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gujarat 1"
+      }
+    },
+    {
+      "id": "U129",
+      "file": "U129_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E17 (effects=venezia_marketplace.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "4504f7db5d8b0dce3dabd8063bd9ec495c72cdc6ec4c0cf6534283f970f220a7",
+      "start_date": "1444.11.11",
+      "seed": "2709168603",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gujarat 1"
+      }
+    },
+    {
+      "id": "U130",
+      "file": "U130_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E18 (effects=padova_autonomy.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "14701908ff64ee17849257542959d5af9d3ac170722bc36b8b86344750f1eca6",
+      "start_date": "1444.11.11",
+      "seed": "2953673399",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, comorin_cape 1"
+      }
+    },
+    {
+      "id": "U131",
+      "file": "U131_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E18 (effects=padova_autonomy.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "cf24455fe089e87f42bcc686d646585ba2338e625fe99aaaed01eb29634d950a",
+      "start_date": "1444.11.11",
+      "seed": "2953673399",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U132",
+      "file": "U132_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E19 (effects=capital_padova.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "9eda113fafa2f81bf19eeb6f001a3ff00e9082769033c98bf49ccae1063c5368",
+      "start_date": "1444.11.11",
+      "seed": "2685456704",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U133",
+      "file": "U133_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E19 (effects=capital_padova.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "d6cf4e616ea0062753fee458399491f84b0bee0e7a5303137446ba1c9a1b533a",
+      "start_date": "1444.11.11",
+      "seed": "2685456704",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U134",
+      "file": "U134_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E20a (effects=subject_vassal.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "0578ae9ab02ce37172f9097169aa7d41431c39dac65e6722de4c5d280931d09c",
+      "start_date": "1444.11.11",
+      "seed": "2712346573",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gujarat 1"
+      }
+    },
+    {
+      "id": "U135",
+      "file": "U135_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E20a (effects=subject_vassal.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "675db74f21f6ff5ba87ef7cdb52c13910ede6198c9586da703ff3219fe202469",
+      "start_date": "1444.11.11",
+      "seed": "2712346573",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U136",
+      "file": "U136_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E20b (effects=subject_march.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "e8418b1179b9723e255ad3177563c602dd1ce9f29117df69589efa447497737e",
+      "start_date": "1444.11.11",
+      "seed": "2643964038",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U137",
+      "file": "U137_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E20b (effects=subject_march.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "4c814b177aa6b5424250576898f70c58483c1b5af266c776c8df1583cbc28a45",
+      "start_date": "1444.11.11",
+      "seed": "2643964038",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U138",
+      "file": "U138_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E20c (effects=subject_tributary.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "406a574c4bcacbc6bd6e173def7196f61021afeb8816d1085f1df3937d469914",
+      "start_date": "1444.11.11",
+      "seed": "2725429041",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U139",
+      "file": "U139_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E20c (effects=subject_tributary.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "68982180d3c03685acdd6162e8f170476771b4c9a907116dad13e25dbfb70ff5",
+      "start_date": "1444.11.11",
+      "seed": "2725429041",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U140",
+      "file": "U140_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E20d (effects=subject_personal_union.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "d21fb8218384be860143b9b0c5ab940bde92ecbeb29c065e5a43371218910f1d",
+      "start_date": "1444.11.11",
+      "seed": "2710599303",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, comorin_cape 1"
+      }
+    },
+    {
+      "id": "U141",
+      "file": "U141_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E20d (effects=subject_personal_union.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "05bf2c760f0f45e030d460b01e53d78db1c6a0e82e0df45c161b7b2bc0e71028",
+      "start_date": "1444.11.11",
+      "seed": "2710599303",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U142",
+      "file": "U142_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E21 (effects=naxos_ceded.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "08a8504274b5bb4aec0522594ad264666aebb6808b751982a1e5bb1e89d4b2b0",
+      "start_date": "1444.11.11",
+      "seed": "2956996998",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "lubeck 1, gujarat 1, gulf_of_aden 1, malacca 1"
+      }
+    },
+    {
+      "id": "U143",
+      "file": "U143_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "E22 (console_commands=idea_trade.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "dda411d42223975f47e1b61fcc8515a631e1f8cebf95aee2e4475cb60773478d",
+      "start_date": "1444.11.11",
+      "seed": "2730330019",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gujarat 1"
+      }
+    },
+    {
+      "id": "U144",
+      "file": "U144_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "E22 (console_commands=idea_trade.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "641a13e1d25f14879d42fe5f3ba8746808b840f32fcfbcaa10f463180c2a7646",
+      "start_date": "1444.11.11",
+      "seed": "2730330019",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U145",
+      "file": "U145_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "B2",
+      "base": "U30",
+      "change": "P01 (patch=p01_ragusa_steer_genua.py), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "ee95fedf50e470425af812909d68fe360424e2870775b9c53c61484884ef3723",
+      "start_date": "1444.11.11",
+      "seed": "2763366112",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [
+        "ragusa"
+      ],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 3,
+        "ai_fleet_targets": "malacca 2, gujarat 1"
+      }
+    },
+    {
+      "id": "U146",
+      "file": "U146_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "P01 (patch=p01_ragusa_steer_genua.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "e0913f2e1f142c1cea7cd16370dc3c0803919f1834b1ad847eb7d91add0fbf2e",
+      "start_date": "1444.11.11",
+      "seed": "2763366112",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U147",
+      "file": "U147_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "P02 (patch=p02_recall_all_steerers_hangzhou.py), t1_1445.01.01.eu4 (stored as observation: a B save must change a merchant or ship placement of A (or record a non-placement change with role observation))",
+      "covers": [],
+      "sha256": "d514789fca4afc53340fd1078cd5ffbd4cb376d1fc0aeddc43b302d4aefa2df6",
+      "start_date": "1444.11.11",
+      "seed": "2712656028",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gujarat 1"
+      }
+    },
+    {
+      "id": "U148",
+      "file": "U148_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "P02 (patch=p02_recall_all_steerers_hangzhou.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "1cbd2aff280daa9071e17a1cdcaa3fd72af2d76b0ae3f97b3e3d87068213bb1c",
+      "start_date": "1444.11.11",
+      "seed": "2712656028",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U149",
+      "file": "U149_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "B4",
+      "base": "U30",
+      "change": "P03 (patch=p03_ragusa_collect_away.py), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "25dfa489ac9f14b7b20d8656fac4365cf5eba0f7fdbfb15918431a9e5648251c",
+      "start_date": "1444.11.11",
+      "seed": "2698687513",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [
+        "ragusa"
+      ],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 4,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, malacca 1"
+      }
+    },
+    {
+      "id": "U150",
+      "file": "U150_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "P03 (patch=p03_ragusa_collect_away.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "8c01f234e95d98594333ee82e6229457227426db53528c8b13c2fa8226a5e79f",
+      "start_date": "1444.11.11",
+      "seed": "2698687513",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "comorin_cape 1, gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U151",
+      "file": "U151_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "B5",
+      "base": "U30",
+      "change": "P04 (effects=mod_merchants.txt, patch=p04_fourth_steerer.py), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "82877320afa46ed9506f47805b7aa9af287f35b269ae62424ce6ebb876fd1e4b",
+      "start_date": "1444.11.11",
+      "seed": "2949048963",
+      "reloaded_from_a": true,
+      "placements": {
+        "constantinople": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [
+        "constantinople"
+      ],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 3,
+        "ai_fleet_targets": "gujarat 1, comorin_cape 1, gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U152",
+      "file": "U152_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "P04 (effects=mod_merchants.txt, patch=p04_fourth_steerer.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "aff0aedba43a59c01a0b21e0892b8466f8e50e90ced8ef8305c65c6db53790ac",
+      "start_date": "1444.11.11",
+      "seed": "2949048963",
+      "reloaded_from_a": true,
+      "placements": {
+        "constantinople": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U153",
+      "file": "U153_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "B6",
+      "base": "U30",
+      "change": "P05 (patch=p05_light_ships.py), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "55943cc47518907e9fe72c7a1007a36a7e8bf4e6f5c52609a61206fd423d3ac5",
+      "start_date": "1444.11.11",
+      "seed": "2958190427",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          2
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [
+        "ragusa",
+        "venice"
+      ],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 3,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U154",
+      "file": "U154_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "P05 (patch=p05_light_ships.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "9da1585344f52adf091ee74ec91b88bcdc6937d52a7d2f23767cbc279587960e",
+      "start_date": "1444.11.11",
+      "seed": "2958190427",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          2
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, hormuz 1"
+      }
+    },
+    {
+      "id": "U155",
+      "file": "U155_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "P06 (patch=p06_xal_california_mexico.py), t1_1445.01.01.eu4 (stored as observation: a B save must change a merchant or ship placement of A (or record a non-placement change with role observation))",
+      "covers": [],
+      "sha256": "1b4f3779ba5d7a329a3dc891104ed59cf787a8dae4f5c05b854c73b18c02a691",
+      "start_date": "1444.11.11",
+      "seed": "2739677921",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, malacca 1"
+      }
+    },
+    {
+      "id": "U156",
+      "file": "U156_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "P06 (patch=p06_xal_california_mexico.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "7e12e4ca4e31b6c475e69bdbf356551a584a52f6725c3ee1452cb1b61cef217f",
+      "start_date": "1444.11.11",
+      "seed": "2739677921",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U157",
+      "file": "U157_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-B4 (patch=b4_recall_wien.py), t1_1445.01.01.eu4 (stored as observation: a B save must change a merchant or ship placement of A (or record a non-placement change with role observation))",
+      "covers": [],
+      "sha256": "c6cf1ac066d89ea7c39e9835b24b15a1f68fa749f1a351f3c67d020f1ed2ad87",
+      "start_date": "1444.11.11",
+      "seed": "2674034519",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U158",
+      "file": "U158_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-B4 (patch=b4_recall_wien.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "fb228b5bdcbfad19b165a6f9487203150e25e925cd63211880fbf7f3fa24fb9e",
+      "start_date": "1444.11.11",
+      "seed": "2674034519",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U159",
+      "file": "U159_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-B5a (patch=b5a_recall_home.py), t1_1445.01.01.eu4 (stored as observation: a B save must change a merchant or ship placement of A (or record a non-placement change with role observation))",
+      "covers": [],
+      "sha256": "a92b40e6e83aaa0fe9d2c1b92b6d6f7bb9868766a25ad80793da2476ee568c54",
+      "start_date": "1444.11.11",
+      "seed": "2980991468",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U160",
+      "file": "U160_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-B5a (patch=b5a_recall_home.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "3fa72dca6e10dce0299eb00d097a3bc5a6fed072726083eeade9a8018164e805",
+      "start_date": "1444.11.11",
+      "seed": "2980991468",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U166",
+      "file": "U166_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-CAP (effects=capital_zara.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "a957b7efc27e10932d8460fb3e48113a9e68e520185f36558eb1afaf52d203db",
+      "start_date": "1444.11.11",
+      "seed": "2965696334",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 3,
+        "ai_fleet_targets": "gujarat 1, comorin_cape 1, malacca 1"
+      }
+    },
+    {
+      "id": "U167",
+      "file": "U167_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-CAP (effects=capital_zara.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "ed5748f91932f88b4df84bf11c370d198177cafb1aba6911a60efa418c5f11e9",
+      "start_date": "1444.11.11",
+      "seed": "2965696334",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U168",
+      "file": "U168_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-COT (effects=cot_verona.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "607a4793b62e7e23c27543c9b54231b3e65cce1fe5d80976a857410353c9812f",
+      "start_date": "1444.11.11",
+      "seed": "2766712390",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U169",
+      "file": "U169_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-COT (effects=cot_verona.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "67a1b5e7cb1acda0775c4ca887b85a831990a37c023cc737e705d81b0ab18b27",
+      "start_date": "1444.11.11",
+      "seed": "2766712390",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U170",
+      "file": "U170_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-DEPOT (effects=depot_venezia.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "cb7e37b2f00c479f6238be4ac761aaab203b0e9b6c61f2a1f8fad47bcda1542f",
+      "start_date": "1444.11.11",
+      "seed": "2719962051",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gujarat 1"
+      }
+    },
+    {
+      "id": "U171",
+      "file": "U171_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-DEPOT (effects=depot_venezia.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "b15138210e5568eae3581cc7d4a4d067695bdcab17a3b51d67c0dd2680409c0d",
+      "start_date": "1444.11.11",
+      "seed": "2719962051",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U172",
+      "file": "U172_VEN.1444.12.01.eu4",
+      "tag": "VEN",
+      "date": "1444.12.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-DIPFRESH: same session as A, no change",
+      "covers": [],
+      "sha256": "a39b9c79829e3a2d8c03219f9132a90e4065ac169679f5e48c04ad59147d1ce1",
+      "start_date": "1444.11.11",
+      "seed": "3505617953",
+      "reloaded_from_a": false,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 42,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "polynesia_node 2, ganges_delta 1, girin 1"
+      }
+    },
+    {
+      "id": "U173",
+      "file": "U173_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-EMB (patch=embargo_rag.py), t1_1445.01.01.eu4 (stored as observation: a B save must change a merchant or ship placement of A (or record a non-placement change with role observation))",
+      "covers": [],
+      "sha256": "a11c9e6c1bc7b0b2a4381b3c54530aa2604bbbba507ec29c120d11e4705a78f0",
+      "start_date": "1444.11.11",
+      "seed": "2718194360",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gulf_of_aden 1, malacca 1"
+      }
+    },
+    {
+      "id": "U174",
+      "file": "U174_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-EMB (patch=embargo_rag.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "28e16805fd45d99aa4836bf08f0d1cd57bec5c3229e026e2357625027bea7661",
+      "start_date": "1444.11.11",
+      "seed": "2718194360",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U185",
+      "file": "U185_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-IDEA1 (effects=idea_trade_1.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "c39fd2c22d2ba7e1a8ba84102e31d775be4800943c853800982cf181c1886edb",
+      "start_date": "1444.11.11",
+      "seed": "2749860148",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U186",
+      "file": "U186_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-IDEA1 (effects=idea_trade_1.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "6ae7a3e1c3b3e168fd87fc541f54e68c8d440403ccfc0d2da7620bf0b08db7ae",
+      "start_date": "1444.11.11",
+      "seed": "2749860148",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gujarat 1"
+      }
+    },
+    {
+      "id": "U187",
+      "file": "U187_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-IDEA2 (effects=idea_trade_2.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "1dd7e71d02844e4e20d7ee982b3e55a736666f58aa5d377410a561b9ebdbc633",
+      "start_date": "1444.11.11",
+      "seed": "2744169999",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "gujarat 1, comorin_cape 1, gulf_of_aden 1, malacca 1"
+      }
+    },
+    {
+      "id": "U188",
+      "file": "U188_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-IDEA2 (effects=idea_trade_2.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "b7513afa7588be9cd8e34de111faebb76338560d1c3b676a3c39fd395e16c356",
+      "start_date": "1444.11.11",
+      "seed": "2744169999",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U189",
+      "file": "U189_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-PORT (patch=port_zara.py), t1_1445.01.01.eu4 (stored as observation: a B save must change a merchant or ship placement of A (or record a non-placement change with role observation))",
+      "covers": [],
+      "sha256": "d75ea9358754d6ed9a633a80e134d2f63efc69c5ebfd696673d31d5927d39498",
+      "start_date": "1444.11.11",
+      "seed": "2743888629",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, malacca 1"
+      }
+    },
+    {
+      "id": "U190",
+      "file": "U190_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-PORT (patch=port_zara.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "cd3b58fb4df4495e43c94062949ebe1289c3518af79ba077069a0176c288bf15",
+      "start_date": "1444.11.11",
+      "seed": "2743888629",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U191",
+      "file": "U191_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "B12",
+      "base": "U30",
+      "change": "R2-PRIV (patch=privateer_ragusa.py), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "634c3c22dbd8149ac4dbe0e4ed95562213ce081c0f958077972088b2524df406",
+      "start_date": "1444.11.11",
+      "seed": "2782201207",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [
+        "venice"
+      ],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "gujarat 1, comorin_cape 1, gulf_of_aden 1, malacca 1"
+      }
+    },
+    {
+      "id": "U192",
+      "file": "U192_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-PRIV (patch=privateer_ragusa.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "c43baeab24bef7d60801c89dd213678624b4a9d8e407ec40d63ad23dff221e58",
+      "start_date": "1444.11.11",
+      "seed": "2782201207",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U193",
+      "file": "U193_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "B13",
+      "base": "U30",
+      "change": "R2-SHIPCON (patch=ships_constantinople.py), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "944b224beb6bc3d456757cc077c6120ced83cf975ed8bf8b931c1ace39e62f49",
+      "start_date": "1444.11.11",
+      "seed": "2760348017",
+      "reloaded_from_a": true,
+      "placements": {
+        "constantinople": [
+          "none",
+          null,
+          false,
+          2
+        ],
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [
+        "constantinople",
+        "venice"
+      ],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gujarat 1"
+      }
+    },
+    {
+      "id": "U194",
+      "file": "U194_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-SHIPCON (patch=ships_constantinople.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "a95bc844b4a77ea382f419321c3e956a5dc923e2265b41406c3b53721e19d19d",
+      "start_date": "1444.11.11",
+      "seed": "2760348017",
+      "reloaded_from_a": true,
+      "placements": {
+        "constantinople": [
+          "none",
+          null,
+          false,
+          2
+        ],
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U195",
+      "file": "U195_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-STEER100 (effects=steer_100.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "539f84f96d397586d5827c2eb7a13ddbb1372ac5df4f96fe69d3d2165c0ac5fa",
+      "start_date": "1444.11.11",
+      "seed": "2704369213",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "comorin_cape 1, malacca 1"
+      }
+    },
+    {
+      "id": "U196",
+      "file": "U196_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-STEER100 (effects=steer_100.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "4cc75a4c90454001c45e088f18fc8eb24861f5fe9d1f495f464c18d8b9dbd008",
+      "start_date": "1444.11.11",
+      "seed": "2704369213",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U197",
+      "file": "U197_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-STEER50 (effects=steer_50.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "4135453c8497287d9346af37f80b017aa60f83f72be46ff00c0973b1c8a4f050",
+      "start_date": "1444.11.11",
+      "seed": "2698322317",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U198",
+      "file": "U198_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-STEER50 (effects=steer_50.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "f5ec99b6c62c333cdfd536afeac8e5f107e8c059432c929c1e8cfa8f2b9607c8",
+      "start_date": "1444.11.11",
+      "seed": "2698322317",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, hormuz 1"
+      }
+    },
+    {
+      "id": "U199",
+      "file": "U199_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-T05 (patch=transfer_man_05.py), t1_1445.01.01.eu4 (stored as observation: a B save must change a merchant or ship placement of A (or record a non-placement change with role observation))",
+      "covers": [],
+      "sha256": "e4782f4e388a28c8af591f9dabcae04dedefa6c818a99a97475d9acb153d83ca",
+      "start_date": "1444.11.11",
+      "seed": "2731970298",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 3,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "gujarat 1, comorin_cape 1, gulf_of_aden 1, malacca 1"
+      }
+    },
+    {
+      "id": "U200",
+      "file": "U200_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-T05 (patch=transfer_man_05.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "7cc93fc93bc46a9241dff50f612b246b0b37e9aa3591480b43d9ae9de4264265",
+      "start_date": "1444.11.11",
+      "seed": "2731970298",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U201",
+      "file": "U201_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-T10 (patch=transfer_man_10.py), t1_1445.01.01.eu4 (stored as observation: a B save must change a merchant or ship placement of A (or record a non-placement change with role observation))",
+      "covers": [],
+      "sha256": "e131ef94278c86c92b802e2dfead440fd8225c6602e31e691cb78198da34d2fc",
+      "start_date": "1444.11.11",
+      "seed": "2996416214",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 3,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gujarat 1"
+      }
+    },
+    {
+      "id": "U202",
+      "file": "U202_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-T10 (patch=transfer_man_10.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "f22cf840f25408b1e9b82e18edda88d9def9bdbca8794225b720c068af24d038",
+      "start_date": "1444.11.11",
+      "seed": "2996416214",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U205",
+      "file": "U205_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-TRIB (effects=tributary_man.txt), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "eaa484f0aa6c1f720eef045990177deac0bde91fd2655d11da011b21e42836a7",
+      "start_date": "1444.11.11",
+      "seed": "2713443394",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gujarat 1"
+      }
+    },
+    {
+      "id": "U206",
+      "file": "U206_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-TRIB (effects=tributary_man.txt), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "9345259317e7b8702c3e6aeea0ac71b58feb633b18e0904c76d71fe5b8a63cff",
+      "start_date": "1444.11.11",
+      "seed": "2713443394",
+      "reloaded_from_a": true,
+      "placements": {
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          2
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "mods-54009f60",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    }
+  ]
+}

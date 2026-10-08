@@ -134,6 +134,72 @@
         "ai_fleets_in_transit": 6,
         "ai_fleet_targets": "novgorod 1, carribean_trade 1, comorin_cape 1, zanzibar 1, gujarat 1, panama 1"
       }
+    },
+    {
+      "id": "U226",
+      "file": "U226_QNG.1756.08.01.eu4",
+      "tag": "QNG",
+      "date": "1756.8.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1756-QNG: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "ab6685165799d75e60e0f12cee820c9e0086d41697caec667eb0dd4ab573793a",
+      "start_date": "1756.5.15",
+      "seed": "569859416",
+      "reloaded_from_a": false,
+      "placements": {
+        "girin": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "chengdu": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "canton": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "hangzhou": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "xian": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "yumen": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 47,
+        "ai_fleets_in_transit": 4,
+        "ai_fleet_targets": "gulf_of_aden 1, the_moluccas 1, ganges_delta 1, brazil 1"
+      }
     }
   ]
 }

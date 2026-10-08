@@ -110,6 +110,60 @@
         "ai_fleets_in_transit": 8,
         "ai_fleet_targets": "gujarat 3, brazil 2, mexico 1, panama 1, cuiaba 1"
       }
+    },
+    {
+      "id": "U227",
+      "file": "U227_FRA.1789.10.01.eu4",
+      "tag": "FRA",
+      "date": "1789.10.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1789-FRA: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "567bfb08406c6c8e0ed2d273f2ed286d14341a1dda5c1a6c6cf9652d5679929e",
+      "start_date": "1789.7.14",
+      "seed": "534509462",
+      "reloaded_from_a": false,
+      "placements": {
+        "rheinland": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "bordeaux": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "genua": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "english_channel": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 51,
+        "ai_fleets_in_transit": 6,
+        "ai_fleet_targets": "carribean_trade 2, st_lawrence 1, zanzibar 1, chesapeake_bay 1, lima 1"
+      }
     }
   ]
 }

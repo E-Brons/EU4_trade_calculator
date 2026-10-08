@@ -1,0 +1,53 @@
+{
+  "series": "reports",
+  "kind": "report",
+  "description": "Saves users submitted from the app (expected to verify but did not). Not part of the CI bar until triaged.",
+  "saves": [
+    {
+      "id": "U31",
+      "file": "U31_TUR.1708.04.01.eu4",
+      "tag": "TUR",
+      "date": "1708.4.1",
+      "role": "report",
+      "change": "",
+      "covers": [],
+      "sha256": "a87e47e3591732b1bb2344154a9bc91b97b68c3f945f16030179bbd507d5d03a",
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true
+      },
+      "calc_version": "0.2.1",
+      "status": "mismatch",
+      "first_failing_stage": "propagation"
+    },
+    {
+      "id": "U32",
+      "file": "U32_TUR.1710.11.01.eu4",
+      "tag": "TUR",
+      "date": "1710.11.1",
+      "role": "report",
+      "change": "",
+      "covers": [],
+      "sha256": "b1c2c185f798da03a307057b9811698e9fbf71467553a5b088c232de9398ac0b",
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true
+      },
+      "calc_version": "0.2.1",
+      "status": "mismatch",
+      "first_failing_stage": "propagation"
+    }
+  ]
+}

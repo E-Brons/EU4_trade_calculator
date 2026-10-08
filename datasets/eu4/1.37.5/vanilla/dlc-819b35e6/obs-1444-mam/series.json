@@ -86,6 +86,314 @@
         "ai_fleets_in_transit": 3,
         "ai_fleet_targets": "gujarat 1, comorin_cape 1, malacca 1"
       }
+    },
+    {
+      "id": "U175",
+      "file": "U175_MAM.1445.01.01.eu4",
+      "tag": "MAM",
+      "date": "1445.1.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-H-MAM-B1 (patch=home_mam_recall_aleppo.py), t1_1445.01.01.eu4 (stored as observation: a B save must change a merchant or ship placement of A (or record a non-placement change with role observation))",
+      "covers": [],
+      "sha256": "01aab233bf21fdee007e02d6d15ee0b4682cf68d20b2c903d8d587e58eed1aef",
+      "start_date": "1444.11.11",
+      "seed": "2616384574",
+      "reloaded_from_a": true,
+      "placements": {
+        "gulf_of_aden": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "aleppo": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 3,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U176",
+      "file": "U176_MAM.1445.02.01.eu4",
+      "tag": "MAM",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-H-MAM-B1 (patch=home_mam_recall_aleppo.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "833e27cb23e3726746f6850b584979974b999cc08bcbe1d219056640527be9b6",
+      "start_date": "1444.11.11",
+      "seed": "2616384574",
+      "reloaded_from_a": true,
+      "placements": {
+        "gulf_of_aden": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "aleppo": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U177",
+      "file": "U177_MAM.1445.01.01.eu4",
+      "tag": "MAM",
+      "date": "1445.1.1",
+      "role": "B2",
+      "base": "U42",
+      "change": "R2-H-MAM-B2 (patch=home_mam_aleppo_to_home.py), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "d014acb293b5f68a9cd6971f98431b260424afb534d89e3c96e8e015a3ffd5e3",
+      "start_date": "1444.11.11",
+      "seed": "2616226886",
+      "reloaded_from_a": true,
+      "placements": {
+        "gulf_of_aden": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "aleppo": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "alexandria": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [
+        "alexandria"
+      ],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 4,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gulf_of_aden 1, malacca 1"
+      }
+    },
+    {
+      "id": "U178",
+      "file": "U178_MAM.1445.02.01.eu4",
+      "tag": "MAM",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-H-MAM-B2 (patch=home_mam_aleppo_to_home.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "bf5811ed58f52490a1974dc9883051764f3b9bf1c776e1398d97d2d66a5a78ed",
+      "start_date": "1444.11.11",
+      "seed": "2616226886",
+      "reloaded_from_a": true,
+      "placements": {
+        "gulf_of_aden": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "aleppo": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "alexandria": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U179",
+      "file": "U179_MAM.1445.01.01.eu4",
+      "tag": "MAM",
+      "date": "1445.1.1",
+      "role": "C",
+      "base": "U42",
+      "change": "R2-H-MAM-C (patch=identity.py), t1_1445.01.01.eu4",
+      "covers": [],
+      "sha256": "52addac5afd547d2f192a74bc9f81a23abd4d3c68cd7f07ddd611c9debb9e6c2",
+      "start_date": "1444.11.11",
+      "seed": "2640040185",
+      "reloaded_from_a": true,
+      "placements": {
+        "gulf_of_aden": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "aleppo": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 3,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U180",
+      "file": "U180_MAM.1445.02.01.eu4",
+      "tag": "MAM",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-H-MAM-C (patch=identity.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "aca1694c6f7ced8fc4adc3835c59894b10cfb7142f2012d553edb586871c7aa3",
+      "start_date": "1444.11.11",
+      "seed": "2640040185",
+      "reloaded_from_a": true,
+      "placements": {
+        "gulf_of_aden": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "aleppo": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U208",
+      "file": "U208_MAM.1445.02.01.eu4",
+      "tag": "MAM",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1444-MAM: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "5e13d472080ebc93ea59ef95a5a020ae082f0b4abd72ea12fe1227983b8d1625",
+      "start_date": "1444.11.11",
+      "seed": "3572037321",
+      "reloaded_from_a": false,
+      "placements": {
+        "gulf_of_aden": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "aleppo": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 3,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gujarat 1"
+      }
     }
   ]
 }

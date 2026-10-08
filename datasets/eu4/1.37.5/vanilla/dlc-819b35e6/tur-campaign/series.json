@@ -1,0 +1,25 @@
+{
+  "series": "tur-campaign",
+  "kind": "observation",
+  "description": "Player TUR, Ottoman campaign (Ironman, melted with pdx.tools). Only the tick-day save U04 is kept; the earlier/later saves of the campaign were mid-month.",
+  "saves": [
+    {
+      "id": "U04",
+      "file": "U04_TUR.1691.11.01.eu4",
+      "tag": "TUR",
+      "date": "1691.11.1",
+      "role": "observation",
+      "change": "",
+      "covers": [],
+      "sha256": "c0f740995342df87fcf4d78d20333398693fa700ebaac31d5891cb5b551b6356",
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "ganges_delta 1"
+      }
+    }
+  ]
+}

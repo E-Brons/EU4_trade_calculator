@@ -1,0 +1,1010 @@
+{
+ "out/E00/base_1444.12.01.eu4": {
+  "archive": "archive/out/E00/base_1444.12.01.eu4.zip",
+  "reason": "this save is already in the series"
+ },
+ "out/E00/t1_1445.01.01.eu4": {
+  "dataset": "U88",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U88_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E00/t2_1445.02.01.eu4": {
+  "dataset": "U89",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U89_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E01a/t1_1445.01.01.eu4": {
+  "dataset": "U90",
+  "series": "exp-core-1444",
+  "role": "C",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U90_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E01a/t2_1445.02.01.eu4": {
+  "dataset": "U91",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U91_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E01b/t1_1445.01.01.eu4": {
+  "dataset": "U92",
+  "series": "exp-core-1444",
+  "role": "C'",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U92_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E01b/t2_1445.02.01.eu4": {
+  "dataset": "U93",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U93_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E01c/t1_1445.01.01.eu4": {
+  "dataset": "U94",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U94_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E01c/t2_1445.02.01.eu4": {
+  "dataset": "U95",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U95_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E01d/t1_1445.01.01.eu4": {
+  "dataset": "U96",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U96_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E01d/t2_1445.02.01.eu4": {
+  "dataset": "U97",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U97_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E02/t1_1445.01.01.eu4": {
+  "dataset": "U98",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U98_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E02/t2_1445.02.01.eu4": {
+  "dataset": "U99",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U99_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E03/t1_1445.01.01.eu4": {
+  "dataset": "U100",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U100_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E03/t2_1445.02.01.eu4": {
+  "dataset": "U101",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U101_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E04/t1_1445.01.01.eu4": {
+  "dataset": "U102",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U102_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E04/t2_1445.02.01.eu4": {
+  "dataset": "U103",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U103_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E05/t1_1445.01.01.eu4": {
+  "dataset": "U104",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U104_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E05/t2_1445.02.01.eu4": {
+  "dataset": "U105",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U105_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E06/t1_1445.01.01.eu4": {
+  "dataset": "U106",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U106_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E06/t2_1445.02.01.eu4": {
+  "dataset": "U107",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U107_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E07/t1_1445.01.01.eu4": {
+  "dataset": "U108",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U108_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E07/t2_1445.02.01.eu4": {
+  "dataset": "U109",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U109_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E08/t1_1445.01.01.eu4": {
+  "dataset": "U110",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U110_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E08/t2_1445.02.01.eu4": {
+  "dataset": "U111",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U111_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E09/t1_1445.01.01.eu4": {
+  "dataset": "U112",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U112_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E09/t2_1445.02.01.eu4": {
+  "dataset": "U113",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U113_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E10/t1_1445.01.01.eu4": {
+  "dataset": "U114",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U114_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E10/t2_1445.02.01.eu4": {
+  "dataset": "U115",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U115_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E11/t1_1445.01.01.eu4": {
+  "dataset": "U116",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U116_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E11/t2_1445.02.01.eu4": {
+  "dataset": "U117",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U117_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E12/t1_1445.01.01.eu4": {
+  "dataset": "U118",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U118_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E12/t2_1445.02.01.eu4": {
+  "dataset": "U119",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U119_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E13/t1_1445.01.01.eu4": {
+  "dataset": "U120",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U120_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E13/t2_1445.02.01.eu4": {
+  "dataset": "U121",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U121_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E14/t1_1445.01.01.eu4": {
+  "dataset": "U122",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U122_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E14/t2_1445.02.01.eu4": {
+  "dataset": "U123",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U123_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E15/t1_1445.01.01.eu4": {
+  "dataset": "U124",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U124_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E15/t2_1445.02.01.eu4": {
+  "dataset": "U125",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U125_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E16/t1_1445.01.01.eu4": {
+  "dataset": "U126",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U126_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E16/t2_1445.02.01.eu4": {
+  "dataset": "U127",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U127_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E17/t1_1445.01.01.eu4": {
+  "dataset": "U128",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U128_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E17/t2_1445.02.01.eu4": {
+  "dataset": "U129",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U129_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E18/t1_1445.01.01.eu4": {
+  "dataset": "U130",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U130_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E18/t2_1445.02.01.eu4": {
+  "dataset": "U131",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U131_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E19/t1_1445.01.01.eu4": {
+  "dataset": "U132",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U132_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E19/t2_1445.02.01.eu4": {
+  "dataset": "U133",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U133_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E20a/t1_1445.01.01.eu4": {
+  "dataset": "U134",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U134_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E20a/t2_1445.02.01.eu4": {
+  "dataset": "U135",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U135_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E20b/t1_1445.01.01.eu4": {
+  "dataset": "U136",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U136_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E20b/t2_1445.02.01.eu4": {
+  "dataset": "U137",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U137_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E20c/t1_1445.01.01.eu4": {
+  "dataset": "U138",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U138_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E20c/t2_1445.02.01.eu4": {
+  "dataset": "U139",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U139_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E20d/t1_1445.01.01.eu4": {
+  "dataset": "U140",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U140_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E20d/t2_1445.02.01.eu4": {
+  "dataset": "U141",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U141_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E21/d_1444.12.03.eu4": {
+  "archive": "archive/out/E21/d_1444.12.03.eu4.zip",
+  "reason": "saved on 1444.12.3 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E21/d_1444.12.15.eu4": {
+  "archive": "archive/out/E21/d_1444.12.15.eu4.zip",
+  "reason": "saved on 1444.12.15 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E21/t1_1445.01.01.eu4": {
+  "dataset": "U142",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U142_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E22/t1_1445.01.01.eu4": {
+  "dataset": "U143",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U143_VEN.1445.01.01.eu4.zip"
+ },
+ "out/E22/t2_1445.02.01.eu4": {
+  "dataset": "U144",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U144_VEN.1445.02.01.eu4.zip"
+ },
+ "out/E23/d_1444.12.03.eu4": {
+  "archive": "archive/out/E23/d_1444.12.03.eu4.zip",
+  "reason": "saved on 1444.12.3 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E23/d_1444.12.05.eu4": {
+  "archive": "archive/out/E23/d_1444.12.05.eu4.zip",
+  "reason": "saved on 1444.12.5 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E23/d_1444.12.07.eu4": {
+  "archive": "archive/out/E23/d_1444.12.07.eu4.zip",
+  "reason": "saved on 1444.12.7 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E23/d_1444.12.09.eu4": {
+  "archive": "archive/out/E23/d_1444.12.09.eu4.zip",
+  "reason": "saved on 1444.12.9 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E23/d_1444.12.11.eu4": {
+  "archive": "archive/out/E23/d_1444.12.11.eu4.zip",
+  "reason": "saved on 1444.12.11 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E23/d_1444.12.13.eu4": {
+  "archive": "archive/out/E23/d_1444.12.13.eu4.zip",
+  "reason": "saved on 1444.12.13 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E23/d_1444.12.15.eu4": {
+  "archive": "archive/out/E23/d_1444.12.15.eu4.zip",
+  "reason": "saved on 1444.12.15 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E23/d_1444.12.17.eu4": {
+  "archive": "archive/out/E23/d_1444.12.17.eu4.zip",
+  "reason": "saved on 1444.12.17 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E23/d_1444.12.19.eu4": {
+  "archive": "archive/out/E23/d_1444.12.19.eu4.zip",
+  "reason": "saved on 1444.12.19 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E23/d_1444.12.21.eu4": {
+  "archive": "archive/out/E23/d_1444.12.21.eu4.zip",
+  "reason": "saved on 1444.12.21 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E23/d_1444.12.23.eu4": {
+  "archive": "archive/out/E23/d_1444.12.23.eu4.zip",
+  "reason": "saved on 1444.12.23 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E23/d_1444.12.25.eu4": {
+  "archive": "archive/out/E23/d_1444.12.25.eu4.zip",
+  "reason": "saved on 1444.12.25 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E23/d_1444.12.27.eu4": {
+  "archive": "archive/out/E23/d_1444.12.27.eu4.zip",
+  "reason": "saved on 1444.12.27 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E23/d_1444.12.29.eu4": {
+  "archive": "archive/out/E23/d_1444.12.29.eu4.zip",
+  "reason": "saved on 1444.12.29 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/E23/d_1444.12.31.eu4": {
+  "archive": "archive/out/E23/d_1444.12.31.eu4.zip",
+  "reason": "saved on 1444.12.31 (mid_month): save on the 1st of a month, after the first computation"
+ },
+ "out/P01/t1_1445.01.01.eu4": {
+  "dataset": "U145",
+  "series": "exp-core-1444",
+  "role": "B2",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U145_VEN.1445.01.01.eu4.zip"
+ },
+ "out/P01/t2_1445.02.01.eu4": {
+  "dataset": "U146",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U146_VEN.1445.02.01.eu4.zip"
+ },
+ "out/P02/t1_1445.01.01.eu4": {
+  "dataset": "U147",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U147_VEN.1445.01.01.eu4.zip"
+ },
+ "out/P02/t2_1445.02.01.eu4": {
+  "dataset": "U148",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U148_VEN.1445.02.01.eu4.zip"
+ },
+ "out/P03/t1_1445.01.01.eu4": {
+  "dataset": "U149",
+  "series": "exp-core-1444",
+  "role": "B4",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U149_VEN.1445.01.01.eu4.zip"
+ },
+ "out/P03/t2_1445.02.01.eu4": {
+  "dataset": "U150",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U150_VEN.1445.02.01.eu4.zip"
+ },
+ "out/P04/t1_1445.01.01.eu4": {
+  "dataset": "U151",
+  "series": "exp-core-1444",
+  "role": "B5",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U151_VEN.1445.01.01.eu4.zip"
+ },
+ "out/P04/t2_1445.02.01.eu4": {
+  "dataset": "U152",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U152_VEN.1445.02.01.eu4.zip"
+ },
+ "out/P05/t1_1445.01.01.eu4": {
+  "dataset": "U153",
+  "series": "exp-core-1444",
+  "role": "B6",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U153_VEN.1445.01.01.eu4.zip"
+ },
+ "out/P05/t2_1445.02.01.eu4": {
+  "dataset": "U154",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U154_VEN.1445.02.01.eu4.zip"
+ },
+ "out/P06/t1_1445.01.01.eu4": {
+  "dataset": "U155",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U155_VEN.1445.01.01.eu4.zip"
+ },
+ "out/P06/t2_1445.02.01.eu4": {
+  "dataset": "U156",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U156_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-B4/t1_1445.01.01.eu4": {
+  "dataset": "U157",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U157_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-B4/t2_1445.02.01.eu4": {
+  "dataset": "U158",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U158_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-B5a/t1_1445.01.01.eu4": {
+  "dataset": "U159",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U159_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-B5a/t2_1445.02.01.eu4": {
+  "dataset": "U160",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U160_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-B5b/t1_1445.01.01.eu4": {
+  "archive": "archive/round2/out/R2-B5b/t1_1445.01.01.eu4.zip",
+  "reason": "series venice-1444 has no A save yet: add the baseline first (--role A)"
+ },
+ "round2/out/R2-B5b/t2_1445.02.01.eu4": {
+  "dataset": "U161",
+  "series": "venice-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/venice-1444/U161_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-B5c/t1_1445.01.01.eu4": {
+  "archive": "archive/round2/out/R2-B5c/t1_1445.01.01.eu4.zip",
+  "reason": "series venice-1444 has no A save yet: add the baseline first (--role A)"
+ },
+ "round2/out/R2-B5c/t2_1445.02.01.eu4": {
+  "dataset": "U162",
+  "series": "venice-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/venice-1444/U162_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-C-NED18/t1_1618.07.01.eu4": {
+  "dataset": "U163",
+  "series": "obs-1618-ned",
+  "role": "C",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1618-ned/U163_NED.1618.07.01.eu4.zip"
+ },
+ "round2/out/R2-C-NED18/t2_1618.08.01.eu4": {
+  "dataset": "U164",
+  "series": "obs-1618-ned",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1618-ned/U164_NED.1618.08.01.eu4.zip"
+ },
+ "round2/out/R2-C-U10/t1_1445.01.01.eu4": {
+  "archive": "archive/round2/out/R2-C-U10/t1_1445.01.01.eu4.zip",
+  "reason": "series venice-1444 has no A save yet: add the baseline first (--role A)"
+ },
+ "round2/out/R2-C-U10/t2_1445.02.01.eu4": {
+  "dataset": "U165",
+  "series": "venice-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/venice-1444/U165_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-CAP/t1_1445.01.01.eu4": {
+  "dataset": "U166",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U166_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-CAP/t2_1445.02.01.eu4": {
+  "dataset": "U167",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U167_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-COT/t1_1445.01.01.eu4": {
+  "dataset": "U168",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U168_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-COT/t2_1445.02.01.eu4": {
+  "dataset": "U169",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U169_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-DEPOT/t1_1445.01.01.eu4": {
+  "dataset": "U170",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U170_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-DEPOT/t2_1445.02.01.eu4": {
+  "dataset": "U171",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U171_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-DIPFRESH/base_1444.12.01.eu4": {
+  "dataset": "U172",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U172_VEN.1444.12.01.eu4.zip"
+ },
+ "round2/out/R2-EMB/t1_1445.01.01.eu4": {
+  "dataset": "U173",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U173_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-EMB/t2_1445.02.01.eu4": {
+  "dataset": "U174",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U174_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-H-MAM-B1/t1_1445.01.01.eu4": {
+  "dataset": "U175",
+  "series": "obs-1444-mam",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-mam/U175_MAM.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-H-MAM-B1/t2_1445.02.01.eu4": {
+  "dataset": "U176",
+  "series": "obs-1444-mam",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-mam/U176_MAM.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-H-MAM-B2/t1_1445.01.01.eu4": {
+  "dataset": "U177",
+  "series": "obs-1444-mam",
+  "role": "B2",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-mam/U177_MAM.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-H-MAM-B2/t2_1445.02.01.eu4": {
+  "dataset": "U178",
+  "series": "obs-1444-mam",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-mam/U178_MAM.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-H-MAM-C/t1_1445.01.01.eu4": {
+  "dataset": "U179",
+  "series": "obs-1444-mam",
+  "role": "C",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-mam/U179_MAM.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-H-MAM-C/t2_1445.02.01.eu4": {
+  "dataset": "U180",
+  "series": "obs-1444-mam",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-mam/U180_MAM.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-H-TUR-B1/t1_1445.01.01.eu4": {
+  "dataset": "U181",
+  "series": "obs-1444-tur",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-tur/U181_TUR.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-H-TUR-B1/t2_1445.02.01.eu4": {
+  "dataset": "U182",
+  "series": "obs-1444-tur",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-tur/U182_TUR.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-H-TUR-C/t1_1445.01.01.eu4": {
+  "dataset": "U183",
+  "series": "obs-1444-tur",
+  "role": "C",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-tur/U183_TUR.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-H-TUR-C/t2_1445.02.01.eu4": {
+  "dataset": "U184",
+  "series": "obs-1444-tur",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-tur/U184_TUR.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-IDEA1/t1_1445.01.01.eu4": {
+  "dataset": "U185",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U185_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-IDEA1/t2_1445.02.01.eu4": {
+  "dataset": "U186",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U186_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-IDEA2/t1_1445.01.01.eu4": {
+  "dataset": "U187",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U187_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-IDEA2/t2_1445.02.01.eu4": {
+  "dataset": "U188",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U188_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-PORT/t1_1445.01.01.eu4": {
+  "dataset": "U189",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U189_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-PORT/t2_1445.02.01.eu4": {
+  "dataset": "U190",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U190_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-PRIV/t1_1445.01.01.eu4": {
+  "dataset": "U191",
+  "series": "exp-core-1444",
+  "role": "B12",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U191_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-PRIV/t2_1445.02.01.eu4": {
+  "dataset": "U192",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U192_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-SHIPCON/t1_1445.01.01.eu4": {
+  "dataset": "U193",
+  "series": "exp-core-1444",
+  "role": "B13",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U193_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-SHIPCON/t2_1445.02.01.eu4": {
+  "dataset": "U194",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U194_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-STEER100/t1_1445.01.01.eu4": {
+  "dataset": "U195",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U195_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-STEER100/t2_1445.02.01.eu4": {
+  "dataset": "U196",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U196_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-STEER50/t1_1445.01.01.eu4": {
+  "dataset": "U197",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U197_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-STEER50/t2_1445.02.01.eu4": {
+  "dataset": "U198",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U198_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-T05/t1_1445.01.01.eu4": {
+  "dataset": "U199",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U199_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-T05/t2_1445.02.01.eu4": {
+  "dataset": "U200",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U200_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-T10/t1_1445.01.01.eu4": {
+  "dataset": "U201",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U201_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-T10/t2_1445.02.01.eu4": {
+  "dataset": "U202",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U202_VEN.1445.02.01.eu4.zip"
+ },
+ "round2/out/R2-TC/t1_1618.07.01.eu4": {
+  "dataset": "U203",
+  "series": "obs-1618-ned",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1618-ned/U203_NED.1618.07.01.eu4.zip"
+ },
+ "round2/out/R2-TC/t2_1618.08.01.eu4": {
+  "dataset": "U204",
+  "series": "obs-1618-ned",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1618-ned/U204_NED.1618.08.01.eu4.zip"
+ },
+ "round2/out/R2-TRIB/t1_1445.01.01.eu4": {
+  "dataset": "U205",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U205_VEN.1445.01.01.eu4.zip"
+ },
+ "round2/out/R2-TRIB/t2_1445.02.01.eu4": {
+  "dataset": "U206",
+  "series": "exp-core-1444",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/mods-54009f60/dlc-819b35e6/exp-core-1444/U206_VEN.1445.02.01.eu4.zip"
+ },
+ "diversity/out/obs-1444-KON/KON_1445.02.01.eu4": {
+  "dataset": "U207",
+  "series": "obs-1444-kon",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-kon/U207_KON.1445.02.01.eu4.zip"
+ },
+ "diversity/out/obs-1444-MAM/MAM_1445.02.01.eu4": {
+  "dataset": "U208",
+  "series": "obs-1444-mam",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-mam/U208_MAM.1445.02.01.eu4.zip"
+ },
+ "diversity/out/obs-1444-MLC/MLC_1445.02.01.eu4": {
+  "dataset": "U209",
+  "series": "obs-1444-mlc",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-mlc/U209_MLC.1445.02.01.eu4.zip"
+ },
+ "diversity/out/obs-1444-MNG/MNG_1445.02.01.eu4": {
+  "dataset": "U210",
+  "series": "obs-1444-mng",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-mng/U210_MNG.1445.02.01.eu4.zip"
+ },
+ "diversity/out/obs-1444-MOS/MOS_1445.02.01.eu4": {
+  "dataset": "U211",
+  "series": "obs-1444-mos",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-mos/U211_MOS.1445.02.01.eu4.zip"
+ },
+ "diversity/out/obs-1444-POR/POR_1445.02.01.eu4": {
+  "dataset": "U212",
+  "series": "obs-1444-por",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-por/U212_POR.1445.02.01.eu4.zip"
+ },
+ "diversity/out/obs-1444-VIJ/VIJ_1445.02.01.eu4": {
+  "dataset": "U213",
+  "series": "obs-1444-vij",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1444-vij/U213_VIJ.1445.02.01.eu4.zip"
+ },
+ "diversity/out/obs-1492-CAS/CAS_1492.04.01.eu4": {
+  "dataset": "U214",
+  "series": "obs-1492-cas",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1492-cas/U214_CAS.1492.04.01.eu4.zip"
+ },
+ "diversity/out/obs-1492-POR/POR_1492.04.01.eu4": {
+  "dataset": "U215",
+  "series": "obs-1492-por",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1492-por/U215_POR.1492.04.01.eu4.zip"
+ },
+ "diversity/out/obs-1492-TUR/TUR_1492.04.01.eu4": {
+  "dataset": "U216",
+  "series": "obs-1492-tur",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1492-tur/U216_TUR.1492.04.01.eu4.zip"
+ },
+ "diversity/out/obs-1618-ENG/ENG_1618.08.01.eu4": {
+  "dataset": "U217",
+  "series": "obs-1618-eng",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1618-eng/U217_ENG.1618.08.01.eu4.zip"
+ },
+ "diversity/out/obs-1618-MUG/MUG_1618.08.01.eu4": {
+  "dataset": "U218",
+  "series": "obs-1618-mug",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1618-mug/U218_MUG.1618.08.01.eu4.zip"
+ },
+ "diversity/out/obs-1618-NED/NED_1618.08.01.eu4": {
+  "dataset": "U219",
+  "series": "obs-1618-ned",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1618-ned/U219_NED.1618.08.01.eu4.zip"
+ },
+ "diversity/out/obs-1618-SPA/SPA_1618.08.01.eu4": {
+  "dataset": "U220",
+  "series": "obs-1618-spa",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1618-spa/U220_SPA.1618.08.01.eu4.zip"
+ },
+ "diversity/out/obs-1701-ENG/ENG_1701.12.01.eu4": {
+  "dataset": "U221",
+  "series": "obs-1701-eng",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1701-eng/U221_ENG.1701.12.01.eu4.zip"
+ },
+ "diversity/out/obs-1701-MUG/MUG_1701.12.01.eu4": {
+  "dataset": "U222",
+  "series": "obs-1701-mug",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1701-mug/U222_MUG.1701.12.01.eu4.zip"
+ },
+ "diversity/out/obs-1701-NED/NED_1701.12.01.eu4": {
+  "dataset": "U223",
+  "series": "obs-1701-ned",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1701-ned/U223_NED.1701.12.01.eu4.zip"
+ },
+ "diversity/out/obs-1756-GBR/GBR_1756.08.01.eu4": {
+  "dataset": "U224",
+  "series": "obs-1756-gbr",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1756-gbr/U224_GBR.1756.08.01.eu4.zip"
+ },
+ "diversity/out/obs-1756-PRU/PRU_1756.08.01.eu4": {
+  "dataset": "U225",
+  "series": "obs-1756-pru",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1756-pru/U225_PRU.1756.08.01.eu4.zip"
+ },
+ "diversity/out/obs-1756-QNG/QNG_1756.08.01.eu4": {
+  "dataset": "U226",
+  "series": "obs-1756-qng",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1756-qng/U226_QNG.1756.08.01.eu4.zip"
+ },
+ "diversity/out/obs-1789-FRA/FRA_1789.10.01.eu4": {
+  "dataset": "U227",
+  "series": "obs-1789-fra",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1789-fra/U227_FRA.1789.10.01.eu4.zip"
+ },
+ "diversity/out/obs-1789-GBR/GBR_1789.10.01.eu4": {
+  "dataset": "U228",
+  "series": "obs-1789-gbr",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1789-gbr/U228_GBR.1789.10.01.eu4.zip"
+ },
+ "diversity/out/obs-1789-USA/USA_1789.10.01.eu4": {
+  "dataset": "U229",
+  "series": "obs-1789-usa",
+  "role": "observation",
+  "zip": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/datasets/eu4/1.37.5/vanilla/dlc-819b35e6/obs-1789-usa/U229_USA.1789.10.01.eu4.zip"
+ },
+ "diversity/out/_old_run_1/A_CAS_1444.12.01.eu4": {
+  "dataset": "stored earlier (obs-1444-cas A/C, U33-U40)"
+ },
+ "diversity/out/_old_run_1/A_ENG_1444.12.01.eu4": {
+  "dataset": "stored earlier (obs-1444-eng A/C, U33-U40)"
+ },
+ "diversity/out/_old_run_1/A_FRA_1444.12.01.eu4": {
+  "dataset": "stored earlier (obs-1444-fra A/C, U33-U40)"
+ },
+ "diversity/out/_old_run_1/A_POR_1444.12.01.eu4": {
+  "archive": "archive/diversity/out/_old_run_1/A_POR_1444.12.01.eu4.zip",
+  "reason": "first diversity run (AI of the nation on); its POR A had a fleet in transit"
+ },
+ "diversity/out/_old_run_1/A_TUR_1444.12.01.eu4": {
+  "dataset": "stored earlier (obs-1444-tur A/C, U33-U40)"
+ },
+ "diversity/out/_old_run_1/C_CAS_1445.01.01.eu4": {
+  "dataset": "stored earlier (obs-1444-cas A/C, U33-U40)"
+ },
+ "diversity/out/_old_run_1/C_ENG_1445.01.01.eu4": {
+  "dataset": "stored earlier (obs-1444-eng A/C, U33-U40)"
+ },
+ "diversity/out/_old_run_1/C_FRA_1445.01.01.eu4": {
+  "dataset": "stored earlier (obs-1444-fra A/C, U33-U40)"
+ },
+ "diversity/out/_old_run_1/C_POR_1445.01.01.eu4": {
+  "archive": "archive/diversity/out/_old_run_1/C_POR_1445.01.01.eu4.zip",
+  "reason": "first diversity run (AI of the nation on); its POR A had a fleet in transit"
+ },
+ "diversity/out/_old_run_1/C_TUR_1445.01.01.eu4": {
+  "dataset": "stored earlier (obs-1444-tur A/C, U33-U40)"
+ },
+ "round2/out/live_1618/A_1618.06.01.eu4": {
+  "archive": "archive/round2/out/live_1618/A_1618.06.01.eu4.zip",
+  "reason": "not part of a job series (probe or retake)"
+ },
+ "round2/out/live_1618/C_1618.07.01.eu4": {
+  "archive": "archive/round2/out/live_1618/C_1618.07.01.eu4.zip",
+  "reason": "not part of a job series (probe or retake)"
+ },
+ "round2/out/probe_recall/day0_after_load.eu4": {
+  "archive": "archive/round2/out/probe_recall/day0_after_load.eu4.zip",
+  "reason": "not part of a job series (probe or retake)"
+ },
+ "round2/out/probe_recall/day14.eu4": {
+  "archive": "archive/round2/out/probe_recall/day14.eu4.zip",
+  "reason": "not part of a job series (probe or retake)"
+ },
+ "round2/out/probe_recall/day2.eu4": {
+  "archive": "archive/round2/out/probe_recall/day2.eu4.zip",
+  "reason": "not part of a job series (probe or retake)"
+ },
+ "round2/out/probe_recall/t1.eu4": {
+  "archive": "archive/round2/out/probe_recall/t1.eu4.zip",
+  "reason": "not part of a job series (probe or retake)"
+ },
+ "round2/out/probe_recall_player/day0_after_load.eu4": {
+  "archive": "archive/round2/out/probe_recall_player/day0_after_load.eu4.zip",
+  "reason": "not part of a job series (probe or retake)"
+ },
+ "round2/out/probe_recall_player/day2.eu4": {
+  "archive": "archive/round2/out/probe_recall_player/day2.eu4.zip",
+  "reason": "not part of a job series (probe or retake)"
+ },
+ "round2/out/probe_recall_strict/day0_after_load.eu4": {
+  "archive": "archive/round2/out/probe_recall_strict/day0_after_load.eu4.zip",
+  "reason": "not part of a job series (probe or retake)"
+ },
+ "round2/out/probe_recall_strict/day2.eu4": {
+  "archive": "archive/round2/out/probe_recall_strict/day2.eu4.zip",
+  "reason": "not part of a job series (probe or retake)"
+ }
+}

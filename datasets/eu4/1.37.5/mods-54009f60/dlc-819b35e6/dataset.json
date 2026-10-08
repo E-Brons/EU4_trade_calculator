@@ -1,0 +1,16 @@
+{
+  "game": "eu4",
+  "game_version": "1.37.5",
+  "mods_key": "mods-54009f60",
+  "rule_mods": [
+    "EU4 Experiments (single-modifier test modifiers)"
+  ],
+  "cosmetic_mods_present": [],
+  "dlc_key": "dlc-819b35e6",
+  "dlcs": [
+    "Art of War",
+    "Common Sense",
+    "Rights of Man"
+  ],
+  "protocol": "docs/research/experiments.md"
+}

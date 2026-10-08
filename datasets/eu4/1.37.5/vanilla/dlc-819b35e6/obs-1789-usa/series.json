@@ -158,6 +158,84 @@
         "ai_fleets_in_transit": 7,
         "ai_fleet_targets": "st_lawrence 1, lubeck 1, malacca 1, gujarat 1, chesapeake_bay 1, panama 1, carribean_trade 1"
       }
+    },
+    {
+      "id": "U229",
+      "file": "U229_USA.1789.10.01.eu4",
+      "tag": "USA",
+      "date": "1789.10.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1789-USA: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "449a920efed94809c3e3c8d765073f2d2166a084e5b95bcadc1453909cc451fb",
+      "start_date": "1789.7.14",
+      "seed": "460779940",
+      "reloaded_from_a": false,
+      "placements": {
+        "rio_grande": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "james_bay": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "california": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "mississippi_river": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "ohio": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "carribean_trade": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "chesapeake_bay": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "st_lawrence": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 49,
+        "ai_fleets_in_transit": 7,
+        "ai_fleet_targets": "carribean_trade 2, chesapeake_bay 1, novgorod 1, brazil 1, lima 1, cuiaba 1"
+      }
     }
   ]
 }

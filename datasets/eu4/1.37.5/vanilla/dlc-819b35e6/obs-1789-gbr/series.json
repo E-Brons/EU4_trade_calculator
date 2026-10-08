@@ -158,6 +158,84 @@
         "ai_fleets_in_transit": 5,
         "ai_fleet_targets": "st_lawrence 1, genua 1, carribean_trade 1, ganges_delta 1, cuiaba 1"
       }
+    },
+    {
+      "id": "U228",
+      "file": "U228_GBR.1789.10.01.eu4",
+      "tag": "GBR",
+      "date": "1789.10.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1789-GBR: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "3ad8e7b1e693f51937ddb432bd80e91c70efc52665e162c9fa84c5714bc7db16",
+      "start_date": "1789.7.14",
+      "seed": "565159475",
+      "reloaded_from_a": false,
+      "placements": {
+        "ganges_delta": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "comorin_cape": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "ivory_coast": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "chesapeake_bay": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "st_lawrence": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "north_sea": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "lubeck": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 48,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "chesapeake_bay 1"
+      }
     }
   ]
 }

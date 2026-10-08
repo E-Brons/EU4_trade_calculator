@@ -74,6 +74,42 @@
         "ai_fleets_in_transit": 4,
         "ai_fleet_targets": "gujarat 3, gulf_of_aden 1"
       }
+    },
+    {
+      "id": "U207",
+      "file": "U207_KON.1445.02.01.eu4",
+      "tag": "KON",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1444-KON: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "0d2cd7a3d994c49a7ce41cab0b53ad3584893d12e230d255277f8081d6a9d1f6",
+      "start_date": "1444.11.11",
+      "seed": "3236298921",
+      "reloaded_from_a": false,
+      "placements": {
+        "kongo": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "constantinople 1"
+      }
     }
   ]
 }

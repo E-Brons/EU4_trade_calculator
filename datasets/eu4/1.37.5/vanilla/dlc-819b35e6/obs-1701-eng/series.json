@@ -122,6 +122,66 @@
         "ai_fleets_in_transit": 3,
         "ai_fleet_targets": "gujarat 1, zanzibar 1, the_moluccas 1"
       }
+    },
+    {
+      "id": "U221",
+      "file": "U221_ENG.1701.12.01.eu4",
+      "tag": "ENG",
+      "date": "1701.12.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1701-ENG: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "5f7b87587642034c193f084d06f7bd29d435ae55d1d768f6abc89ef2aa7af0e0",
+      "start_date": "1701.9.1",
+      "seed": "582812430",
+      "reloaded_from_a": false,
+      "placements": {
+        "ivory_coast": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "carribean_trade": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "chesapeake_bay": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "north_sea": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 20,
+        "ai_fleets_in_transit": 3,
+        "ai_fleet_targets": "novgorod 1, brazil 1, chesapeake_bay 1"
+      }
     }
   ]
 }

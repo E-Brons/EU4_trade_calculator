@@ -86,6 +86,48 @@
         "ai_fleets_in_transit": 6,
         "ai_fleet_targets": "tunis 1, hormuz 1, gulf_of_aden 1, gujarat 1, ganges_delta 1, malacca 1"
       }
+    },
+    {
+      "id": "U212",
+      "file": "U212_POR.1445.02.01.eu4",
+      "tag": "POR",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1444-POR: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "82cfc9b2dd261aedf6398b5aa97ae2002162bd62519ae623f92fec0551f9585f",
+      "start_date": "1444.11.11",
+      "seed": "3507176853",
+      "reloaded_from_a": false,
+      "placements": {
+        "tunis": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "safi": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
     }
   ]
 }

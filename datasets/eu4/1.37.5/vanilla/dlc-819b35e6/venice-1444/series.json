@@ -1,0 +1,295 @@
+{
+  "series": "venice-1444",
+  "kind": "observation",
+  "description": "Player VEN, new game 1444.11.11, non-Ironman. Hands-off until 1445.03.01; all three VEN merchants recalled in March 1445; ragusa, alexandria, wien merchants re-sent one per month afterwards. Only the 1st-of-month saves are kept.",
+  "saves": [
+    {
+      "id": "U10",
+      "file": "U10_VEN.1444.12.01.eu4",
+      "tag": "VEN",
+      "date": "1444.12.1",
+      "role": "observation",
+      "change": "no player action (hands-off)",
+      "covers": [],
+      "sha256": "32e836ac140ed3035ee20196ff286f843c5a67b734027c769b86393483fa23f1",
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "ai_merchants_in_transit": 52,
+        "ai_fleets_in_transit": 8,
+        "ai_fleet_targets": "polynesia_node 4, comorin_cape 2, lubeck 1, zanzibar 1"
+      }
+    },
+    {
+      "id": "U14",
+      "file": "U14_VEN.1445.01.01.eu4",
+      "tag": "VEN",
+      "date": "1445.1.1",
+      "role": "observation",
+      "change": "no player action (hands-off)",
+      "covers": [],
+      "sha256": "7d598a47c5ce8b86caa4b653280c2839ef7230e1843acd1541c6b6596f5bb23b",
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "ai_merchants_in_transit": 5,
+        "ai_fleets_in_transit": 3,
+        "ai_fleet_targets": "gujarat 2, malacca 1"
+      }
+    },
+    {
+      "id": "U20",
+      "file": "U20_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "change": "no player action (hands-off)",
+      "covers": [],
+      "sha256": "feb8cabd32936fa7766dae645593c04cccb542f50eea88aa824fc81b0634d2ac",
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U25",
+      "file": "U25_VEN.1445.03.01.eu4",
+      "tag": "VEN",
+      "date": "1445.3.1",
+      "role": "observation",
+      "change": "last hands-off save of the series; three merchants steering",
+      "covers": [],
+      "sha256": "b731b168dda63ffec57a1e5c1dcb1f01ffc2df0c7c505ce0ddb4bfac8f13aa56",
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
+    },
+    {
+      "id": "U27",
+      "file": "U27_VEN.1445.04.01.eu4",
+      "tag": "VEN",
+      "date": "1445.4.1",
+      "role": "observation",
+      "change": "first 1st after the recall: 0 merchants",
+      "covers": [],
+      "sha256": "e43411a7539ffc9e014d0559dd9f3b2adb85b8982cabe30a4dee2568554963af",
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U28",
+      "file": "U28_VEN.1445.05.01.eu4",
+      "tag": "VEN",
+      "date": "1445.5.1",
+      "role": "observation",
+      "change": "ragusa merchant sent again (steering)",
+      "covers": [],
+      "sha256": "4c63c18a7f18bbd67b58c4d01862d49e1ae0282926f6e8d1c1292c1d11d30b10",
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U29",
+      "file": "U29_VEN.1445.06.01.eu4",
+      "tag": "VEN",
+      "date": "1445.6.1",
+      "role": "observation",
+      "change": "alexandria merchant sent again",
+      "covers": [],
+      "sha256": "0bc2cf264ad8425e09a7e7cc5e9a7aa1f206c3191b79fbf232cd632d76721f01",
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U161",
+      "file": "U161_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-B5b (patch=b5b_place_home.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "744e5abc40a9e650ab702cfc9676c544caff94adef56d72b7ec2ed202442ff46",
+      "start_date": "1444.11.11",
+      "seed": "2793770951",
+      "reloaded_from_a": true,
+      "placements": {
+        "alexandria": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "collect",
+          null,
+          true,
+          3
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    },
+    {
+      "id": "U162",
+      "file": "U162_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-B5c (patch=b5c_recall_alexandria.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "f4ceb82cea89773285640952018b649a422d4d68b492e785038faeb15d9dfbfc",
+      "start_date": "1444.11.11",
+      "seed": "2630765291",
+      "reloaded_from_a": true,
+      "placements": {
+        "alexandria": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "none",
+          null,
+          false,
+          3
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
+    },
+    {
+      "id": "U165",
+      "file": "U165_VEN.1445.02.01.eu4",
+      "tag": "VEN",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "R2-C-U10 (patch=identity.py), t2_1445.02.01.eu4",
+      "covers": [],
+      "sha256": "02852cf3262c03f2db6477334a368246f3c153d956a65730eb173aa2fc484277",
+      "start_date": "1444.11.11",
+      "seed": "2892041671",
+      "reloaded_from_a": true,
+      "placements": {
+        "alexandria": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "ragusa": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "venice": [
+          "none",
+          null,
+          false,
+          3
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "comorin_cape 1"
+      }
+    }
+  ]
+}

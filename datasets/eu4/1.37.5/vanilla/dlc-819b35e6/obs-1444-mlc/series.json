@@ -98,6 +98,54 @@
         "ai_fleets_in_transit": 5,
         "ai_fleet_targets": "gujarat 3, comorin_cape 1, gulf_of_aden 1"
       }
+    },
+    {
+      "id": "U209",
+      "file": "U209_MLC.1445.02.01.eu4",
+      "tag": "MLC",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1444-MLC: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "740996c341f58d797347a2896d85d6ca50e8623d7ca638754dc0d0dc49a961f5",
+      "start_date": "1444.11.11",
+      "seed": "3548956164",
+      "reloaded_from_a": false,
+      "placements": {
+        "gulf_of_siam": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "canton": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "the_moluccas": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 2,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
     }
   ]
 }

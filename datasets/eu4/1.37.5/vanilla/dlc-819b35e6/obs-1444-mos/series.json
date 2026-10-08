@@ -86,6 +86,48 @@
         "ai_fleets_in_transit": 2,
         "ai_fleet_targets": "gulf_of_aden 1, malacca 1"
       }
+    },
+    {
+      "id": "U211",
+      "file": "U211_MOS.1445.02.01.eu4",
+      "tag": "MOS",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1444-MOS: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "c3ea2bc2c2aa45c12643bf21f4d0aa65ef35a4520b0fed860b1237d922339975",
+      "start_date": "1444.11.11",
+      "seed": "3283115489",
+      "reloaded_from_a": false,
+      "placements": {
+        "kiev": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "kazan": [
+          "steer",
+          0,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 1,
+        "ai_fleets_in_transit": 1,
+        "ai_fleet_targets": "gulf_of_aden 1"
+      }
     }
   ]
 }

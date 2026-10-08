@@ -134,6 +134,72 @@
         "ai_fleets_in_transit": 3,
         "ai_fleet_targets": "chesapeake_bay 2, bordeaux 1"
       }
+    },
+    {
+      "id": "U225",
+      "file": "U225_PRU.1756.08.01.eu4",
+      "tag": "PRU",
+      "date": "1756.8.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1756-PRU: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "4cbdab9a2585d5fbbd12055fb107a1176dd30c3932b47b156e6770d9b6d5238f",
+      "start_date": "1756.5.15",
+      "seed": "604128850",
+      "reloaded_from_a": false,
+      "placements": {
+        "novgorod": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "krakow": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "wien": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "baltic_sea": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "lubeck": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "english_channel": [
+          "collect",
+          null,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 44,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "gujarat 1, brazil 1"
+      }
     }
   ]
 }

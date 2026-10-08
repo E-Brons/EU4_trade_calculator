@@ -86,6 +86,48 @@
         "ai_fleets_in_transit": 5,
         "ai_fleet_targets": "gujarat 4, comorin_cape 1"
       }
+    },
+    {
+      "id": "U213",
+      "file": "U213_VIJ.1445.02.01.eu4",
+      "tag": "VIJ",
+      "date": "1445.2.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1444-VIJ: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "f3e6606409a8c82fb4eb2864b73dc383b5d3d52b64be34379c99181ac39b7515",
+      "start_date": "1444.11.11",
+      "seed": "3511383285",
+      "reloaded_from_a": false,
+      "placements": {
+        "ganges_delta": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "deccan": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 0,
+        "ai_fleets_in_transit": 0,
+        "ai_fleet_targets": ""
+      }
     }
   ]
 }

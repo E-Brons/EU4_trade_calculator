@@ -2,3 +2,5 @@
 backend/tests/fixtures/saves_zip/U*.zip filter=lfs diff=lfs merge=lfs -text
 # Research datasets are large saves: keep them in git LFS (see docs/trade_testing.md)
 datasets/**/*.zip filter=lfs diff=lfs merge=lfs -text
+# Experiment saves that are not dataset material (mid-month, probes): zipped, git LFS
+tools/EU4-game-automation/experiments/archive/**/*.zip filter=lfs diff=lfs merge=lfs -text

@@ -158,6 +158,84 @@
         "ai_fleets_in_transit": 10,
         "ai_fleet_targets": "gujarat 4, carribean_trade 1, constantinople 1, sevilla 1, the_moluccas 1, chesapeake_bay 1, brazil 1"
       }
+    },
+    {
+      "id": "U224",
+      "file": "U224_GBR.1756.08.01.eu4",
+      "tag": "GBR",
+      "date": "1756.8.1",
+      "role": "observation",
+      "base": null,
+      "change": "obs-1756-GBR: third 1st of the series, same session",
+      "covers": [],
+      "sha256": "f793ff6b0abd93013d0ea128f5502dab5205a0bc51a9144931a6ceafd894e818",
+      "start_date": "1756.5.15",
+      "seed": "528564688",
+      "reloaded_from_a": false,
+      "placements": {
+        "comorin_cape": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "ivory_coast": [
+          "steer",
+          2,
+          true,
+          0
+        ],
+        "carribean_trade": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "chesapeake_bay": [
+          "steer",
+          1,
+          true,
+          0
+        ],
+        "st_lawrence": [
+          "collect",
+          null,
+          true,
+          0
+        ],
+        "north_sea": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "lubeck": [
+          "steer",
+          0,
+          true,
+          0
+        ],
+        "champagne": [
+          "steer",
+          1,
+          true,
+          0
+        ]
+      },
+      "placements_changed": [],
+      "quality": {
+        "timing": "tick_day",
+        "own_merchants_in_transit": 0,
+        "own_fleets_in_transit": 0,
+        "game_version": "1.37.5",
+        "version_supported": true,
+        "mods_key": "vanilla",
+        "dlc_key": "dlc-819b35e6",
+        "clean": true,
+        "ai_merchants_in_transit": 49,
+        "ai_fleets_in_transit": 2,
+        "ai_fleet_targets": "zanzibar 1, brazil 1"
+      }
     }
   ]
 }
