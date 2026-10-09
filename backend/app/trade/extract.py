@@ -7,12 +7,14 @@ from __future__ import annotations
 
 import re
 from collections import Counter
+from dataclasses import dataclass
 from pathlib import Path
 
 from app.parsing.clausewitz import as_list, parse
 from app.trade import savefile
 from app.trade.types import (
     Action,
+    CountryInput,
     Decisions,
     EntryInput,
     EntryRecorded,
@@ -62,6 +64,67 @@ def _mods(meta: str) -> tuple[str, ...]:
 def _dlcs(meta: str) -> tuple[str, ...]:
     block = savefile.extract_top_level_block(meta, "dlc_enabled") or ""
     return tuple(re.findall(r'"([^"]*)"', block))
+
+
+@dataclass(frozen=True)
+class _PlayerAssets:
+    merchants_in_transit: int = 0
+    fleets_in_transit: int = 0
+    merchants: int = 0
+    light_ships: int = 0
+    light_ship_types: tuple[tuple[str, int], ...] = ()
+
+
+def _player_assets(gamestate: str, player: str) -> _PlayerAssets:
+    """Player's merchants (all envoys; on the way = action 1, action 2 = at its node, equal to the country's has_trader
+    entries in 1,947 of 1,950 country-saves), protect-trade fleets without `on_my_way` (not yet counted, R11), the
+    light-ship count (`num_subunits_type_and_cat.light_ship.normal`) and the light ships per unit type in its navies."""
+    block = savefile.extract_nested_block(gamestate, "countries", player)
+    if block is None:
+        return _PlayerAssets()
+    country = parse(block[1:-1])
+    merchants = country.get("merchants")
+    envoys = as_list(merchants.get("envoy")) if isinstance(merchants, dict) else []
+    moving = sum(1 for v in envoys if isinstance(v, dict) and v.get("action") == 1)
+    fleets = 0
+    types: Counter[str] = Counter()
+    for fleet in as_list(country.get("navy")):
+        if not isinstance(fleet, dict):
+            continue
+        mission = fleet.get("mission")
+        protect = mission.get("protect_mission") if isinstance(mission, dict) else None
+        if isinstance(protect, dict) and "on_my_way" not in protect:
+            fleets += 1
+        types.update(str(ship["type"]) for ship in as_list(fleet.get("ship")) if isinstance(ship, dict) and "type" in ship)
+    subunits = country.get("num_subunits_type_and_cat")
+    light = subunits.get("light_ship") if isinstance(subunits, dict) else None
+    return _PlayerAssets(moving, fleets, len([v for v in envoys if isinstance(v, dict)]),
+                         int(_f(light.get("normal"), 0)) if isinstance(light, dict) else 0, tuple(sorted(types.items())))
+
+
+COUNTRY_KEYS = ("active_idea_groups", "active_policy", "government", "active_age_ability", "modifier", "navy_tradition",
+                "blockaded_percent")
+
+
+def _countries(gamestate: str, tags: set[str]) -> dict[str, CountryInput]:
+    """The variables of each country that select its country-scope modifiers (CountryInput)."""
+    spans = savefile.country_spans(gamestate)
+    out: dict[str, CountryInput] = {}
+    for tag in sorted(tags & set(spans)):
+        c = parse(savefile.block_fields(gamestate, spans[tag], COUNTRY_KEYS))
+        groups = c.get("active_idea_groups")
+        reforms = ((c.get("government") or {}).get("reform_stack") or {}).get("reforms") if isinstance(c.get("government"), dict) else None
+        out[tag] = CountryInput(
+            tag=tag,
+            idea_groups=tuple((str(g), int(_f(n, 0))) for g, n in groups.items()) if isinstance(groups, dict) else (),
+            policies=tuple(str(p["policy"]) for p in as_list(c.get("active_policy")) if isinstance(p, dict) and "policy" in p),
+            reforms=tuple(str(r) for r in as_list(reforms)),
+            age_abilities=tuple(str(a) for a in as_list(c.get("active_age_ability"))),
+            modifiers=tuple(str(m["modifier"]) for m in as_list(c.get("modifier")) if isinstance(m, dict) and "modifier" in m),
+            navy_tradition=_f(c.get("navy_tradition"), 0.0),
+            blockaded_percent=_f(c.get("blockaded_percent"), 0.0),
+        )
+    return out
 
 
 def extract_world(path: str | Path, save_id: str = "", graph=None) -> World:
@@ -165,8 +228,13 @@ def extract_world(path: str | Path, save_id: str = "", graph=None) -> World:
                 decisions.by_entry[(tag, nid)] = NodeDecision(action, target, e.light_ships)
 
     version = _game_version(text.meta)
+    start_date = savefile.extract_scalar(text.meta, "start_date") or savefile.extract_scalar(text.gamestate, "start_date") or ""
+    assets = _player_assets(text.gamestate, player)
     inputs = WorldInputs(
         game_version=version, date=date, player=player, nodes=nodes, entries=entries, node_order=node_order,
         multipliers=multipliers, decisions=decisions, ironman=text.ironman, mods=_mods(text.meta), dlcs=_dlcs(text.meta),
+        start_date=start_date, own_merchants_in_transit=assets.merchants_in_transit, own_fleets_in_transit=assets.fleets_in_transit,
+        player_merchants=assets.merchants, player_light_ships=assets.light_ships, player_ship_types=assets.light_ship_types,
+        countries=_countries(text.gamestate, {tag for _n, tag in entries}),
     )
     return World(inputs=inputs, recorded=Recorded(entries=rec_entries, nodes=rec_nodes), save_id=save_id, unmapped_keys=dict(unmapped))

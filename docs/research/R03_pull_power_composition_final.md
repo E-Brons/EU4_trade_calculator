@@ -197,3 +197,9 @@ Caveats / contradicts: the draft's caveat that the "at least 10 provincial trade
 | Draft's "at least 10 provincial trade power" conflicts with `TRADE_PROPAGATE_THRESHOLD = 2` | draft C-03 caveat | No conflict: 2 x divider 5 = 10 (R05: the threshold lies between 9.961 and 10.036). |
 | The goal's "40-row" sample | goal | The table has 43 rows; all 43 are reproduced by rules A and B. |
 | Wiki quotes "last verified 1.25-1.30" for 1.37.5 | draft section 1 | Not contradicted; the rule is reproduced on 1.37.5 saves (C-01). The quotes stay `reported` because they were not re-fetched. |
+
+## Data basis (2026-10-06)
+
+On 2026-10-06 the research data was rebuilt (`docs/research/data_audit.md`): only **clean** saves are kept (the 1st of a month after the game's first trade computation, none of the player's merchants or fleets on the way; R12 final). Kept: U04 (TUR 1691.11.01), U10, U14, U20, U25, U27, U28, U29 (VEN 1444-1445). Removed: the 78 start snapshots S01-S78 and U07-U09 (saved before the first computation: steering weights, `add` and other computed fields are placeholders there) and 21 mid-month saves (S79, S80, U01-U03, U05, U06, U11-U13, U15-U19, U21-U24, U26, U30: numbers from the last 1st, merchant/ship flags from the save day). Counts above that include removed saves are kept as recorded but are **unverified on clean data** unless listed as re-checked below. Clean-data stage results quoted here: `scripts/verify_all.sh` on the 8 kept saves (calc 0.2.0).
+
+- Rule B on clean data: `pull_power` exact in 539 of 539 checks and `retain_power` in 640 of 640 on the 8 kept saves: **confirmed on clean data**. The exceptions of this file (S79 `english_channel`, U05 `ethiopia` / `gulf_of_aden` stale AFA aggregates) were in removed mid-month saves; the steering-downstream extension (C-02) rested on S79 only and is **unverified on clean data**.

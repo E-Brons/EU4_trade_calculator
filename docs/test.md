@@ -1,3 +1,9 @@
+> **Superseded 2026-10-09.** This file describes how the removed player-centric engine (`app/engine`,
+> `parsing/save.py`) was checked. The calculation is now `backend/app/trade/calc.py`, verified stage by stage and end
+> to end against every clean dataset save: see `docs/trade_testing.md`. Kept for its history and findings.
+
+> **Superseded (2026-10-06).** The fixture corpus this file describes (`backend/tests/fixtures/saves*`, `test_real_saves.py`) was removed in the data redesign: most of those saves were game-start or mid-month saves, which cannot test the calculation (see `docs/research/data_audit.md`). Current testing: `docs/trade_testing.md`; data: `datasets/eu4/`; experiments: `docs/research/experiments.md`.
+
 # Testing the trade value calculation
 
 This describes how to check `backend/app/engine/simulate.py` (and the save

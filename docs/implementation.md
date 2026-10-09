@@ -5,15 +5,19 @@
 ```
 frontend/ (Flutter web)  --HTTP-->  backend/ (FastAPI)
                                        |
-                                       +-- app/parsing/  save -> engine input
-                                       +-- app/engine/   simulate + optimize
-                                       +-- app/api.py    ties it together
+                                       +-- app/trade/extract.py   save -> World (every country in every node)
+                                       +-- app/trade/calc.py      THE trade calculation (verified against real saves)
+                                       +-- app/trade/optimize.py  merchant/ship search, priced by calc.WhatIf
+                                       +-- app/trade/session.py   loaded saves, kept server-side
+                                       +-- app/api.py             ties it together
 ```
 
-The frontend never talks to the trade model directly; it POSTs node
-states/params/allocations to the backend and renders whatever comes back.
-This keeps the actual EU4 mechanics in one place (Python), testable with
-plain pytest, independent of the UI.
+The frontend never talks to the trade model directly. It uploads a save once (`/api/import-save` returns a
+`save_id`; the extracted world stays on the server) and afterwards sends only the player's decisions (merchant action
+and light ships per node) plus the two player scalars it lets the user change (trade efficiency, power per added light
+ship). Every number it shows comes from `calc.py`, the same code `scripts/verify_all.sh` checks against every clean
+save in `datasets/` (see `docs/trade_testing.md`). The old player-centric engine (`app/engine`, `parsing/save.py`,
+per-node `node_states` with `known_*` replay fields, manual data entry) was removed on 2026-10-09 (calc 0.3.0).
 
 ## Trade node graph (`app/parsing/tradenodes.py`, `data/tradenodes.json`)
 
@@ -34,166 +38,48 @@ level become a list, in first-seen order (needed for e.g. a node's
 repeated `outgoing={...}` blocks, or a country's repeated `steer_power=`
 values).
 
-## Trade simulation (`app/engine/model.py`, `app/engine/simulate.py`)
+## Trade calculation (`app/trade/calc.py`)
 
-`simulate()` processes nodes in topological (upstream-first) order and
-computes, per node, the gross value entering it (`local_value + incoming`),
-how much of that is retained there vs. forwarded down outgoing links, and
-the player's own realized income. The formula is derived from and verified
-against 50 real, non-Ironman saves spanning 1444-1821 (see `docs/test.md`
-for the full save list and how they're made) -- not tuned by guesswork.
+One file holds every trade rule (one small `rule_*` function each, with the evidence in its docstring) and is the only
+importer of game constants (`game_data.py`, vendored from the game by `scripts/build_game_data.py`: defines, light-ship
+trade power, and the per-source values of the country modifiers `trade_steering` and `ship_power_propagation`).
+`docs/trade_spec.md` (generated) lists every stage, variable and edge case. Two entry points share the rules:
 
-### The confirmed formula
+- `calculate(inputs, decisions, observed)`: the whole world from raw save variables and every country's decisions.
+- `predict_stage(stage, world)`: one stage from the save's recorded upstream values, so verification localises a
+  mismatch to the stage that is wrong.
 
-Ground truth comes from a save's `trade={ node={...} }` block. Per node,
-the fields that matter (see `ParsedNode`/`ParsedCountryInNode` in
-`save.py` for where each is parsed):
+`WhatIf(inputs, observed, tag)` is `calculate()` for many alternative decisions of one country: everything that does
+not depend on that country is computed once, each `evaluate()` takes about 2 ms instead of 10-16 ms.
+`tests/trade/test_what_if.py` checks that it gives exactly what `calculate()` gives.
 
-| Field | Meaning |
-|---|---|
-| `local_value` | the node's own production value (ducats) |
-| `incoming` | list of `{value, from}` per upstream link received this tick (ducats) |
-| `current` | the node's **retained** (post-forward) ducat value |
-| `total` | `sum(top_power_values)` -- a trade-power-weighted reach metric, **not ducats** (~15x `current` is typical) |
-| `retention` | fraction of gross value retained (not forwarded) |
-| `retain_power`, `pull_power` | the two sides of the retention ratio, see below |
-| per-country `val` | a country's power-weighted share of the node's whole (retained + forwarded) value |
-| per-country `has_capital`, `has_trader`, `type` | presence flags -- `has_trader=yes` marks a merchant; an additional `type` key means Steer, absent means Collect |
-| per-country `power_fraction`, `total` (money share), `money` | **only ever present on the `has_capital` entry** (confirmed: 23,275/23,275 real entries) |
+Values the save does not store are either derived (steering strength = `TRADE_ADDED_VALUE_MODIFER x (1 +
+trade_steering)` from the country's ideas, policies, reforms, age abilities, event modifiers, navy tradition and
+blockade) or identified from the save's own numbers (`identify_observed`: trade efficiency, merchant power, transfer
+fraction). A variable that is truly unknown raises `UnknownVariable`; the API turns that into a 422 naming it.
 
-The confirmed relationships (all verified to <0.001 absolute error across
-every node-instance with trade activity in all 50 saves):
+## Optimizer (`app/trade/optimize.py`)
 
-```
-gross           = local_value + sum(incoming[].value)
-retention       = retain_power / (retain_power + pull_power)
-current         = gross * retention                              # the RETAINED value
-power_fraction  = val / retain_power                              # has_capital country's own val over the field above
-money           = gross * (val / (retain_power + pull_power)) * (1 + trade_efficiency + merchant_present_bonus)
-                = current * power_fraction * (1 + trade_efficiency + merchant_present_bonus)
-```
+Decision variables per candidate node: merchant action (none / collect / steer-to-`X`) and light ships (sea nodes).
+Every candidate placement is priced by `calc.WhatIf`:
 
-`retain_power` also matches `sum(val)` over `has_capital` countries almost
-exactly (a handful of New World/trade-company-region nodes are a confirmed
-exception). `pull_power`'s own country-level composition -- which
-countries' power/actions sum to it -- was **not** solved: several
-hypotheses (steering-only, steering+passive power, a `<2.0`-power
-threshold/divider) were tried against all 50 saves and none fit exactly
-(best R^2=0.85). That only matters for a genuinely hypothetical allocation
-that was never recorded in any save; see "Replay vs. hypothetical" below.
-Two mechanics that were *disproven* by real data and are correctly absent
-from the model: a "-50% power away from home" collection penalty, and
-`has_trader=yes` alone (without `has_capital`) meaning "this country
-collects here" -- confirmed false in 1,330 real instances, none of which
-had `money`/`power_fraction`.
+1. **Seed**: a merchant collects at home; the others steer along the shortest path towards home; ships placed
+   greedily in chunks (about 1/20 of the fleet), then single-ship moves while they help. The save's own placement is
+   searched from as well, so the result is never below it.
+2. **Marginal completion**: remaining merchants added one at a time where they gain most.
+3. **Local search**: change one node's merchant action at a time while income rises, re-place the ships (capped at 8
+   rounds), plus a few random restarts. A repair step first drops the least valuable merchants if a perturbed start
+   exceeds the budget.
+4. **Marginal value report**: income with one merchant / one chunk of ships more or fewer, and where.
 
-`trade_efficiency` cannot be derived from the trade block at all (an `add`
-field was suspected and refuted -- it only appears on steering entries).
-`save.py` back-solves it from the relationship above at every node the
-player collects at, and it's otherwise a manually-entered `Params` field.
+## Save extraction (`app/trade/extract.py`, `app/trade/savefile.py`)
 
-### Per-node explanation fields and `/api/node-options`
-
-Every `NodeBreakdown` also carries `player_share`, `income_multiplier`,
-`retained_power`/`pull_power` (sum to `total_power`), `retained_value`
-(`total_value - forwarded_value`), `incoming_value`, `player_action`
-(`collect` | `steer` | `passive-home` | `none`), `player_steer_target`,
-`player_light_ships` and `is_replay`; `player_income == total_value *
-player_share * income_multiplier` in both replay and hypothetical branches.
-`POST /api/node-options` re-simulates one node with each merchant action
-(none / collect / steer per outgoing link) and with 0..N light ships. Each
-entry has `total_income` (engine, replay where the node still matches the
-save) and `formula_total_income` (pure formula, no replay); the response's
-`calibration_offset` is replay - formula for the unchanged allocation. Gross value of
-every node with a recorded `known_gross_value` is `known_gross_value +
-(incoming_now - incoming_ref)`, where `incoming_ref` (`reference_incoming`) is
-the modelled inflow when every node replays its recorded allocation. With the
-recorded allocation everywhere the delta is exactly 0 (snapshot stays the
-bit-exact replay); an edited upstream steer/collect/ships shifts downstream
-gross by the modelled delta, and replayed nodes forward their share
-`1 - retain_power/total_power` of it. Nodes without a recorded value (manual
-entry) use local + inflow. `formula_total_income` means pure formula: every
-`known_*` field dropped. The optimizer computes the reference once
-(`with_reference`); `simulate()` accepts `incoming_ref` or uses the cache a
-`ReferencedStates` carries.
-
-### Replay vs. hypothetical
-
-`simulate()` supports two modes, both through the same code path:
-
-- **Replaying a save's own recorded allocation** (what
-  `test_simulator_reproduces_saves_own_numbers` does): `NodeState` carries
-  the save's own `retain_power`/`pull_power`/`current`/gross value
-  directly (the `known_*` fields), and `simulate()` uses them as-is
-  whenever the `Allocation` passed in exactly matches what was recorded
-  (`NodeState.matches_recorded`). This sidesteps needing `pull_power`'s
-  mechanism at all, and is effectively exact: median per-node error is
-  0.0 across all 50 saves, total-income error under 1% for 48 of 50 (the
-  other two are single-province economies where 0.001-ducat display
-  rounding is a large fraction of the total).
-- **A genuinely hypothetical allocation** (the optimizer's actual job --
-  what if I add ships/merchants somewhere): falls back to reconstructing
-  `retain_power`/`pull_power`-equivalent quantities from
-  `other_collect_power`/`other_steer_power`/`other_passive_power`
-  (`has_capital` maps to collect, `is_steering` maps to steer, everything
-  else is passive, forwarded in proportion to steering or evenly split).
-  This is the same formula shape, just with an approximate denominator
-  instead of the exact one -- accurate enough to rank allocations, not
-  guaranteed exact the way a replay is.
-
-Also confirmed and modeled: `TRADE_POWER_HOME_BONUS` (+10%) applies only to
-power the player *adds* at the home node, not the base (which already
-reflects it via the save's own `province_power`); `TRADE_MERCHANT_PRESENT`
-(+10%) is a separate, additive income bonus for collecting via an explicit
-merchant at any node; `TRADE_CAPITAL_POWER` (5.0) vs.
-`MERCHANT_MAX_POWER_BONUS` (2.0) for a merchant's power at home vs. away
-(the two don't stack).
-
-**"Current income" is not computed by this simulator at all when a save is
-available** -- it's read directly from the save's own `money` field
-(`ParsedSave.actual_current_income`). `simulate()`'s hypothetical-mode
-estimate is reserved for allocations with no ground truth to read.
-
-## Optimizer (`app/engine/optimize.py`)
-
-Decision variables per candidate node: merchant action (none / collect /
-steer-to-`X`) and light ships (in configurable chunks). Algorithm:
-
-1. **Seed**: home node collects (with a merchant if any are free, for the
-   home bonus); nodes upstream of home steer toward it along the shortest
-   path; ships placed greedily by marginal gain.
-2. **Marginal completion**: remaining merchants added one at a time to
-   whichever free node/option gives the best gain.
-3. **Local search**: 1-opt over merchant placement/action and ship
-   chunks, repeated with a few random restarts to escape local optima. A
-   **repair step** removes the least-valuable merchant(s) first if a
-   restart's perturbation ever exceeds the merchant budget (a real bug
-   caught by a regression test: exceeding budget silently, not just
-   inefficiently).
-4. **Exhaustive fallback** when the candidate set is small enough
-   (<= ~200k combinations) -- also used by tests to validate the heuristic
-   matches brute force on small random networks.
-5. **Marginal value report**: income with one more/fewer merchant, and
-   with one more/fewer chunk of light ships.
-
-## Save parsing (`app/parsing/save.py`)
-
-Field names are **verified against 50 real, non-Ironman saves** spanning
-1444-1821 (`backend/scripts/inspect_save.py` dumps a node's raw fields for
-spot-checking), not guessed -- see the "confirmed formula" table above for
-what each field means. Two parsing details worth knowing:
-
-- Countries present in a node are sub-blocks keyed **directly by tag**
-  (`TUR={...}`, `PIR={...}`, colonial nations like `C08={...}`) --
-  detected by key shape (`^[A-Z0-9]{2,4}$` + dict value), not a
-  `country={tag=...}` list as an early version assumed.
-- The save gives per-link steering weight only as a *node-level*
-  aggregate (repeated once per outgoing link, in the same order as the
-  node's edges in `data/tradenodes.json`), not per country -- used as
-  relative weights to split "how much do other countries steer down each
-  specific link," exact for single-link nodes, approximate for multi-link
-  ones (only matters for hypothetical-mode; see "Replay vs. hypothetical"
-  above).
+Reads variables only (no arithmetic): every country's entry in every node of the `trade` block (province/ship power,
+flags, `max_demand`, transfers, modifiers, steering link and `add`), the node fields, the recorded results (used only
+by verification), the variables of each country that select its country-scope modifiers (`countries.<TAG>`: idea
+groups, policies, reforms, age abilities, modifiers, navy tradition, blockaded share; found through the save's tab
+indentation so the 50+ MB document is never tokenized), and the player's merchants and light ships. Keys the variable
+registry (`variables.py`) does not know are counted, and a test fails on them.
 
 ## Ironman melting (`app/parsing/ironman_melt.py`, `app/parsing/pdx_tools_browser.py`, `app/parsing/pdx_tools_melt.py`, `tools/melt_worker.py`)
 
@@ -271,17 +157,13 @@ per-node waterfall (`widgets/node_waterfall.dart`).
 
 - **Three presets**: *Snapshot* (the save's own allocation), *Optimal* (the
   optimizer's), *Current* (the user's last-edited allocation). Each is
-  simulated through `/api/simulate` over the **same** node states, so incomes
+  calculated through `/api/simulate` for the same loaded save, so incomes
   are directly comparable. Editing any control while Snapshot/Optimal is shown
   forks that allocation into Current; the two read-only presets never change.
-- **Snapshot is an exact replay**: `NodeStateIn` round-trips the `known_*`
-  fields, so simulating the imported allocation reproduces the save's own
-  income (checked in `test_import_then_simulate_replays_saves_own_income`).
-- **Optimizer gets every node's state**, not just the candidates (decisions are
-  still limited to candidates). With candidates only, upstream value flowing
-  into a candidate was dropped, income was understated, and "optimal" could come
-  out *below* the save's current income (e.g. NED 1650: 14.85 vs 17.04 actual;
-  with all nodes: 24.98). This replaces the old calibration-ratio workaround.
+- **Snapshot is the calculation of the save's own placement**: it reproduces the
+  income the save records (median error 0.13 % over the 205 clean saves, see
+  `docs/trade_testing.md`); the save's own figure is shown next to it
+  (`actual_current_income`).
 - **"Hide nodes with 0 power"** hides nodes where the active preset gives you no
   trade power. Flow to/from hidden nodes is drawn as grey stubs so totals still
   add up. To place a merchant at a node you have no power in, turn the filter off.
@@ -293,14 +175,10 @@ per-node waterfall (`widgets/node_waterfall.dart`).
 
 ## Testing
 
-`backend/tests/` (pytest): the Clausewitz parser on hand-built snippets;
-the generated graph is a DAG where every node reaches an end node; the
-simulator against hand-computed exact values on toy networks (collect,
-steer, passive, home bonus, non-home collect, steer-target-missing
-conservation); the optimizer against exhaustive search on small random
-networks; the API via FastAPI's `TestClient`; save parsing against a
-hand-built fixture matching the real verified format; `test_real_saves.py`
-against 50 real, non-Ironman saves (see `docs/test.md`). One test
-(`test_import_save_real_ironman_end_to_end_via_live_melt_worker`) is a
-genuine, best-effort end-to-end check against a real Ironman save and a
-live melt worker -- it skips cleanly if no worker is running.
+`backend/tests/` (pytest): the Clausewitz parser on hand-built snippets; the generated graph is a DAG where every node
+reaches an end node; the map asset; the API via FastAPI's `TestClient` on a dataset save (import, simulate, node
+options, optimize); `tests/trade/` verifies `calc.py` stage by stage and end to end against every clean dataset save
+(`scripts/verify_all.sh`, also the CI job), checks the variable registry, the architecture rules (one calculation, no
+legacy engine), the what-if fast path and the optimizer. One test
+(`test_import_save_real_ironman_end_to_end_via_live_melt_worker`) is a best-effort end-to-end check against a real
+Ironman save and a live melt worker; it skips cleanly if no worker is running.

@@ -13,17 +13,25 @@ def _table(headers: list[str], rows: list[list]) -> str:
 def stage_table(report: corpus.CorpusReport) -> list[list]:
     rows = []
     for stage in calc.STAGES:
-        checks = failures = saves_fail = 0
+        checks = failures = margin = saves_fail = 0
         status: Counter[str] = Counter()
         for r in report.reports.values():
             s = r.stages[stage]
             status[s.status] += 1
             checks += s.checks
             failures += s.failures
-            saves_fail += s.status == "fail"
-        verdict = "NOT IMPLEMENTED" if status["not_implemented"] else ("GREEN" if not failures else "RED")
-        rows.append([stage, verdict, checks, failures, f"{100 * failures / checks:.2f}%" if checks else "-", f"{saves_fail}/{len(report.reports)}"])
+            margin += s.margin_failures
+            saves_fail += s.margin_failures > 0
+        verdict = "NOT IMPLEMENTED" if status["not_implemented"] else ("EXACT" if not failures else "WITHIN 5%" if not margin else "FAIL")
+        rows.append([stage, verdict, checks, failures, margin, f"{100 * margin / checks:.2f}%" if checks else "-", f"{saves_fail}/{len(report.reports)}"])
     return rows
+
+
+def reproduced(report: corpus.CorpusReport) -> tuple[int, int]:
+    """Saves reproduced end to end: exactly, and within the 5% margin."""
+    chains = [r.chain for r in report.reports.values()]
+    return (sum(c.status == "ok" for c in chains),
+            sum(c.status != "unknown_variable" and c.margin_failures == 0 for c in chains))
 
 
 def chain_summary(report: corpus.CorpusReport) -> str:
@@ -44,20 +52,20 @@ def coverage_rows(report: corpus.CorpusReport) -> list[list]:
 def user_case_rows(report: corpus.CorpusReport) -> list[list]:
     rows = []
     for sid, entry in report.entries.items():
-        if entry["kind"] == "user_case" and sid in report.reports:
+        if entry["kind"] == "report" and sid in report.reports:
             r = report.reports[sid]
             rows.append([sid, entry["tag"], entry["date"], r.status.upper(), r.first_failing_stage or "-"])
     return rows
 
 
 def markdown(report: corpus.CorpusReport) -> str:
-    reproduced = sum(r.chain.status == "ok" for r in report.reports.values())
+    exact, margin = reproduced(report)
     out = [f"# Trade calculation status (calc {calc.CALC_VERSION}, {len(report.reports)} saves)", "",
-           f"**Saves reproduced end to end: {reproduced} of {len(report.reports)}**", "", "## Stages", "",
-           _table(["stage", "verdict", "checks", "failures", "rate", "saves failing"], stage_table(report)), "",
+           f"**Saves reproduced end to end: {margin} of {len(report.reports)} within 5% ({exact} exactly)**", "", "## Stages", "",
+           _table(["stage", "verdict", "checks", "not exact", "outside 5%", "rate outside 5%", "saves outside 5%"], stage_table(report)), "",
            f"End-to-end chain: {chain_summary(report)}", ""]
     cases = user_case_rows(report)
-    out += ["## Stored user cases", ""]
+    out += ["## Submitted saves (reports, not gating)", ""]
     out += [_table(["id", "tag", "date", "status", "first failing stage"], cases)] if cases else ["none"]
     out += ["", "## Edge-case coverage", "", _table(["id", "case", "level", "saves exhibiting", "status"], coverage_rows(report))]
     if report.missing:

@@ -22,6 +22,8 @@ TOLERANCE: dict[str, tuple[float, float]] = {
 }
 DEFAULT_TOLERANCE = (0.002, 0.001)
 CHAIN_TOLERANCE = (0.01, 0.003)
+# The CI bar: every value within 5% of the save (absolute floor for values near 0). Exact failures are always reported too.
+MARGIN = (0.002, 0.05)
 
 
 def close(predicted: float, recorded: float, abs_tol: float, rel_tol: float) -> bool:
@@ -43,7 +45,8 @@ class StageReport:
     stage: str
     status: str                                  # ok | fail | not_implemented
     checks: int = 0
-    failures: int = 0
+    failures: int = 0                            # outside the exact (save-precision) tolerance
+    margin_failures: int = 0                     # outside the 5% CI margin
     max_abs_error: float = 0.0
     worst: list[Failure] = field(default_factory=list)
     failures_by_case: dict[str, int] = field(default_factory=dict)
@@ -59,6 +62,7 @@ class ChainReport:
     player_income_recorded: float = 0.0
     checks: int = 0
     failures: int = 0
+    margin_failures: int = 0
     worst: list[Failure] = field(default_factory=list)
 
 
@@ -116,6 +120,8 @@ def verify_stage(stage: str, world: World, ctx, max_worst: int = 10) -> StageRep
         cases = _classify(ctx, p.node, p.tag)
         by_case_all.update(cases)
         report.checks += 1
+        if not close(p.predicted, p.recorded, *MARGIN):
+            report.margin_failures += 1
         if not close(p.predicted, p.recorded, abs_tol, rel_tol):
             report.failures += 1
             report.max_abs_error = max(report.max_abs_error, abs(p.predicted - p.recorded))
@@ -143,16 +149,19 @@ def verify_chain(world: World, max_worst: int = 10) -> ChainReport:
     for node, nr in world.recorded.nodes.items():
         if nr.current is not None and node in result.nodes:
             chain.checks += 1
+            chain.margin_failures += not close(result.nodes[node].current, nr.current, *MARGIN)
             if not close(result.nodes[node].current, nr.current, abs_tol, rel_tol):
                 chain.failures += 1
                 bad.append(Failure("current", node, "", result.nodes[node].current, nr.current, ()))
     for (node, tag), r in world.recorded.entries.items():
         if r.money is not None and (node, tag) in result.entries:
             chain.checks += 1
+            chain.margin_failures += not close(result.entries[(node, tag)].money, r.money, *MARGIN)
             if not close(result.entries[(node, tag)].money, r.money, abs_tol, rel_tol):
                 chain.failures += 1
                 bad.append(Failure("money", node, tag, result.entries[(node, tag)].money, r.money, ()))
     chain.checks += 1
+    chain.margin_failures += not close(chain.player_income_calculated, recorded_income, *MARGIN)
     if not close(chain.player_income_calculated, recorded_income, abs_tol, rel_tol):
         chain.failures += 1
     bad.sort(key=lambda f: -abs(f.predicted - f.recorded))

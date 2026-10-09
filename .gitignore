@@ -1,7 +1,7 @@
 # Python
 backend/.venv/
-backend/**/__pycache__/
-backend/**/*.pyc
+**/__pycache__/
+**/*.pyc
 .pytest_cache/
 
 # Melt worker file-bridge runtime state (pending jobs, results, debug

@@ -1,0 +1,1007 @@
+{
+ "_meta": {
+  "game_version": "EU4 v1.37.5.0 Inca (491d)",
+  "source": "common/ideas, policies, government_reforms, ages, event_modifiers, static_modifiers (+ the experiment mod's event_modifiers); only the modifiers listed in `modifiers`, only sources with a non-zero value"
+ },
+ "age_abilities": {
+  "ab_dutch_trade": {
+   "trade_steering": 0.33
+  },
+  "ab_ship_power_propagation": {
+   "ship_power_propagation": 0.2
+  }
+ },
+ "event_modifiers": {
+  "ARB_arabian_sea_trade": {
+   "trade_steering": 0.15
+  },
+  "ARB_reroute_the_trade_north": {
+   "trade_steering": 0.05
+  },
+  "MAY_merchant_travels": {
+   "trade_steering": 0.1
+  },
+  "MUG_trade_fleets": {
+   "trade_steering": 0.05
+  },
+  "TIM_indian_relations": {
+   "trade_steering": 0.1
+  },
+  "bav_bavarian_netherlands": {
+   "trade_steering": 0.15
+  },
+  "berber_new_world_pirates": {
+   "trade_steering": 0.2
+  },
+  "bur_channel_trading": {
+   "trade_steering": 0.1
+  },
+  "buying_american": {
+   "trade_steering": 0.1
+  },
+  "colbert_trade_reforms": {
+   "trade_steering": 0.2
+  },
+  "competitive_advantage": {
+   "trade_steering": 0.1
+  },
+  "croatian_fleet": {
+   "ship_power_propagation": 0.33
+  },
+  "dan_humiliated_the_hanse": {
+   "trade_steering": 0.1
+  },
+  "dan_sca_indian_administration": {
+   "trade_steering": 0.2
+  },
+  "east_africa_commercial_routes": {
+   "ship_power_propagation": 0.1
+  },
+  "eng_australian_colony": {
+   "trade_steering": 0.1
+  },
+  "eng_rb_established_shipping": {
+   "trade_steering": 0.2
+  },
+  "exp_trade_steering": {
+   "trade_steering": 0.25
+  },
+  "exp_trade_steering_100": {
+   "trade_steering": 1.0
+  },
+  "exp_trade_steering_50": {
+   "trade_steering": 0.5
+  },
+  "gbr_naval_dominance": {
+   "trade_steering": 0.25
+  },
+  "gen_indian_holding_mod": {
+   "trade_steering": 0.1
+  },
+  "german_asia_companies_backup": {
+   "trade_steering": 0.1
+  },
+  "hab_austrian_australia": {
+   "trade_steering": 0.1
+  },
+  "hab_ostend_company_2": {
+   "trade_steering": 0.1
+  },
+  "hsa_north_sea_trading": {
+   "trade_steering": 0.2
+  },
+  "hsn_east_mediterranean": {
+   "trade_steering": 0.1
+  },
+  "hsn_red_sea_trade_hegemony": {
+   "trade_steering": 0.1
+  },
+  "mug_gujarat_mod": {
+   "trade_steering": 0.2
+  },
+  "ned_ceylon_mod": {
+   "ship_power_propagation": 0.2,
+   "trade_steering": 0.2
+  },
+  "ned_grand_designs_effects": {
+   "trade_steering": 0.25
+  },
+  "ned_west_indies_charter": {
+   "ship_power_propagation": 0.1,
+   "trade_steering": 0.1
+  },
+  "nor_new_world_administration": {
+   "trade_steering": 0.1
+  },
+  "nov_north_sea_trade": {
+   "trade_steering": 0.3
+  },
+  "ori_coromandel_modifier": {
+   "trade_steering": 0.2
+  },
+  "orm_arabian_indian_ocean_supremacy": {
+   "trade_steering": 0.15
+  },
+  "orm_arabian_indian_ocean_supremacy_no_dlc": {
+   "trade_steering": 0.15
+  },
+  "orm_coast_of_china": {
+   "trade_steering": 0.2
+  },
+  "orm_far_east_company": {
+   "trade_steering": 0.05
+  },
+  "pirate_trade_ports": {
+   "trade_steering": 0.1
+  },
+  "plb_gold": {
+   "trade_steering": 0.1
+  },
+  "pom_trade_boom": {
+   "trade_steering": 0.2
+  },
+  "por_spice_trade": {
+   "trade_steering": 0.15
+  },
+  "por_wine_monopolies": {
+   "trade_steering": 0.2
+  },
+  "protected_commerce": {
+   "trade_steering": 0.1
+  },
+  "pru_chinese_trade": {
+   "trade_steering": 0.33
+  },
+  "prussian_african_trade_company": {
+   "trade_steering": 0.05
+  },
+  "rus_alaska_modifier": {
+   "trade_steering": 0.2
+  },
+  "rus_trade_empire": {
+   "trade_steering": 0.25
+  },
+  "silk_road_modifier": {
+   "trade_steering": 0.2
+  },
+  "spa_invest_in_west_africa_modifier": {
+   "trade_steering": 0.1
+  },
+  "tau_arakan_trade": {
+   "trade_steering": 0.2
+  },
+  "tur_control_over_the_red_sea": {
+   "trade_steering": 0.15
+  },
+  "turkoman_control_of_hormuz": {
+   "trade_steering": 0.2
+  },
+  "ven_genoese_humiliation": {
+   "trade_steering": 0.2
+  },
+  "ven_office_of_foreign_commercial_affairs": {
+   "trade_steering": 0.1
+  },
+  "ven_wealth_of_india_modifier": {
+   "trade_steering": 0.05
+  },
+  "zan_kilwan_trade_dominance": {
+   "trade_steering": 0.25
+  }
+ },
+ "government_reforms": {
+  "curtail_the_burghers_reform": {
+   "trade_steering": 0.15
+  },
+  "karimi_stations_reform": {
+   "trade_steering": 0.2
+  },
+  "power_to_the_smugglers_reform": {
+   "ship_power_propagation": 0.25
+  }
+ },
+ "idea_groups": {
+  "ARA_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {
+     "trade_steering": 0.2
+    },
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "ARB_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {
+     "trade_steering": 0.2
+    },
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "BRB_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.2
+    },
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "BRI_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {
+    "trade_steering": 0.1
+   }
+  },
+  "CAN_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.15
+    },
+    {}
+   ],
+   "start": {}
+  },
+  "CNN_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {
+    "trade_steering": 0.1
+   }
+  },
+  "CRO_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {
+     "trade_steering": 0.1
+    },
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "DNZ_ideas": {
+   "bonus": {
+    "trade_steering": 0.2
+   },
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "EFR_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.2
+    }
+   ],
+   "start": {}
+  },
+  "EIC_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.25
+    },
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "FU2_ideas": {
+   "bonus": {
+    "trade_steering": 0.2
+   },
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "GRA_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.1
+    },
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "HSA_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {
+    "trade_steering": 0.1
+   }
+  },
+  "HUR_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {
+     "trade_steering": 0.2
+    },
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "ISR_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.1
+    },
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "KRA_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {
+    "trade_steering": 0.1
+   }
+  },
+  "KRL_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {
+     "trade_steering": 0.1
+    },
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "KUT_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {
+    "trade_steering": 0.2
+   }
+  },
+  "LIG_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.2
+    },
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "LNS_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {
+    "trade_steering": 0.33
+   }
+  },
+  "LUX_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {
+     "trade_steering": 0.15
+    },
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "MAM2_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {
+    "trade_steering": 0.25
+   }
+  },
+  "MAM_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {
+    "trade_steering": 0.25
+   }
+  },
+  "MED_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {
+    "trade_steering": 0.1
+   }
+  },
+  "MLC_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.2
+    },
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "MPC_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.2
+    },
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "MSA_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {
+     "ship_power_propagation": 0.2
+    },
+    {
+     "trade_steering": 0.25
+    },
+    {}
+   ],
+   "start": {}
+  },
+  "NOR_ideas": {
+   "bonus": {
+    "trade_steering": 0.2
+   },
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "OMA_ideas": {
+   "bonus": {},
+   "ideas": [
+    {
+     "trade_steering": 0.33
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "ORI_ideas": {
+   "bonus": {
+    "trade_steering": 0.2
+   },
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "OUC_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.15
+    },
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "PAT_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {
+     "trade_steering": 0.2
+    },
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "POM_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {
+     "trade_steering": 0.25
+    },
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "PSK_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.2
+    }
+   ],
+   "start": {}
+  },
+  "RYU_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {
+    "trade_steering": 0.2
+   }
+  },
+  "SIL_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.1
+    },
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "SMZ_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.2
+    },
+    {}
+   ],
+   "start": {}
+  },
+  "SOM_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {
+     "trade_steering": 0.15
+    },
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "SOO_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {
+    "trade_steering": 0.2
+   }
+  },
+  "SUN_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.1
+    },
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "SZO_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.2
+    },
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "TRA_ideas": {
+   "bonus": {
+    "trade_steering": 0.2
+   },
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "VEN_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {
+    "trade_steering": 0.33
+   }
+  },
+  "VEN_ideas_2": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {
+    "trade_steering": 0.33
+   }
+  },
+  "arabian_ideas": {
+   "bonus": {},
+   "ideas": [
+    {
+     "trade_steering": 0.15
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "default_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.05
+    },
+    {}
+   ],
+   "start": {}
+  },
+  "javan_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.1
+    },
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "malayan_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {
+    "trade_steering": 0.1
+   }
+  },
+  "maritime_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {
+     "ship_power_propagation": 0.25
+    },
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "somali_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {
+    "trade_steering": 0.15
+   }
+  },
+  "sulawesi_ideas": {
+   "bonus": {},
+   "ideas": [
+    {
+     "trade_steering": 0.1
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "start": {}
+  },
+  "trade_ideas": {
+   "bonus": {},
+   "ideas": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+     "trade_steering": 0.25
+    },
+    {}
+   ],
+   "start": {}
+  }
+ },
+ "modifiers": [
+  "trade_steering",
+  "ship_power_propagation"
+ ],
+ "policies": {
+  "armed_neutrality_act": {
+   "trade_steering": 0.25
+  },
+  "encouragement_of_merchant_navy": {
+   "trade_steering": 0.2
+  }
+ },
+ "static_modifiers": {
+  "navy_tradition": {
+   "trade_steering": 1.0
+  },
+  "total_blockaded": {
+   "trade_steering": -0.75
+  }
+ }
+}

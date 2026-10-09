@@ -1,7 +1,11 @@
-"""The fixture corpus: manifest, locating saves (raw file or tracked zip), and running verification over all of them.
+"""The research datasets: locating clean saves and running verification over them.
+
+Layout (docs/trade_testing.md):  datasets/eu4/<game version>/<mods key>/<dlc key>/<series>/series.json + <file>.zip
+Every series.json lists its saves (id, file, tag, date, role, change, covers, sha256, quality). Series of kind
+"report" hold saves users submitted from the app; they are verified and logged but do not gate the calculation.
 
 Worlds are processed one at a time and discarded (a world holds ~50k multipliers); only the VerificationReport is kept.
-EU4_FIXTURE_IDS=S14,S42 restricts a run; EU4_TEST_SAVES_DIR points at a directory of raw saves.
+EU4_FIXTURE_IDS=U10,U27 restricts a run to those saves; EU4_SERIES=venice-1444 to those series.
 """
 from __future__ import annotations
 
@@ -14,50 +18,56 @@ from pathlib import Path
 from typing import Callable, Iterator
 
 from app.parsing.tradenodes import load_trade_graph
+from app.trade import calc
 from app.trade.extract import extract_world
 from app.trade.types import World
 from app.trade.verify import VerificationReport, verify_world
 
-TESTS_DIR = Path(__file__).resolve().parent.parent.parent / "tests"
-FIXTURES_DIR = TESTS_DIR / "fixtures" / "saves"
-ZIP_DIR = TESTS_DIR / "fixtures" / "saves_zip"
-MANIFEST_PATH = FIXTURES_DIR / "saves.json"
+REPO_DIR = Path(__file__).resolve().parents[3]
+DATASETS_DIR = REPO_DIR / "datasets" / "eu4"
+REPORT_KIND = "report"
 
 
-def manifest(path: Path = MANIFEST_PATH) -> list[dict]:
-    entries = json.loads(path.read_text(encoding="utf-8"))["saves"]
-    for e in entries:
-        e.setdefault("kind", "start")
-        e.setdefault("expected", "green")
-        e.setdefault("covers", [])
+def dataset_dir(game_version: str, mods_key: str, dlc_key: str, root: Path = DATASETS_DIR) -> Path:
+    return root / game_version / mods_key / dlc_key
+
+
+def manifest(root: Path = DATASETS_DIR, game_version: str = calc.SUPPORTED_GAME_VERSION) -> list[dict]:
+    """Every save of every series of the given game version, with its series, kind, dataset and zip path."""
+    entries: list[dict] = []
+    for series_path in sorted((root / game_version).glob("*/*/*/series.json")):
+        series = json.loads(series_path.read_text(encoding="utf-8"))
+        for e in series["saves"]:
+            entries.append(e | {
+                "series": series["series"], "kind": series.get("kind", "observation"),
+                "dataset": str(series_path.parent.parent.relative_to(root)), "zip": str(series_path.parent / f"{e['file']}.zip"),
+                "covers": e.get("covers", []),
+            })
     return entries
 
 
-def selected(entries: list[dict] | None = None) -> list[dict]:
+def selected(entries: list[dict] | None = None, include_reports: bool = False) -> list[dict]:
     entries = entries if entries is not None else manifest()
-    wanted = os.environ.get("EU4_FIXTURE_IDS")
-    if wanted:
-        ids = {i.strip() for i in wanted.split(",") if i.strip()}
-        entries = [e for e in entries if e["id"] in ids]
-    return entries
+    if not include_reports:
+        entries = [e for e in entries if e["kind"] != REPORT_KIND]
+    ids = {i.strip() for i in os.environ.get("EU4_FIXTURE_IDS", "").split(",") if i.strip()}
+    series = {s.strip() for s in os.environ.get("EU4_SERIES", "").split(",") if s.strip()}
+    return [e for e in entries if (not ids or e["id"] in ids) and (not series or e["series"] in series)]
 
 
-def locate(entry: dict, tmp_dir: Path, zip_dir: Path = ZIP_DIR, saves_dir: Path | None = None) -> Path | None:
-    saves_dir = saves_dir or Path(os.environ.get("EU4_TEST_SAVES_DIR", FIXTURES_DIR))
-    raw = saves_dir / entry["file"]
-    if raw.exists():
-        return raw
-    zp = zip_dir / f"{entry['file']}.zip"
-    if not zp.exists():
+def locate(entry: dict, tmp_dir: Path) -> Path | None:
+    """Extract the save from its zip into tmp_dir; None if the zip is missing (or only an LFS pointer was checked out)."""
+    zp = Path(entry["zip"])
+    if not zp.exists() or not zipfile.is_zipfile(zp):
         return None
     with zipfile.ZipFile(zp) as zf:
         zf.extract(entry["file"], path=tmp_dir)
     return tmp_dir / entry["file"]
 
 
-def iter_worlds(entries: list[dict] | None = None) -> Iterator[tuple[dict, World]]:
+def iter_worlds(entries: list[dict]) -> Iterator[tuple[dict, World]]:
     graph = load_trade_graph()
-    for entry in selected(entries):
+    for entry in entries:
         with tempfile.TemporaryDirectory() as tmp:
             path = locate(entry, Path(tmp))
             if path is None:
@@ -73,7 +83,7 @@ class CorpusReport:
 
 
 def run_corpus(entries: list[dict] | None = None, progress: Callable[[str], None] | None = None) -> CorpusReport:
-    chosen = selected(entries)
+    chosen = entries if entries is not None else selected()
     reports: dict[str, VerificationReport] = {}
     for entry, world in iter_worlds(chosen):
         reports[entry["id"]] = verify_world(world)

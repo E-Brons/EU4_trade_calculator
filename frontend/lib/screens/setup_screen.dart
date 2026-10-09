@@ -3,13 +3,12 @@ import 'package:provider/provider.dart';
 
 import '../app_state.dart';
 import '../models.dart';
-import 'dashboard_screen.dart';
 
+/// Optimizer settings, opened from the dashboard: home node, budgets, the player's scalars and the nodes the optimizer
+/// may place merchants and ships in. Everything else (every country's power in every node) comes from the save.
+/// "Apply" pops back; the dashboard rebuilds itself.
 class SetupScreen extends StatefulWidget {
-  /// Opened from the dashboard to tweak raw trade data: "Apply" just pops
-  /// back (the dashboard rebuilds itself) instead of pushing a new dashboard.
-  final bool fromDashboard;
-  const SetupScreen({super.key, this.fromDashboard = false});
+  const SetupScreen({super.key});
 
   @override
   State<SetupScreen> createState() => _SetupScreenState();
@@ -36,13 +35,13 @@ class _SetupScreenState extends State<SetupScreen> {
 
     if (_loadingGraph || app.graph == null) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Setup')),
+        appBar: AppBar(title: const Text('Optimizer settings')),
         body: const Center(child: CircularProgressIndicator()),
       );
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Setup')),
+      appBar: AppBar(title: const Text('Optimizer settings')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: ConstrainedBox(
@@ -63,15 +62,8 @@ class _SetupScreenState extends State<SetupScreen> {
                 children: [
                   FilledButton.icon(
                     icon: const Icon(Icons.auto_awesome),
-                    label: Text(widget.fromDashboard ? 'Apply' : 'Open dashboard'),
-                    onPressed: () {
-                      if (widget.fromDashboard) {
-                        Navigator.of(context).pop();
-                      } else {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (_) => const DashboardScreen()));
-                      }
-                    },
+                    label: const Text('Apply'),
+                    onPressed: () => Navigator.of(context).pop(),
                   ),
                 ],
               ),
@@ -146,22 +138,17 @@ class _GlobalParamsCard extends StatelessWidget {
               integer: true,
             ),
             _NumberField(
-              label: 'Merchant trade power',
-              value: app.params.merchantPower,
-              onChanged: (v) => app.params.merchantPower = v,
-            ),
-            _NumberField(
-              label: 'Power per light ship',
-              value: app.params.powerPerLightShip,
+              label: 'Power per added light ship',
+              value: app.params.powerPerLightShip ?? 0,
               onChanged: (v) => app.params.powerPerLightShip = v,
             ),
             _NumberField(
-              label: 'Trade efficiency (0-1)',
-              value: app.params.tradeEfficiency,
+              label: 'Trade efficiency (0.25 = 25%)',
+              value: app.params.tradeEfficiency ?? 0,
               onChanged: (v) => app.params.tradeEfficiency = v,
             ),
             if (nodeOptions.isEmpty)
-              const Text('Add some trade nodes below to get started.', style: TextStyle(color: Colors.grey)),
+              const Text('Add the trade nodes the optimizer may use below.', style: TextStyle(color: Colors.grey)),
           ],
         ),
       ),
@@ -241,7 +228,7 @@ class _AddNodeRowState extends State<_AddNodeRow> {
               controller: controller,
               focusNode: focusNode,
               decoration: const InputDecoration(
-                labelText: 'Add a trade node you have range/power in',
+                labelText: 'Add a trade node the optimizer may place merchants or ships in',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -268,156 +255,19 @@ class _NodeTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ids = app.candidateNodeIds.toList()..sort();
     final byId = app.graph!.byId;
-
-    return Column(
+    final ids = app.candidateNodeIds.toList()..sort((a, b) => (byId[a]?.displayName ?? a).compareTo(byId[b]?.displayName ?? b));
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
       children: [
         for (final id in ids)
-          _NodeRowCard(app: app, nodeId: id, displayName: byId[id]?.displayName ?? id, outgoing: byId[id]?.outgoing ?? const []),
+          InputChip(
+            label: Text((byId[id]?.displayName ?? id) + (id == app.homeNode ? '  (home)' : '')),
+            onDeleted: id == app.homeNode ? null : () => app.removeCandidate(id),
+          ),
       ],
     );
   }
 }
 
-class _NodeRowCard extends StatelessWidget {
-  final AppState app;
-  final String nodeId;
-  final String displayName;
-  final List<String> outgoing;
-  const _NodeRowCard({required this.app, required this.nodeId, required this.displayName, required this.outgoing});
-
-  @override
-  Widget build(BuildContext context) {
-    final state = app.nodeState(nodeId);
-    final alloc = app.currentAllocation.putIfAbsent(nodeId, () => NodeAllocationData());
-    final isHome = nodeId == app.homeNode;
-    final byId = app.graph!.byId;
-
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    displayName + (isHome ? '  (home)' : ''),
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.close),
-                  tooltip: 'Remove from candidates',
-                  onPressed: isHome ? null : () => app.removeCandidate(nodeId),
-                ),
-              ],
-            ),
-            Wrap(
-              spacing: 16,
-              runSpacing: 8,
-              children: [
-                _InlineNumberField(
-                  label: 'Local value',
-                  value: state.localValue,
-                  onChanged: (v) => state.localValue = v,
-                ),
-                _InlineNumberField(
-                  label: 'Your province power',
-                  value: state.playerBasePower,
-                  onChanged: (v) => state.playerBasePower = v,
-                ),
-                _InlineNumberField(
-                  label: "Others' collecting power",
-                  value: state.otherCollectPower,
-                  onChanged: (v) => state.otherCollectPower = v,
-                ),
-                _InlineNumberField(
-                  label: "Others' passive power",
-                  value: state.otherPassivePower,
-                  onChanged: (v) => state.otherPassivePower = v,
-                ),
-                SizedBox(
-                  width: 160,
-                  child: DropdownButtonFormField<MerchantAction>(
-                    initialValue: alloc.merchantAction,
-                    decoration: const InputDecoration(labelText: 'Current merchant'),
-                    items: const [
-                      DropdownMenuItem(value: MerchantAction.none, child: Text('None')),
-                      DropdownMenuItem(value: MerchantAction.collect, child: Text('Collect')),
-                      DropdownMenuItem(value: MerchantAction.steer, child: Text('Steer')),
-                    ],
-                    onChanged: (v) {
-                      if (v != null) alloc.merchantAction = v;
-                    },
-                  ),
-                ),
-                if (alloc.merchantAction == MerchantAction.steer)
-                  SizedBox(
-                    width: 160,
-                    child: DropdownButtonFormField<String>(
-                      initialValue: alloc.steerTarget,
-                      decoration: const InputDecoration(labelText: 'Steer to'),
-                      items: [
-                        for (final t in outgoing)
-                          DropdownMenuItem(value: t, child: Text(byId[t]?.displayName ?? t)),
-                      ],
-                      onChanged: (v) => alloc.steerTarget = v,
-                    ),
-                  ),
-                _InlineNumberField(
-                  label: 'Current light ships',
-                  value: alloc.lightShips.toDouble(),
-                  integer: true,
-                  onChanged: (v) => alloc.lightShips = v.round(),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _InlineNumberField extends StatefulWidget {
-  final String label;
-  final double value;
-  final void Function(double) onChanged;
-  final bool integer;
-  const _InlineNumberField({required this.label, required this.value, required this.onChanged, this.integer = false});
-
-  @override
-  State<_InlineNumberField> createState() => _InlineNumberFieldState();
-}
-
-class _InlineNumberFieldState extends State<_InlineNumberField> {
-  late TextEditingController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController(text: _format(widget.value));
-  }
-
-  String _format(double v) => widget.integer ? v.round().toString() : v.toStringAsFixed(2);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 140,
-      child: TextField(
-        controller: _controller,
-        decoration: InputDecoration(labelText: widget.label),
-        keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        onChanged: (text) {
-          final v = double.tryParse(text);
-          if (v != null) widget.onChanged(v);
-        },
-      ),
-    );
-  }
-}

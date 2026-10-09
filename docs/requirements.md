@@ -18,6 +18,10 @@ game state rather than generic advice.
    - A manual-entry form must always work as a fallback, independent of
      save parsing succeeding, since save-format parsing is inherently
      best-effort against an undocumented, patch-dependent format.
+     *(2026-10-09: suspended. The manual form fed the removed player-centric
+     engine; the verified calculation needs every country in every node, which
+     only a save provides. Open decision for the user: restore it as an
+     approximate mode, or drop the requirement.)*
 
 2. **Trade model**
    - Model the real EU4 trade node graph (~80 nodes, the actual topology

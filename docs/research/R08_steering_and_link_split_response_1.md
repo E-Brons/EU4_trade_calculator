@@ -150,6 +150,15 @@ Passive pullers (in `pull_power` without a merchant) and collectors do not count
 - Weights of the 67 nodes with no steering entry.
 - What sets a_c (0.05 x (1 + trade steering) is the obvious reading; not sourced).
 
+## Data basis (2026-10-06)
+
+On 2026-10-06 the research data was rebuilt (`docs/research/data_audit.md`): only **clean** saves are kept (the 1st of a month after the game's first trade computation, none of the player's merchants or fleets on the way; R12 final). Kept: U04 (TUR 1691.11.01), U10, U14, U20, U25, U27, U28, U29 (VEN 1444-1445). Removed: the 78 start snapshots S01-S78 and U07-U09 (saved before the first computation: steering weights, `add` and other computed fields are placeholders there) and 21 mid-month saves (S79, S80, U01-U03, U05, U06, U11-U13, U15-U19, U21-U24, U26, U30: numbers from the last 1st, merchant/ship flags from the save day). Counts above that include removed saves are kept as recorded but are **unverified on clean data** unless listed as re-checked below. Clean-data stage results quoted here: `scripts/verify_all.sh` on the 8 kept saves (calc 0.2.0).
+
+- C-02, C-03, Q5 and V-R08-5 claim 3 mix start snapshots (uniform pre-tick weights) into the counts: **not evidence** for or against a rule. The weight rule of update W (2026-10-06) was found on tick-day saves only.
+- On clean data `steer_weights` still fails 761 of 1,272 checks outside 5%: almost all are nodes with a steering country whose strength is unknown (never in a link's top 5) or nodes without steerers.
+- Mid-month Venice findings (V-R08-4 recall behaviour, U26) used saves that are now removed; the tick-day findings remain checkable.
+
+
 ## Update 2026-10-07 - controlled experiments (E00-P06)
 
 Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.
@@ -186,3 +195,36 @@ Source: 27 single-change jobs run in the game by the automation (`tools/EU4-game
 
 ### V4-R08-1 Steering strength = TRADE_ADDED_VALUE_MODIFER x (1 + trade_steering)
 Claim: VEN's `add` on its rank-1 steering entries (ragusa, wien) is 0.071 (E01d), 0.083 (+25 %, E08), 0.096 (+50 %, R2-STEER50), 0.121 (+100 %, R2-STEER100): +0.05 per +100 % = `TRADE_ADDED_VALUE_MODIFER = 0.05` (defines.lua 1204) x the modifier; the base 0.071 = 0.05 x 1.42-1.44 (`VEN_ideas` start `trade_steering = 0.33` plus about 0.1 unknown). A country without steering modifiers has 0.05, the most common identified strength in the corpus (57 % of 3,826). Confidence: confirmed (one country, four levels).
+
+## Update 2026-10-08 - value/flow analysis (all saves)
+
+Data: all clean dataset saves (corpus.selected(): 205 saves while the experiment saves were being added; calc 0.2.2). Scripts: `backend/scripts/research/value_chain.py`, `value_efficiency_gap.py`, `value_chain_proposed.py`, `value_negative_val.py`, `value_steer_failures.py`, `value_steer_variants.py`.
+
+### V5-R08-1 The remaining steer_weights misses are identification precision, not the rule
+Claim: on 40 saves (6,360 weight checks) the rule with identified strengths leaves 195 outside 5 % (4,491 exact within 0.001); equal strength 0.05 for everybody (weights proportional to effective power) leaves 504 (4,174 exact); keeping only identified strengths > 0.06 leaves 483. Strengths differ between countries; the failing nodes are those with many steerers per link, where `add = trunc3(strength / rank)` bounds a strength only to +-0.001 x rank (e.g. north_sea U89 0.831 vs 0.792 with five ranked steerers) and nodes with a large steerer that carries no `add` (default strength). Confidence: confirmed (variant comparison); the exact strengths of unranked steerers stay open.
+### V5-R08-2 Why the end-to-end chain stopped: efficiency, not flow
+Claim: of 205 saves, 144 stopped on an unknown `trade_efficiency`. The blocking countries hold a capital entry with no power (e.g. KLH ganges_delta: `has_capital`, no `val`) or a share that truncates to 0, so the save records no `money` for them anywhere (2 collecting entries with money lacked an identified efficiency). With efficiency identified at any collecting entry with money and 0.0 for countries with no recorded money (the value cannot matter: share 0), the chain completes in 205 of 205 saves and the player's income is within the chain tolerance in 169 of 205. Confidence: confirmed (measured).
+### V5-R08-3 Entries with negative `max_pow` count as 0 power
+Claim: 109 of 109 entries with negative `max_pow` (60 saves) store no `val`; the game counts them as 0 (U10 ethiopia: recorded `pull_power` 70.297 = chain 58.844 + 3.381 (HED) + 8.072 (NJR), the two negative vals). Clipping `val` at 0 in the chain lowers the node `current` misses from 3,853 to 3,554 of 15,545 (player income unchanged, 169 of 205). Confidence: confirmed.
+### V5-R08-4 First divergences of the chain (before the two changes)
+Claim: in the 26 saves where the chain ran: entry `max_pow` 12 (merchant/colonial power: gulf_of_siam PAT/KUT/BNJ, amazonas_node colonial nations, katsina TRP - power side), incoming 8 (philippines: its only inflow is canton, a steer-weight precision node of V5-R08-1), retention 6 (ethiopia: V5-R08-3; burma). Confidence: confirmed (classification).
+
+
+## Update 2026-10-09 - project check on the 205 clean saves (calc 0.3.0)
+
+- **Steering strength is derived, not identified (Q1).** strength = TRADE_ADDED_VALUE_MODIFER (0.05) x (1 +
+  trade_steering), trade_steering summed from the country's idea groups (traditions, ideas taken, ambition), policies,
+  government reforms, age abilities, event modifiers, the static modifier `navy_tradition` (trade_steering +1.0 at 100
+  navy tradition, scaled) and `total_blockaded` (-0.75, scaled by `blockaded_percent`). Weight of link i = sum over its
+  steerers of effective power x strength / the same over all links, truncated to 3 decimals: exact in 8,775 of 9,174
+  steered multi-link node-saves (with strengths identified from `add` ranks: 4,460), within 5 % in 9,095. The misses are
+  later-era countries with a trade_steering source the save does not name per country (estate privileges,
+  trade-company investments, parliament issues, great projects) and navy tradition earned after the month's
+  computation (implied strengths are lower by up to 0.02 in trade_steering).
+- **Size of `add` (Q2).** The steerers of one link ranked by effective power x strength get add = trunc3(strength /
+  rank) for ranks 1 to 5 and no `add` after rank 5 (smaller adds such as 0.004 exist for weak strengths); the per-link
+  sum of `add` matches in 18,184 of 19,086 links. Order among equal products is not by tag or power (ties do not
+  change the link sum when strengths are equal).
+- **Nodes without steering weight.** A node whose stored weights are all 0 (nobody steers and nobody has) sends
+  nothing on: `outgoing` = 0 and `current` = gross although `retention` < 1 (1,329 of 1,329 node-saves, e.g.
+  australia).

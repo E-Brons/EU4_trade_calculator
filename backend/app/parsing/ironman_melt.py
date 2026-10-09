@@ -113,5 +113,5 @@ def melt_ironman_save(file_bytes: bytes) -> bytes:
         + ". Workaround: open https://pdx.tools yourself, upload this save, "
         "open 'Save Info', click 'Melt', and re-upload the downloaded file "
         "here instead -- pre-melted files are accepted with zero extra "
-        "steps. Or enter your trade data manually below."
+        "steps."
     )

@@ -1,0 +1,29 @@
+start: MAM ../../diversity/out/obs-1444-MAM/MAM_1444.12.01.eu4
+step 0: {'patch': '../patches/probe_mam_recall_strict.py'}
+  patch probe_mam_recall_strict.py: reloading
+step 1: {'outfname': '../out/probe_recall_player/day0_after_load.eu4'}
+step 2: {'date': '1444.12.03', 'outfname': '../out/probe_recall_player/day2.eu4'}
+  run to 1444.12.03
+restored dlc_load.json and continue_game.json
+{
+ "ok": true,
+ "steps": [
+  {
+   "step": 0
+  },
+  {
+   "step": 1,
+   "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/probe/../out/probe_recall_player/day0_after_load.eu4",
+   "sha256": "e16f238fe4323893bb0d0915b7548a1ba466ef1ecbdccfff15942e5665d0e6c5",
+   "bytes": 34873701,
+   "date": "1444.12.1"
+  },
+  {
+   "step": 2,
+   "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/probe/../out/probe_recall_player/day2.eu4",
+   "sha256": "0d6a6daf3be22ee28c87c5a423bbd811d8bd80845b97b354372dc80c65f2f623",
+   "bytes": 35028240,
+   "date": "1444.12.3"
+  }
+ ]
+}

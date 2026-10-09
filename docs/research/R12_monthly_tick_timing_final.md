@@ -101,3 +101,9 @@ Draft (2026-10-04) -> response_1 (saves only, verified) -> Update and second pas
 | Q4 unverifiable defines and quotes | not needed for the calculation; removed with the draft claims |
 | Q5 fixed-point truncation | R08 C-06 (3-decimal truncation, verified on 12,113 links) |
 | Data rows | removed from request_2 (closed): 58 nodes -> R10; 95.5 % dropped; inputs not varied listed in section 5 as optional evidence |
+
+## Data basis (2026-10-06)
+
+On 2026-10-06 the research data was rebuilt (`docs/research/data_audit.md`): only **clean** saves are kept (the 1st of a month after the game's first trade computation, none of the player's merchants or fleets on the way; R12 final). Kept: U04 (TUR 1691.11.01), U10, U14, U20, U25, U27, U28, U29 (VEN 1444-1445). Removed: the 78 start snapshots S01-S78 and U07-U09 (saved before the first computation: steering weights, `add` and other computed fields are placeholders there) and 21 mid-month saves (S79, S80, U01-U03, U05, U06, U11-U13, U15-U19, U21-U24, U26, U30: numbers from the last 1st, merchant/ship flags from the save day). Counts above that include removed saves are kept as recorded but are **unverified on clean data** unless listed as re-checked below. Clean-data stage results quoted here: `scripts/verify_all.sh` on the 8 kept saves (calc 0.2.0).
+
+- This topic is about timing itself, so its evidence correctly uses mid-month and pre-first-tick saves (Venice series U07-U30). Those saves were removed from the dataset after this final; the conclusions stand as recorded, and the comparisons cannot be re-run from the repository any more (originals: `~/EU4_save_backups/`).

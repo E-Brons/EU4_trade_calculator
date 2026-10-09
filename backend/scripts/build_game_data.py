@@ -71,19 +71,88 @@ def build_light_ships(install: Path) -> dict:
     return ships
 
 
+# Country-scope modifiers the calculation needs, and where a country can get them. Only sources the save names per
+# country are read (idea groups, policies, government reforms, age abilities, the `modifier` list); estate privileges,
+# parliament issues, trade-company investments and great projects are not (no entry in the corpus needed them).
+COUNTRY_MODIFIERS = ("trade_steering", "ship_power_propagation")
+IDEA_GROUP_KEYS = {"start", "bonus", "trigger", "free", "ai_will_do", "category", "important"}
+# Event modifiers of mods whose saves are research data (the experiment mod lives in this repository).
+MOD_DIRS = [Path(__file__).resolve().parents[2] / "tools" / "EU4-game-automation" / "experiments" / "mod" / "eu4_experiments"]
+
+
+def _relevant(block) -> dict[str, float]:
+    if not isinstance(block, dict):
+        return {}
+    out = {}
+    for name in COUNTRY_MODIFIERS:
+        try:
+            out[name] = float(block[name])
+        except (KeyError, TypeError, ValueError):
+            pass
+    return out
+
+
+def _tree(path: Path) -> dict:
+    return parse(path.read_text(encoding="utf-8-sig", errors="replace"))
+
+
+def build_country_modifiers(install: Path) -> dict:
+    common = install / "common"
+    ideas: dict[str, dict] = {}
+    for path in sorted((common / "ideas").glob("*.txt")):
+        for group, body in _tree(path).items():
+            if isinstance(body, dict):
+                ideas[group] = {
+                    "start": _relevant(body.get("start")),
+                    "ideas": [_relevant(v) for k, v in body.items() if k not in IDEA_GROUP_KEYS and isinstance(v, dict)],
+                    "bonus": _relevant(body.get("bonus")),
+                }
+    policies = {k: _relevant(v) for path in sorted((common / "policies").glob("*.txt")) for k, v in _tree(path).items() if isinstance(v, dict)}
+    reforms = {k: _relevant(v.get("modifiers")) for path in sorted((common / "government_reforms").glob("*.txt"))
+               for k, v in _tree(path).items() if isinstance(v, dict)}
+    abilities = {ab: _relevant(ab_body.get("modifier")) for path in sorted((common / "ages").glob("*.txt"))
+                 for age in _tree(path).values() if isinstance(age, dict)
+                 for ab, ab_body in (age.get("abilities") or {}).items() if isinstance(ab_body, dict)}
+    events: dict[str, dict] = {}
+    for root in [common, *[d / "common" for d in MOD_DIRS if d.exists()]]:
+        for path in sorted((root / "event_modifiers").glob("*.txt")):
+            events.update({k: _relevant(v) for k, v in _tree(path).items() if isinstance(v, dict)})
+    static = {k: _relevant(v) for path in sorted((common / "static_modifiers").glob("*.txt")) for k, v in _tree(path).items() if isinstance(v, dict)}
+
+    def nonzero(table: dict) -> dict:
+        return {k: v for k, v in table.items() if v}
+
+    return {
+        "modifiers": list(COUNTRY_MODIFIERS),
+        "idea_groups": {g: body for g, body in ideas.items() if body["start"] or body["bonus"] or any(body["ideas"])},
+        "policies": nonzero(policies),
+        "government_reforms": nonzero(reforms),
+        "age_abilities": nonzero(abilities),
+        "event_modifiers": nonzero(events),
+        "static_modifiers": {k: static[k] for k in ("navy_tradition", "total_blockaded") if k in static},
+    }
+
+
 def main() -> None:
     install = Path(sys.argv[1]).expanduser() if len(sys.argv) > 1 else find_install()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     meta = {"game_version": game_version(install), "source": "common/defines.lua, common/units/*.txt"}
     defines = build_defines(install)
     ships = build_light_ships(install)
+    country = build_country_modifiers(install)
     (OUT_DIR / "defines_trade.json").write_text(
         json.dumps({"_meta": meta, "defines": defines}, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
     (OUT_DIR / "light_ships.json").write_text(
         json.dumps({"_meta": meta, "ships": ships}, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
-    print(f"{meta['game_version']}: {len(defines)} defines, {len(ships)} light ships -> {OUT_DIR}")
+    country_meta = meta | {"source": "common/ideas, policies, government_reforms, ages, event_modifiers, static_modifiers (+ the experiment mod's event_modifiers); "
+                                     "only the modifiers listed in `modifiers`, only sources with a non-zero value"}
+    (OUT_DIR / "country_modifiers.json").write_text(
+        json.dumps({"_meta": country_meta} | country, indent=1, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    print(f"{meta['game_version']}: {len(defines)} defines, {len(ships)} light ships, "
+          f"{sum(len(v) for k, v in country.items() if k != 'modifiers')} country modifier sources -> {OUT_DIR}")
 
 
 if __name__ == "__main__":

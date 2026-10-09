@@ -64,6 +64,20 @@ class NodeInput:
 
 
 @dataclass(frozen=True)
+class CountryInput:
+    """Raw variables of one country (its block under `countries`) that select country-scope modifiers."""
+
+    tag: str
+    idea_groups: tuple[tuple[str, int], ...] = ()   # `active_idea_groups`: group -> ideas taken (national: traditions always)
+    policies: tuple[str, ...] = ()                 # `active_policy`
+    reforms: tuple[str, ...] = ()                  # `government.reform_stack.reforms`
+    age_abilities: tuple[str, ...] = ()            # `active_age_ability`
+    modifiers: tuple[str, ...] = ()                # names in the `modifier` list (event / mission modifiers)
+    navy_tradition: float = 0.0
+    blockaded_percent: float = 0.0
+
+
+@dataclass(frozen=True)
 class NodeDecision:
     action: Action = Action.NONE
     steer_target: str | None = None
@@ -93,6 +107,13 @@ class WorldInputs:
     ironman: bool = False
     mods: tuple[str, ...] = ()
     dlcs: tuple[str, ...] = ()
+    start_date: str = ""                       # the game's start (bookmark) date
+    own_merchants_in_transit: int = 0          # player's merchants not yet at their node (envoy action 1)
+    own_fleets_in_transit: int = 0             # player's protect-trade fleets not yet counted (no `on_my_way` key, R11)
+    countries: dict[str, CountryInput] = field(default_factory=dict)   # every country with an entry in some node
+    player_merchants: int = 0                  # player's merchants (envoys), deployed or not
+    player_light_ships: int = 0                # player's light ships
+    player_ship_types: tuple[tuple[str, int], ...] = ()   # player's ships per unit type (all navies)
 
 
 @dataclass(frozen=True)

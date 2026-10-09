@@ -2,24 +2,23 @@
 
 Tells you where to put your merchants (collect vs. steer, and to where) and
 how to spread your light ships across trade nodes to maximize monthly trade
-income -- either from a save file or from numbers you type in by hand.
+income, from your own save file.
 
 ## How it works
 
-- **`backend/app/parsing`** turns game files and `.eu4` saves into a trade
-  node graph (`data/tradenodes.json`, generated from the game's own
-  `common/tradenodes/00_tradenodes.txt` + localisation) and per-node data
-  (local value, everyone's trade power). `save.py`'s field names are
-  verified against a real melted 1.37.5 save, not guessed -- see its module
-  docstring.
-- **`backend/app/engine`** simulates trade value flowing through that graph
-  (`simulate.py`, implementing the real EU4 trade formula reverse-engineered
-  from `common/defines.lua` and a real save -- see its module docstring)
-  and searches merchant/light-ship allocations for the one that maximizes
-  the player's income (`optimize.py`): seed with the obvious choices, fill
-  remaining merchants by marginal gain, then local-search / random-restart
-  until nothing improves (falls back to brute force for small enough
-  candidate sets).
+- **`backend/app/trade`** is the trade calculation. `extract.py` reads every
+  country's entry in every trade node of a `.eu4` save (plus the country data
+  that selects its trade modifiers); `calc.py` is the one file with the EU4
+  trade rules, reverse-engineered from the game files and verified stage by
+  stage against 205 clean real saves (`scripts/verify_all.sh`, see
+  `docs/trade_testing.md` for the current status); `optimize.py` searches
+  merchant/light-ship placements, each priced by `calc.WhatIf`: seed with the
+  obvious choices (and the save's own placement), fill remaining merchants by
+  marginal gain, then local search with random restarts.
+- **`backend/app/parsing`** holds the text-format parser, the trade node graph
+  (`data/tradenodes.json`, generated from the game's own
+  `common/tradenodes/00_tradenodes.txt` + localisation) and the Ironman melt
+  automation.
 - **`backend/app/api.py`** exposes it all over HTTP; the Flutter app in
   `frontend/` is the UI.
 - **Trade Atlas** (`frontend/lib/screens/atlas_view.dart`) is the default
@@ -34,13 +33,12 @@ income -- either from a save file or from numbers you type in by hand.
   still available via "Flow chart". Map geometry is generated from the game
   files by `backend/scripts/build_map.py` (see below).
 
-See `backend/app/engine/model.py` (`Params`) for every constant the trade
-model uses -- most are exact game constants, a few (trade efficiency) are
-genuinely save-specific and can't be derived, and are editable in the UI.
-"Current income" shown after importing a save is the save's own exact
-number (`actual_current_income`), not a re-derived estimate; "optimal
-income" necessarily *is* an estimate, since it describes an allocation you
-haven't actually tried, calibrated against that exact current figure.
+Game constants come from the game files (`backend/data/game/`, vendored by
+`backend/scripts/build_game_data.py`); values the save does not store are
+derived from the country's ideas/policies/modifiers or identified from the
+save's own numbers, and the two you may want to change (trade efficiency,
+power per added light ship) are sliders in the UI. The income the save itself
+records is shown next to the calculated Snapshot.
 
 ## Run it
 
@@ -126,8 +124,7 @@ Ironman saves are binary and need melting first. That happens
 
 If no worker is running (or it can't reach pdx.tools), import fails with a
 clear, actionable error instead of hanging, and you can always fall back to
-melting by hand via pdx.tools and re-uploading the result, or entering data
-manually.
+melting by hand via pdx.tools and re-uploading the result.
 
 See `backend/app/parsing/pdx_tools_melt.py` (the bridge client) and
 `backend/tools/melt_worker.py` (the worker, plus its module docstring for
@@ -138,27 +135,31 @@ details.
 
 - `docs/requirements.md` -- what this app is for and what it needs to do.
 - `docs/implementation.md` -- how it's actually built: architecture,
-  the trade model, the optimizer, save parsing, and the melt automation.
-- `docs/test.md` -- how to check the trade calculation against real save
-  files (a save list to make, an automated harness, and a critical
-  accuracy finding surfaced while building it).
+  the trade calculation, the optimizer, save extraction, and the melt automation.
+- `docs/trade_testing.md` -- how the calculation is verified against real
+  saves; `docs/trade_spec.md` (generated) -- every stage, variable and edge
+  case; `docs/research/` -- the open questions and their evidence.
 
 ## Project layout
 
 ```
 backend/
   app/
+    trade/      calc.py (THE trade calculation), extract.py + savefile.py
+                (save -> World), optimize.py, session.py (loaded saves),
+                verify.py + corpus.py (verification against datasets/),
+                variables.py (variable registry), game_data.py
     parsing/    clausewitz.py (text-format parser), tradenodes.py (graph),
-                save.py (.eu4 -> engine input), ironman_melt.py +
-                pdx_tools_browser.py + pdx_tools_melt.py (Ironman melt:
-                in-process pdx.tools automation, then a separate worker)
-    engine/     model.py (data model + Params), simulate.py, optimize.py
+                ironman_melt.py + pdx_tools_browser.py + pdx_tools_melt.py
+                (Ironman melt: in-process pdx.tools automation, then a
+                separate worker)
     api.py, main.py, schemas.py
-  data/tradenodes.json   generated node graph (committed, so no game
-                          install is required to run the app)
-  scripts/      build_tradenodes.py, inspect_save.py (save-format debugging)
+  data/         tradenodes.json (node graph), game/ (vendored game constants)
+  scripts/      build_game_data.py, build_tradenodes.py, build_map.py,
+                add_save.py, check_datasets.py, gen_spec.py, research/
   tools/        melt_worker.py (standalone Ironman-melt bridge worker)
   tests/
-frontend/       Flutter web app (import -> setup -> results screens)
-docs/           requirements.md, implementation.md
+datasets/       clean real saves (git LFS) the calculation is verified on
+frontend/       Flutter web app (import -> dashboard / atlas -> optimizer settings)
+docs/           requirements.md, implementation.md, trade_testing.md, research/
 ```

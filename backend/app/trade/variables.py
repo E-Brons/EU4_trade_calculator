@@ -40,8 +40,14 @@ VARIABLES: tuple[Variable, ...] = (
     _v("ironman", "read", "save was a binary Ironman save melted by pdx.tools"),
     _v("trade_efficiency", "observed", "country trade efficiency, identified at the country's collecting nodes (not stored in the save)",
        "trade.node[].<tag>.money / .total", ("income_efficiency",), ("R07",)),
-    _v("steering_strength", "observed", "country's steering strength: add = trunc3(strength / rank) on each link, identified from the add values (not stored)",
-       "trade.node[].<tag>.add", ("steer_weights",), ("R08",)),
+    # --- country (countries.<tag>): selects country-scope modifiers (trade_steering, ship_power_propagation) ---
+    _v("country_idea_groups", "read", "idea groups and how many ideas are taken", "countries.<tag>.active_idea_groups", ("steer_weights", "steering_bonus", "propagation"), ("R08", "R05")),
+    _v("country_policies", "read", "active policies", "countries.<tag>.active_policy", ("steer_weights", "steering_bonus"), ("R08",)),
+    _v("country_reforms", "read", "government reforms", "countries.<tag>.government.reform_stack.reforms", ("steer_weights", "steering_bonus", "propagation"), ("R08", "R05")),
+    _v("country_age_abilities", "read", "taken age abilities", "countries.<tag>.active_age_ability", ("steer_weights", "steering_bonus", "propagation"), ("R08", "R05")),
+    _v("country_modifiers", "read", "event and mission modifiers", "countries.<tag>.modifier", ("steer_weights", "steering_bonus", "propagation"), ("R08", "R05")),
+    _v("navy_tradition", "read", "navy tradition (static modifier navy_tradition: trade_steering +1.0 at 100)", "countries.<tag>.navy_tradition", ("steer_weights", "steering_bonus"), ("R08",)),
+    _v("blockaded_percent", "read", "share of ports blockaded (static modifier total_blockaded: trade_steering -0.75)", "countries.<tag>.blockaded_percent", ("steer_weights", "steering_bonus"), ("R08",)),
     _v("merchant_power", "observed", "country's flat power on every entry with a merchant (0 in start saves), identified from max_pow minus its known parts",
        "trade.node[].<tag>.max_pow", ("raw_power",), ("R06",)),
     # --- node: read ---
@@ -93,7 +99,7 @@ VARIABLES: tuple[Variable, ...] = (
     _v("entry_money", "recorded", "monthly ducats of a collector", "<tag>.money", ("income_efficiency",), ("R07",)),
     _v("entry_share_total", "recorded", "collector's share of retained ducats", "<tag>.total", ("income_share",), ("R07",)),
     _v("entry_power_fraction", "recorded", "collector's share of retained power", "<tag>.power_fraction", (), ("R07",)),
-    _v("entry_add", "observed", "steering value bonus on the steered link (size not derived)", "<tag>.add", ("link_flow",), ("R08",)),
+    _v("entry_add", "recorded", "steering value bonus on the steered link: fx(strength / rank) for the 5 strongest steerers", "<tag>.add", ("steering_bonus", "link_flow"), ("R08",)),
     _v("entry_potential", "recorded", "net transferred power / node total, signed (R04, verified)", "<tag>.potential", ("transfers",), ("R04", "R09")),
     _v("entry_already_sent", "unknown", "meaning unknown", "<tag>.already_sent", (), ("R09",)),
     # --- constants (game_data) ---
@@ -106,7 +112,8 @@ VARIABLES: tuple[Variable, ...] = (
     _v("TRADE_PROPAGATE_DIVIDER", "constant", "propagation divisor", "defines.lua", ("propagation",), ("R05",)),
     _v("TRADE_PROPAGATE_THRESHOLD", "constant", "propagation threshold", "defines.lua", ("propagation",), ("R05",)),
     _v("TRADE_MERCHANT_PRESENT", "constant", "income bonus when a merchant is present", "defines.lua", ("income_efficiency",), ("R07",)),
-    _v("TRADE_ADDED_VALUE_MODIFER", "constant", "steering value bonus", "defines.lua", ("link_flow",), ("R08",)),
+    _v("TRADE_ADDED_VALUE_MODIFER", "constant", "base steering strength (value bonus of the strongest steerer)", "defines.lua", ("steer_weights", "steering_bonus"), ("R08",)),
+    _v("STEERING_BONUS_RANKS", "constant", "steerers per link that get a value bonus (fitted, data/game/empirical.json)", "empirical", ("steering_bonus",), ("R08",)),
 )
 
 BY_ID = {v.id: v for v in VARIABLES}

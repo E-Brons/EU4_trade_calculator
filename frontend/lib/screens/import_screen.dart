@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../app_state.dart';
 import '../api_client.dart';
+import '../save_check.dart';
 import 'dashboard_screen.dart';
-import 'setup_screen.dart';
 
 class ImportScreen extends StatefulWidget {
   const ImportScreen({super.key});
@@ -34,20 +34,15 @@ class _ImportScreenState extends State<ImportScreen> {
     try {
       final imported = await app.api.importSave(bytes, file.name);
       app.applyImportResult(imported);
+      if (context.mounted) context.read<SaveCheck>().check(bytes, file.name); // background: banner when done
       if (!context.mounted) return;
       Navigator.of(context).push(MaterialPageRoute(builder: (_) => const DashboardScreen()));
     } catch (e) {
       final message = e is ApiException ? e.message : e.toString();
-      setState(() => _error =
-          'Could not read that save automatically ($message). You can still continue and enter your trade nodes by hand.');
+      setState(() => _error = 'Could not read that save ($message).');
     } finally {
       setState(() => _loading = false);
     }
-  }
-
-  void _goManual(BuildContext context) {
-    context.read<AppState>().startManualEntry();
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) => const SetupScreen()));
   }
 
   @override
@@ -86,16 +81,10 @@ class _ImportScreenState extends State<ImportScreen> {
                 const SizedBox(height: 8),
                 const Text(
                   'Non-ironman saves are read directly. Ironman saves are melted '
-                  'automatically via pdx.tools; if that\'s not available, '
-                  'importing will fail gracefully and you can enter values by '
-                  'hand instead.',
+                  'automatically via pdx.tools; if that\'s not available, melt the '
+                  'save on pdx.tools yourself and upload the melted file.',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 12, color: Colors.grey),
-                ),
-                const SizedBox(height: 24),
-                OutlinedButton(
-                  onPressed: _loading ? null : () => _goManual(context),
-                  child: const Text('Enter everything manually'),
                 ),
               ],
             ),

@@ -61,12 +61,12 @@ class ApiClient {
   }
 
   Future<SimulateResponseData> simulate({
-    required Map<String, NodeStateData> nodeStates,
+    required String saveId,
     required Map<String, NodeAllocationData> allocation,
     required ParamsData params,
   }) async {
     final body = jsonEncode({
-      'node_states': nodeStates.map((k, v) => MapEntry(k, v.toJson())),
+      'save_id': saveId,
       'allocation': allocation.map((k, v) => MapEntry(k, v.toJson())),
       'params': params.toJson(),
     });
@@ -75,8 +75,29 @@ class ApiClient {
     return SimulateResponseData.fromJson(_decode(r));
   }
 
+  /// What every merchant choice (and every light-ship count) at one node would
+  /// do to total income, holding the rest of the allocation fixed.
+  Future<NodeOptionsData> nodeOptions({
+    required String nodeId,
+    required String saveId,
+    required Map<String, NodeAllocationData> allocation,
+    required ParamsData params,
+    required int maxLightShips,
+  }) async {
+    final body = jsonEncode({
+      'node_id': nodeId,
+      'save_id': saveId,
+      'allocation': allocation.map((k, v) => MapEntry(k, v.toJson())),
+      'params': params.toJson(),
+      'max_light_ships': maxLightShips,
+    });
+    final r = await http.post(_uri('/api/node-options'),
+        headers: {'Content-Type': 'application/json'}, body: body);
+    return NodeOptionsData.fromJson(_decode(r));
+  }
+
   Future<OptimizeResponseData> optimize({
-    required Map<String, NodeStateData> nodeStates,
+    required String saveId,
     required ParamsData params,
     required String homeNode,
     required List<String> candidateNodes,
@@ -87,7 +108,7 @@ class ApiClient {
     int maxRestarts = 3,
   }) async {
     final body = jsonEncode({
-      'node_states': nodeStates.map((k, v) => MapEntry(k, v.toJson())),
+      'save_id': saveId,
       'params': params.toJson(),
       'home_node': homeNode,
       'candidate_nodes': candidateNodes,

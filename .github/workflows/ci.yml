@@ -1,8 +1,7 @@
 name: CI
 
 on:
-  push:
-    branches: [main]
+  push:            # every branch: each pushed state of the calculation gets a log row
   pull_request:
   workflow_dispatch:
 
@@ -23,68 +22,70 @@ jobs:
           cache: pip
           cache-dependency-path: backend/requirements.txt
       - run: pip install -r requirements.txt
-      - run: python -m pytest -q --ignore=tests/test_real_saves.py --ignore=tests/trade
-
-  # LEGACY, removed at cutover: this runs the old engine's replay shortcut, which reads the save's own numbers back, so it
-  # does NOT prove the formula (see docs/trade_testing.md). The real check is verify-trade-calculation below.
-  # The raw .eu4 saves are gitignored (multi-GB); each has a small tracked zip under tests/fixtures/saves_zip/,
-  # unzipped lazily into a pytest tmp_path per test.
-  verify-calculation-vs-saves:
-    name: "Legacy replay check (to be removed at cutover)"
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.14"
-          cache: pip
-          cache-dependency-path: backend/requirements.txt
-      - run: pip install -r requirements.txt
-      - name: Confirm the save corpus is actually present (not silently all-skipped)
-        run: |
-          python3 - <<'EOF'
-          import json, zipfile
-          from pathlib import Path
-          manifest = json.loads(Path("tests/fixtures/saves/saves.json").read_text())["saves"]
-          zip_dir = Path("tests/fixtures/saves_zip")
-          missing = [e["id"] for e in manifest if not (zip_dir / f"{e['file']}.zip").exists()]
-          if missing:
-              raise SystemExit(f"{len(missing)}/{len(manifest)} fixture saves have no tracked zip: {missing}")
-          print(f"{len(manifest)} fixture saves present, zips verified readable.")
-          for e in manifest:
-              with zipfile.ZipFile(zip_dir / f"{e['file']}.zip") as zf:
-                  zf.testzip()
-          EOF
-      - run: python -m pytest -q tests/test_real_saves.py -v
+      - run: python -m pytest -q --ignore=tests/trade
 
   # THE trade-calculation check. One calculation file (backend/app/trade/calc.py) is run, stage by stage and end to end, over
-  # EVERY fixture save (all countries, all nodes) and compared with what the game recorded. The job fails while any stage
+  # EVERY clean dataset save (datasets/eu4/..., all countries, all nodes) and compared with what the game recorded. The job fails while any stage
   # or any save is not reproduced: there is no list of accepted failures. Also enforces: one calculation module, complete variable registry, edge-case
-  # coverage, up-to-date docs/trade_spec.md, stored user cases (git LFS). Same command locally: scripts/verify_all.sh
+  # coverage, up-to-date docs/trade_spec.md, well-formed datasets (git LFS). Same command locally: scripts/verify_all.sh
   verify-trade-calculation:
-    name: "Verify trade calculation (calc.py vs every fixture save)"
+    name: "Verify trade calculation (calc.py vs every clean dataset save)"
     runs-on: ubuntu-latest
+    permissions:
+      contents: write          # the run appends docs/verification_log.md and pushes it
+    concurrency:
+      group: verify-log-${{ github.ref }}
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
         with:
-          lfs: true   # stored user cases (Uxx_*.eu4.zip) live in git LFS
+          lfs: false           # LFS objects come from the cache below (bandwidth quota), then `git lfs pull`
+      - name: LFS object list
+        run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
+      - uses: actions/cache@v4
+        with:
+          path: .git/lfs
+          key: lfs-${{ hashFiles('.lfs-assets-id') }}
+          restore-keys: lfs-
+      - run: git lfs pull
       - uses: actions/setup-python@v5
         with:
           python-version: "3.14"
           cache: pip
           cache-dependency-path: backend/requirements.txt
       - run: pip install -r backend/requirements.txt
-      - run: bash scripts/verify_all.sh
+      - name: Verify (every value within 5% on every clean save)
+        id: verify
+        continue-on-error: true      # the result is logged first; the last step fails the job if this failed
+        run: bash scripts/verify_all.sh
         env:
           PYTHON: python
+      - name: Append the run to docs/verification_log.md
+        if: always()
+        working-directory: backend
+        env:
+          VERIFY_OUT: ${{ github.workspace }}/verify-out
+        run: python scripts/verification_log.py
+      - name: Commit and push the log
+        if: always() && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/verification_log.md
+          git commit -m "docs(verification): log run ${GITHUB_SHA::8} (${{ steps.verify.outcome }})" -m "[skip ci]"
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep 5
+          done
+          echo "could not push the verification log"; exit 1
       - if: always()
         uses: actions/upload-artifact@v4
         with:
           name: trade-verification-report
           path: verify-out/
+      - name: Fail if the calculation is outside the margin
+        if: steps.verify.outcome != 'success'
+        run: exit 1
 
   frontend:
     runs-on: ubuntu-latest

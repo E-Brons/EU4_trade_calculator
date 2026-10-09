@@ -1,0 +1,22 @@
+{
+ "nation": "MAM",
+ "start_date": "1444.11.11",
+ "base_save": "../../diversity/out/obs-1444-MAM/MAM_1444.12.01.eu4",
+ "mods": [],
+ "observe": true,
+ "ai_off": [
+  "MAM"
+ ],
+ "script": [
+  {
+   "patch": "../patches/probe_mam_recall_strict.py"
+  },
+  {
+   "outfname": "../out/probe_recall_strict/day0_after_load.eu4"
+  },
+  {
+   "date": "1444.12.03",
+   "outfname": "../out/probe_recall_strict/day2.eu4"
+  }
+ ]
+}

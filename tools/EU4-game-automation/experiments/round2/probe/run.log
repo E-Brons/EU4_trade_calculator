@@ -1,0 +1,47 @@
+start: MAM ../../diversity/out/obs-1444-MAM/MAM_1444.12.01.eu4
+step 0: {'patch': '../patches/home_mam_recall_aleppo.py'}
+  patch home_mam_recall_aleppo.py: reloading
+step 1: {'outfname': '../out/probe_recall/day0_after_load.eu4'}
+step 2: {'date': '1444.12.03', 'outfname': '../out/probe_recall/day2.eu4'}
+  run to 1444.12.03
+step 3: {'date': '1444.12.15', 'outfname': '../out/probe_recall/day14.eu4'}
+  run to 1444.12.15
+step 4: {'date': '1445.01.01', 'outfname': '../out/probe_recall/t1.eu4'}
+  run to 1445.01.01
+restored dlc_load.json and continue_game.json
+{
+ "ok": true,
+ "steps": [
+  {
+   "step": 0
+  },
+  {
+   "step": 1,
+   "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/probe/../out/probe_recall/day0_after_load.eu4",
+   "sha256": "4701852f253b0875fb2e525087bf7db1e632a7d1a93c0cce43b0c447394812cb",
+   "bytes": 34873714,
+   "date": "1444.12.1"
+  },
+  {
+   "step": 2,
+   "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/probe/../out/probe_recall/day2.eu4",
+   "sha256": "f40329881efea2458807a5f242631614d5a856756221b188ad90bbcfb7d7ea44",
+   "bytes": 35033109,
+   "date": "1444.12.3"
+  },
+  {
+   "step": 3,
+   "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/probe/../out/probe_recall/day14.eu4",
+   "sha256": "939b8a4a4bc70498ccb11d50a7a6d1215f6b494205297a3347ff305169449908",
+   "bytes": 35233775,
+   "date": "1444.12.15"
+  },
+  {
+   "step": 4,
+   "outfname": "/Users/elkanabronstein/myProjects/EU4_Trade_calculator/tools/EU4-game-automation/experiments/round2/probe/../out/probe_recall/t1.eu4",
+   "sha256": "50931eb0fd9d1caa120baa000dd3a574a5c0299000c238416970136ee0d60288",
+   "bytes": 35666754,
+   "date": "1445.1.1"
+  }
+ ]
+}

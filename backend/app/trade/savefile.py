@@ -47,6 +47,39 @@ def extract_scalar(text: str, key: str) -> str | None:
     return match.group(1) if match else None
 
 
+_COUNTRY_START = re.compile(r"\n\t([A-Z0-9]{3})=\{")
+
+
+def country_spans(gamestate: str) -> dict[str, tuple[int, int]]:
+    """tag -> (start, end) of every block under the top-level `countries`, found by the save's tab indentation (the game
+    and the Ironman melter write one tab per level), so the 50+ MB document is never tokenized. Empty if not found."""
+    start = gamestate.find("\ncountries={")
+    if start < 0:
+        return {}
+    end = gamestate.find("\n}", start + 1)
+    spans: dict[str, tuple[int, int]] = {}
+    pos = start
+    while (m := _COUNTRY_START.search(gamestate, pos, end)) is not None:
+        close = gamestate.find("\n\t}", m.end())
+        spans[m.group(1)] = (m.end(), close)
+        pos = close
+    return spans
+
+
+def block_fields(text: str, span: tuple[int, int], keys: tuple[str, ...], indent: str = "\t\t") -> str:
+    """The `key=value` / `key={...}` lines of `keys` directly inside a tab-indented block, joined (every occurrence)."""
+    body = text[span[0]:span[1]]
+    parts: list[str] = []
+    for m in re.finditer(rf"\n{indent}({'|'.join(map(re.escape, keys))})=", body):
+        j = m.end()
+        if body.startswith("{", j):
+            close = body.find(f"\n{indent}}}", j)
+            parts.append(f"{m.group(1)}={body[j:close + len(indent) + 2]}")
+        else:
+            parts.append(f"{m.group(1)}={body[j:body.find(chr(10), j)]}")
+    return "\n".join(parts)
+
+
 def extract_top_level_block(text: str, key: str) -> str | None:
     """`key={ ... }` at brace depth 0, including its braces, without tokenizing the rest of a huge document."""
     i, n, depth, in_quotes = 0, len(text), 0, False

@@ -1,43 +1,12 @@
-"""Pydantic request/response models for the API, plus conversion helpers
-to/from the plain-dataclass engine types (engine/model.py, engine/optimize.py)."""
+"""Pydantic request/response models of the API. The world lives on the server (app/trade/session.py); requests carry
+the loaded save's id and the player's decisions, responses describe the result from the player's point of view."""
 from __future__ import annotations
 
 from pydantic import BaseModel, Field
 
-from app.engine.model import Allocation, MerchantAction, NodeAllocation, NodeState, Params
-from app.engine.optimize import MarginalValue, OptimizeConfig, OptimizeResult
-from app.engine.simulate import NodeBreakdown, SimulationResult
+from app.trade.types import Action, NodeDecision
 
-
-class NodeStateIn(BaseModel):
-    node_id: str
-    local_value: float = 0.0
-    is_home: bool = False
-    player_base_power: float = 0.0
-    player_power_per_ship: float | None = None
-    player_recorded_has_trader: bool = False
-    player_merchant_bonus: float = 0.0
-    player_max_demand: float = 1.0
-    player_t_in: float = 0.0
-    player_t_out: float = 0.0
-    other_collect_power: float = 0.0
-    other_steer_power: dict[str, float] = Field(default_factory=dict)
-    other_steer_merchants: dict[str, int] = Field(default_factory=dict)
-    other_passive_power: float = 0.0
-
-    # Authoritative save fields, round-tripped so the client can ask for an
-    # exact replay of the save's own allocation (see NodeState.matches_recorded).
-    known_gross_value: float | None = None
-    known_retained_value: float | None = None
-    known_retain_power: float | None = None
-    known_pull_power: float | None = None
-    known_player_val: float = 0.0
-    known_player_action: MerchantAction | None = None
-    known_player_light_ships: int = 0
-    known_player_steer_target: str | None = None
-
-    def to_engine(self) -> NodeState:
-        return NodeState(**self.model_dump())
+MerchantAction = Action
 
 
 class NodeAllocationIn(BaseModel):
@@ -45,77 +14,60 @@ class NodeAllocationIn(BaseModel):
     steer_target: str | None = None
     light_ships: int = 0
 
-    def to_engine(self) -> NodeAllocation:
-        return NodeAllocation(self.merchant_action, self.steer_target, self.light_ships)
+    def to_decision(self) -> NodeDecision:
+        target = self.steer_target if self.merchant_action == MerchantAction.STEER else None
+        return NodeDecision(self.merchant_action, target, self.light_ships)
+
+    @classmethod
+    def from_decision(cls, d: NodeDecision) -> "NodeAllocationIn":
+        return cls(merchant_action=d.action, steer_target=d.steer_target, light_ships=d.light_ships)
 
 
 class ParamsIn(BaseModel):
-    trade_efficiency: float = 0.0
-    merchant_power: float = 2.0
-    capital_merchant_power: float = 5.0
-    power_per_light_ship: float = 3.0
-    home_power_bonus: float = 0.1
-    merchant_present_income_bonus: float = 0.1
-    steer_value_bonus_per_merchant: float = 0.05
-    ship_chunk: int = 1
+    """The player's scalars the app lets the user change; None = the value identified from the save."""
 
-    def to_engine(self) -> Params:
-        return Params(**self.model_dump())
+    trade_efficiency: float | None = None
+    power_per_light_ship: float | None = None
 
 
-class SimulateRequest(BaseModel):
-    node_states: dict[str, NodeStateIn]
-    allocation: dict[str, NodeAllocationIn] = Field(default_factory=dict)
+class SaveRequest(BaseModel):
+    save_id: str
     params: ParamsIn = Field(default_factory=ParamsIn)
+
+
+class SimulateRequest(SaveRequest):
+    allocation: dict[str, NodeAllocationIn] = Field(default_factory=dict)
 
 
 class NodeBreakdownOut(BaseModel):
     node_id: str
     display_name: str
     local_value: float
-    total_value: float
-    player_power: float
-    total_power: float
+    total_value: float                 # gross: local value + everything arriving from upstream
+    player_power: float                # the player's effective power here (after transfers)
+    total_power: float                 # retained_power + pull_power
     player_collects: bool
     player_income: float
     forwarded_value: float
     link_values: dict[str, float]
-    # Explanatory extras -- see engine.simulate.NodeBreakdown for definitions.
-    player_share: float = 0.0
-    income_multiplier: float = 1.0
+    player_share: float = 0.0          # the player's share of the retained value / total_value (before trade efficiency)
+    income_multiplier: float = 1.0     # money / share of the retained value (1 + trade efficiency + merchant bonus)
     retained_power: float = 0.0
     pull_power: float = 0.0
     retained_value: float = 0.0
-    player_action: str = "none"  # 'collect' | 'steer' | 'passive-home' | 'none'
+    player_action: str = "none"        # 'collect' | 'steer' | 'passive-home' | 'none'
     player_steer_target: str | None = None
     player_light_ships: int = 0
     incoming_value: float = 0.0
-    is_replay: bool = False
-
-    @classmethod
-    def from_engine(cls, b: NodeBreakdown, display_name: str) -> "NodeBreakdownOut":
-        return cls(display_name=display_name, **b.__dict__)
+    is_replay: bool = False            # kept for older clients; every value is computed
 
 
 class SimulateResponse(BaseModel):
     total_income: float
     nodes: dict[str, NodeBreakdownOut]
 
-    @classmethod
-    def from_engine(cls, result: SimulationResult, display_names: dict[str, str]) -> "SimulateResponse":
-        return cls(
-            total_income=result.total_income,
-            nodes={
-                nid: NodeBreakdownOut.from_engine(b, display_names.get(nid, nid))
-                for nid, b in result.nodes.items()
-            },
-        )
 
-
-class NodeOptionsRequest(BaseModel):
-    node_states: dict[str, NodeStateIn]
-    allocation: dict[str, NodeAllocationIn] = Field(default_factory=dict)
-    params: ParamsIn = Field(default_factory=ParamsIn)
+class NodeOptionsRequest(SimulateRequest):
     node_id: str
     max_light_ships: int = 0
 
@@ -124,8 +76,8 @@ class MerchantOptionOut(BaseModel):
     action: MerchantAction
     steer_target: str | None = None
     steer_target_display_name: str | None = None
-    total_income: float  # whole-empire income if this option replaced the node's merchant action
-    formula_total_income: float  # same, but computed purely by the formula model (no save replay)
+    total_income: float
+    formula_total_income: float        # = total_income (one calculation); kept for older clients
     is_current: bool
     node: NodeBreakdownOut
 
@@ -143,38 +95,20 @@ class NodeOptionsResponse(BaseModel):
     node_id: str
     display_name: str
     current_total_income: float
-    # Pure-formula income of the current allocation, and replay - formula.
-    # Options/curve points that differ from the save's recorded allocation at
-    # this node use the formula model, so they sit `calibration_offset` away
-    # from the exact replay number. Compare `formula_total_income` series and
-    # add the offset to stay consistent with `current_total_income`.
     formula_current_total_income: float
-    calibration_offset: float
+    calibration_offset: float = 0.0
     merchant_options: list[MerchantOptionOut]
     ship_curve: list[ShipPointOut]
 
 
-class OptimizeRequest(BaseModel):
-    node_states: dict[str, NodeStateIn]
-    params: ParamsIn = Field(default_factory=ParamsIn)
+class OptimizeRequest(SaveRequest):
     home_node: str
-    candidate_nodes: list[str] | None = None  # defaults to all keys in node_states
+    candidate_nodes: list[str] | None = None   # default: the nodes the import suggested
     max_merchants: int
     max_light_ships: int
     current_allocation: dict[str, NodeAllocationIn] | None = None
     random_seed: int = 0
     max_restarts: int = 3
-
-    def to_engine_config(self) -> OptimizeConfig:
-        candidates = self.candidate_nodes if self.candidate_nodes is not None else list(self.node_states.keys())
-        return OptimizeConfig(
-            home_node=self.home_node,
-            candidate_nodes=candidates,
-            max_merchants=self.max_merchants,
-            max_light_ships=self.max_light_ships,
-            random_seed=self.random_seed,
-            max_restarts=self.max_restarts,
-        )
 
 
 class RecommendedAction(BaseModel):
@@ -190,27 +124,12 @@ class MarginalValueOut(BaseModel):
     label: str
     income: float
     delta_vs_optimal: float
-    # Where the change would be made: added to / taken from this node.
     node_id: str | None = None
     node_display_name: str | None = None
-    change: str | None = None  # "add" | "remove"
+    change: str | None = None          # "add" | "remove"
     merchant_action: MerchantAction | None = None
     steer_target: str | None = None
     steer_target_display_name: str | None = None
-
-    @classmethod
-    def from_engine(cls, m: MarginalValue, display_names: dict[str, str]) -> "MarginalValueOut":
-        return cls(
-            label=m.label,
-            income=m.income,
-            delta_vs_optimal=m.delta_vs_optimal,
-            node_id=m.node_id,
-            node_display_name=display_names.get(m.node_id, m.node_id) if m.node_id else None,
-            change=m.change,
-            merchant_action=m.merchant_action,
-            steer_target=m.steer_target,
-            steer_target_display_name=display_names.get(m.steer_target, m.steer_target) if m.steer_target else None,
-        )
 
 
 class OptimizeResponse(BaseModel):
@@ -222,37 +141,6 @@ class OptimizeResponse(BaseModel):
     merchant_marginals: list[MarginalValueOut]
     ship_marginals: list[MarginalValueOut]
     breakdown: SimulateResponse
-
-    @classmethod
-    def from_engine(
-        cls,
-        result: OptimizeResult,
-        display_names: dict[str, str],
-        breakdown: SimulationResult,
-        current_income: float | None,
-    ) -> "OptimizeResponse":
-        actions = [
-            RecommendedAction(
-                node_id=nid,
-                display_name=display_names.get(nid, nid),
-                merchant_action=a.merchant_action,
-                steer_target=a.steer_target,
-                steer_target_display_name=display_names.get(a.steer_target) if a.steer_target else None,
-                light_ships=a.light_ships,
-            )
-            for nid, a in result.allocation.nodes.items()
-            if a.merchant_action != MerchantAction.NONE or a.light_ships > 0
-        ]
-        return cls(
-            income=result.income,
-            baseline_income=result.baseline_income,
-            current_income=current_income,
-            income_gain_vs_current=(result.income - current_income) if current_income is not None else None,
-            recommended_actions=actions,
-            merchant_marginals=[MarginalValueOut.from_engine(m, display_names) for m in result.merchant_marginals],
-            ship_marginals=[MarginalValueOut.from_engine(m, display_names) for m in result.ship_marginals],
-            breakdown=SimulateResponse.from_engine(breakdown, display_names),
-        )
 
 
 class TradeNodeOut(BaseModel):
@@ -269,18 +157,16 @@ class TradeGraphOut(BaseModel):
 
 
 class ImportSaveResponse(BaseModel):
+    save_id: str
     player_tag: str
+    date: str
+    calc_version: str
     warnings: list[str]
-    node_states: dict[str, NodeStateIn]
     current_allocation: dict[str, NodeAllocationIn]
     suggested_home_node: str | None
     suggested_trade_efficiency: float | None
-    actual_current_income: float
+    actual_current_income: float       # the player's monthly trade income as the save records it
     suggested_max_merchants: int | None
     suggested_max_light_ships: int | None
-    suggested_power_per_light_ship: float | None  # weighted-mean real trade_power across the
-    # player's actual light_ship fleet mix (e.g. a mix of Early Frigates and Frigates) -- see
-    # app.parsing.save.LIGHT_SHIP_TRADE_POWER.
-    suggested_candidate_nodes: list[str]  # genuine presence only (owned provinces/ships, home,
-    # or already doing something there) -- NOT the same test as "player_base_power > 0", which
-    # now uses `val` and can be nonzero from pure colonial-range reach with nothing to act on.
+    suggested_power_per_light_ship: float | None
+    suggested_candidate_nodes: list[str]

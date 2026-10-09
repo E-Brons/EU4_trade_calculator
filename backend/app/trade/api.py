@@ -1,16 +1,16 @@
-"""POST /api/verify-save: checks an uploaded save against the calculation and stores it as a RED case on mismatch."""
+"""POST /api/verify-save: checks an uploaded save against the calculation, reports how fair a test the save is
+(quality: 1st of a month, nothing of the player's on the way), and stores it for investigation only when asked (store=true)."""
 from __future__ import annotations
 
-import os
 import tempfile
 import zipfile
 from pathlib import Path
 
-from fastapi import APIRouter, File, HTTPException, UploadFile
+from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 
 from app.parsing import ironman_melt
 from app.parsing.tradenodes import load_trade_graph
-from app.trade import cases, savefile
+from app.trade import cases, quality, savefile
 from app.trade.extract import extract_world
 from app.trade.verify import verify_world
 
@@ -26,7 +26,7 @@ def _summary(report) -> dict:
 
 
 @router.post("/verify-save")
-async def verify_save(file: UploadFile = File(...)) -> dict:
+async def verify_save(file: UploadFile = File(...), store: bool = Form(False)) -> dict:
     data = await file.read()
     with tempfile.NamedTemporaryFile(suffix=".eu4") as tmp:
         tmp.write(data)
@@ -41,9 +41,8 @@ async def verify_save(file: UploadFile = File(...)) -> dict:
         except ValueError as e:
             raise HTTPException(422, str(e)) from e
     report = verify_world(world)
-    stored = None
-    if report.status != "verified" and os.environ.get("EU4_STORE_CASES", "1") != "0":
-        stored = cases.store_case(text, report)
+    q = quality.classify(world.inputs)
+    stored = cases.store_case(text, report, q) if store else None
     if report.status == "verified":
         message = "The calculation reproduces every number recorded in this save."
     else:
@@ -53,4 +52,4 @@ async def verify_save(file: UploadFile = File(...)) -> dict:
             + (f"The save was stored as case {stored.id} for investigation." if stored and not stored.duplicate
                else f"This save is already stored as case {stored.id}." if stored else "")
         ).strip()
-    return {"verification": _summary(report), "stored_case": stored.id if stored else None, "message": message}
+    return {"verification": _summary(report), "quality": q.to_dict(), "stored_case": stored.id if stored else None, "message": message}

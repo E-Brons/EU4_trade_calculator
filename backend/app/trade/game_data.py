@@ -41,5 +41,16 @@ def light_ship_trade_power(ship_type: str) -> float:
     return _ships()[ship_type]
 
 
+def light_ship_types() -> frozenset[str]:
+    return frozenset(_ships())
+
+
+@lru_cache(maxsize=1)
+def country_modifier_sources() -> dict:
+    """Per source (idea group/idea, policy, reform, age ability, event or static modifier) the values of the
+    country-scope modifiers listed under `modifiers` (country_modifiers.json; only non-zero sources)."""
+    return json.loads((DATA_DIR / "country_modifiers.json").read_text(encoding="utf-8"))
+
+
 def graph() -> TradeGraph:
     return load_trade_graph()

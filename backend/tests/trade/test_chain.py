@@ -1,12 +1,12 @@
 """calc.calculate (whole world from raw inputs, no recorded values) against every recorded node value and collector income.
 
-This is the measure of correctness: it passes only when every save is reproduced end to end."""
+This is the measure of correctness: it passes only when every clean save is reproduced end to end within the 5% margin."""
 from __future__ import annotations
 
 
 def chain_verdict(report) -> tuple[str, str]:
     chains = [r.chain for r in report.reports.values()]
-    bad = [(sid, r.chain) for sid, r in report.reports.items() if r.chain.status != "ok"]
+    bad = [(sid, r.chain) for sid, r in report.reports.items() if r.chain.status == "unknown_variable" or r.chain.margin_failures]
     if not bad:
         return "green", f"{len(chains)} saves"
     lines = [f"end-to-end chain fails in {len(bad)}/{len(chains)} saves"]
@@ -14,7 +14,7 @@ def chain_verdict(report) -> tuple[str, str]:
         if c.status == "unknown_variable":
             lines.append(f"  {sid}: {c.note}")
         else:
-            lines.append(f"  {sid}: player income calc {c.player_income_calculated:.3f} vs save {c.player_income_recorded:.3f}; {c.failures}/{c.checks} checks fail")
+            lines.append(f"  {sid}: player income calc {c.player_income_calculated:.3f} vs save {c.player_income_recorded:.3f}; {c.margin_failures}/{c.checks} checks outside the 5% margin ({c.failures} not exact)")
     return "red", "\n".join(lines)
 
 

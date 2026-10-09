@@ -131,6 +131,14 @@ Game names and values of 2, 5, 15; SND/MKL/VER/TMB/SCA cases of the TUR campaign
 ### Verification 2026-10-05 (second pass)
 V-R06-1/2 use a second implementation: residual re-derived from the raw text diff counts of `max_pow` / `prev` / `province_power` lines (`venice_a_ver.py 1`: no `max_pow` line changes between 1sts, lines of `max_pow` change on the 1sts only) and `venice_r06.py` (own loop) versus `venice_a_r06.py` (country-level formula).
 
+## Data basis (2026-10-06)
+
+On 2026-10-06 the research data was rebuilt (`docs/research/data_audit.md`): only **clean** saves are kept (the 1st of a month after the game's first trade computation, none of the player's merchants or fleets on the way; R12 final). Kept: U04 (TUR 1691.11.01), U10, U14, U20, U25, U27, U28, U29 (VEN 1444-1445). Removed: the 78 start snapshots S01-S78 and U07-U09 (saved before the first computation: steering weights, `add` and other computed fields are placeholders there) and 21 mid-month saves (S79, S80, U01-U03, U05, U06, U11-U13, U15-U19, U21-U24, U26, U30: numbers from the last 1st, merchant/ship flags from the save day). Counts above that include removed saves are kept as recorded but are **unverified on clean data** unless listed as re-checked below. Clean-data stage results quoted here: `scripts/verify_all.sh` on the 8 kept saves (calc 0.2.0).
+
+- "R = 0 in all 78 start snapshots" is a **pre-first-tick artifact**: `max_pow` incl. the merchant term is recomputed only on the 1st (R12 final). The per-country merchant power R is integrated as an observed input; on clean data `raw_power` fails 7 of 11,307 checks (1 of 8 saves).
+- The formula R = 2 + 5a + 15b was fitted on S79/S80 (mid-month, removed): unverified on clean data.
+
+
 ## Update 2026-10-07 - controlled experiments (E00-P06)
 
 Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.

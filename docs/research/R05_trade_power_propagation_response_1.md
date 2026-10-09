@@ -150,6 +150,15 @@ VEN has 3 light ships at `alexandria` (`ship_power` 6.0) and no `province_power`
 ### Verification 2026-10-05 (second pass)
 V-R05-1 recomputed with `venice_a_ver.py 2` (own loop, Decimal, weights read from the first save): exact for every entry at the 8 later 1sts (1,413 / 1,500 / 1,504 / 1,501 / 1,501 / 1,501 / 1,501 / 1,502).
 
+## Data basis (2026-10-06)
+
+On 2026-10-06 the research data was rebuilt (`docs/research/data_audit.md`): only **clean** saves are kept (the 1st of a month after the game's first trade computation, none of the player's merchants or fleets on the way; R12 final). Kept: U04 (TUR 1691.11.01), U10, U14, U20, U25, U27, U28, U29 (VEN 1444-1445). Removed: the 78 start snapshots S01-S78 and U07-U09 (saved before the first computation: steering weights, `add` and other computed fields are placeholders there) and 21 mid-month saves (S79, S80, U01-U03, U05, U06, U11-U13, U15-U19, U21-U24, U26, U30: numbers from the last 1st, merchant/ship flags from the save day). Counts above that include removed saves are kept as recorded but are **unverified on clean data** unless listed as re-checked below. Clean-data stage results quoted here: `scripts/verify_all.sh` on the 8 kept saves (calc 0.2.0).
+
+- The "weight gate" (holds in start saves, not in played saves; C-Q3.1/C-Q3.2, U-R05-2) compares pre-first-tick placeholder weights with computed ones: it is most likely a **pre-first-tick artifact**, not a game rule. Re-test on clean saves only.
+- Plain rule (threshold 10, per-link truncation) on clean data: 28 failures of 16,140 checks (7 of 8 saves); those 28 are the open part.
+- MOR ship term: S80 only (removed): unverified on clean data.
+
+
 ## Update 2026-10-07 - controlled experiments (E00-P06)
 
 Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.
@@ -172,3 +181,18 @@ Source: 27 single-change jobs run in the game by the automation (`tools/EU4-game
 
 ### V4-R05-1 Ships neither propagate nor count for the gate
 Claim (R2-SHIPCON): VEN's 2 light ships moved to constantinople (VEN `province_power` 2.8 there): `ship_power` 4.000 and `max_pow` +4.000 at constantinople, no `prev` change in any node. The gate is `province_power / TRADE_PROPAGATE_DIVIDER (5) >= TRADE_PROPAGATE_THRESHOLD (2)` (defines.lua 1205-1206) on province power only. Confidence: confirmed.
+
+
+## Update 2026-10-09 - project check on the 205 clean saves (calc 0.3.0)
+
+- **Ships propagate through a country modifier.** `prev` = sum over directly downstream nodes of
+  fx((province_power + ship_power x ship_power_propagation) / TRADE_PROPAGATE_DIVIDER), counted when that reaches
+  TRADE_PROPAGATE_THRESHOLD (the threshold applies to the sum: KUT gulf_of_siam (8.99 + 10 x 0.25) / 5 = 2.298, while
+  8.99 / 5 alone is below 2). In the 1618-1789 saves the residual of every failing entry was ship_power / 4 downstream;
+  per country the factor is 0.25 or 0, and the 0.25 countries have Maritime ideas with `grand_navy` (4th idea, +0.25;
+  colonial nations with all Maritime ideas included). Other sources in 1.37.5: age ability `ab_ship_power_propagation`
+  +0.2, reform `power_to_the_smugglers_reform` +0.25, `private_enterprise_subject` +0.1, national ideas and mission
+  modifiers. The previous MOR case (S80, +0.525) fits this rule.
+- **Which links count.** In a node where some merchant steers, every outgoing link propagates; in a node nobody steers,
+  only the links whose stored weight is above 0 (cape_of_good_hope -> ivory_coast with weight 0: no `prev`). Together
+  with the ship term: 400,689 of 400,691 entries exact (failures before: 4,872).

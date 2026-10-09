@@ -1,11 +1,11 @@
 # Trade calculation: testing and the RED -> GREEN loop
 
-There is exactly one calculation: `backend/app/trade/calc.py`. Tests, the verifier, the upload API and (after cutover) the optimizer all call it. `docs/trade_spec.md` (generated) lists its stages, every variable and every edge case. Open questions are the research tasks in `docs/research/`.
+There is exactly one calculation: `backend/app/trade/calc.py`. Tests, the verifier, the upload API, the app (`app/api.py`) and the optimizer all call it. `docs/trade_spec.md` (generated) lists its stages, every variable and every edge case. Open questions are the research tasks in `docs/research/`.
 
 ## Run it
 
 ```bash
-scripts/verify_all.sh                         # full run, ~3 min; same command as CI
+scripts/verify_all.sh                         # full run, ~12 min (205 saves); same command as CI
 EU4_FIXTURE_IDS=S14,S79 scripts/verify_all.sh  # quick subset (corpus-wide expectation tests skip)
 cd backend && python3 scripts/stage_report.py  # just the dashboard
 cd backend && python3 scripts/gen_spec.py      # regenerate docs/trade_spec.md after changing calc/variables/edge cases
@@ -35,18 +35,22 @@ A stage passes only when it reproduces the save on **every** check of **every** 
 3. Change the rule function in `calc.py` (and constants only via `game_data`; variables via `variables.py`).
 4. Run `scripts/verify_all.sh` and compare the failure counts; regenerate the spec; commit.
 
-## When a user uploads a save that does not verify
+## Datasets (the only saves tests use)
 
-`POST /api/verify-save` runs the same verification. On mismatch the user sees which stage failed and that results are unverified, and the save is stored as `backend/tests/fixtures/saves_zip/Uxx_TAG.yyyy.mm.dd.eu4.zip` with a manifest entry (`kind: user_case`, `expected: red`, sha256). Duplicates are not stored twice. The server never commits or pushes.
+A save is used only if it is **clean** (`backend/app/trade/quality.py`; R12 final: the game computes trade once a month, on the 1st): dated the 1st after the game's first computation, with none of the player's own merchants or fleets on the way. AI traffic on the way is allowed (it is absent from both the trade entries and the computed values) and is recorded per save. `docs/research/data_audit.md` records why the 102 earlier fixture saves were removed (81 before the first computation, 21 mid-month).
 
-1. `git add` the new zip (LFS, see `.gitattributes`) and `backend/tests/fixtures/saves/saves.json`, commit.
-2. `test_user_cases.py` fails on the case until `calc.py` reproduces it.
-3. `python3 scripts/promote_case.py Uxx --green` records in the manifest that it verifies (informational). `--list` shows all cases, `--check` validates files and hashes.
+```
+datasets/eu4/cosmetic_mods.json                     mods that do not change game rules (they keep a save 'vanilla')
+datasets/eu4/<version>/<mods key>/<dlc key>/        one dataset per game version, rule-changing mod list and DLC set
+    dataset.json                                    version, mods, DLCs, protocol
+    <series>/series.json + Uxx_TAG.yyyy.mm.dd.eu4.zip   one series = one game (git LFS)
+    reports/                                        saves users submitted from the app (verified and logged, not gating)
+```
 
-Env: `EU4_STORE_CASES=0` disables storing; `EU4_CASE_ZIP_DIR` / `EU4_CASE_MANIFEST` redirect it (tests use this).
+`series.json` entries: `id, file, tag, date, role (observation | A | C | B<n> | report), change, covers (edge-case ids, e.g. ["IV-06"]), sha256, quality`. Designed experiments and how to make them: `docs/research/experiments.md`. `scripts/check_datasets.py` validates names, zips (not LFS pointers), hashes and cleanliness; `scripts/verify_all.sh` runs it first. `EU4_FIXTURE_IDS=U10,U27` / `EU4_SERIES=venice-1444` restrict a run.
 
-## Fixtures
+Known blind spots are listed, not hidden: `KNOWN_UNCOVERED` in `expected.py` (situations no clean save exercises yet; the designed experiments close most of them).
 
-`saves.json` entries: `id, file, tag, date, kind, expected, covers`. Kinds: `start` (game-start snapshot), `ticked` (played save: the only ones with ships, transfers and away collectors), `user_case`, `intervention` (change-one-thing pair from `docs/research/R14`; list the edge-case ids it exercises in `covers`, e.g. `["IV-06"]`). Raw `.eu4` files are gitignored; tracked zips in `saves_zip/` are unzipped on demand. `EU4_TEST_SAVES_DIR` points at a folder of raw saves.
+## When a user submits a save
 
-Known blind spots are listed, not hidden: `KNOWN_UNCOVERED` in `expected.py` (currently no Ironman-melted save, no pirate-power node, no zero-value node, and all 16 counterfactual `IV-*` cases need intervention pairs).
+`POST /api/verify-save` runs the same verification and returns the save's quality. It stores nothing unless called with `store=true` (the app's "store this save for future enhancement"); then the save goes to the `reports` series of its dataset with its quality and verification summary, deduplicated by sha256. The server never commits or pushes: `git add` the new zip (LFS) and `series.json`, commit. `EU4_DATASETS_DIR` redirects the store (tests use this).

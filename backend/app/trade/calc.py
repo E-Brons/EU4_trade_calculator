@@ -21,6 +21,7 @@ from typing import Iterable
 from app.trade import game_data
 from app.trade.types import (
     Action,
+    CountryInput,
     Decisions,
     EntryInput,
     EntryResult,
@@ -32,10 +33,11 @@ from app.trade.types import (
     WorldInputs,
 )
 
-CALC_VERSION = "0.2.2"
+CALC_VERSION = "0.3.0"
+SUPPORTED_GAME_VERSION = game_data.SUPPORTED_GAME_VERSION   # the game version the constants were vendored from
 
 STAGE_INFO: dict[str, tuple[str, tuple[str, ...]]] = {
-    "propagation": ("prev = sum over downstream nodes with province_power / TRADE_PROPAGATE_DIVIDER >= TRADE_PROPAGATE_THRESHOLD of fx(province_power / TRADE_PROPAGATE_DIVIDER)", ("R05",)),
+    "propagation": ("prev = sum over downstream nodes of fx((province_power + ship_power x ship_power_propagation) / TRADE_PROPAGATE_DIVIDER) where that reaches TRADE_PROPAGATE_THRESHOLD", ("R05", "R11")),
     "raw_power": ("max_pow = province + ship + prev + capital + node modifiers + the country's merchant power on every merchant entry", ("R06", "R11")),
     "multiplier": ("max_demand: multiplier from max_pow to val (observed input until derived)", ("R01", "R02")),
     "val": ("val = fx(max_pow * max_demand) (3-decimal fixed point, truncated)", ("R01",)),
@@ -44,7 +46,8 @@ STAGE_INFO: dict[str, tuple[str, tuple[str, ...]]] = {
     "pull_power": ("pull_power = effective power of the countries that steer here, or do not collect here and collect or steer downstream (R03 rule B)", ("R03", "R04")),
     "retention": ("retention = retain / (retain + pull)", ("R03",)),
     "current_value": ("current = gross * retention; outgoing = gross - current", ("R12",)),
-    "steer_weights": ("weight of link i = sum over steerers on link i of effective power x steering strength / sum over all links", ("R08",)),
+    "steer_weights": ("weight of link i = sum over steerers on link i of effective power x steering strength / sum over all links; strength = TRADE_ADDED_VALUE_MODIFER x (1 + trade_steering)", ("R08",)),
+    "steering_bonus": ("add of the steerer ranked r on its link (by effective power x strength) = fx(strength / r) for r <= STEERING_BONUS_RANKS", ("R08",)),
     "link_flow": ("value delivered on link i = outgoing * weight_i * (1 + sum of `add` of the entries on link i)", ("R08",)),
     "income_share": ("power_fraction = fx(effective / retain); share = fx(current * power_fraction)", ("R07",)),
     "income_efficiency": ("money = fx(share * (1 + trade_efficiency + merchant bonus))", ("R07",)),
@@ -62,9 +65,8 @@ class Observed:
 
     trade_efficiency: dict[str, float] = field(default_factory=dict)
     merchant_power: dict[str, float] = field(default_factory=dict)
-    steering_strength: dict[str, float] = field(default_factory=dict)
     transfer_fraction: dict[str, float] = field(default_factory=dict)
-    default_steering_strength: float | None = None   # most common identified strength, for steerers without `add`
+    ship_unit_power: dict[str, float] = field(default_factory=dict)   # override of a country's power per light ship
 
 
 @dataclass(frozen=True)
@@ -82,13 +84,84 @@ class Pair:
 # Rules (one small pure function per rule)
 # ----------------------------------------------------------------------------------------------------------------
 
-def rule_propagated_power(province_power_downstream: Iterable[float]) -> float:
-    """R05 C-Q2.1/C-Q5.1, R09 C-16 (confirmed): each directly downstream node whose province power reaches
-    TRADE_PROPAGATE_THRESHOLD after the divider contributes fx(province_power / TRADE_PROPAGATE_DIVIDER), truncated per
-    link; ships do not propagate. OPEN (R05): which links count (start saves: only links with steer weight > 0; played
-    saves: not) and MOR's ship term; neither is applied."""
+def rule_propagated_power(downstream: Iterable[tuple[float, float]], ship_power_propagation: float) -> float:
+    """R05 C-Q2.1/C-Q5.1, R09 C-16: each directly downstream node contributes fx(power / TRADE_PROPAGATE_DIVIDER) when
+    that reaches TRADE_PROPAGATE_THRESHOLD, truncated per link. power = province_power + ship_power x the country's
+    ship_power_propagation (project check 2026-10-09, 205 clean saves: the +0.75, +3.75, ... left over in the 1618-1789
+    saves is ship_power / 4 downstream for countries with Maritime ideas' grand_navy (+0.25), 0 for the others; the
+    threshold applies to the sum, e.g. KUT gulf_of_siam (8.99 + 10 x 0.25) / 5 = 2.298). `downstream` = (province_power,
+    ship_power) per downstream node."""
     divider, threshold = game_data.const("TRADE_PROPAGATE_DIVIDER"), game_data.const("TRADE_PROPAGATE_THRESHOLD")
-    return sum(rule_fx(p / divider) for p in province_power_downstream if p / divider >= threshold)
+    out = 0.0
+    for province, ships in downstream:
+        p = (province + ships * ship_power_propagation) / divider
+        if p >= threshold:
+            out += rule_fx(p)
+    return out
+
+
+def rule_propagating_links(stored_weights: tuple[float, ...], link_count: int, steered: bool) -> tuple[bool, ...]:
+    """Which outgoing links carry propagated power (R05 open point "which links count", settled 2026-10-09 on the 205
+    clean saves: 400,689 of 400,691 entries): every link of a node where some merchant steers; in a node nobody steers
+    only the links whose stored weight is above 0 (e.g. cape_of_good_hope -> ivory_coast, weight 0: no prev)."""
+    if steered or len(stored_weights) != link_count:
+        return (True,) * link_count
+    return tuple(w > 0 for w in stored_weights)
+
+
+def rule_country_modifier(country: CountryInput, name: str) -> float:
+    """A country-scope modifier summed over the sources the save names: idea groups (national traditions always, the
+    ideas taken in order, the ambition with all seven), policies, government reforms, age abilities, event modifiers,
+    the static `navy_tradition` modifier scaled by navy tradition / 100 and `total_blockaded` scaled by the blockaded
+    share of ports. Values per source are vendored from the game files (game_data.country_modifier_sources)."""
+    src = game_data.country_modifier_sources()
+    total = 0.0
+    for group, taken in country.idea_groups:
+        g = src["idea_groups"].get(group)
+        if g:
+            total += g["start"].get(name, 0.0) + sum(i.get(name, 0.0) for i in g["ideas"][:taken])
+            if taken >= len(g["ideas"]):
+                total += g["bonus"].get(name, 0.0)
+    for table, keys in (("policies", country.policies), ("government_reforms", country.reforms),
+                        ("age_abilities", country.age_abilities), ("event_modifiers", country.modifiers)):
+        total += sum(src[table].get(k, {}).get(name, 0.0) for k in keys)
+    static = src["static_modifiers"]
+    total += static.get("navy_tradition", {}).get(name, 0.0) * country.navy_tradition / 100.0
+    total += static.get("total_blockaded", {}).get(name, 0.0) * country.blockaded_percent
+    return total
+
+
+def rule_steering_strength(country: CountryInput) -> float:
+    """R08 W-3 with the strength derived instead of identified (project check 2026-10-09): strength =
+    TRADE_ADDED_VALUE_MODIFER x (1 + trade_steering). Node weights from it are exact in 8,775 of 9,174 steered
+    multi-link nodes of the 205 clean saves (identification from `add` ranks: 4,460); within 5 % in 9,095. The misses
+    are later-era countries with a trade_steering source the save does not name per country (estate privileges, trade
+    company investments) or navy tradition earned after the month's computation."""
+    return game_data.const("TRADE_ADDED_VALUE_MODIFER") * (1.0 + rule_country_modifier(country, "trade_steering"))
+
+
+def rule_ship_power_propagation(country: CountryInput) -> float:
+    return rule_country_modifier(country, "ship_power_propagation")
+
+
+def rule_fleet_ship_power(ship_types: Iterable[tuple[str, int]]) -> float | None:
+    """Power per light ship of a country with no ship on a trade mission: the mean `trade_power` of the light ships in
+    its navies (common/units). It leaves out ship trade power modifiers (R11: the deployed ships' ship_power / light_ship
+    carries them), so it is only used when no deployed ship shows the real value; None without light ships."""
+    known = [(game_data.light_ship_trade_power(t), n) for t, n in ship_types if t in game_data.light_ship_types()]
+    count = sum(n for _p, n in known)
+    return sum(p * n for p, n in known) / count if count else None
+
+
+def rule_steering_bonus(steerers: list[tuple[float, float]]) -> list[float]:
+    """R08 W-2 + project check 2026-10-09: the steerers of one link ranked by effective power x strength; the one at
+    rank r gets add = fx(strength / r) for r <= STEERING_BONUS_RANKS, the rest none (per-link sum of `add` exact in
+    18,184 of 19,086 links). `steerers` = (effective power, strength); returns the add of each, in the given order."""
+    order = sorted((i for i, (eff, _s) in enumerate(steerers) if eff > 0), key=lambda i: -steerers[i][0] * steerers[i][1])
+    adds = [0.0] * len(steerers)
+    for rank, i in enumerate(order[:int(game_data.const("STEERING_BONUS_RANKS"))], 1):
+        adds[i] = rule_fx(steerers[i][1] / rank)
+    return adds
 
 
 def rule_flat_extras(entry: EntryInput, merchant_power: float) -> float:
@@ -119,7 +192,9 @@ def rule_max_pow(province_power: float, ship_power: float, prev: float, extras: 
 
 
 def rule_val(max_pow: float, multiplier: float) -> float:
-    return rule_fx(max_pow * multiplier)
+    """R10 value/flow analysis 2026-10-08: entries with negative max_pow store no val (109 of 109) and the node
+    counts them as 0 (U10 ethiopia: recorded pull 70.297 = 58.844 + 3.381 + 8.072 without them)."""
+    return max(0.0, rule_fx(max_pow * multiplier))
 
 
 def rule_transfer_out(val: float, fraction: float | None = None) -> float:
@@ -148,7 +223,10 @@ def rule_effective_power(val: float, t_out: float, t_in: float) -> float:
 
 
 def rule_is_collecting(entry: EntryInput, decision: NodeDecision) -> bool:
-    return entry.has_capital or decision.action == Action.COLLECT
+    """A country collects where its merchant collects and at its home node, unless its merchant steers there (U189/U190,
+    VEN's trade port moved to ragusa: the steering merchant at the new home node leaves ragusa's retain_power unchanged
+    and its power counts as pull)."""
+    return decision.action == Action.COLLECT or (entry.has_capital and decision.action != Action.STEER)
 
 
 @lru_cache(maxsize=1)
@@ -200,18 +278,25 @@ def rule_retention(retain: float, pull: float) -> float:
     return retain / total if total > 0 else 1.0
 
 
-def rule_current_outgoing(gross: float, retention: float) -> tuple[float, float]:
+def rule_current_outgoing(gross: float, retention: float, weights: tuple[float, ...] = (1.0,)) -> tuple[float, float]:
+    """current = gross * retention; outgoing = the rest. Where every link weight is 0 (nobody steers and nobody ever
+    has: stored weights 0) nothing leaves and the node keeps its whole value (1,329 of 1,329 node-saves, e.g.
+    australia: retention 0.945 recorded, current = gross, no outgoing); so does an end node (no links: genua keeps all
+    its value although its pull_power is not 0)."""
+    if not any(weights):
+        return gross, 0.0
     current = gross * retention
     return current, gross - current
 
 
-def rule_steer_weights(link_count: int, steerers: Iterable[tuple[int, float, float | None]],
+def rule_steer_weights(link_count: int, steerers: Iterable[tuple[int, float, float]],
                        stored: tuple[float, ...] = ()) -> tuple[float, ...]:
-    """R08 response_1 W-3 (119 of 120 testable tick-day nodes): weight of link i = sum over the steering merchants on
-    link i of effective power x the country's steering strength, divided by the same sum over all links. Passive pullers
-    and collectors do not count. R08 V3-R08-1 (228 unsteered node-saves, 17 clean saves): where no merchant steers the
-    game keeps the stored weights (unchanged month to month 140/140, equal to the bookmark values 84/84), so they are
-    returned as they are. A single steered link carries everything. OPEN: a steerer whose strength is unknown (nan)."""
+    """R08 response_1 W-3: weight of link i = sum over the steering merchants on link i of effective power x the
+    country's steering strength (rule_steering_strength), divided by the same sum over all links. Passive pullers and
+    collectors do not count. R08 V3-R08-1 (228 unsteered node-saves, 17 clean saves): where no merchant steers the game
+    keeps the stored weights (unchanged month to month 140/140, equal to the bookmark values 84/84), so they are
+    returned as they are. A single steered link carries everything. The weights are stored and applied in fixed point
+    (they sum to 0.998-1.000; full precision forwarded ~0.1 % too much value per hop, 2026-10-09)."""
     steerers = [s for s in steerers if s[1] != 0]
     if not steerers and len(stored) == link_count:
         return tuple(stored)
@@ -219,42 +304,14 @@ def rule_steer_weights(link_count: int, steerers: Iterable[tuple[int, float, flo
         return (1.0,)
     per_link = [0.0] * link_count
     for link, power, strength in steerers:
-        if power == 0:
-            continue
-        if strength is None:
-            return tuple(math.nan for _ in per_link)
         if link < link_count:
             per_link[link] += power * strength
     total = sum(per_link)
-    return tuple(p / total for p in per_link) if total > 0 else tuple(math.nan for _ in per_link)
-
-
-def rule_steering_strengths(groups: Iterable[list[tuple[str, float, float]]], rounds: int = 2) -> tuple[dict[str, float], dict[str, bool]]:
-    """R08 W-2: add = trunc3(strength / rank), rank = order by effective power x strength among the add-carrying steering
-    entries of one link. Each entry bounds the strength to [add x rank, (add + 0.001) x rank); a country's strength is
-    the value most of its entries agree on. Start: equal strengths (rank by power). Returns strength and whether every
-    entry of the country agrees. `groups` = per (node, link): [(tag, effective power, add)]."""
-    groups = list(groups)
-    strength: dict[str, float] = defaultdict(lambda: 1.0)
-    consistent: dict[str, bool] = {}
-    for _ in range(rounds):
-        bounds: dict[str, list[tuple[float, float]]] = defaultdict(list)
-        for items in groups:
-            ranked = sorted(items, key=lambda x: -x[1] * strength[x[0]])
-            for rank, (tag, _eff, add) in enumerate(ranked, 1):
-                bounds[tag].append((add * rank, (add + 1.0 / game_data.const("FIXED_POINT_SCALE")) * rank))
-        new: dict[str, float] = {}
-        for tag, ivs in bounds.items():
-            events = sorted([(lo, 1) for lo, _hi in ivs] + [(hi, -1) for _lo, hi in ivs])
-            best, best_at, cur = 0, 0.0, 0
-            for i, (x, d) in enumerate(events):
-                cur += d
-                if d == 1 and cur > best:
-                    best, best_at = cur, (x + events[i + 1][0]) / 2
-            new[tag] = best_at
-            consistent[tag] = best == len(ivs)
-        strength = defaultdict(lambda: 1.0, new)
-    return dict(strength), consistent
+    if total > 0:
+        return tuple(rule_fx(p / total) for p in per_link)
+    if len(stored) == link_count:  # steerers present but all with strength 0: nothing steers, the stored weights stay
+        return tuple(stored)
+    return tuple(math.nan for _ in per_link)
 
 
 def rule_link_adds(link_count: int, adds: Iterable[tuple[int, float]]) -> tuple[float, ...]:
@@ -268,7 +325,7 @@ def rule_link_adds(link_count: int, adds: Iterable[tuple[int, float]]) -> tuple[
 
 def rule_link_values(outgoing: float, weights: tuple[float, ...], link_adds: tuple[float, ...]) -> tuple[float, ...]:
     """R08 C-06 (12,590 of 12,590 links): value on link i = outgoing * weight_i * (1 + sum of `add` on link i); the
-    bonus is value created on the link. OPEN (R08): the weights themselves and the size of `add`."""
+    bonus is value created on the link."""
     return tuple(outgoing * w * (1.0 + a) for w, a in zip(weights, link_adds))
 
 
@@ -299,47 +356,103 @@ def rule_trade_efficiency(money: float, share: float, merchant_bonus: float) -> 
 # Whole-world calculation (inputs only: this function cannot see recorded results)
 # ----------------------------------------------------------------------------------------------------------------
 
-def _ship_unit_power(inputs: WorldInputs) -> dict[str, float]:
+def ship_unit_power(inputs: WorldInputs, observed: Observed) -> dict[str, float]:
+    """Trade power of one more light ship per country: the save's ship_power / light_ship (R11), unless given."""
     ships: dict[str, int] = defaultdict(int)
     power: dict[str, float] = defaultdict(float)
     for e in inputs.entries.values():
         ships[e.tag] += e.light_ships
         power[e.tag] += e.ship_power
-    return {t: power[t] / n for t, n in ships.items() if n > 0}
+    out = {t: power[t] / n for t, n in ships.items() if n > 0}
+    if inputs.player not in out:
+        fleet = rule_fleet_ship_power(inputs.player_ship_types)
+        if fleet is not None:
+            out[inputs.player] = fleet
+    return out | dict(observed.ship_unit_power)
 
 
-def calculate(inputs: WorldInputs, decisions: Decisions | None = None, observed: Observed | None = None) -> TradeResult:
+@lru_cache(maxsize=1)
+def _upstream() -> dict[str, tuple[str, ...]]:
     graph = game_data.graph()
-    decisions = decisions if decisions is not None else inputs.decisions
-    observed = observed or Observed()
-    unit_power = _ship_unit_power(inputs)
+    up: dict[str, list[str]] = defaultdict(list)
+    for node in graph.nodes:
+        for target in graph.outgoing(node):
+            up[target].append(node)
+    return {n: tuple(v) for n, v in up.items()}
 
-    entries: dict[tuple[str, str], EntryInput] = dict(inputs.entries)
-    for (tag, node), d in decisions.by_entry.items():
-        if (node, tag) not in entries and (d.action != Action.NONE or d.light_ships):
-            entries[(node, tag)] = EntryInput(tag=tag, node=node)
 
-    province_power = {key: e.province_power for key, e in entries.items()}
+def _country(inputs: WorldInputs, tag: str, needed_for: str) -> CountryInput:
+    country = inputs.countries.get(tag)
+    if country is None:
+        raise UnknownVariable("country modifiers", f"{tag} ({needed_for})", "R08")
+    return country
 
-    entry_results: dict[tuple[str, str], EntryResult] = {}
-    first_pass: list[tuple[str, EntryInput, float, bool, bool]] = []
-    active_nodes: dict[str, set[str]] = defaultdict(set)   # collecting or steering (R03 rule B)
-    for (node, tag), e in entries.items():
+
+@dataclass
+class _Row:
+    """One country at one node after the power stages: what the node stages need."""
+
+    e: EntryInput
+    eff: float
+    collecting: bool
+    steering: bool
+    link: int
+    pulling: bool = False
+
+
+class _Context:
+    """Per-calculation lookups shared by the entry and node passes (ship power, ship propagation, steering strength)."""
+
+    def __init__(self, inputs: WorldInputs, decisions: Decisions, observed: Observed):
+        self.inputs, self.decisions, self.observed = inputs, decisions, observed
+        self.unit_power = ship_unit_power(inputs, observed)
+        self._propagation: dict[str, float] = {}
+        self._strength: dict[str, float] = {}
+
+    def ship_power(self, e: EntryInput, d: NodeDecision) -> float:
+        if not d.light_ships:
+            return 0.0
+        if d.light_ships == e.light_ships and e.ship_power > 0:
+            return e.ship_power   # unchanged: the save's own ship power (per-node ship modifiers included)
+        if e.tag in self.unit_power:
+            return d.light_ships * self.unit_power[e.tag]
+        raise UnknownVariable("ship unit power", f"{e.tag}@{e.node}", "R11")
+
+    def propagation(self, tag: str) -> float:
+        if tag not in self._propagation:
+            self._propagation[tag] = rule_ship_power_propagation(_country(self.inputs, tag, "ship power propagation"))
+        return self._propagation[tag]
+
+    def strength(self, tag: str) -> float:
+        if tag not in self._strength:
+            self._strength[tag] = rule_steering_strength(_country(self.inputs, tag, "steering strength"))
+        return self._strength[tag]
+
+
+def _entry_rows(ctx: _Context, node: str, node_entries: Iterable[EntryInput], ship_power: dict[tuple[str, str], float],
+                steered: bool, results: dict[tuple[str, str], EntryResult]) -> list[_Row]:
+    """Power stages for the entries of one node: propagation, raw power, val, transfers (all node-local: a transfer
+    goes to a receiver in the same node). Fills `results`; `pulling` is set later (it needs the country's other nodes)."""
+    graph, inputs, decisions, observed = game_data.graph(), ctx.inputs, ctx.decisions, ctx.observed
+    targets = graph.outgoing(node) if node in graph else ()
+    info = inputs.nodes.get(node)
+    gate = rule_propagating_links(info.stored_steer_weights if info else (), len(targets), steered)
+    first: list[tuple[EntryInput, NodeDecision, float, bool, bool]] = []
+    for e in node_entries:
+        tag = e.tag
         d = decisions.get(tag, node)
-        prev = rule_propagated_power(province_power.get((down, tag), 0.0) for down in graph.outgoing(node)) if node in graph else 0.0
-        if d.light_ships:
-            if d.light_ships == e.light_ships and e.ship_power > 0:
-                ship_power = e.ship_power
-            elif tag in unit_power:
-                ship_power = d.light_ships * unit_power[tag]
-            else:
-                raise UnknownVariable("ship unit power", f"{tag}@{node}", "R11")
-        else:
-            ship_power = 0.0
+        downstream = []
+        for down, g in zip(targets, gate):
+            if g:
+                de = inputs.entries.get((down, tag))
+                downstream.append((de.province_power if de else 0.0, ship_power.get((down, tag), 0.0)))
+        spp = ctx.propagation(tag) if any(sp for _p, sp in downstream) else 0.0
+        prev = rule_propagated_power(downstream, spp)
         merchant_present = d.action != Action.NONE or (e.has_trader and inputs.decisions.get(tag, node).action == Action.NONE)
         if merchant_present and tag not in observed.merchant_power:
             raise UnknownVariable("merchant power", tag, "R06")
-        max_pow = rule_max_pow(e.province_power, ship_power, prev, rule_flat_extras(e, observed.merchant_power.get(tag, 0.0) if merchant_present else 0.0))
+        max_pow = rule_max_pow(e.province_power, ship_power.get((node, tag), 0.0), prev,
+                               rule_flat_extras(e, observed.merchant_power.get(tag, 0.0) if merchant_present else 0.0))
         multiplier = inputs.multipliers.get((node, tag))
         if multiplier is None and max_pow != 0:
             raise UnknownVariable("max_demand", f"{tag}@{node}", "R01")
@@ -347,73 +460,207 @@ def calculate(inputs: WorldInputs, decisions: Decisions | None = None, observed:
         recorded_away = e.collecting and not e.has_capital
         multiplier = (multiplier or 0.0) * rule_away_adjustment(recorded_away, collecting and not e.has_capital)
         val = rule_val(max_pow, multiplier)
-        entry_results[(node, tag)] = EntryResult(prev=prev, max_pow=max_pow, val=val, collecting=collecting)
-        first_pass.append((node, e, val, collecting, rule_is_steering(d)))
-        if collecting or rule_is_steering(d):
-            active_nodes[tag].add(node)
-
+        results[(node, tag)] = EntryResult(prev=prev, max_pow=max_pow, val=val, collecting=collecting)
+        first.append((e, d, val, collecting, rule_is_steering(d)))
     # Transfers (R04): a giver's t_out follows its own val; the amounts it sends to each receiver scale with it.
-    t_out_now: dict[tuple[str, str], float] = {}
-    t_in_delta: dict[tuple[str, str], float] = defaultdict(float)
-    for node, e, val, _c, _s in first_pass:
+    t_out_now: dict[str, float] = {}
+    t_in_delta: dict[str, float] = defaultdict(float)
+    for e, _d, val, _c, _s in first:
         if e.t_out > 0:
             new_out = rule_transfer_out(val, observed.transfer_fraction.get(e.tag))
-            t_out_now[(node, e.tag)] = new_out
+            t_out_now[e.tag] = new_out
             for receiver, amount in e.transfers_to:
-                t_in_delta[(node, receiver)] += amount * (new_out / e.t_out) - amount
+                t_in_delta[receiver] += amount * (new_out / e.t_out) - amount
+    rows = []
+    for e, d, val, collecting, steering in first:
+        eff = rule_effective_power(val, t_out_now.get(e.tag, e.t_out), e.t_in + t_in_delta.get(e.tag, 0.0))
+        results[(node, e.tag)].effective = eff
+        link = targets.index(d.steer_target) if steering and d.steer_target in targets else e.steer_link
+        rows.append(_Row(e, eff, collecting, steering, link))
+    return rows
 
-    pending: list[tuple[str, EntryInput, float, bool, bool]] = []
-    for node, e, val, collecting, steering in first_pass:
-        eff = rule_effective_power(val, t_out_now.get((node, e.tag), e.t_out), e.t_in + t_in_delta.get((node, e.tag), 0.0))
-        entry_results[(node, e.tag)].effective = eff
-        pending.append((node, e, eff, collecting, steering))
 
-    # Steering bonus (R08): the save's `add` of each entry on its link; a newly steering merchant has no known `add`.
-    node_adds: dict[str, list[tuple[int, float]]] = defaultdict(list)
-    for (node, tag), e in entries.items():
-        d = decisions.get(tag, node)
-        if rule_is_steering(d) and not e.steering:
-            raise UnknownVariable("steering add", f"{tag}@{node}", "R08")
-        if e.add is not None and (rule_is_steering(d) or not e.steering):
-            node_adds[node].append((e.steer_link, e.add))
+def _set_pulling(node_rows: dict[str, list[_Row]], tags: set[str] | None = None) -> None:
+    """R03 rule B needs each country's collecting and steering nodes; sets _Row.pulling (only for `tags` if given)."""
+    active: dict[str, set[str]] = defaultdict(set)
+    for node, rows in node_rows.items():
+        for r in rows:
+            if (tags is None or r.e.tag in tags) and (r.collecting or r.steering):
+                active[r.e.tag].add(node)
+    for node, rows in node_rows.items():
+        for r in rows:
+            if tags is None or r.e.tag in tags:
+                r.pulling = rule_is_pulling(node, r.steering, r.collecting, active[r.e.tag])
 
-    node_effective: dict[str, list[tuple[EntryInput, float, bool, bool]]] = defaultdict(list)
-    for node, e, eff, collecting, steering in pending:
-        node_effective[node].append((e, eff, collecting, rule_is_pulling(node, steering, collecting, active_nodes[e.tag])))
 
-    node_results: dict[str, NodeResult] = {}
+@dataclass
+class _NodePower:
+    """What the value stages of one node need from its countries."""
+
+    retain: float = 0.0
+    pull: float = 0.0
+    steerers: list[tuple[int, float, float]] = field(default_factory=list)   # (link, effective power, strength)
+
+
+def _node_power(ctx: _Context, rows: Iterable[_Row], into: _NodePower | None = None) -> _NodePower:
+    out = into or _NodePower()
+    for r in rows:
+        if r.collecting:
+            out.retain += r.eff
+        if r.pulling:
+            out.pull += r.eff
+        if r.steering and r.eff != 0:
+            out.steerers.append((r.link, r.eff, ctx.strength(r.e.tag)))
+    return out
+
+
+def _value_flow(inputs: WorldInputs, power: dict[str, _NodePower]) -> dict[str, NodeResult]:
+    """The value stages over the graph in topological order: retention, current/outgoing, weights, bonus, links."""
+    graph = game_data.graph()
+    results: dict[str, NodeResult] = {}
     incoming: dict[str, float] = defaultdict(float)
+    empty = _NodePower()
     for node in graph.topo_order():
         info = inputs.nodes.get(node)
+        p = power.get(node, empty)
         gross = (info.local_value if info else 0.0) + incoming[node]
-        rows = node_effective.get(node, [])
-        retain, pull = rule_retain_pull((eff for _e, eff, c, _p in rows if c), (eff for _e, eff, _c, p in rows if p))
-        retention = rule_retention(retain, pull)
+        retention = rule_retention(p.retain, p.pull)
         targets = graph.outgoing(node)
-        current, outgoing = rule_current_outgoing(gross, retention)
-        strength_of = lambda tag: observed.steering_strength.get(tag, observed.default_steering_strength)  # noqa: E731
-        steerers = [(e.steer_link, eff, strength_of(e.tag)) for e, eff, _c, _p in rows if rule_is_steering(decisions.get(e.tag, node))]
-        missing = [e.tag for e, eff, _c, _p in rows if rule_is_steering(decisions.get(e.tag, node)) and eff != 0 and strength_of(e.tag) is None]
-        if len(targets) > 1 and missing:
-            raise UnknownVariable("steering strength", f"{missing[0]}@{node}", "R08")
-        weights = rule_steer_weights(len(targets), steerers, info.stored_steer_weights if info else ())
-        if len(targets) == 1:
-            weights = (1.0,)  # a single link carries the whole outgoing value even where the save stores weight 0
-        link_values = rule_link_values(outgoing, weights, rule_link_adds(len(targets), node_adds.get(node, [])))
+        weights = rule_steer_weights(len(targets), p.steerers, info.stored_steer_weights if info else ())
+        current, outgoing = rule_current_outgoing(gross, retention, weights)
+        by_link: dict[int, list[tuple[float, float]]] = defaultdict(list)
+        for link, eff, strength in p.steerers:
+            by_link[link].append((eff, strength))
+        link_adds = rule_link_adds(len(targets), [(link, add) for link, group in by_link.items() for add in rule_steering_bonus(group)])
+        link_values = rule_link_values(outgoing, weights, link_adds)
         for target, v in zip(targets, link_values):
             incoming[target] += v
-        node_results[node] = NodeResult(
-            gross=gross, retain_power=retain, pull_power=pull, retention=retention, current=current, outgoing=outgoing,
-            steer_weights=weights, link_values=dict(zip(targets, link_values)),
-        )
-        for e, eff, c, _p in rows:
-            if c:
-                r = entry_results[(node, e.tag)]
-                r.share_total = rule_income_share(current, rule_power_fraction(eff, retain))
-                if e.tag not in observed.trade_efficiency:
-                    raise UnknownVariable("trade_efficiency", e.tag, "R07")
-                r.money = rule_money(r.share_total, observed.trade_efficiency[e.tag], rule_merchant_bonus(e.has_trader))
-    return TradeResult(entries=entry_results, nodes=node_results)
+        results[node] = NodeResult(gross=gross, retain_power=p.retain, pull_power=p.pull, retention=retention, current=current,
+                                   outgoing=outgoing, steer_weights=weights, link_values=dict(zip(targets, link_values)))
+    return results
+
+
+def _money(ctx: _Context, node: NodeResult, row: _Row, result: EntryResult) -> None:
+    result.share_total = rule_income_share(node.current, rule_power_fraction(row.eff, node.retain_power))
+    if row.e.tag not in ctx.observed.trade_efficiency:
+        raise UnknownVariable("trade_efficiency", row.e.tag, "R07")
+    result.money = rule_money(result.share_total, ctx.observed.trade_efficiency[row.e.tag], rule_merchant_bonus(row.e.has_trader))
+
+
+def _with_decided_entries(inputs: WorldInputs, decisions: Decisions, ctx: _Context, tags: set[str] | None = None
+                          ) -> tuple[dict[tuple[str, str], EntryInput], dict[tuple[str, str], float]]:
+    """Entries (the save's, plus a blank one wherever a decision puts a merchant or ships, plus upstream of ships that
+    propagate) and the ship power of each, for every country or only `tags`."""
+    entries = {k: e for k, e in inputs.entries.items() if tags is None or k[1] in tags}
+    for (tag, node), d in decisions.by_entry.items():
+        if (tags is None or tag in tags) and (node, tag) not in entries and (d.action != Action.NONE or d.light_ships):
+            entries[(node, tag)] = EntryInput(tag=tag, node=node)
+    ship_power = {}
+    for (node, tag), e in entries.items():
+        sp = ctx.ship_power(e, decisions.get(tag, node))
+        if sp:
+            ship_power[(node, tag)] = sp
+    for (node, tag) in list(ship_power):
+        if ctx.propagation(tag):
+            for up in _upstream().get(node, ()):   # ships can propagate into a node where the country had nothing
+                entries.setdefault((up, tag), EntryInput(tag=tag, node=up))
+    return entries, ship_power
+
+
+def _steered_nodes(decisions: Decisions) -> set[str]:
+    return {node for (_tag, node), d in decisions.by_entry.items() if rule_is_steering(d)}
+
+
+def calculate(inputs: WorldInputs, decisions: Decisions | None = None, observed: Observed | None = None) -> TradeResult:
+    """The whole world from raw inputs and every country's decisions."""
+    decisions = decisions if decisions is not None else inputs.decisions
+    ctx = _Context(inputs, decisions, observed or Observed())
+    entries, ship_power = _with_decided_entries(inputs, decisions, ctx)
+    steered = _steered_nodes(decisions)
+    by_node: dict[str, list[EntryInput]] = defaultdict(list)
+    for (node, _tag), e in entries.items():
+        by_node[node].append(e)
+    entry_results: dict[tuple[str, str], EntryResult] = {}
+    node_rows = {node: _entry_rows(ctx, node, es, ship_power, node in steered, entry_results) for node, es in by_node.items()}
+    _set_pulling(node_rows)
+    nodes = _value_flow(inputs, {node: _node_power(ctx, rows) for node, rows in node_rows.items()})
+    for node, rows in node_rows.items():
+        for r in rows:
+            if r.collecting:
+                _money(ctx, nodes[node], r, entry_results[(node, r.e.tag)])
+    return TradeResult(entries=entry_results, nodes=nodes)
+
+
+class WhatIf:
+    """calculate() for many alternative decisions of ONE country (the optimizer, the node inspector): everything that
+    does not depend on that country's decisions is computed once; each evaluate() recomputes the country's own
+    entries, the nodes whose propagation gate it changes, and the value flow. Same rule functions as calculate();
+    tests/trade/test_what_if.py checks that both give the same result."""
+
+    def __init__(self, inputs: WorldInputs, observed: Observed, tag: str, base: Decisions | None = None):
+        self.inputs, self.observed, self.tag = inputs, observed, tag
+        base = base if base is not None else inputs.decisions
+        self._others = Decisions({k: d for k, d in base.by_entry.items() if k[0] != tag})
+        ctx = _Context(inputs, self._others, observed)
+        entries, self._ship_power = _with_decided_entries(inputs, self._others, ctx, {t for _n, t in inputs.entries} - {tag})
+        self._steered = _steered_nodes(self._others)
+        self._entries: dict[str, list[EntryInput]] = defaultdict(list)
+        for (node, _t), e in entries.items():
+            self._entries[node].append(e)
+        self._results: dict[tuple[str, str], EntryResult] = {}
+        self._rows = {node: _entry_rows(ctx, node, es, self._ship_power, node in self._steered, self._results)
+                      for node, es in self._entries.items()}
+        _set_pulling(self._rows)
+        self._power = {node: _node_power(ctx, rows) for node, rows in self._rows.items()}
+        self._strength = ctx._strength
+
+    def evaluate(self, decisions: dict[str, NodeDecision]) -> TradeResult:
+        """`decisions` = node -> the country's decision there (missing = no merchant, no ships). Returns every node and
+        the country's own entries."""
+        tag = self.tag
+        merged = Decisions(dict(self._others.by_entry) | {(tag, node): d for node, d in decisions.items()})
+        ctx = _Context(self.inputs, merged, self.observed)
+        ctx._strength = dict(self._strength)
+        own, own_ships = _with_decided_entries(self.inputs, Decisions({(tag, n): d for n, d in decisions.items()}), ctx, {tag})
+        ship_power = self._ship_power | own_ships
+        steered = self._steered | {n for n, d in decisions.items() if rule_is_steering(d)}
+        changed_gate = {n for n in steered - self._steered}
+        own_by_node: dict[str, list[EntryInput]] = defaultdict(list)
+        for (node, _t), e in own.items():
+            own_by_node[node].append(e)
+        results: dict[tuple[str, str], EntryResult] = {}
+        power = dict(self._power)
+        rows_of: dict[str, list[_Row]] = {}
+        for node in set(own_by_node) | changed_gate:
+            own_entries = own_by_node.get(node, [])
+            transfers = any(e.t_out or e.t_in for e in own_entries)
+            if node in changed_gate or transfers:   # the others' power at this node changes too: recompute the node
+                others_results: dict[tuple[str, str], EntryResult] = {}
+                rows = _entry_rows(ctx, node, self._entries.get(node, []) + own_entries, ship_power, node in steered, others_results)
+                for r in rows:
+                    if r.e.tag != tag:
+                        r.pulling = next((o.pulling for o in self._rows.get(node, []) if o.e.tag == r.e.tag), False)
+                results.update({k: v for k, v in others_results.items() if k[1] == tag})
+                rows_of[node] = rows
+            else:
+                rows_of[node] = _entry_rows(ctx, node, own_entries, ship_power, node in steered, results)
+        own_rows = {node: [r for r in rows if r.e.tag == tag] for node, rows in rows_of.items()}
+        _set_pulling(own_rows, {tag})
+        for node, rows in rows_of.items():
+            if node in changed_gate or any(r.e.tag != tag for r in rows):
+                power[node] = _node_power(ctx, rows)
+            else:
+                base = self._power.get(node, _NodePower())
+                power[node] = _node_power(ctx, rows, _NodePower(base.retain, base.pull, list(base.steerers)))
+        nodes = _value_flow(self.inputs, power)
+        for node, rows in own_rows.items():
+            for r in rows:
+                if r.collecting:
+                    _money(ctx, nodes[node], r, results[(node, tag)])
+        return TradeResult(entries=results, nodes=nodes)
+
+    def income(self, decisions: dict[str, NodeDecision]) -> float:
+        return self.evaluate(decisions).income(self.tag)
 
 
 def identify_observed(world: World) -> Observed:
@@ -433,12 +680,20 @@ def identify_observed(world: World) -> Observed:
         if e.has_trader and rec.max_pow is not None:
             residuals[tag][round(rule_merchant_power_residual(e, rec.max_pow, rec.prev or 0.0), 3)] += 1
     merchant = {tag: c.most_common(1)[0][0] for tag, c in residuals.items()}
-    groups: dict[tuple[str, int], list[tuple[str, float, float]]] = defaultdict(list)
+    # R07/R10 value analysis 2026-10-08: countries whose capital entry records no money (no power there, or a share
+    # that truncates to 0) are identified at any other collecting entry with money (most common value); countries with
+    # no recorded money anywhere get 0.0 - their share is 0, so the value cannot change any result. Without this the
+    # chain stopped in 179 of 205 saves on an unknown trade_efficiency.
+    fallback: dict[str, Counter[float]] = defaultdict(Counter)
     for (node, tag), e in world.inputs.entries.items():
         rec = world.recorded.entries.get((node, tag))
-        if e.steering and e.add is not None and rec:
-            groups[(node, e.steer_link)].append((tag, rule_effective_power(rec.val or 0.0, e.t_out, e.t_in), e.add))
-    strength, _consistent = rule_steering_strengths(groups.values())
+        if tag not in efficiency and e.collecting and rec and rec.money and rec.share_total:
+            fallback[tag][round(rule_trade_efficiency(rec.money, rec.share_total, rule_merchant_bonus(e.has_trader)), 2)] += 1
+    efficiency.update({tag: c.most_common(1)[0][0] for tag, c in fallback.items()})
+    for (node, tag), e in world.inputs.entries.items():
+        rec = world.recorded.entries.get((node, tag))
+        if (e.has_capital or e.collecting) and tag not in efficiency and not (rec and rec.money):
+            efficiency[tag] = 0.0
     fractions: dict[str, Counter[float]] = defaultdict(Counter)
     for (node, tag), e in world.inputs.entries.items():
         rec = world.recorded.entries.get((node, tag))
@@ -447,13 +702,7 @@ def identify_observed(world: World) -> Observed:
             if f is not None:
                 fractions[tag][f] += 1
     fraction = {tag: c.most_common(1)[0][0] for tag, c in fractions.items()}
-    # Steerers that carry no `add` (outside the link's bonus ranking; 2,447 entries in the 17 clean saves, effective
-    # power ~2) do not reveal their strength; they get the save's most common identified strength (0.05 in 57 % and
-    # 0.06 in 27 % of 3,826 identified countries). They move a node's weights very little but made the node unknown.
-    modes = Counter(round(s, 2) for s in strength.values())
-    default = modes.most_common(1)[0][0] if modes else None
-    return Observed(trade_efficiency=efficiency, merchant_power=merchant, steering_strength=strength,
-                    transfer_fraction=fraction, default_steering_strength=default)
+    return Observed(trade_efficiency=efficiency, merchant_power=merchant, transfer_fraction=fraction)
 
 
 # ----------------------------------------------------------------------------------------------------------------
@@ -471,10 +720,15 @@ def predict_stage(stage: str, world: World) -> list[Pair]:
     out: list[Pair] = []
 
     if stage == "propagation":
-        province_power = {key: e.province_power for key, e in inp.entries.items()}
+        steered = {node for (node, _tag), e in inp.entries.items() if e.steering}
         for (node, tag), r in rec.entries.items():
-            pred = rule_propagated_power(province_power.get((down, tag), 0.0) for down in graph.outgoing(node)) if node in graph else 0.0
-            out.append(Pair("prev", pred, r.prev or 0.0, node, tag))
+            targets = graph.outgoing(node) if node in graph else ()
+            gate = rule_propagating_links(inp.nodes[node].stored_steer_weights, len(targets), node in steered)
+            downstream = [(inp.entries[(d, tag)].province_power, inp.entries[(d, tag)].ship_power) for d, g in zip(targets, gate)
+                          if g and (d, tag) in inp.entries]
+            ships = any(sp for _p, sp in downstream)
+            spp = rule_ship_power_propagation(inp.countries[tag]) if ships and tag in inp.countries else 0.0
+            out.append(Pair("prev", rule_propagated_power(downstream, spp), r.prev or 0.0, node, tag))
 
     elif stage == "raw_power":
         observed = identify_observed(world)
@@ -544,25 +798,33 @@ def predict_stage(stage: str, world: World) -> list[Pair]:
         for node, nr in rec.nodes.items():
             if nr.current is None or nr.retention is None:
                 continue
-            cur, outg = rule_current_outgoing(_gross_recorded(world, node), nr.retention)
+            cur, outg = rule_current_outgoing(_gross_recorded(world, node), nr.retention, nr.steer_weights)
             out.append(Pair("current", cur, nr.current, node))
             out.append(Pair("outgoing", outg, nr.outgoing or 0.0, node))
 
-    elif stage == "steer_weights":
-        observed = identify_observed(world)
-        steerers_by_node: dict[str, list[tuple[int, float, float | None]]] = defaultdict(list)
+    elif stage in ("steer_weights", "steering_bonus"):
+        strengths = {tag: rule_steering_strength(c) for tag, c in inp.countries.items()}
+        steerers_by_node: dict[str, list[tuple[int, float, float, str]]] = defaultdict(list)
         for (node, tag), e in inp.entries.items():
             r = rec.entries[(node, tag)]
-            if e.steering:
-                steerers_by_node[node].append((e.steer_link, rule_effective_power(r.val or 0.0, e.t_out, e.t_in),
-                                               observed.steering_strength.get(tag, observed.default_steering_strength)))
+            eff = rule_effective_power(r.val or 0.0, e.t_out, e.t_in)
+            if e.steering and eff != 0 and tag in strengths:
+                steerers_by_node[node].append((e.steer_link, eff, strengths[tag], tag))
         for node, nr in rec.nodes.items():
-            targets = graph.outgoing(node)
-            if not targets or not nr.steer_weights:
+            targets = graph.outgoing(node) if node in graph else ()
+            steerers = steerers_by_node.get(node, [])
+            if stage == "steer_weights":
+                if not targets or not nr.steer_weights:
+                    continue
+                pred = rule_steer_weights(len(targets), [s[:3] for s in steerers], inp.nodes[node].stored_steer_weights)
+                for i, (p, rv) in enumerate(zip(pred, nr.steer_weights)):
+                    out.append(Pair(f"steer_weight[{i}]", p, rv, node))
                 continue
-            pred = rule_steer_weights(len(targets), steerers_by_node.get(node, []), inp.nodes[node].stored_steer_weights)
-            for i, (p, rv) in enumerate(zip(pred, nr.steer_weights)):
-                out.append(Pair(f"steer_weight[{i}]", p, rv, node))
+            for link in sorted({s[0] for s in steerers}):
+                group = [s for s in steerers if s[0] == link]
+                pred = sum(rule_steering_bonus([(eff, st) for _l, eff, st, _t in group]))
+                recorded = sum(inp.entries[(node, t)].add or 0.0 for _l, _e, _s, t in group)
+                out.append(Pair(f"add[{link}]", pred, recorded, node))
 
     elif stage == "link_flow":
         adds_by_node: dict[str, list[tuple[int, float]]] = defaultdict(list)

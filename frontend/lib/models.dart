@@ -1,6 +1,6 @@
 /// Plain-JSON data models mirroring backend/app/schemas.py. Kept as simple
-/// mutable classes (not immutable/freezed) since the setup screen edits
-/// these fields directly through form controls.
+/// mutable classes (not immutable/freezed) since the controls edit
+/// allocations and parameters in place.
 library;
 
 enum MerchantAction { none, collect, steer }
@@ -64,75 +64,6 @@ class TradeGraphData {
   Map<String, TradeNode> get byId => {for (final n in nodes) n.nodeId: n};
 }
 
-/// Everything about a node the player does NOT directly control: its own
-/// production value, and the aggregate trade power/behaviour of every
-/// other country present.
-class NodeStateData {
-  String nodeId;
-  double localValue;
-  bool isHome;
-  double playerBasePower;
-  double otherCollectPower;
-  Map<String, double> otherSteerPower;
-  Map<String, int> otherSteerMerchants;
-  double otherPassivePower;
-
-  /// Authoritative save fields, echoed back to the backend untouched so it
-  /// can replay the save's own allocation exactly. Not user-editable.
-  final Map<String, dynamic> known;
-
-  NodeStateData({
-    required this.nodeId,
-    this.localValue = 0,
-    this.isHome = false,
-    this.playerBasePower = 0,
-    this.otherCollectPower = 0,
-    Map<String, double>? otherSteerPower,
-    Map<String, int>? otherSteerMerchants,
-    this.otherPassivePower = 0,
-    Map<String, dynamic>? known,
-  })  : otherSteerPower = otherSteerPower ?? {},
-        otherSteerMerchants = otherSteerMerchants ?? {},
-        known = known ?? {};
-
-  static const _knownKeys = [
-    'known_gross_value',
-    'known_retained_value',
-    'known_retain_power',
-    'known_pull_power',
-    'known_player_val',
-    'known_player_action',
-    'known_player_light_ships',
-    'known_player_steer_target',
-  ];
-
-  factory NodeStateData.fromJson(Map<String, dynamic> j) => NodeStateData(
-        nodeId: j['node_id'],
-        localValue: (j['local_value'] as num).toDouble(),
-        isHome: j['is_home'] ?? false,
-        playerBasePower: (j['player_base_power'] as num).toDouble(),
-        otherCollectPower: (j['other_collect_power'] as num).toDouble(),
-        otherSteerPower: (j['other_steer_power'] as Map? ?? {})
-            .map((k, v) => MapEntry(k as String, (v as num).toDouble())),
-        otherSteerMerchants: (j['other_steer_merchants'] as Map? ?? {})
-            .map((k, v) => MapEntry(k as String, v as int)),
-        otherPassivePower: (j['other_passive_power'] as num).toDouble(),
-        known: {for (final k in _knownKeys) if (j[k] != null) k: j[k]},
-      );
-
-  Map<String, dynamic> toJson() => {
-        ...known,
-        'node_id': nodeId,
-        'local_value': localValue,
-        'is_home': isHome,
-        'player_base_power': playerBasePower,
-        'other_collect_power': otherCollectPower,
-        'other_steer_power': otherSteerPower,
-        'other_steer_merchants': otherSteerMerchants,
-        'other_passive_power': otherPassivePower,
-      };
-}
-
 class NodeAllocationData {
   MerchantAction merchantAction;
   String? steerTarget;
@@ -163,35 +94,16 @@ class NodeAllocationData {
       };
 }
 
+/// The player's scalars the user may change. Null = the value the backend identified from the save.
 class ParamsData {
-  double tradeEfficiency;
-  double merchantPower;
-  double capitalMerchantPower;
-  double powerPerLightShip;
-  double homePowerBonus;
-  double merchantPresentIncomeBonus;
-  double steerValueBonusPerMerchant;
+  double? tradeEfficiency;
+  double? powerPerLightShip;
 
-  ParamsData({
-    this.tradeEfficiency = 0.0,
-    this.merchantPower = 2.0,
-    this.capitalMerchantPower = 5.0,
-    this.powerPerLightShip = 3.0,
-    this.homePowerBonus = 0.1,
-    this.merchantPresentIncomeBonus = 0.1,
-    this.steerValueBonusPerMerchant = 0.05,
-  });
+  ParamsData({this.tradeEfficiency, this.powerPerLightShip});
 
   Map<String, dynamic> toJson() => {
         'trade_efficiency': tradeEfficiency,
-        'merchant_power': merchantPower,
-        'capital_merchant_power': capitalMerchantPower,
         'power_per_light_ship': powerPerLightShip,
-        'home_power_bonus': homePowerBonus,
-        'merchant_present_income_bonus': merchantPresentIncomeBonus,
-        'steer_value_bonus_per_merchant': steerValueBonusPerMerchant,
-        // ship_chunk deliberately omitted -- internal optimizer tuning knob,
-        // not a game mechanic; backend defaults it to 1 (see Params).
       };
 }
 
@@ -207,6 +119,18 @@ class NodeBreakdownData {
   final double forwardedValue;
   final Map<String, double> linkValues;
 
+  /// Teaching fields (see backend NodeBreakdown). All have safe defaults so an
+  /// older backend still parses.
+  final double playerShare;
+  final double incomeMultiplier;
+  final double retainedPower;
+  final double pullPower;
+  final double retainedValue;
+  final double incomingValue;
+  final String playerAction;
+  final String? playerSteerTarget;
+  final int playerLightShips;
+
   NodeBreakdownData.fromJson(Map<String, dynamic> j)
       : nodeId = j['node_id'],
         displayName = j['display_name'],
@@ -217,7 +141,25 @@ class NodeBreakdownData {
         playerCollects = j['player_collects'],
         playerIncome = (j['player_income'] as num).toDouble(),
         forwardedValue = (j['forwarded_value'] as num).toDouble(),
-        linkValues = (j['link_values'] as Map).map((k, v) => MapEntry(k as String, (v as num).toDouble()));
+        linkValues = (j['link_values'] as Map).map((k, v) => MapEntry(k as String, (v as num).toDouble())),
+        playerShare = (j['player_share'] as num?)?.toDouble() ??
+            ((j['total_power'] as num) > 0 && j['player_collects'] == true
+                ? (j['player_power'] as num).toDouble() / (j['total_power'] as num).toDouble()
+                : 0.0),
+        incomeMultiplier = (j['income_multiplier'] as num?)?.toDouble() ?? 1.0,
+        retainedPower = (j['retained_power'] as num?)?.toDouble() ?? 0.0,
+        pullPower = (j['pull_power'] as num?)?.toDouble() ?? 0.0,
+        retainedValue = (j['retained_value'] as num?)?.toDouble() ??
+            ((j['total_value'] as num).toDouble() - (j['forwarded_value'] as num).toDouble()),
+        incomingValue = (j['incoming_value'] as num?)?.toDouble() ??
+            ((j['total_value'] as num).toDouble() - (j['local_value'] as num).toDouble()).clamp(0.0, double.infinity),
+        playerAction = j['player_action'] ?? 'none',
+        playerSteerTarget = j['player_steer_target'],
+        playerLightShips = (j['player_light_ships'] as num?)?.toInt() ?? 0;
+
+  /// Your power as a fraction of everything at the node, regardless of whether
+  /// you collect (the Power lens); `playerShare` only counts when collecting.
+  double get powerFraction => totalPower > 0 ? (playerPower / totalPower).clamp(0.0, 1.0) : 0.0;
 }
 
 class SimulateResponseData {
@@ -227,6 +169,53 @@ class SimulateResponseData {
   SimulateResponseData.fromJson(Map<String, dynamic> j)
       : totalIncome = (j['total_income'] as num).toDouble(),
         nodes = (j['nodes'] as Map).map((k, v) => MapEntry(k as String, NodeBreakdownData.fromJson(v)));
+}
+
+/// One merchant choice at a node and what it would do to total income.
+class MerchantOptionData {
+  final MerchantAction action;
+  final String? steerTarget;
+  final String? steerTargetDisplayName;
+  final double totalIncome;
+  final bool isCurrent;
+  final NodeBreakdownData node;
+
+  MerchantOptionData.fromJson(Map<String, dynamic> j)
+      : action = merchantActionFromJson(j['action']),
+        steerTarget = j['steer_target'],
+        steerTargetDisplayName = j['steer_target_display_name'],
+        totalIncome = (j['total_income'] as num).toDouble(),
+        isCurrent = j['is_current'] ?? false,
+        node = NodeBreakdownData.fromJson(j['node']);
+}
+
+class ShipPointData {
+  final int ships;
+  final double totalIncome;
+  final double playerPower;
+  final double playerShare;
+  final double nodeIncome;
+
+  ShipPointData.fromJson(Map<String, dynamic> j)
+      : ships = j['ships'],
+        totalIncome = (j['total_income'] as num).toDouble(),
+        playerPower = (j['player_power'] as num).toDouble(),
+        playerShare = (j['player_share'] as num).toDouble(),
+        nodeIncome = (j['node_income'] as num).toDouble();
+}
+
+class NodeOptionsData {
+  final String nodeId;
+  final double currentTotalIncome;
+  final List<MerchantOptionData> merchantOptions;
+  final List<ShipPointData> shipCurve;
+
+  NodeOptionsData.fromJson(Map<String, dynamic> j)
+      : nodeId = j['node_id'],
+        currentTotalIncome = (j['current_total_income'] as num).toDouble(),
+        merchantOptions =
+            (j['merchant_options'] as List).map((o) => MerchantOptionData.fromJson(o)).toList(),
+        shipCurve = (j['ship_curve'] as List).map((p) => ShipPointData.fromJson(p)).toList();
 }
 
 class MarginalValueData {
@@ -297,9 +286,12 @@ class OptimizeResponseData {
 }
 
 class ImportSaveResponseData {
+  /// The save stays on the server; every later request names it by this id.
+  final String saveId;
   final String playerTag;
+  final String date;
+  final String calcVersion;
   final List<String> warnings;
-  final Map<String, NodeStateData> nodeStates;
   final Map<String, NodeAllocationData> currentAllocation;
   final String? suggestedHomeNode;
   final double? suggestedTradeEfficiency;
@@ -310,10 +302,11 @@ class ImportSaveResponseData {
   final List<String> suggestedCandidateNodes;
 
   ImportSaveResponseData.fromJson(Map<String, dynamic> j)
-      : playerTag = j['player_tag'],
+      : saveId = j['save_id'],
+        playerTag = j['player_tag'],
+        date = j['date'] ?? '',
+        calcVersion = j['calc_version'] ?? '',
         warnings = List<String>.from(j['warnings']),
-        nodeStates =
-            (j['node_states'] as Map).map((k, v) => MapEntry(k as String, NodeStateData.fromJson(v))),
         currentAllocation = (j['current_allocation'] as Map)
             .map((k, v) => MapEntry(k as String, NodeAllocationData.fromJson(v))),
         suggestedHomeNode = j['suggested_home_node'],

@@ -231,6 +231,15 @@ Independent recomputation with regex readers over the raw files (`venice_c_raw.p
 - VS-5: timing identical; the nine U30 rows identical.
 - VS-4: the per-tick counts and the five republic steps were checked once more by `venice_c_firsttick.py` (merchant classes) only; the drift cause stays UNKNOWN, so nothing is claimed beyond the counts.
 
+## Data basis (2026-10-06)
+
+On 2026-10-06 the research data was rebuilt (`docs/research/data_audit.md`): only **clean** saves are kept (the 1st of a month after the game's first trade computation, none of the player's merchants or fleets on the way; R12 final). Kept: U04 (TUR 1691.11.01), U10, U14, U20, U25, U27, U28, U29 (VEN 1444-1445). Removed: the 78 start snapshots S01-S78 and U07-U09 (saved before the first computation: steering weights, `add` and other computed fields are placeholders there) and 21 mid-month saves (S79, S80, U01-U03, U05, U06, U11-U13, U15-U19, U21-U24, U26, U30: numbers from the last 1st, merchant/ship flags from the save day). Counts above that include removed saves are kept as recorded but are **unverified on clean data** unless listed as re-checked below. Clean-data stage results quoted here: `scripts/verify_all.sh` on the 8 kept saves (calc 0.2.0).
+
+- C-01 to C-05 (one country-wide scalar, embargo presence, domestic = home or top, distributions): counted over 82 saves dominated by start snapshots: **unverified on clean data**; re-test on the 8 kept saves and the experiment series.
+- C-06 home bonus "absent in all 78 start snapshots, present in played saves": the start-save half is a **pre-first-tick artifact** (no computation yet), not evidence that the bonus is missing; the played-save evidence (S79, S80, U03, U05) is mid-month (merchant counts of the save day vs numbers of the 1st). Re-test on U04 and the Venice tick-day saves (U25 three steerers, U27 none, U28/U29 one/two).
+- Venice/U06 updates: U06 and the mid-month Venice saves are removed; tick-day statements (U10, U14, U20, U25, U27-U29) remain checkable.
+
+
 ## Update 2026-10-07 - controlled experiments (E00-P06)
 
 Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.

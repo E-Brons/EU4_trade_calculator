@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'api_client.dart';
 import 'app_state.dart';
 import 'build_watcher.dart';
+import 'save_check.dart';
 import 'screens/import_screen.dart';
 
 void main() {
@@ -19,14 +20,15 @@ class Eu4TradeApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AppState()),
         ChangeNotifierProvider(create: (_) => BuildWatcher(ApiClient())..start()),
+        ChangeNotifierProvider(create: (_) => SaveCheck(ApiClient())),
       ],
       child: MaterialApp(
         title: 'EU4 Trade Optimizer',
         theme: ThemeData(colorSchemeSeed: const Color(0xFF8B5E34), useMaterial3: true),
-        // Above every screen: stale-build warning on top, build tag in the corner.
+        // Above every screen: stale-build warning on top, then how far the loaded save can be trusted; build tag in the corner.
         builder: (context, child) => Stack(
           children: [
-            Column(children: [const _StaleBanner(), Expanded(child: child!)]),
+            Column(children: [const _StaleBanner(), const SaveCheckBanner(), Expanded(child: child!)]),
             const _BuildTag(),
           ],
         ),

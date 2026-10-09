@@ -99,6 +99,13 @@ Same data and tables as `R01_power_multiplier_response_1.md`, 'Update 2026-10-05
 ### Verification 2026-10-05 (second pass, Venice series)
 VX-1: parsed count (0 of 1,975) and regex count (0 of 1,896 after the reader fix) agree; the fix was found by this pass (first regex run: 24 mismatches, all nodes where an entry carries a nested `t_from` block that the regex skipped). VX-2 was computed once (parser). VX-3: timing and the nine rows reproduced by the regex readers (`venice_c_ver4.py` D, `venice_c_ver5.py` 3); the ruler and other R01 claims are verified in the R01 document.
 
+## Data basis (2026-10-06)
+
+On 2026-10-06 the research data was rebuilt (`docs/research/data_audit.md`): only **clean** saves are kept (the 1st of a month after the game's first trade computation, none of the player's merchants or fleets on the way; R12 final). Kept: U04 (TUR 1691.11.01), U10, U14, U20, U25, U27, U28, U29 (VEN 1444-1445). Removed: the 78 start snapshots S01-S78 and U07-U09 (saved before the first computation: steering weights, `add` and other computed fields are placeholders there) and 21 mid-month saves (S79, S80, U01-U03, U05, U06, U11-U13, U15-U19, U21-U24, U26, U30: numbers from the last 1st, merchant/ship flags from the save day). Counts above that include removed saves are kept as recorded but are **unverified on clean data** unless listed as re-checked below. Clean-data stage results quoted here: `scripts/verify_all.sh` on the 8 kept saves (calc 0.2.0).
+
+- The `total - sum(val)` gap analysis and the embargo counts are mostly start snapshots and mid-month saves: unverified on clean data (experiment `exp-edge` B1, B5).
+
+
 ## Update 2026-10-07 - controlled experiments (E00-P06)
 
 Source: single-change experiments run in the game (EU4 1.37.5) with the automation in `tools/EU4-game-automation/experiments/` (`PLAN.md`, `RESULTS.md`, scripts `analysis/a1`-`a8`). Every treatment loads the same base save `out/E00/base_1444.12.01.eu4` (new game VEN 1444.11.11, spectator mode, saved on the first tick day), applies one change on 1444.12.01, runs with the AI of VEN switched off and is saved on 1445.01.01 (t1, first tick with the change) and 1445.02.01 (t2); saves under `tools/EU4-game-automation/experiments/out/<id>/` (67 saves checked: date, player VEN, plain text). Noise (controls E01a-E01d): two runs from one save diverge in other countries' fields (E01a vs E01b: 4,859 of 73,073 trade-block fields at t1, 8,029 at t2), but 101 of 103 VEN entry fields are identical in all four controls; only venice `money`/`total` vary (about +-0.6 %). Single-run comparisons are therefore used only for VEN power, demand, `val`, `prev`, `province_power`, `ship_power`, `add` and merchant fields, and for income only as the ratio `money/total`.
@@ -112,3 +119,14 @@ Source: 27 single-change jobs run in the game by the automation (`tools/EU4-game
 
 ### V4-R10-1 Embargo and privateer patches are void
 Claim: a patched embargo (`trade_embargoes` / `trade_embargoed_by`, U25 format) and a protect mission renamed to `privateer_mission` are removed by the game on load (no such key on t1); both questions need the state written by the game. Candidate constants: `EMBARGO_BASE_EFFICIENCY = 0.5`, `EMBARGO_MERCANTILISM_EFFICIENCY = 50`, `PIRATES_TRADE_POWER_FACTOR = 1.5`, `PRIVATEER_INCOME_COLLECTION_EFF = 0.5` (defines.lua). Confidence: confirmed (void).
+
+## Update 2026-10-08 - value/flow analysis (all saves)
+
+Data: every clean dataset save (`datasets/eu4/1.37.5/vanilla/*/*/U*.zip`, 1444-1789, 20+ nations; 8,271 node-saves with `total`). Scripts: `backend/scripts/research/value_node_total.py`, `value_pirates.py`, `value_privateers.py`.
+
+### V5-R10-1 `total` = sum of `val` + a non-country power that is neither retained nor listed
+Claim: node `total` equals the sum of the entries' `val` in 7,890 of 8,271 node-saves; in the other 381 it is larger (e.g. U33 CAS 1444.12.01: gujarat 476.500 vs 475.904, gulf_of_aden 400.873 vs 400.279, ethiopia 234.528 vs 234.335; mostly Indian-Ocean nodes). The extra is not `t_in`, `t_out`, entries without `val`, or `top_power` tags without an entry (0 of 381 for each); `top_power_values` sum to the entries' `val` exactly; and `retain_power` equals the collectors' effective power exactly in all 381 (the extra is not retained and not in `pull_power`). Confidence: confirmed (decomposition); its source is inferred to be pirate power (the only non-country power the node keeps).
+### V5-R10-2 Pirates always count as one collector
+Claim: `retain_power == collector_power_including_pirates` in 7,747 of 7,747 node-saves and `num_collectors_including_pirates == (entries with total or has_capital) + 1` in 7,747 of 7,747, also where the extra power of V5-R10-1 is 0. Confidence: confirmed.
+### V5-R10-3 No privateer mission in the clean saves
+Claim: no node in the clean saves carries power of a country's privateer fleet (the 2,071 'privateer' strings counted earlier are names and modifiers); the privateer rows therefore still need a privateer mission written by the game (set in the game's interface; a patched mission is dropped on load, round 2 R2-PRIV). Confidence: confirmed (absence in these saves).

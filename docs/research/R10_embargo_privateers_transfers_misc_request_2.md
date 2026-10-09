@@ -44,4 +44,4 @@
 | Embargo on `money` (income) in addition to power | `money`/`total` share of an embargoed collector compared with the predicted value (stage income_efficiency, R07) |
 | 35 `cape_of_good_hope` nodes without `total` and PIR `potential` -0.001 | the sign and size of `potential` in all 35 nodes (likely a 3-decimal truncation artefact of an empty node) |
 | Node aggregates holding the power of a country without an entry (V8: U05 AFA); second case E21 (NAX): `top_power` kept until the next 1st | `max`, `pull_power`, `retain_power`, `incoming.add` of alexandria and constantinople in the E21 saves (`tools/EU4-game-automation/experiments/out/E21/`) |
-| `total - sum(val)` and the residual nodes in U03-U05 | the same decomposition as in response_1 C-01/C-02 applied to these saves (province controllers, `p_pow`, entries) |
+| `total - sum(val)` and the residual nodes in U03-U05. 2026-10-08 (V5-R10-1): the extra is a non-country power, not retained, not in `top_power` (381 of 8,271 clean node-saves); still needed: its source (pirate power?) | the same decomposition as in response_1 C-01/C-02 applied to these saves (province controllers, `p_pow`, entries) |

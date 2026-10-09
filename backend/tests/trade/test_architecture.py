@@ -35,9 +35,16 @@ def test_calc_is_pure_and_self_contained():
     assert "open(" not in src
 
 
-def test_trade_package_does_not_use_the_legacy_engine():
-    offenders = [p.name for p in TRADE.glob("*.py") if any(i.startswith("app.engine") or i.startswith("app.parsing.save") for i in _imports(p))]
-    assert not offenders, f"app/trade must not depend on the legacy engine/parser: {offenders}"
+def test_the_legacy_engine_is_gone():
+    assert not (APP / "engine").exists() and not (APP / "parsing" / "save.py").exists(), "the old player-centric engine was replaced by app/trade"
+    offenders = [str(p.relative_to(APP)) for p in APP.rglob("*.py") if any(i.startswith("app.engine") or i.startswith("app.parsing.save") for i in _imports(p))]
+    assert not offenders, f"nothing may import the legacy engine/parser: {offenders}"
+
+
+def test_api_prices_everything_with_calc():
+    imports = _imports(APP / "api.py")
+    assert "app.trade.calc" in imports or "app.trade.calc" in {i.rsplit(".", 1)[0] for i in imports}
+    assert any(i.startswith("app.trade.optimize") for i in imports)
 
 
 def test_verification_runs_the_operational_calculation():

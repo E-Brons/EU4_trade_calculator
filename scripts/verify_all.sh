@@ -19,8 +19,8 @@ export VERIFY_OUT="${VERIFY_OUT:-$ROOT/verify-out}"
 mkdir -p "$VERIFY_OUT"
 rm -f "$VERIFY_OUT/stage-report.md" "$VERIFY_OUT/stage-report.json"
 
-echo "== stored user cases: files, names, hashes"
-"$PY" scripts/promote_case.py --check || exit 1
+echo "== datasets: files, names, hashes, clean"
+"$PY" scripts/check_datasets.py || exit 1
 
 echo "== trade calculation tests"
 "$PY" -m pytest tests/trade -q -rxXs -p no:cacheprovider "$@"
